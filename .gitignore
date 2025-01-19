@@ -1,0 +1,57 @@
+
+.DS_Store
+
+.quarto/*
+/.quarto/
+/.luarc.json
+.Rproj.user
+.cursorignore
+
+
+# misc knit files
+*.aux
+*.gz
+*.log
+*.rdx
+*.rdb
+#*.knit.md
+*.results
+*.canvas
+*.vdoc.r
+*.here
+*.sav
+*.zip
+
+
+# r created files
+*.rproj
+*.rproj.user
+*.rhistory
+*.ruserdata
+*.history
+*.rdata
+#*.rds
+
+.lintr
+.luarc.json
+license 
+
+
+/_scratch/*
+data/model_cache/*
+
+
+# ignore all png files located inside of nb/
+nb/**/*.png
+
+# ignore all png files in misc, included recursive
+misc/indiv_files/figure-html/**
+
+manuscript/.quarto/** 
+
+*.sps
+*.sav
+_*
+
+
+

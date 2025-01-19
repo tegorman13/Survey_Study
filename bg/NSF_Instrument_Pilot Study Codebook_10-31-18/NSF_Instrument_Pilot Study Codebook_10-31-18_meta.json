@@ -1,0 +1,1312 @@
+{
+  "table_of_contents": [
+    {
+      "title": "Summary",
+      "heading_level": null,
+      "page_id": 0,
+      "polygon": [
+        [
+          35.7099609375,
+          77.4404296875
+        ],
+        [
+          82.51300048828125,
+          77.4404296875
+        ],
+        [
+          82.51300048828125,
+          91.265625
+        ],
+        [
+          35.7099609375,
+          91.265625
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 1,
+      "polygon": [
+        [
+          35.560546875,
+          36.20654296875
+        ],
+        [
+          218.5927734375,
+          36.20654296875
+        ],
+        [
+          218.5927734375,
+          49.7900390625
+        ],
+        [
+          35.560546875,
+          49.7900390625
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 2,
+      "polygon": [
+        [
+          34.5,
+          36.279052734375
+        ],
+        [
+          217.248046875,
+          36.279052734375
+        ],
+        [
+          217.248046875,
+          50.03173828125
+        ],
+        [
+          34.5,
+          50.03173828125
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 4,
+      "polygon": [
+        [
+          34.5,
+          36.6416015625
+        ],
+        [
+          218.443359375,
+          36.6416015625
+        ],
+        [
+          218.443359375,
+          49.35498046875
+        ],
+        [
+          34.5,
+          49.35498046875
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          35.4111328125,
+          36.569091796875
+        ],
+        [
+          218.5927734375,
+          36.569091796875
+        ],
+        [
+          218.5927734375,
+          49.6214599609375
+        ],
+        [
+          35.4111328125,
+          49.6214599609375
+        ]
+      ]
+    },
+    {
+      "title": "ATTARI ENERGY SURVEY (PART 2)",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          41.0888671875,
+          173.830078125
+        ],
+        [
+          249.6708984375,
+          173.830078125
+        ],
+        [
+          249.6708984375,
+          188.33203125
+        ],
+        [
+          41.0888671875,
+          188.33203125
+        ]
+      ]
+    },
+    {
+      "title": "Relative Energy Usage",
+      "heading_level": null,
+      "page_id": 5,
+      "polygon": [
+        [
+          40.4912109375,
+          285.205078125
+        ],
+        [
+          159.275390625,
+          285.205078125
+        ],
+        [
+          159.275390625,
+          299.126953125
+        ],
+        [
+          40.4912109375,
+          299.126953125
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 6,
+      "polygon": [
+        [
+          34.5,
+          36.279052734375
+        ],
+        [
+          217.845703125,
+          36.279052734375
+        ],
+        [
+          217.845703125,
+          49.74169921875
+        ],
+        [
+          34.5,
+          49.74169921875
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 7,
+      "polygon": [
+        [
+          35.63525390625,
+          36.2548828125
+        ],
+        [
+          217.845703125,
+          36.2548828125
+        ],
+        [
+          217.845703125,
+          49.93505859375
+        ],
+        [
+          35.63525390625,
+          49.93505859375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 8,
+      "polygon": [
+        [
+          34.962890625,
+          36.49658203125
+        ],
+        [
+          218.14453125,
+          36.49658203125
+        ],
+        [
+          218.14453125,
+          49.6214599609375
+        ],
+        [
+          34.962890625,
+          49.6214599609375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 9,
+      "polygon": [
+        [
+          35.18701171875,
+          36.4482421875
+        ],
+        [
+          218.7421875,
+          36.4482421875
+        ],
+        [
+          218.7421875,
+          49.6214599609375
+        ],
+        [
+          35.18701171875,
+          49.6214599609375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 10,
+      "polygon": [
+        [
+          35.4111328125,
+          37.004150390625
+        ],
+        [
+          218.7421875,
+          37.004150390625
+        ],
+        [
+          218.7421875,
+          49.7900390625
+        ],
+        [
+          35.4111328125,
+          49.7900390625
+        ]
+      ]
+    },
+    {
+      "title": "NEP",
+      "heading_level": null,
+      "page_id": 13,
+      "polygon": [
+        [
+          40.640625,
+          63.421875
+        ],
+        [
+          65.84700012207031,
+          63.421875
+        ],
+        [
+          65.84700012207031,
+          77.6214599609375
+        ],
+        [
+          40.640625,
+          77.6214599609375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 15,
+      "polygon": [
+        [
+          34.5,
+          36.665771484375
+        ],
+        [
+          217.6962890625,
+          36.665771484375
+        ],
+        [
+          217.6962890625,
+          49.9833984375
+        ],
+        [
+          34.5,
+          49.9833984375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 16,
+      "polygon": [
+        [
+          34.5,
+          36.544921875
+        ],
+        [
+          219.041015625,
+          36.544921875
+        ],
+        [
+          219.041015625,
+          49.45166015625
+        ],
+        [
+          34.5,
+          49.45166015625
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 17,
+      "polygon": [
+        [
+          34.5,
+          36.6416015625
+        ],
+        [
+          218.14453125,
+          36.6416015625
+        ],
+        [
+          218.14453125,
+          49.9833984375
+        ],
+        [
+          34.5,
+          49.9833984375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 18,
+      "polygon": [
+        [
+          34.5,
+          36.59326171875
+        ],
+        [
+          218.2939453125,
+          36.59326171875
+        ],
+        [
+          218.2939453125,
+          49.5966796875
+        ],
+        [
+          34.5,
+          49.5966796875
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 19,
+      "polygon": [
+        [
+          35.33642578125,
+          36.134033203125
+        ],
+        [
+          218.14453125,
+          36.134033203125
+        ],
+        [
+          218.14453125,
+          49.6214599609375
+        ],
+        [
+          35.33642578125,
+          49.6214599609375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 20,
+      "polygon": [
+        [
+          35.48583984375,
+          36.859130859375
+        ],
+        [
+          218.443359375,
+          36.859130859375
+        ],
+        [
+          218.443359375,
+          49.74169921875
+        ],
+        [
+          35.48583984375,
+          49.74169921875
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 21,
+      "polygon": [
+        [
+          35.48583984375,
+          36.78662109375
+        ],
+        [
+          218.7421875,
+          36.78662109375
+        ],
+        [
+          218.7421875,
+          49.6214599609375
+        ],
+        [
+          35.48583984375,
+          49.6214599609375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 22,
+      "polygon": [
+        [
+          35.26171875,
+          36.8349609375
+        ],
+        [
+          218.8916015625,
+          36.8349609375
+        ],
+        [
+          218.8916015625,
+          49.7900390625
+        ],
+        [
+          35.26171875,
+          49.7900390625
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 23,
+      "polygon": [
+        [
+          33.0,
+          36.4482421875
+        ],
+        [
+          218.7421875,
+          36.4482421875
+        ],
+        [
+          218.7421875,
+          49.54833984375
+        ],
+        [
+          33.0,
+          49.54833984375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 24,
+      "polygon": [
+        [
+          34.5,
+          36.59326171875
+        ],
+        [
+          218.443359375,
+          36.59326171875
+        ],
+        [
+          218.443359375,
+          49.88671875
+        ],
+        [
+          34.5,
+          49.88671875
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 25,
+      "polygon": [
+        [
+          35.560546875,
+          36.88330078125
+        ],
+        [
+          218.8916015625,
+          36.88330078125
+        ],
+        [
+          218.8916015625,
+          49.93505859375
+        ],
+        [
+          35.560546875,
+          49.93505859375
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 26,
+      "polygon": [
+        [
+          34.5,
+          36.3515625
+        ],
+        [
+          219.041015625,
+          36.3515625
+        ],
+        [
+          219.041015625,
+          49.5
+        ],
+        [
+          34.5,
+          49.5
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 27,
+      "polygon": [
+        [
+          33.75,
+          36.424072265625
+        ],
+        [
+          218.8916015625,
+          36.424072265625
+        ],
+        [
+          218.8916015625,
+          49.7900390625
+        ],
+        [
+          33.75,
+          49.7900390625
+        ]
+      ]
+    },
+    {
+      "title": "NFS instrument pilot study codebook",
+      "heading_level": null,
+      "page_id": 29,
+      "polygon": [
+        [
+          33.0,
+          36.39990234375
+        ],
+        [
+          217.6962890625,
+          36.39990234375
+        ],
+        [
+          217.6962890625,
+          49.5966796875
+        ],
+        [
+          33.0,
+          49.5966796875
+        ]
+      ]
+    }
+  ],
+  "page_stats": [
+    {
+      "page_id": 0,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          83
+        ],
+        [
+          "Line",
+          35
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 1,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          107
+        ],
+        [
+          "Line",
+          49
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 2,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          51
+        ],
+        [
+          "Span",
+          51
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 3,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          99
+        ],
+        [
+          "Line",
+          50
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "TableOfContents",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 4,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          50
+        ],
+        [
+          "Span",
+          50
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 5,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          75
+        ],
+        [
+          "Line",
+          36
+        ],
+        [
+          "Text",
+          12
+        ],
+        [
+          "SectionHeader",
+          3
+        ],
+        [
+          "TextInlineMath",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 6,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          53
+        ],
+        [
+          "Span",
+          53
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 7,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          97
+        ],
+        [
+          "Line",
+          46
+        ],
+        [
+          "Text",
+          9
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Form",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 8,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          81
+        ],
+        [
+          "Line",
+          39
+        ],
+        [
+          "Text",
+          18
+        ],
+        [
+          "SectionHeader",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 9,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          87
+        ],
+        [
+          "Line",
+          42
+        ],
+        [
+          "Text",
+          4
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 10,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          81
+        ],
+        [
+          "Line",
+          37
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 11,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          123
+        ],
+        [
+          "Line",
+          58
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "TableOfContents",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 12,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          87
+        ],
+        [
+          "Line",
+          44
+        ],
+        [
+          "Text",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 13,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          97
+        ],
+        [
+          "Line",
+          48
+        ],
+        [
+          "Text",
+          23
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "SectionHeader",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 14,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          51
+        ],
+        [
+          "Span",
+          51
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 15,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          59
+        ],
+        [
+          "Span",
+          59
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 16,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          46
+        ],
+        [
+          "Span",
+          46
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 17,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          54
+        ],
+        [
+          "Span",
+          54
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Figure",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 18,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          52
+        ],
+        [
+          "Span",
+          52
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 19,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          113
+        ],
+        [
+          "Line",
+          53
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Text",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 20,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          105
+        ],
+        [
+          "Line",
+          41
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Form",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 21,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          59
+        ],
+        [
+          "Line",
+          28
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Form",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 22,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          65
+        ],
+        [
+          "Line",
+          30
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Form",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 23,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          17
+        ],
+        [
+          "Span",
+          17
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 24,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          43
+        ],
+        [
+          "Span",
+          43
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 25,
+      "text_extraction_method": "pdftext",
+      "block_counts": [
+        [
+          "Span",
+          61
+        ],
+        [
+          "Line",
+          31
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Form",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 26,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          32
+        ],
+        [
+          "Span",
+          32
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 27,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          23
+        ],
+        [
+          "Span",
+          23
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 28,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          31
+        ],
+        [
+          "Span",
+          31
+        ],
+        [
+          "PageHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    },
+    {
+      "page_id": 29,
+      "text_extraction_method": "surya",
+      "block_counts": [
+        [
+          "Line",
+          19
+        ],
+        [
+          "Span",
+          19
+        ],
+        [
+          "SectionHeader",
+          1
+        ],
+        [
+          "Table",
+          1
+        ]
+      ]
+    }
+  ],
+  "debug_data_path": "debug_data/NSF_Instrument_Pilot Study Codebook_10-31-18"
+}
