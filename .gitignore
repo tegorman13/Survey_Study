@@ -1,5 +1,6 @@
 
 .DS_Store
+.gitignore
 
 .quarto/*
 /.quarto/
@@ -55,3 +56,8 @@ _*
 
 
 
+#docs/inspect.markdown_strict_files/figure-markdown_strict/*
+docs/**/figure-markdown_strict/*.png
+
+#docs/inspect_files/figure-commonmark/*
+docs/**/figure-commonmark/*.png

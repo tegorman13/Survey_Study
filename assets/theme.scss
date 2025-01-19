@@ -36,11 +36,25 @@ $link-hover-color: $secondary-color;
 $pagination-active-bg: $primary-color;
 $pagination-active-color: white;
 $pagination-active-border-color: $primary-color;
-
 /*-- scss:rules --*/
 
 /*-- Raleway numbers aren't aligned, so use Roboto for numbers only: --*/
 /*-- https://stackoverflow.com/a/68779757/1456821 --*/
+
+
+
+
+
+details > summary {
+  color: #5480a7;
+  font-size: 1em;
+  border-radius: 20px;
+  background-color: $code-bg;
+  padding-left: 10px;
+  margin-bottom: 10px;
+  font-family: $font-family-monospace;
+}
+
 
 body {
   font-family: "Roboto", $font-family-base, sans-serif;
@@ -174,15 +188,7 @@ hr {
   color: $body-bg;
 }
 
-details > summary {
-  color: $navbar-bg;
-  font-size: 1em;
-  border-radius: 20px;
-  background-color: $code-bg;
-  padding-left: 10px;
-  margin-bottom: 10px;
-  font-family: $font-family-monospace;
-}
+
 
 /* gets rid of the border and reduces padding in tables */
 thead, tbody, tfoot, tr, td, th {

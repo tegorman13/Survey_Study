@@ -1,6 +1,26 @@
-
-
-
+---
+title: "Initial Data Inspect"
+lightbox: true
+toc: false
+date: today
+execute:
+  echo: true
+  warning: false
+format:
+  html: 
+    grid:
+      sidebar-width: 220px
+      body-width: 1200px
+      margin-width: 170px
+      gutter-width: 1.0rem
+  hugo-md:
+    include: true
+    html-math-method: mathjax
+    output-file: inspect_hugo.md
+  gfm:
+    echo: true
+    output-file: inspect_gfm.md
+---
 
 ```{r}
 pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,gt,flextable,ggh4x,psych,corrplot)

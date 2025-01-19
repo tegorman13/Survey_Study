@@ -1,0 +1,26 @@
+---
+title: Survey Study - Communication and Cognition Lab
+author:
+  - name: Thomas E. Gorman
+    url: https://tegorman13.github.io/
+    orcid: "0000-0001-5366-5442"
+    affiliations: 
+    - ref: cclab
+    - ref: clara
+affiliations:
+  - id: cclab
+    name: Communication and Cognition Lab, Purdue University
+    city: West Lafayette
+    region: IN
+    country: USA
+    postal-code: 47907
+    url: https://web.ics.purdue.edu/~treimer/
+  - id: clara
+    name: College of Liberal Arts Research Academy
+    department: Purdue University
+    city: West Lafayette
+    region: IN
+    country: USA
+    postal-code: 47907
+---
+
