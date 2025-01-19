@@ -3,24 +3,11 @@
 
 
 ```{r}
-
-library(pacman)
 pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,gt,flextable,ggh4x,psych,corrplot)
 options(digits=2, scipen=999, dplyr.summarise.inform=FALSE)
 
-#/Users/thomasgorman/Library/CloudStorage/GoogleDrive-tegorman13@gmail.com/My Drive/Purdue/Survey_Study/data/NSF Instrument - 11-3-18.sav
-draw <- haven::read_sav(here::here("data/NSF Instrument - 11-3-18.sav")) |> mutate(id=row_number(),.before=1)
-dinst <- haven::read_sav(here::here("data/Instrument_Study1_1.sav")) |> mutate(id=row_number() + nrow(draw),.before=1)
-
-# compare column names
-#colnames(draw)==colnames(dinst)
-# colnames(draw)[200:208]
-# "RS01"  "RS02"  "RS03"  "RS04"  "RS05"  "RS06"  "DEM28" "DEM29" "DEM30"
-# colnames(dinst)[200:208]
-# "RS01"  "RS02"  "RS03"  "RS04"  "RS05"  "RS06"  "Q43"   "DEM29" "DEM30"
-# different col. labels at 206, but both are identical question "This past year, did you send a letter to any political official...."
-
-dinst <- dinst |> rename(DEM28=Q43)
+draw <- readRDS(here("data","draw.rds"))
+dinst <- readRDS(here("data","dinst.rds"))
 
 
 # Attari Energy Survey (Part 1)
@@ -33,7 +20,6 @@ att_useSave2 <- dinst |> select(id,ATT19:ATT33)
 
 els1 <- draw |> select(id,ELS01:ELS08)
 els2 <- dinst |> select(id,ELS01:ELS08)
-
 
 recs1 <- draw |> select(id,RECS01:RECS16)
 recs2 <- dinst |> select(id,RECS01:RECS16)
