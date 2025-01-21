@@ -1,5 +1,5 @@
 ---
-title: "Instrument Correlations_b"
+title: "Instrument Correlations_1"
 execute:
   echo: true
   warning: false
@@ -13,7 +13,7 @@ format:
   hugo-md:
     include: true
     html-math-method: mathjax
-    output-file: cor1_hugo.md
+    output-file: cor1_hugo1.md
 ---
 
 
@@ -21,16 +21,26 @@ format:
 
 
 ```{r}
-
-pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot)
+pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot,factoextra)
 options(digits=2, scipen=999, dplyr.summarise.inform=FALSE)
+
+library(gridExtra)
+library(factoextra)
+library(mgcv)
+library(lavaan)
+library(CCA)
+library(qgraph)
+library(rpart)
+library(rpart.plot)
+library(mclust)
+library(tidyLPA)
+
+select = dplyr::select
 
 source(here("scripts","survey_functions.R"))
 
-
 draw <- readRDS(here("data","draw.rds"))
 dinst <- readRDS(here("data","dinst.rds"))
-
 
 # Attari Energy Survey (Part 1)
 aes1 <- draw |> select(id,ATT01:ATT18)
@@ -49,10 +59,46 @@ rs1 <- draw |> select(id,RS01:RS06)
 rs2 <- dinst |> select(id,RS01:RS06)
 rs <- bind_rows(rs1,rs2)
 
+attari1 <- analyze_attari_survey_part1(aes_combined)
+attari2_scores <- analyze_attari_survey(att2_combined)
+els_scores <- analyze_els_survey(els)
+rs_scores <- analyze_recycling_survey(rs)
+
+# Combine all scores into one dataframe
+combined_scores <- attari1 %>%
+  left_join(attari2_scores, by="id") %>%
+  left_join(els_scores, by="id") %>%
+  left_join(rs_scores, by="id")
+
+
 ```
 
 
 
+```{r}
+
+
+# Analyze and score each survey
+attari1 <- analyze_attari_survey_part1(aes_combined)
+attari2_scores <- analyze_attari_survey(att2_combined)
+els_scores <- analyze_els_survey(els)
+rs_scores <- analyze_recycling_survey(rs)
+
+# Combine all scores into one dataframe
+combined_scores <- attari1 %>%
+  left_join(attari2_scores, by = "id") %>%
+  left_join(els_scores, by = "id") %>%
+  left_join(rs_scores, by = "id")
+
+# Rename columns for clarity
+names(combined_scores) <- c(
+  "id", "perceived_difficulty", "numeracy",
+  "energy_use", "energy_save",
+  "els_accuracy", "els_score",
+  "env_attitude", "env_attitude_z",
+  "pol_conservatism", "pol_conservatism_z"
+)
+```
 
 
 
