@@ -1,0 +1,739 @@
+
+
+
+Compare these 3 methods of analyzing the Resident Energy Consumption Survey, suggest which method is best, or if there isn't a clear winner, create a new method that combines the strengths of the existing approaches. 
+
+
+
+https://www.eia.gov/consumption/residential/reports/2015/overview/
+
+# Residential Energy Consumption Survey (RECS01-RECS16)
+
+*   **Description:**  Gathers information about the household’s energy use and equipment.
+*   **Coding Scheme:** Mixed, with multiple-choice and open-ended responses.
+*   **Specific Items:**
+    *   RECS01: Number of light bulbs in the residence (coding: 6 point ordinal)
+    *   RECS02: How household controls main heating equipment (coding: 6 point ordinal)
+    *   RECS03: How household maintains heating equipment (text entry if RECS02 = “Other”)
+    *   RECS04: How household controls central AC (coding: 6 point ordinal)
+    *   RECS05: How household maintains central air equipment (text entry if RECS04= "Other")
+    *   RECS06: Do you use individual AC (coding: 3 point ordinal)
+    *   RECS07: Number of window/wall/portable AC units (coding: numeric)
+    *    RECS08: Age of most used window/wall/portable AC unit (coding: 7 point ordinal)
+    *   RECS09: How household controls individual AC (coding: 6 point ordinal)
+    *  RECS10: How household maintains individual AC (text entry if RECS09 = "other")
+    *   RECS11: Number of light bulbs used 4 hours per day (coding: numeric)
+    *   RECS12: Portion of lightbulbs in use daily (coding: 4 point ordinal)
+     *   RECS13: Portion of lightbulbs that are incandescent (coding: 6 point ordinal)
+    *    RECS14: Portion of lightbulbs that are CFLs (coding: 6 point ordinal)
+    *   RECS15: Portion of lightbulbs that are LEDs (coding: 6 point ordinal)
+     *   RECS16:  Lights controlled by timers or dimmers? (coding: 3 point ordinal)
+     *    RECS17: Second heating source (coding: 6 point ordinal)
+
+pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot)
+options(digits=2, scipen=999, dplyr.summarise.inform=FALSE)
+
+draw <- readRDS(here("data","draw.rds"))
+dinst <- readRDS(here("data","dinst.rds"))
+els1 <- draw |> select(id,ELS01:ELS08)
+els2 <- dinst |> select(id,ELS01:ELS08)
+els <- bind_rows(els1,els2)
+
+
+head(recs,n=10)
+# A tibble: 10 × 17
+      id RECS01                        RECS02                       RECS03 RECS04  RECS05 RECS06  RECS07 RECS08  RECS09  RECS10 RECS11 RECS12  RECS13  RECS14  RECS15  RECS16 
+   <int> <dbl+lbl>                     <dbl+lbl>                    <chr>  <dbl+l> <chr>  <dbl+l> <chr>  <dbl+l> <dbl+l> <chr>  <chr>  <dbl+l> <dbl+l> <dbl+l> <dbl+l> <dbl+l>
+ 1     1 1 [Fewer than 20 light bulbs] 1 [Set one temperature and … ""     4 [Tur… ""     1 [Yes] 2      3 [5 t… 4 [Tur… ""     6      4 [Som… 4 [Som… 3 [Abo… 2 [No]  2 [Por…
+ 2     2 3 [40 to 59 light bulbs]      3 [Program the thermostat t… ""     2 [Man… ""     2 [No]  0      7 [Don… 6 [Oth… "n/a"  6      5 [Don… 5 [Don… 5 [Don… 2 [No]  1 [No …
+ 3     3 3 [40 to 59 light bulbs]      4 [Turn equipment on or off… ""     3 [Pro… ""     2 [No]  10     4 [10 … 5 [Our… ""     100    3 [Abo… 4 [Som… 4 [Som… 1 [Yes] 4 [Nat…
+ 4     4 1 [Fewer than 20 light bulbs] 4 [Turn equipment on or off… ""     4 [Tur… ""     2 [No]  0      7 [Don… 6 [Oth… "N/A"  2      6 [Non… 6 [Non… 1 [All] 2 [No]  1 [No …
+ 5     5 2 [20 to 39 light bulbs]      3 [Program the thermostat t… ""     3 [Pro… ""     3 [Don… 5      2 [2 t… 3 [Pro… ""     15     3 [Abo… 4 [Som… 4 [Som… 3 [Don… 2 [Por…
+ 6     6 1 [Fewer than 20 light bulbs] 2 [Manually adjust the temp… ""     2 [Man… ""     1 [Yes] 1      4 [10 … 2 [Man… ""     2      6 [Non… 6 [Non… 1 [All] 2 [No]  1 [No …
+ 7     7 1 [Fewer than 20 light bulbs] 2 [Manually adjust the temp… ""     2 [Man… ""     2 [No]  0      7 [Don… 6 [Oth… "We h… 5      6 [Non… 6 [Non… 1 [All] 1 [Yes] 2 [Por…
+ 8     8 3 [40 to 59 light bulbs]      2 [Manually adjust the temp… ""     3 [Pro… ""     1 [Yes] 450    5 [15 … 3 [Pro… ""     5      3 [Abo… 3 [Abo… 4 [Som… 1 [Yes] 3 [Woo…
+ 9     9 2 [20 to 39 light bulbs]      3 [Program the thermostat t… ""     4 [Tur… ""     1 [Yes] 3      1 [Les… 1 [Set… ""     12     3 [Abo… 4 [Som… 6 [Non… 2 [No]  2 [Por…
+10    10 3 [40 to 59 light bulbs]      4 [Turn equipment on or off… ""     3 [Pro… ""     1 [Yes] 1      4 [10 … 4 [Tur… ""     3      4 [Som… 2 [Mos… 2 [Mos… 1 [Yes] 1 [No …
+
+
+
+
+# method 1
+
+
+analyze_recs_survey <- function(recs) {
+  
+  # Function to extract numeric values from ordinal columns and standardize
+  extract_and_standardize <- function(data, cols) {
+    data %>%
+      select(id, all_of(cols)) %>%
+      pivot_longer(
+        cols = all_of(cols),
+        names_to = "item",
+        values_to = "response"
+      ) %>%
+      # Extract numeric part of the response label (assuming it's at the beginning)
+      mutate(response_num = as.numeric(gsub("[^0-9]", "", response))) %>% 
+      group_by(item) %>%
+      # Standardize within each item
+      mutate(response_std = as.numeric(scale(response_num))) %>%
+      ungroup() %>%
+      select(-response_num) # Remove the intermediate numeric column
+  }
+  
+  # 1. Process ordinal variables (RECS01, RECS02, RECS04, RECS06, RECS08, RECS09, RECS12, RECS13, RECS14, RECS15, RECS16)
+  ordinal_vars <- c("RECS01", "RECS02", "RECS04", "RECS06", "RECS08", "RECS09", "RECS12", "RECS13", "RECS14", "RECS15", "RECS16")
+  ordinal_data <- extract_and_standardize(recs, ordinal_vars)
+  
+  # 2. Process numeric variables (RECS07, RECS11)
+  numeric_vars <- c("RECS07", "RECS11")
+  numeric_data <- recs %>%
+    select(id, all_of(numeric_vars)) %>%
+    pivot_longer(
+      cols = all_of(numeric_vars),
+      names_to = "item",
+      values_to = "response"
+    ) %>%
+    # Convert response to numeric, coercing non-numeric to NA
+    mutate(response = as.numeric(response)) %>%
+    group_by(item) %>%
+    # Standardize
+    mutate(response_std = as.numeric(scale(response))) %>% 
+    ungroup()
+  
+  # 3. Combine ordinal and numeric data
+  combined_data <- bind_rows(ordinal_data, numeric_data)
+  
+  # 4. Aggregate by id (averaging standardized scores)
+  recs_scores <- combined_data %>%
+    group_by(id) %>%
+    summarize(recs_score = mean(response_std, na.rm = TRUE))
+  
+  return(recs_scores)
+}
+
+# Example usage:
+recs_scores <- analyze_recs_survey(recs)
+head(recs_scores)
+
+r$> # Example usage:
+    recs_scores <- analyze_recs_survey(recs)
+There were 11 warnings (use warnings() to see them)
+
+r$> head(recs_scores)
+# A tibble: 6 × 2
+     id recs_score
+  <int>      <dbl>
+1     1     -0.223
+2     2      0.453
+3     3      0.546
+4     4      0.361
+5     5      0.320
+6     6     -0.274
+
+
+
+# method 2
+
+
+analyze_recs_survey <- function(recs_data) {
+
+  # 1) Convert any label/character columns to numeric
+  #    (Adjust the list of columns as needed.)
+  recs_data_clean <- recs_data %>%
+    mutate(
+      # If columns are labeled or character, coerce them to numeric
+      RECS01_num = as.numeric(as.character(RECS01)),
+      RECS07_num = as.numeric(as.character(RECS07)),
+      RECS11_num = as.numeric(as.character(RECS11)),
+      # For RECS16, we might only want 1 vs. 0 if “Yes” vs. “No”; 
+      # but if it's truly numeric-coded, we can do as.numeric(as.character(RECS16)) as well
+      RECS16_num = as.numeric(as.character(RECS16))
+    )
+
+  # 2) Recode a simple binary for "has timers/dimmers" 
+  #    if the original coding is 1=No, 2=Yes, 3=Don't Know:
+  recs_data_clean <- recs_data_clean %>%
+    mutate(
+      has_timers_dimmers = case_when(
+        RECS16_num == 2 ~ 1,
+        RECS16_num == 1 ~ 0,
+        TRUE            ~ NA_real_
+      )
+    )
+
+  # 3) Create standardized z-scores
+  #    (Only call scale() on numeric columns)
+  recs_scored <- recs_data_clean %>%
+    mutate(
+      recs01_z = as.numeric(scale(RECS01_num)),
+      recs07_z = as.numeric(scale(RECS07_num)),
+      recs11_z = as.numeric(scale(RECS11_num)),
+      has_timers_dimmers_z = as.numeric(scale(has_timers_dimmers))
+    ) %>%
+    select(
+      id,
+      recs01_z,
+      recs07_z,
+      recs11_z,
+      has_timers_dimmers_z
+    )
+
+  return(recs_scored)
+}
+
+recs_scores <- analyze_recs_survey(recs)
+head(recs_scores)
+# A tibble: 6 × 5
+     id recs01_z recs07_z recs11_z has_timers_dimmers_z
+  <int>    <dbl>    <dbl>    <dbl>                <dbl>
+1     1  -0.904   -0.0607   -0.117                1.47 
+2     2   1.06    -0.0647   -0.117               -0.677
+3     3   1.06    -0.0447    3.95                NA    
+4     4  -0.904   -0.0647   -0.290               -0.677
+5     5   0.0770  -0.0547    0.273                1.47 
+6     6  -0.904   -0.0627   -0.290               -0.677
+Warning message:
+There was 1 warning in `mutate()`.
+ℹ In argument: `RECS07_num = as.numeric(as.character(RECS07))`.
+Caused by warning:
+! NAs introduced by coercion 
+
+
+
+# method 3
+
+analyze_recs_survey <- function(recs) {
+  # Recode RECS01, RECS02, RECS04, RECS06, RECS08, RECS09, RECS12, RECS13, RECS14, RECS15, and RECS16 to numeric
+  # The specific recoding will depend on the desired interpretation of these variables
+  recs_recoded <- recs %>%
+    mutate(
+      RECS01_num = case_when(
+        RECS01 == 1 ~ 1, # "1-5"
+        RECS01 == 2 ~ 2, # "6-10"
+        RECS01 == 3 ~ 3, # "11-15"
+        RECS01 == 4 ~ 4, # "16-20"
+        RECS01 == 5 ~ 5, # "21-50"
+        RECS01 == 6 ~ 6, # "51 or more"
+        TRUE ~ NA_real_
+      ),
+      RECS02_num = case_when(
+        RECS02 == 1 ~ 1, # "Don't know"
+        RECS02 == 2 ~ 2, # "Manual thermostat"
+        RECS02 == 3 ~ 3, # "Programmable thermostat"
+        RECS02 == 4 ~ 4, # "Automatic set-back thermostat"
+        RECS02 == 5 ~ 5, # "Remote/app control"
+        RECS02 == 6 ~ 6, # "Other"
+        TRUE ~ NA_real_
+      ),
+      RECS04_num = case_when(
+        RECS04 == 1 ~ 1, # "Don't know"
+        RECS04 == 2 ~ 2, # "Manual thermostat"
+        RECS04 == 3 ~ 3, # "Programmable thermostat"
+        RECS04 == 4 ~ 4, # "Automatic set-back thermostat"
+        RECS04 == 5 ~ 5, # "Remote/app control"
+        RECS04 == 6 ~ 6, # "Other"
+        TRUE ~ NA_real_
+      ),
+      RECS06_num = case_when(
+        RECS06 == 1 ~ 1, # "Yes"
+        RECS06 == 2 ~ 0, # "No"
+        RECS06 == 3 ~ 0, # "Don't know"
+        TRUE ~ NA_real_
+      ),
+      RECS08_num = case_when(
+        RECS08 == 1 ~ 1, # "Less than 1 year"
+        RECS08 == 2 ~ 2, # "1-2 years"
+        RECS08 == 3 ~ 3, # "3-5 years"
+        RECS08 == 4 ~ 4, # "6-10 years"
+        RECS08 == 5 ~ 5, # "11-15 years"
+        RECS08 == 6 ~ 6, # "16 years or more"
+        RECS08 == 7 ~ 0, # "Don't know"
+        TRUE ~ NA_real_
+      ),
+      RECS09_num = case_when(
+        RECS09 == 1 ~ 1, # "Don't know"
+        RECS09 == 2 ~ 2, # "Manual thermostat"
+        RECS09 == 3 ~ 3, # "Programmable thermostat"
+        RECS09 == 4 ~ 4, # "Automatic set-back thermostat"
+        RECS09 == 5 ~ 5, # "Remote/app control"
+        RECS09 == 6 ~ 6, # "Other"
+        TRUE ~ NA_real_
+      ),
+      RECS12_num = case_when(
+        RECS12 == 1 ~ 1, # "None"
+        RECS12 == 2 ~ 2, # "Some"
+        RECS12 == 3 ~ 3, # "Most"
+        RECS12 == 4 ~ 4, # "All"
+        TRUE ~ NA_real_
+      ),
+      RECS13_num = case_when(
+        RECS13 == 1 ~ 1, # "None"
+        RECS13 == 2 ~ 2, # "1%-25%"
+        RECS13 == 3 ~ 3, # "26%-50%"
+        RECS13 == 4 ~ 4, # "51%-75%"
+        RECS13 == 5 ~ 5, # "76%-99%"
+        RECS13 == 6 ~ 6, # "100%"
+        TRUE ~ NA_real_
+      ),
+      RECS14_num = case_when(
+        RECS14 == 1 ~ 1, # "None"
+        RECS14 == 2 ~ 2, # "1%-25%"
+        RECS14 == 3 ~ 3, # "26%-50%"
+        RECS14 == 4 ~ 4, # "51%-75%"
+        RECS14 == 5 ~ 5, # "76%-99%"
+        RECS14 == 6 ~ 6, # "100%"
+        TRUE ~ NA_real_
+      ),
+      RECS15_num = case_when(
+        RECS15 == 1 ~ 1, # "None"
+        RECS15 == 2 ~ 2, # "1%-25%"
+        RECS15 == 3 ~ 3, # "26%-50%"
+        RECS15 == 4 ~ 4, # "51%-75%"
+        RECS15 == 5 ~ 5, # "76%-99%"
+        RECS15 == 6 ~ 6, # "100%"
+        TRUE ~ NA_real_
+      ),
+      RECS16_num = case_when(
+        RECS16 == 1 ~ 1, # "Yes"
+        RECS16 == 2 ~ 0, # "No"
+        RECS16 == 3 ~ 0, # "Don't know"
+        TRUE ~ NA_real_
+      )
+    )
+  
+  # Calculate a composite score (e.g., average of the numeric variables)
+  recs_score <- recs_recoded %>%
+    mutate(
+      recs_composite_score = rowMeans(select(., RECS01_num:RECS16_num), na.rm = TRUE),
+      recs_composite_score_scaled = scale(recs_composite_score)
+    ) %>%
+    select(id, recs_composite_score, recs_composite_score_scaled)
+  
+  return(recs_score)
+}
+
+# Example usage:
+recs_scores <- analyze_recs_survey(recs)
+head(recs_scores) |> pander::pandoc.table(caption="Residential Energy Consumption Survey")
+
+---------------------------------------------------------
+ id   recs_composite_score   recs_composite_score_scaled 
+---- ---------------------- -----------------------------
+ 1           2.455                     0.2407            
+
+ 2            2.7                      0.8261            
+
+ 3            3.1                       1.78             
+
+ 4            2.5                      0.3491            
+
+ 5           2.455                     0.2407            
+
+ 6            2.2                      -0.3663           
+---------------------------------------------------------
+
+Table: Residential Energy Consumption Survey
+
+
+
+
+
+
+```{r}
+analyze_recs_survey_hybrid <- function(recs) {
+
+  recs_clean <- recs %>%
+    # 1) Manual recoding for truly ordinal items
+    mutate(
+      # Example for RECS01 (the rest done similarly):
+      RECS01_num = case_when(
+        RECS01 == 1 ~ 1,  # < 20
+        RECS01 == 2 ~ 2,  # 20-39
+        RECS01 == 3 ~ 3,  # 40-59
+        RECS01 == 4 ~ 4,  # 60-79
+        RECS01 == 5 ~ 5,  # 80-99
+        RECS01 == 6 ~ 6,  # 100+ (example)
+        TRUE       ~ NA_real_
+      ),
+      # Possibly do the same for RECS02, RECS04, etc. ...
+      
+      # 2) Keep numeric items as numeric
+      RECS07_num = as.numeric(as.character(RECS07)),
+      RECS11_num = as.numeric(as.character(RECS11)),
+
+      # 3) If RECS16 is yes/no/don't know, create a binary
+      has_timers_dimmers = case_when(
+        RECS16 == 1 ~ 1, # "Yes"
+        RECS16 == 2 ~ 0, # "No"
+        RECS16 == 3 ~ NA_real_, # "Don't know"
+        TRUE        ~ NA_real_
+      )
+    )
+
+  # Create subscales 
+  recs_clean <- recs_clean %>%
+    rowwise() %>%
+    mutate(
+      # Example "Lighting Subscale" if relevant items are e.g. RECS01_num, RECS11_num, RECS12, RECS13, ...
+      lighting_subscale = mean(c(RECS01_num, RECS11_num, as.numeric(RECS12), 
+                                 as.numeric(RECS13), as.numeric(RECS14), 
+                                 as.numeric(RECS15), has_timers_dimmers), 
+                               na.rm = TRUE),
+      # Example "HeatingCooling Subscale" for RECS02, RECS04, RECS06, RECS07_num, ...
+      heatingcooling_subscale = mean(c(as.numeric(RECS02), as.numeric(RECS04),
+                                       as.numeric(RECS06), RECS07_num,
+                                       as.numeric(RECS08), as.numeric(RECS09)), 
+                                     na.rm = TRUE)
+    ) %>%
+    ungroup()
+
+  # Optionally standardize subscales
+  recs_final <- recs_clean %>%
+    mutate(
+      lighting_subscale_z = as.numeric(scale(lighting_subscale)),
+      heatingcooling_subscale_z = as.numeric(scale(heatingcooling_subscale))
+    ) %>%
+    select(id, lighting_subscale_z, heatingcooling_subscale_z)
+
+  return(recs_final)
+}
+
+recs_scores_hybrid <- analyze_recs_survey_hybrid(recs)
+
+
+recs_scores_hybrid |> head() |> pander::pandoc.table(caption="RECS Hybrid Scores",split.table=Inf,style='rmarkdown')
+
+```
+
+| id | lighting_subscale_z | heatingcooling_subscale_z |
+|:--:|:-------------------:|:-------------------------:|
+| 1  |       -0.2237       |         -0.06442          |
+| 2  |       0.05235       |          -0.0544          |
+| 3  |        4.279        |         -0.03835          |
+| 4  |       -0.2632       |         -0.04838          |
+| 5  |       0.2101        |          -0.0564          |
+| 6  |       -0.2632       |         -0.07044          |
+
+Table: RECS Hybrid Scores
+
+
+
+```{r}
+analyze_recs_combined <- function(recs) {
+  recs_recoded <- recs %>%
+    mutate(
+      # Lighting group
+      RECS01_num = case_when(
+        RECS01 == 1 ~ 1, # "1-5"
+        RECS01 == 2 ~ 2, # "6-10"
+        RECS01 == 3 ~ 3, # "11-15"
+        RECS01 == 4 ~ 4, # "16-20"
+        RECS01 == 5 ~ 5, # "21-50"
+        RECS01 == 6 ~ 6, # "51 or more"
+        TRUE ~ NA_real_
+      ),
+      RECS11_num = as.numeric(RECS11),
+      RECS12_num = case_when(
+        RECS12 == 1 ~ 1, # "None"
+        RECS12 == 2 ~ 2, # "Some"
+        RECS12 == 3 ~ 3, # "Most"
+        RECS12 == 4 ~ 4, # "All"
+        TRUE ~ NA_real_
+      ),
+      RECS13_num = case_when(
+        RECS13 == 1 ~ 1, # "None"
+        RECS13 == 2 ~ 2, # "1%-25%"
+        RECS13 == 3 ~ 3, # "26%-50%"
+        RECS13 == 4 ~ 4, # "51%-75%"
+        RECS13 == 5 ~ 5, # "76%-99%"
+        RECS13 == 6 ~ 6, # "100%"
+        TRUE ~ NA_real_
+      ),
+      RECS14_num = case_when(
+        RECS14 == 1 ~ 1, # "None"
+        RECS14 == 2 ~ 2, # "1%-25%"
+        RECS14 == 3 ~ 3, # "26%-50%"
+        RECS14 == 4 ~ 4, # "51%-75%"
+        RECS14 == 5 ~ 5, # "76%-99%"
+        RECS14 == 6 ~ 6, # "100%"
+        TRUE ~ NA_real_
+      ),
+      RECS15_num = case_when(
+        RECS15 == 1 ~ 1, # "None"
+        RECS15 == 2 ~ 2, # "1%-25%"
+        RECS15 == 3 ~ 3, # "26%-50%"
+        RECS15 == 4 ~ 4, # "51%-75%"
+        RECS15 == 5 ~ 5, # "76%-99%"
+        RECS15 == 6 ~ 6, # "100%"
+        TRUE ~ NA_real_
+      ),
+      RECS16_num = case_when(
+        RECS16 == 1 ~ 1, # "Yes"
+        RECS16 == 2 ~ 0, # "No"
+        RECS16 == 3 ~ 0, # "Don't know"
+        TRUE ~ NA_real_
+      ),
+      # Heating group
+      RECS02_num = case_when(
+        RECS02 == 1 ~ 1, # "Don't know"
+        RECS02 == 2 ~ 2, # "Manual thermostat"
+        RECS02 == 3 ~ 3, # "Programmable thermostat"
+        RECS02 == 4 ~ 4, # "Automatic set-back thermostat"
+        RECS02 == 5 ~ 5, # "Remote/app control"
+        RECS02 == 6 ~ 6, # "Other"
+        TRUE ~ NA_real_
+      ),
+      # Cooling group
+      RECS04_num = case_when(
+        RECS04 == 1 ~ 1, # "Don't know"
+        RECS04 == 2 ~ 2, # "Manual thermostat"
+        RECS04 == 3 ~ 3, # "Programmable thermostat"
+        RECS04 == 4 ~ 4, # "Automatic set-back thermostat"
+        RECS04 == 5 ~ 5, # "Remote/app control"
+        RECS04 == 6 ~ 6, # "Other"
+        TRUE ~ NA_real_
+      ),
+      RECS06_num = case_when(
+        RECS06 == 1 ~ 1, # "Yes"
+        RECS06 == 2 ~ 0, # "No"
+        RECS06 == 3 ~ 0, # "Don't know"
+        TRUE ~ NA_real_
+      ),
+      RECS07_num = as.numeric(RECS07),
+      RECS08_num = case_when(
+        RECS08 == 1 ~ 1, # "Less than 1 year"
+        RECS08 == 2 ~ 2, # "1-2 years"
+        RECS08 == 3 ~ 3, # "3-5 years"
+        RECS08 == 4 ~ 4, # "6-10 years"
+        RECS08 == 5 ~ 5, # "11-15 years"
+        RECS08 == 6 ~ 6, # "16 years or more"
+        RECS08 == 7 ~ 0, # "Don't know"
+        TRUE ~ NA_real_
+      ),
+      RECS09_num = case_when(
+        RECS09 == 1 ~ 1, # "Don't know"
+        RECS09 == 2 ~ 2, # "Manual thermostat"
+        RECS09 == 3 ~ 3, # "Programmable thermostat"
+        RECS09 == 4 ~ 4, # "Automatic set-back thermostat"
+        RECS09 == 5 ~ 5, # "Remote/app control"
+        RECS09 == 6 ~ 6, # "Other"
+        TRUE ~ NA_real_
+      )
+    )
+  
+  # Create group scores
+  recs_grouped <- recs_recoded %>%
+    mutate(
+      lighting_score = rowMeans(select(., RECS01_num, RECS11_num, RECS12_num, RECS13_num, RECS14_num, RECS15_num, RECS16_num), na.rm = TRUE),
+      heating_score = rowMeans(select(., RECS02_num), na.rm = TRUE),
+      cooling_score = rowMeans(select(., RECS04_num, RECS06_num, RECS07_num, RECS08_num, RECS09_num), na.rm = TRUE)
+    )
+  
+  # Standardize group scores
+  recs_standardized <- recs_grouped %>%
+    mutate(
+      lighting_score_std = scale(lighting_score),
+      heating_score_std = scale(heating_score),
+      cooling_score_std = scale(cooling_score)
+    )
+  
+  # Optional overall score
+  recs_final <- recs_standardized %>%
+    mutate(
+      overall_recs_score = rowMeans(select(., lighting_score_std, heating_score_std, cooling_score_std), na.rm = TRUE)
+    )
+  
+  return(recs_final)
+}
+
+# Example usage
+recs_combined_scores <- analyze_recs_combined(recs)
+head(recs_combined_scores) |>
+  select(id, lighting_score, heating_score, cooling_score, lighting_score_std, heating_score_std, cooling_score_std, overall_recs_score) |>
+  pander::pandoc.table(caption = "RECS Combined Scores",split.table=Inf,style='rmarkdown')
+
+```
+
+| id | lighting_score | heating_score | cooling_score | lighting_score_std | heating_score_std | cooling_score_std | overall_recs_score |
+|:--:|:--------------:|:-------------:|:-------------:|:------------------:|:-----------------:|:-----------------:|:------------------:|
+| 1  |     2.857      |       1       |      2.8      |      -0.1769       |      -1.341       |     -0.05276      |      -0.5235       |
+| 2  |     3.667      |       3       |      1.6      |       0.0549       |      0.3861       |     -0.06479      |       0.1254       |
+| 3  |     19.17      |       4       |      4.4      |       4.493        |       1.249       |     -0.03672      |       1.902        |
+| 4  |     2.167      |       4       |       2       |      -0.3746       |       1.249       |     -0.06078      |       0.2714       |
+| 5  |     4.429      |       3       |      2.6      |       0.273        |      0.3861       |     -0.05476      |       0.2014       |
+| 6  |     2.167      |       2       |       2       |      -0.3746       |      -0.4774      |     -0.06078      |      -0.3042       |
+
+Table: RECS Combined Scores
+
+
+
+```{r}
+analyze_recs_survey_combined <- function(recs) {
+  # 1. Recode variables with meaningful scales (from Method 3)
+  recs_recoded <- recs %>%
+    mutate(
+      # Efficiency indicators (higher = more efficient)
+      efficiency_score = case_when(
+        RECS02 %in% c(3,4,5) ~ 1, # Programmable/automatic/remote
+        TRUE ~ 0
+      ),
+      ac_efficiency = case_when(
+        RECS04 %in% c(3,4,5) ~ 1,
+        TRUE ~ 0
+      ),
+      lighting_efficiency = case_when(
+        RECS14 >= 4 | RECS15 >= 4 ~ 1, # >50% CFL or LED
+        TRUE ~ 0
+      ),
+      
+      # Usage intensity (standardized)
+      light_intensity = scale(as.numeric(RECS11)),
+      ac_intensity = scale(as.numeric(RECS07)),
+      
+      # Technology adoption (from Method 2)
+      has_timers = case_when(
+        RECS16 == 1 ~ 1,
+        RECS16 == 2 ~ 0,
+        TRUE ~ NA_real_
+      )
+    )
+  
+  # 2. Calculate subscores with different weights
+  recs_scores <- recs_recoded %>%
+    mutate(
+      efficiency_subscore = (efficiency_score + ac_efficiency + lighting_efficiency)/3,
+      intensity_subscore = -(scale(light_intensity + ac_intensity)[,1]), # Negative because lower use is better
+      tech_subscore = scale(has_timers)[,1]
+    )
+  
+  # 3. Calculate weighted final score
+  final_scores <- recs_scores %>%
+    mutate(
+      recs_score = (0.5 * efficiency_subscore + 
+                    0.3 * intensity_subscore +
+                    0.2 * tech_subscore),
+      recs_score_scaled = scale(recs_score)[,1]
+    ) %>%
+    select(id, efficiency_subscore, intensity_subscore, 
+           tech_subscore, recs_score, recs_score_scaled)
+  
+  return(final_scores)
+}
+
+
+recs_combined_scores <- analyze_recs_survey_combined(recs)
+head(recs_combined_scores) |>
+  select(id, efficiency_subscore, intensity_subscore, tech_subscore, recs_score, recs_score_scaled) |>
+  pander::pandoc.table(caption = "RECS Combined Scores",split.table=Inf,style='rmarkdown')
+
+```
+
+| id | efficiency_subscore | intensity_subscore | tech_subscore | recs_score | recs_score_scaled |
+|:--:|:-------------------:|:------------------:|:-------------:|:----------:|:-----------------:|
+| 1  |       0.3333        |       0.1257       |    -1.473     |  -0.09025  |      -0.9077      |
+| 2  |       0.6667        |       0.1285       |    0.6773     |   0.5074   |      0.5803       |
+| 3  |          1          |       -2.748       |      NA       |     NA     |        NA         |
+| 4  |       0.6667        |       0.2503       |    0.6773     |   0.5439   |      0.6713       |
+| 5  |          1          |      -0.1526       |    -1.473     |   0.1596   |      -0.2856      |
+| 6  |          0          |       0.2489       |    0.6773     |   0.2101   |      -0.1597      |
+
+Table: RECS Combined Scores
+
+
+
+
+```{r}
+
+analyze_recs_survey_hybrid <- function(recs) {
+  
+  # Step 1: Recode ordinal and yes/no items with explicit numeric categories
+  recs_recoded <- recs %>%
+    mutate(
+      # Example recoding of RECS01 (fewer than 20 = 1, 20-39 = 2, etc.)
+      RECS01_num = case_when(
+        RECS01 == 1 ~ 1,
+        RECS01 == 2 ~ 2,
+        RECS01 == 3 ~ 3,
+        RECS01 == 4 ~ 4,
+        RECS01 == 5 ~ 5,
+        RECS01 == 6 ~ 6,
+        TRUE        ~ NA_real_
+      ),
+      # Example recoding of RECS16 (Yes = 1, No/Don't know = 0)
+      RECS16_num = case_when(
+        RECS16 == 1 ~ 1, 
+        RECS16 == 2 ~ 0,
+        RECS16 == 3 ~ 0,
+        TRUE        ~ NA_real_
+      ),
+      # And so on, for other ordinal variables (RECS02, RECS04, RECS06, RECS08, RECS09, RECS12, RECS13, RECS14, RECS15), 
+      # plus numeric variables (RECS07, RECS11).
+    )
+  
+  # Step 2: Convert numeric columns to a numeric type (coerce text, if any)
+  # (If your data is already numeric-coded, you may skip or adapt this.)
+  recs_numeric <- recs_recoded %>%
+    mutate(
+      RECS07_num = as.numeric(RECS07),
+      RECS11_num = as.numeric(RECS11)
+      # etc.
+    )
+  
+  # Step 3: For each numeric-coded item, create a standardized z-score
+  # Here, you'd specify all the columns you want to standardize
+  columns_to_standardize <- c(
+    "RECS01_num", "RECS02_num", "RECS04_num", 
+    "RECS06_num", "RECS07_num", "RECS08_num",
+    "RECS09_num", "RECS11_num", "RECS12_num",
+    "RECS13_num", "RECS14_num", "RECS15_num",
+    "RECS16_num"
+  )
+  
+  # Create the z-scores
+  # We'll do this programmatically
+  recs_z <- recs_numeric %>%
+    rowwise() %>%
+    mutate(
+      across(
+        .cols = all_of(columns_to_standardize),
+        .fns  = ~ as.numeric(scale(.x)),
+        .names = "{.col}_z"
+      )
+    ) %>%
+    ungroup()
+  
+  # Step 4: Optionally create a composite score 
+  # (e.g., mean of all standardized variables)
+  # This ensures each item has equal weight
+  recs_final <- recs_z %>%
+    rowwise() %>%
+    mutate(
+      recs_composite_z = mean(
+        c_across(ends_with("_z")), 
+        na.rm = TRUE
+      )
+    ) %>%
+    ungroup() %>%
+    select(
+      id,
+      ends_with("_z"),
+      recs_composite_z
+    )
+  
+  return(recs_final)
+}
+
+recs_scores_hybrid <- analyze_recs_survey_hybrid(recs)
+head(recs_scores_hybrid) 
+
+```
+# A tibble: 6 × 3
+     id lighting_subscale_z heatingcooling_subscale_z
+  <int>               <dbl>                     <dbl>
+1     1             -0.224                    -0.0644
+2     2              0.0524                   -0.0544
+3     3              4.28                     -0.0383
+4     4             -0.263                    -0.0484
+5     5              0.210                    -0.0564
+6     6             -0.263                    -0.0704

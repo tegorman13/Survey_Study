@@ -1,0 +1,296 @@
+
+
+
+
+Now add an analysis function for the Recycling Study Questions
+
+
+
+
+# Recycling Study Questions RS01-RS06
+
+* **Description:** These are questions included from a different study
+    * **Coding Scheme:** 5-point agreement scale
+   *  **Specific Items:**
+       *  RS01: I generally don’t pay attention to how much energy I use.
+       *  RS02: I would say I am very pro-environmental.
+       *  RS03: I think saving energy is largely a waste of time.
+        *  RS04: I am generally conservative on the political spectrum with regard to social issues.
+        * RS05: I am generally conservative on the political spectrum with regard to economic issues.
+        *  RS06: I consider myself knowledgeable about how much energy utilities use
+
+head(rs,n=10)
+# A tibble: 10 × 7
+      id RS01                           RS02                           RS03                           RS04                           RS05                     RS06   
+   <int> <dbl+lbl>                      <dbl+lbl>                      <dbl+lbl>                      <dbl+lbl>                      <dbl+lbl>                <dbl+l>
+ 1     1 2 [Somewhat Agree]             2 [Somewhat Agree]             5 [Disagree]                   4 [Somewhat Disagree]          4 [Somewhat Disagree]    4 [Som…
+ 2     2 5 [Disagree]                   3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 5 [Disagree]                   5 [Disagree]             3 [Nei…
+ 3     3 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor di… 3 [Nei…
+ 4     4 4 [Somewhat Disagree]          3 [Neither agree nor disagree] 5 [Disagree]                   5 [Disagree]                   5 [Disagree]             3 [Nei…
+ 5     5 3 [Neither agree nor disagree] 2 [Somewhat Agree]             4 [Somewhat Disagree]          2 [Somewhat Agree]             3 [Neither agree nor di… 2 [Som…
+ 6     6 5 [Disagree]                   1 [Agree]                      5 [Disagree]                   5 [Disagree]                   5 [Disagree]             2 [Som…
+ 7     7 5 [Disagree]                   2 [Somewhat Agree]             5 [Disagree]                   5 [Disagree]                   2 [Somewhat Agree]       4 [Som…
+ 8     8 2 [Somewhat Agree]             3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 2 [Somewhat Agree]             1 [Agree]                3 [Nei…
+ 9     9 4 [Somewhat Disagree]          2 [Somewhat Agree]             5 [Disagree]                   5 [Disagree]                   5 [Disagree]             4 [Som…
+10    10 5 [Disagree]                   1 [Agree]                      5 [Disagree]                   1 [Agree]                      1 [Agree]                1 [Agr…
+
+
+
+
+
+
+
+
+
+```{r}
+analyze_recycling_survey <- function(rs_data) {
+  
+  # 1) Coerce columns to numeric
+  rs_numeric <- rs_data %>%
+    mutate(
+      RS01_num = as.numeric(as.character(RS01)),
+      RS02_num = as.numeric(as.character(RS02)),
+      RS03_num = as.numeric(as.character(RS03)),
+      RS04_num = as.numeric(as.character(RS04)),
+      RS05_num = as.numeric(as.character(RS05)),
+      RS06_num = as.numeric(as.character(RS06))
+    )
+  
+  # 2) Recode items so that higher numbers consistently reflect
+  #    "more" of the targeted construct:
+  #
+  # Environmental Attitude (RS01 & RS03 are negative, RS02 & RS06 are positive).
+  # Original scale is 1=Agree ... 5=Disagree
+  # For a 'positive' pro-environment item, do 6 - x => so 1 => 5 (strong agreement => higher = pro-env).
+  # For a 'negative' pro-environment item, keep x => so 1 => 1 (strong agreement => lower pro-env).
+  
+  rs_recode <- rs_numeric %>%
+    mutate(
+      # Positive items
+      RS02_env = 6 - RS02_num,  # now 5 = strongly pro-env
+      RS06_env = 6 - RS06_num,  # now 5 = strongly pro-env
+      
+      # Negative items (keep the original so that 1 => 1 = strongly anti-env, 5 => 5 = strongly pro-env)
+      RS01_env = RS01_num,
+      RS03_env = RS03_num,
+      
+      # Political items: If we want higher = more conservative,
+      # we can do 6 - x so that 1 => 5 (strongly conservative).
+      # If you'd prefer the raw code to remain 1=Agree => "lowest" numeric,
+      # skip the transformation. Below we invert it:
+      RS04_cons = 6 - RS04_num, 
+      RS05_cons = 6 - RS05_num
+    )
+  
+  # 3) Compute subscales
+  #    - "env_attitude": average of RS01_env, RS02_env, RS03_env, RS06_env
+  #      such that 5 = most pro-environment, 1 = least pro-environment
+  #    - "pol_conservatism": average of RS04_cons, RS05_cons
+  #      such that 5 = strongly conservative, 1 = strongly liberal
+  
+  rs_subscales <- rs_recode %>%
+    rowwise() %>%
+    mutate(
+      env_attitude = mean(c(RS01_env, RS02_env, RS03_env, RS06_env), na.rm = TRUE),
+      pol_conservatism = mean(c(RS04_cons, RS05_cons), na.rm = TRUE)
+    ) %>%
+    ungroup()
+  
+  # 4) Standardize subscales if desired
+  rs_final <- rs_subscales %>%
+    mutate(
+      env_attitude_z = as.numeric(scale(env_attitude)),
+      pol_conservatism_z = as.numeric(scale(pol_conservatism))
+    ) %>%
+    # 5) Return the columns of interest
+    select(id, 
+           env_attitude, env_attitude_z,
+           pol_conservatism, pol_conservatism_z)
+  
+  return(rs_final)
+}
+
+rs_scores <- analyze_recycling_survey(rs)
+head(rs_scores) |> pander::pandoc.table(caption = "Recycling Study Scores",split.table=Inf,style='rmarkdown')
+
+```
+| id | env_attitude | env_attitude_z | pol_conservatism | pol_conservatism_z |
+|:--:|:------------:|:--------------:|:----------------:|:------------------:|
+| 1  |     3.25     |    -0.4323     |        2         |       -0.449       |
+| 2  |     3.5      |    -0.1079     |        1         |       -1.154       |
+| 3  |      3       |    -0.7567     |        3         |       0.2555       |
+| 4  |     3.75     |     0.2164     |        1         |       -1.154       |
+| 5  |     3.75     |     0.2164     |       3.5        |       0.6077       |
+| 6  |     4.75     |     1.514      |        1         |       -1.154       |
+
+Table: Recycling Study Scores
+
+
+Rationale for the Example Code
+	•	RS02 (“I would say I am very pro-environmental”) and RS06 (“I consider myself knowledgeable …”) are phrased positively for environmental attitudes.
+	•	If a person selects 1 [Agree], that is the strongest pro-environment response.
+	•	Often, we prefer higher numbers to mean stronger agreement, so we do (6 - x) to flip the original code (1→5, 5→1).
+	•	RS01 (“I generally don’t pay attention to how much energy I use”) and RS03 (“… saving energy is a waste of time”) are negative statements about the environment.
+	•	If a person selects 1 [Agree] here, that is more anti-environment.
+	•	To keep “5 = most pro-environment,” we just keep these as x in the final scale. (Hence, 1=least pro-environment, 5=most pro-environment for these reversed items.)
+	•	Alternatively, one could unify them by also applying 6 - x but then interpret them as “bigger number = more negative.” The key is consistency.
+	•	RS04 and RS05 ask about conservatism. One might keep these separate as a “political orientation” scale (higher = more conservative). For instance, if someone selects 1 [Agree], that means strongly conservative, so we do pol = 6 - x so that 5 indicates strong conservative and 1 indicates strong liberal.
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+analyze_recycling_study <- function(rs) {
+  # Reverse code items where higher values indicate disagreement with pro-environmental attitudes
+  rs_recoded <- rs %>%
+    mutate(
+      RS01_rev = 6 - RS01,
+      RS03_rev = 6 - RS03
+    )
+  
+  # Calculate a composite score for pro-environmental attitudes (average of RS02, RS01_rev, RS03_rev)
+  # and for political conservatism (average of RS04 and RS05)
+  rs_scores <- rs_recoded %>%
+    mutate(
+      pro_env_attitude = rowMeans(select(., RS02, RS01_rev, RS03_rev), na.rm = TRUE),
+      political_conservatism = rowMeans(select(., RS04, RS05), na.rm = TRUE),
+      rs06_knowledge = RS06 # Rename RS06 to a more descriptive name
+    )
+  
+  # Standardize the scores
+  rs_standardized <- rs_scores %>%
+    mutate(
+      pro_env_attitude_std = scale(pro_env_attitude),
+      political_conservatism_std = scale(political_conservatism),
+      rs06_knowledge_std = scale(rs06_knowledge)
+    )
+  
+  # Select relevant columns and return
+  rs_final <- rs_standardized %>%
+    select(id, pro_env_attitude, political_conservatism, rs06_knowledge,
+           pro_env_attitude_std, political_conservatism_std, rs06_knowledge_std)
+  
+  return(rs_final)
+}
+
+# Example usage:
+rs_scores <- analyze_recycling_study(rs)
+head(rs_scores) |> pander::pandoc.table(caption = "Recycling Study Scores",split.table=Inf,style='rmarkdown')
+```
+
+
+| id | pro_env_attitude | political_conservatism | rs06_knowledge | pro_env_attitude_std | political_conservatism_std | rs06_knowledge_std |
+|:--:|:----------------:|:----------------------:|:--------------:|:--------------------:|:--------------------------:|:------------------:|
+| 1  |      2.333       |           4            |       4        |        0.1075        |           0.449            |       0.8629       |
+| 2  |      2.333       |           5            |       3        |        0.1075        |           1.154            |      0.03801       |
+| 3  |        3         |           3            |       3        |        0.8573        |          -0.2555           |      0.03801       |
+| 4  |        2         |           5            |       3        |       -0.2674        |           1.154            |      0.03801       |
+| 5  |      2.333       |          2.5           |       2        |        0.1075        |          -0.6077           |      -0.7869       |
+| 6  |        1         |           5            |       2        |        -1.392        |           1.154            |      -0.7869       |
+
+Table: Recycling Study Scores
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+
+analyze_rs_survey <- function(rs) {
+  # 1. Recode variables so higher scores = more pro-environmental
+  rs_recoded <- rs %>%
+    mutate(
+      # Reverse code RS01 and RS03 (negative statements)
+      RS01_rev = 6 - as.numeric(RS01),
+      RS02_std = as.numeric(RS02),
+      RS03_rev = 6 - as.numeric(RS03),
+      # Political conservatism reverse coded as it typically correlates negatively with environmental concerns
+      RS04_rev = 6 - as.numeric(RS04),
+      RS05_rev = 6 - as.numeric(RS05),
+      RS06_std = as.numeric(RS06)
+    )
+  
+  # 2. Calculate subscores
+  rs_scores <- rs_recoded %>%
+    mutate(
+      # Environmental attitude subscore (RS01, RS02, RS03)
+      env_attitude = (RS01_rev + RS02_std + RS03_rev)/3,
+      
+      # Political orientation subscore (RS04, RS05)
+      political_orientation = (RS04_rev + RS05_rev)/2,
+      
+      # Knowledge score (RS06)
+      env_knowledge = RS06_std
+    )
+  
+  # 3. Calculate composite score with weights
+  final_scores <- rs_scores %>%
+    mutate(
+      # Weight environmental attitude more heavily
+      rs_composite = (0.5 * env_attitude + 
+                     0.3 * political_orientation +
+                     0.2 * env_knowledge),
+      
+      # Standardized versions
+      env_attitude_z = scale(env_attitude)[,1],
+      political_orientation_z = scale(political_orientation)[,1],
+      env_knowledge_z = scale(env_knowledge)[,1],
+      rs_composite_z = scale(rs_composite)[,1]
+    ) %>%
+    select(id, 
+           env_attitude, env_attitude_z,
+           political_orientation, political_orientation_z,
+           env_knowledge, env_knowledge_z,
+           rs_composite, rs_composite_z)
+  
+  return(final_scores)
+}
+
+rs_scores <- analyze_rs_survey(rs) |> head(5) |> pander::pandoc.table(caption = "Recycling Study Scores",split.table=Inf,style='rmarkdown')
+
+```
+
+| id | env_attitude | env_attitude_z | political_orientation | political_orientation_z | env_knowledge | env_knowledge_z | rs_composite | rs_composite_z |
+|:--:|:------------:|:--------------:|:---------------------:|:-----------------------:|:-------------:|:---------------:|:------------:|:--------------:|
+| 1  |    2.333     |     0.1075     |           2           |         -0.449          |       4       |     0.8629      |    2.567     |    0.08558     |
+| 2  |    2.333     |     0.1075     |           1           |         -1.154          |       3       |     0.03801     |    2.067     |    -0.5649     |
+| 3  |      3       |     0.8573     |           3           |         0.2555          |       3       |     0.03801     |      3       |     0.6493     |
+| 4  |      2       |    -0.2674     |           1           |         -1.154          |       3       |     0.03801     |     1.9      |    -0.7817     |
+| 5  |    2.333     |     0.1075     |          3.5          |         0.6077          |       2       |     -0.7869     |    2.617     |     0.1506     |
+
+Table: Recycling Study Scores
+
+
+his analysis approach:
+
+Handles reverse coding for negatively worded items (RS01, RS03)
+Creates meaningful subscores:
+    Environmental attitude (RS01-RS03)
+    Political orientation (RS04-RS05)
+    Environmental knowledge (RS06)
+Weights the components based on their relevance to environmental behavior:
+    50% environmental attitude
+    30% political orientation
+    20% environmental knowledge
+Provides both raw and standardized scores
+Includes a combination function to merge with RECS scores for a comprehensive assessment
+The combination function allows us to:
+
+Compare behavioral measures (RECS) with attitudinal measures (RS)
+Create an overall environmental score
+Identify potential gaps between attitudes and behaviors

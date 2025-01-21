@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.13">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>Instrument Analyses – CCL Survey Study</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./org.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-66ab7fd5e73b7f0a764e0d49b3e29ab1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-8ebe664a20a329468a5069a44ff81306.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><style>html{ scroll-behavior: smooth; }</style>
+<!-- academic icons --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<!-- fontawesome icons --><script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
+</head>
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">CCL Survey Study</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+<li class="nav-item">
+    <a class="nav-link active" href="./org.html" aria-current="page"> 
+<span class="menu-text">Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./inspect.html"> 
+<span class="menu-text">items</span></a>
+  </li>  
+</ul>
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tegorman13/Survey_Study"> <i class="bi bi-github" role="img" aria-label="github">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./inst.html"><strong>Analyses</strong></a></li><li class="breadcrumb-item"><a href="./inst.html">Survey Items</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Analyses</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inst.html" class="sidebar-item-text sidebar-link active"><i class="bi bi-file-text-fill" role="img">
+</i> 
+ <span class="menu-text">Survey Items</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./org.html" class="sidebar-item-text sidebar-link"><i class="bi bi-file-text-fill" role="img">
+</i> 
+ <span class="menu-text">Organization</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inspect.html" class="sidebar-item-text sidebar-link"><i class="bi bi-file-text-fill" role="img">
+</i> 
+ <span class="menu-text">Inspect</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+    </ul>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="inst_hugo.md"><i class="bi bi-file-code"></i>CommonMark (hugo)</a></li><li><a href="inst_gfm.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li></ul></div></div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./inst.html"><strong>Analyses</strong></a></li><li class="breadcrumb-item"><a href="./inst.html">Survey Items</a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Instrument Analyses</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header><section id="survey-instrument-categorizations" class="level2"><h2 class="anchored" data-anchor-id="survey-instrument-categorizations">Survey Instrument Categorizations</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 27%">
+<col style="width: 6%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 12%">
+</colgroup>
+<thead><tr class="header">
+<th style="text-align: left;">Survey</th>
+<th style="text-align: left;">Scale/Description</th>
+<th style="text-align: left;">Categorization</th>
+<th style="text-align: left;">Starting Item</th>
+<th style="text-align: left;">Ending Item</th>
+<th style="text-align: left;"># of Items</th>
+<th style="text-align: left;">Operationalization</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Energy Literacy Survey</td>
+<td style="text-align: left;">Energy Literacy Survey</td>
+<td style="text-align: left;">Knowledge</td>
+<td style="text-align: left;">ELS01</td>
+<td style="text-align: left;">ELS08</td>
+<td style="text-align: left;">8</td>
+<td style="text-align: left;">Multiple choice</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Attari Energy Survey - Part 1</td>
+<td style="text-align: left;">Numeracy Questions</td>
+<td style="text-align: left;">Knowledge</td>
+<td style="text-align: left;">ATT16</td>
+<td style="text-align: left;">ATT18</td>
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Specific numeric answers</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Attari Energy Survey - Part 2</td>
+<td style="text-align: left;">Relative Energy Usage</td>
+<td style="text-align: left;">Knowledge</td>
+<td style="text-align: left;">ATT19</td>
+<td style="text-align: left;">ATT33</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">Specific numeric answers</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Attari Energy Survey - Part 1</td>
+<td style="text-align: left;">Perceived Difficulty items</td>
+<td style="text-align: left;">Motivation</td>
+<td style="text-align: left;">ATT01</td>
+<td style="text-align: left;">ATT15</td>
+<td style="text-align: left;">15</td>
+<td style="text-align: left;">“Do it already”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Recycling Study</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">Motivation - Attitudes on environment,Politics</td>
+<td style="text-align: left;">RS01</td>
+<td style="text-align: left;">RS06</td>
+<td style="text-align: left;">6</td>
+<td style="text-align: left;">“Agree”</td>
+</tr>
+</tbody>
+</table>
+<div class="cell">
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">pacman</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pacman/man/p_load.html">p_load</a></span><span class="op">(</span><span class="va">dplyr</span>,<span class="va">purrr</span>,<span class="va">tidyr</span>,<span class="va">here</span>, <span class="va">haven</span>,<span class="va">tibble</span>,<span class="va">ggplot2</span>,<span class="va">ggh4x</span>,<span class="va">lme4</span>,<span class="va">knitr</span>,<span class="va">kableExtra</span>,<span class="va">gt</span>,<span class="va">pander</span>,<span class="va">flextable</span>,<span class="va">ggh4x</span>,<span class="va">psych</span>,<span class="va">corrplot</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>digits<span class="op">=</span><span class="fl">2</span>, scipen<span class="op">=</span><span class="fl">999</span>, dplyr.summarise.inform<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">draw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"draw.rds"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dinst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dinst.rds"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Attari Energy Survey (Part 1)</span></span>
+<span><span class="va">aes1</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT01</span><span class="op">:</span><span class="va">ATT18</span><span class="op">)</span></span>
+<span><span class="va">aes2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT01</span><span class="op">:</span><span class="va">ATT18</span><span class="op">)</span></span>
+<span><span class="va">aes_combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">aes1</span>, <span class="va">aes2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">att_useSave</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT19</span><span class="op">:</span><span class="va">ATT33</span><span class="op">)</span></span>
+<span><span class="va">att_useSave2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT19</span><span class="op">:</span><span class="va">ATT33</span><span class="op">)</span></span>
+<span><span class="va">att2_combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">att_useSave</span>, <span class="va">att_useSave2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">els1</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ELS01</span><span class="op">:</span><span class="va">ELS08</span><span class="op">)</span></span>
+<span><span class="va">els2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ELS01</span><span class="op">:</span><span class="va">ELS08</span><span class="op">)</span></span>
+<span><span class="va">els</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">els1</span>,<span class="va">els2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">rs1</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">RS01</span><span class="op">:</span><span class="va">RS06</span><span class="op">)</span></span>
+<span><span class="va">rs2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">RS01</span><span class="op">:</span><span class="va">RS06</span><span class="op">)</span></span>
+<span><span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">rs1</span>,<span class="va">rs2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="attari-energy-survey-part-1" class="level1"><h1>Attari Energy Survey (Part 1)</h1>
+<ul>
+<li>
+<p><strong>A. Perceived Difficulty Items (ATT01-ATT15):</strong></p>
+<ul>
+<li>
+<strong>Description:</strong> Measures how easy or hard it would be for participants to make various changes related to energy usage. Items are phrased as actions such as buying a fuel-efficient car, or changing light bulbs.</li>
+<li>
+<strong>Coding Scheme:</strong>
+<ul>
+<li>1 = “Do it already”</li>
+<li>2 = “Extremely easy”</li>
+<li>3 = “Very easy”</li>
+<li>4 = “Somewhat easy”</li>
+<li>5 = “Neither easy nor hard”</li>
+<li>6 = “Somewhat hard”</li>
+<li>7 = “Very hard”</li>
+<li>8 = “Extremely hard”</li>
+<li>9 = “Not applicable”</li>
+</ul>
+</li>
+<li>
+<strong>Specific Items:</strong>
+<ul>
+<li>ATT01: Buying a more fuel-efficient automobile</li>
+<li>ATT02: Carpooling with one other person to work</li>
+<li>ATT03: Replacing poorly insulated windows</li>
+<li>ATT04: Cutting highway speed</li>
+<li>ATT05: More efficient heating unit</li>
+<li>ATT06: Turning down the thermostat in the day and night</li>
+<li>ATT07: Turning up the thermostat on air conditioner in the summer</li>
+<li>ATT08: Tuning up the car twice a year</li>
+<li>ATT09: Replacing incandescent bulbs with CFLs</li>
+<li>ATT10: Turning up the refrigerator thermostat</li>
+<li>ATT11: Turning down the freezer thermostat</li>
+<li>ATT12: Drying clothes on a clothes line</li>
+<li>ATT13: Watching less TV</li>
+<li>ATT14: Installing a more efficient washer</li>
+<li>ATT15: Changing washer temperature settings</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>B. Numeracy Questions (ATT16-ATT18):</strong></p>
+<ul>
+<li>
+<strong>Description:</strong> Measures numerical literacy through probability questions.</li>
+<li>
+<strong>Coding Scheme:</strong> Text box entry where participants are asked to enter numeric answers with no other text. Correct answers are below.</li>
+<li>
+<strong>Specific Items:</strong>
+<ul>
+<li>ATT16: Probability of coin flips (correct answer: 500)</li>
+<li>ATT17: Probability of winning lottery (correct answer: 10)</li>
+<li>ATT18: Percentage of winning car sweepstakes (correct answer: 0.1%)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">analyze_attari_survey_part1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">aes_combined</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Correct answers for Numeracy Questions (ATT16-ATT18)</span></span>
+<span>  <span class="va">correct_numeracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    ATT16 <span class="op">=</span> <span class="fl">500</span>, ATT17 <span class="op">=</span> <span class="fl">10</span>, ATT18 <span class="op">=</span> <span class="fl">0.1</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Function to calculate the relative score for numeracy items</span></span>
+<span>  <span class="va">calculate_relative_score_numeracy</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">correct</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">response</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">response</span> <span class="op">&gt;</span> <span class="va">correct</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="va">response</span> <span class="op">-</span> <span class="va">correct</span><span class="op">)</span> <span class="op">/</span> <span class="va">response</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="va">response</span> <span class="op">/</span> <span class="va">correct</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Calculate perceived difficulty scores (average of ATT01-ATT15, excluding 9)</span></span>
+<span>  <span class="va">difficulty_scores</span> <span class="op">&lt;-</span> <span class="va">aes_combined</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">ATT01</span><span class="op">:</span><span class="va">ATT15</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">pivot_longer</span><span class="op">(</span></span>
+<span>      cols <span class="op">=</span> <span class="va">ATT01</span><span class="op">:</span><span class="va">ATT15</span>,</span>
+<span>      names_to <span class="op">=</span> <span class="st">"item"</span>,</span>
+<span>      values_to <span class="op">=</span> <span class="st">"response"</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">response</span> <span class="op">!=</span> <span class="fl">9</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Exclude "Not applicable" responses</span></span>
+<span>    <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">summarize</span><span class="op">(</span>perceived_difficulty_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">response</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Calculate numeracy scores</span></span>
+<span>  <span class="va">numeracy_scores</span> <span class="op">&lt;-</span> <span class="va">aes_combined</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">ATT16</span><span class="op">:</span><span class="va">ATT18</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">pivot_longer</span><span class="op">(</span></span>
+<span>      cols <span class="op">=</span> <span class="va">ATT16</span><span class="op">:</span><span class="va">ATT18</span>,</span>
+<span>      names_to <span class="op">=</span> <span class="st">"item"</span>,</span>
+<span>      values_to <span class="op">=</span> <span class="st">"response"</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>correct <span class="op">=</span> <span class="va">correct_numeracy</span><span class="op">[</span><span class="va">item</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>relative_score <span class="op">=</span> <span class="fu">map2_dbl</span><span class="op">(</span><span class="va">response</span>, <span class="va">correct</span>, <span class="va">calculate_relative_score_numeracy</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">summarize</span><span class="op">(</span>numeracy_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">relative_score</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Combine the scores into a single data frame</span></span>
+<span>  <span class="va">final_scores</span> <span class="op">&lt;-</span> <span class="fu">full_join</span><span class="op">(</span><span class="va">difficulty_scores</span>, <span class="va">numeracy_scores</span>, by <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">final_scores</span> <span class="op">&lt;-</span> <span class="va">final_scores</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      perceived_difficulty_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">perceived_difficulty_score</span><span class="op">)</span>,</span>
+<span>      numeracy_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">numeracy_score</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">final_scores</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Example usage:</span></span>
+<span><span class="va">attari1</span> <span class="op">&lt;-</span> <span class="fu">analyze_attari_survey_part1</span><span class="op">(</span><span class="va">aes_combined</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># histogram of attari_pd_n (1 liner plot)</span></span>
+<span><span class="co">#ggplot(attari1, aes(attari_pd_n)) + geom_histogram(binwidth = 1) </span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">attari1</span><span class="op">$</span><span class="va">perceived_difficulty_score</span>, <span class="va">attari1</span><span class="op">$</span><span class="va">numeracy_score</span>, use<span class="op">=</span><span class="st">"pairwise.complete.obs"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>      [,1]
+[1,] -0.13</code></pre>
+</div>
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">attari1</span><span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span>caption<span class="op">=</span><span class="st">"Attari Part 1"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+--------------------------------------------------
+ id   perceived_difficulty_score   numeracy_score 
+---- ---------------------------- ----------------
+ 1              0.6143                 1.451      
+
+ 2             -0.4515                 1.451      
+
+ 3              2.095                    -2       
+
+ 4             -0.6884                 -1.262     
+
+ 5              0.9104                 1.451      
+
+ 6             -0.2147                 1.451      
+--------------------------------------------------
+
+Table: Attari Part 1</code></pre>
+</div>
+</div>
+</section><section id="attari-energy-survey-part-2" class="level1"><h1>Attari Energy Survey (Part 2)</h1>
+<ul>
+<li>
+<strong>A. Relative Energy Usage (ATT19-ATT27):</strong>
+<ul>
+<li>
+<strong>Description:</strong> Asks participants to estimate the relative energy usage of various devices compared to a 100-Watt bulb.</li>
+<li>
+<strong>Coding Scheme:</strong> Numeric entry. Correct answers are indicated in codebook but these can be any response between 0-200.</li>
+<li>
+<strong>Specific Items:</strong>
+<ul>
+<li>ATT19: Compact fluorescent light bulb (correct answer: 27)</li>
+<li>ATT20: Desktop computer (correct answer: 140)</li>
+<li>ATT21: Laptop computer (correct answer: 48)</li>
+<li>ATT22: Stereo (correct answer: 128)</li>
+<li>ATT23: Electric clothing dryer (correct answer: 3400)</li>
+<li>ATT24: Portable heater (correct answer: 925)</li>
+<li>ATT25: Air conditioning unit for a room (correct answer: 1000)</li>
+<li>ATT26: Central air conditioning unit (correct answer: 3500)</li>
+<li>ATT27: Dishwasher (correct answer: 3400)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>B. Relative Energy Savings (ATT28-ATT33):</strong>
+<ul>
+<li>
+<strong>Description:</strong> Asks participants to estimate the relative energy savings of various actions compared to turning off a 100-Watt bulb.</li>
+<li>
+<strong>Coding Scheme:</strong> Numeric entry. Correct answers are indicated in codebook but these can be any response between 0-200.</li>
+<li>
+<strong>Specific Items:</strong>
+<ul>
+<li>ATT28: Replacing 100-Watt bulb with CFL (correct answer: 1800)</li>
+<li>ATT29: Replacing 100-watt kitchen bulb with 75-watt bulb (correct answer: 25)</li>
+<li>ATT30: Drying clothes on a clothesline (correct answer: 3400)</li>
+<li>ATT31: Raising summer air conditioner by 5 F (correct answer: 115)</li>
+<li>ATT32: Lowering winter heater by 5 F (correct answer: 546)</li>
+<li>ATT33: Changing washer temp settings (correct answer: 4000)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">analyze_attari_survey</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">att2_combined</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Correct answers for Relative Energy Usage (ATT19-ATT27)</span></span>
+<span>  <span class="va">correct_usage</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    ATT19 <span class="op">=</span> <span class="fl">27</span>, ATT20 <span class="op">=</span> <span class="fl">140</span>, ATT21 <span class="op">=</span> <span class="fl">48</span>, ATT22 <span class="op">=</span> <span class="fl">128</span>, ATT23 <span class="op">=</span> <span class="fl">3400</span>,</span>
+<span>    ATT24 <span class="op">=</span> <span class="fl">925</span>, ATT25 <span class="op">=</span> <span class="fl">1000</span>, ATT26 <span class="op">=</span> <span class="fl">3500</span>, ATT27 <span class="op">=</span> <span class="fl">3400</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Correct answers for Relative Energy Savings (ATT28-ATT33)</span></span>
+<span>  <span class="va">correct_savings</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    ATT28 <span class="op">=</span> <span class="fl">1800</span>, ATT29 <span class="op">=</span> <span class="fl">25</span>, ATT30 <span class="op">=</span> <span class="fl">3400</span>, ATT31 <span class="op">=</span> <span class="fl">115</span>, ATT32 <span class="op">=</span> <span class="fl">546</span>, ATT33 <span class="op">=</span> <span class="fl">4000</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Function to calculate the relative score for each item</span></span>
+<span>  <span class="va">calculate_relative_score</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">response</span>, <span class="va">correct</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">response</span> <span class="op">&gt;</span> <span class="va">correct</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="fl">1</span> <span class="op">-</span> <span class="op">(</span><span class="va">response</span> <span class="op">-</span> <span class="va">correct</span><span class="op">)</span> <span class="op">/</span> <span class="va">response</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="va">response</span> <span class="op">/</span> <span class="va">correct</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  </span>
+<span>  <span class="co"># Calculate relative energy usage scores</span></span>
+<span>  <span class="va">usage_scores</span> <span class="op">&lt;-</span> <span class="va">att2_combined</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">ATT19</span><span class="op">:</span><span class="va">ATT27</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">pivot_longer</span><span class="op">(</span></span>
+<span>      cols <span class="op">=</span> <span class="va">ATT19</span><span class="op">:</span><span class="va">ATT27</span>,</span>
+<span>      names_to <span class="op">=</span> <span class="st">"item"</span>,</span>
+<span>      values_to <span class="op">=</span> <span class="st">"response"</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>correct <span class="op">=</span> <span class="va">correct_usage</span><span class="op">[</span><span class="va">item</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>relative_score <span class="op">=</span> <span class="fu">map2_dbl</span><span class="op">(</span><span class="va">response</span>, <span class="va">correct</span>, <span class="va">calculate_relative_score</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">summarize</span><span class="op">(</span>relative_energy_use_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">relative_score</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Calculate relative energy savings scores</span></span>
+<span>  <span class="va">savings_scores</span> <span class="op">&lt;-</span> <span class="va">att2_combined</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">ATT28</span><span class="op">:</span><span class="va">ATT33</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">pivot_longer</span><span class="op">(</span></span>
+<span>      cols <span class="op">=</span> <span class="va">ATT28</span><span class="op">:</span><span class="va">ATT33</span>,</span>
+<span>      names_to <span class="op">=</span> <span class="st">"item"</span>,</span>
+<span>      values_to <span class="op">=</span> <span class="st">"response"</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>correct <span class="op">=</span> <span class="va">correct_savings</span><span class="op">[</span><span class="va">item</span><span class="op">]</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span>relative_score <span class="op">=</span> <span class="fu">map2_dbl</span><span class="op">(</span><span class="va">response</span>, <span class="va">correct</span>, <span class="va">calculate_relative_score</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">group_by</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">summarize</span><span class="op">(</span>relative_energy_save_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">relative_score</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># Combine the scores into a single data frame</span></span>
+<span>  <span class="va">final_scores</span> <span class="op">&lt;-</span> <span class="fu">full_join</span><span class="op">(</span><span class="va">usage_scores</span>, <span class="va">savings_scores</span>, by <span class="op">=</span> <span class="st">"id"</span><span class="op">)</span></span>
+<span>   <span class="co"># Standardize the scores</span></span>
+<span>  <span class="va">final_scores</span> <span class="op">&lt;-</span> <span class="va">final_scores</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      relative_energy_use_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">relative_energy_use_score</span><span class="op">)</span>,</span>
+<span>      relative_energy_save_score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">relative_energy_save_score</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">final_scores</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Example usage with the provided data:</span></span>
+<span><span class="va">attari2_scores</span> <span class="op">&lt;-</span> <span class="fu">analyze_attari_survey</span><span class="op">(</span><span class="va">att2_combined</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">attari2_scores</span><span class="op">$</span><span class="va">relative_energy_use_score</span>, <span class="va">attari2_scores</span><span class="op">$</span><span class="va">relative_energy_save_score</span>, use<span class="op">=</span><span class="st">"pairwise.complete.obs"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>     [,1]
+[1,] 0.57</code></pre>
+</div>
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">attari2_scores</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">relative_energy_use_score</span>, y <span class="op">=</span> <span class="va">relative_energy_save_score</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="st">"lm"</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">labs</span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Relative Energy Usage Score"</span>, y <span class="op">=</span> <span class="st">"Relative Energy Savings Score"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="inst_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">attari2_scores</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span>caption<span class="op">=</span><span class="st">"Attari Part 2"</span>,split.table<span class="op">=</span><span class="cn">Inf</span>,style<span class="op">=</span><span class="st">'rmarkdown'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+
+| id | relative_energy_use_score | relative_energy_save_score |
+|:--:|:-------------------------:|:--------------------------:|
+| 1  |           1.101           |           1.007            |
+| 2  |          0.1368           |          -0.4572           |
+| 3  |           -1.44           |           0.7011           |
+| 4  |           1.346           |           2.161            |
+| 5  |          0.07543          |          -0.5211           |
+| 6  |           1.277           |            1.36            |
+
+Table: Attari Part 2</code></pre>
+</div>
+</div>
+</section><section id="energy-literacy-survey-els01-els08" class="level1"><h1>Energy Literacy Survey (ELS01-ELS08)</h1>
+<ul>
+<li>
+<strong>Description:</strong> Assesses participants’ knowledge of energy concepts.</li>
+<li>
+<strong>Coding Scheme:</strong> Multiple-choice questions.</li>
+<li>
+<strong>Specific Items:</strong>
+<ul>
+<li>ELS01: Units of electrical energy (correct answer: 2 = “Kilowatt-hours (kWh)”)</li>
+<li>ELS02: Energy consumption of appliance (correct answer: 3 = “Multiplied by the time it’s used”)</li>
+<li>ELS03: Energy conversion in incandescent bulb (correct answer: 3 = “Electrical energy to radiant energy (light) and thermal energy (heat)”)</li>
+<li>ELS04: Best reason to buy an Energy Star appliance (correct answer: 3 = “ENERGY STAR appliances use less energy”)</li>
+<li>ELS05: Most energy used in average American home (correct answer: 3 = “Heating and cooling rooms”)</li>
+<li>ELS06: Most electricity used in average home (correct answer: 2 = “Refrigerator”)</li>
+<li>ELS07: Source of most electricity in the US (correct answer: 3 = “Burning coal”)</li>
+<li>ELS08: Problem with switching to electric cars (correct answer: 1 = “Most electricity is currently produced from fossil fuels (coal, oil, natural gas)”)</li>
+</ul>
+</li>
+</ul>
+<div class="cell">
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">analyze_els_survey</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">els</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Correct answers for ELS items (ELS01-ELS08)</span></span>
+<span>  <span class="va">correct_answers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    ELS01 <span class="op">=</span> <span class="fl">2</span>, ELS02 <span class="op">=</span> <span class="fl">3</span>, ELS03 <span class="op">=</span> <span class="fl">3</span>, ELS04 <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>    ELS05 <span class="op">=</span> <span class="fl">3</span>, ELS06 <span class="op">=</span> <span class="fl">2</span>, ELS07 <span class="op">=</span> <span class="fl">3</span>, ELS08 <span class="op">=</span> <span class="fl">1</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">els</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      accuracy <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html">rowSums</a></span><span class="op">(</span><span class="fu">across</span><span class="op">(</span><span class="va">ELS01</span><span class="op">:</span><span class="va">ELS08</span>, <span class="op">~</span> <span class="va">.x</span> <span class="op">==</span> <span class="va">correct_answers</span><span class="op">[</span><span class="fu">cur_column</span><span class="op">(</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      els <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">accuracy</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, <span class="va">accuracy</span>, <span class="va">els</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Example usage:</span></span>
+<span><span class="va">els_scores</span> <span class="op">&lt;-</span> <span class="fu">analyze_els_survey</span><span class="op">(</span><span class="va">els</span><span class="op">)</span></span>
+<span><span class="va">els_scores</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span>caption<span class="op">=</span><span class="st">"Energy Literacy Scores"</span>,split.table<span class="op">=</span><span class="cn">Inf</span>,style<span class="op">=</span><span class="st">'rmarkdown'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+
+| id | accuracy |   els   |
+|:--:|:--------:|:-------:|
+| 1  |    6     | 0.7373  |
+| 2  |    5     | 0.2026  |
+| 3  |    4     | -0.3322 |
+| 4  |    2     | -1.402  |
+| 5  |    3     | -0.8669 |
+| 6  |    5     | 0.2026  |
+
+Table: Energy Literacy Scores</code></pre>
+</div>
+</div>
+</section><section id="recycling-study-questions-rs01-rs06" class="level1"><h1>Recycling Study Questions RS01-RS06</h1>
+<ul>
+<li>
+<strong>Description:</strong> These are questions included from a different study
+<ul>
+<li>
+<strong>Coding Scheme:</strong> 5-point agreement scale</li>
+<li>
+<strong>Specific Items:</strong>
+<ul>
+<li>RS01: I generally don’t pay attention to how much energy I use.</li>
+<li>RS02: I would say I am very pro-environmental.</li>
+<li>RS03: I think saving energy is largely a waste of time.</li>
+<li>RS04: I am generally conservative on the political spectrum with regard to social issues.</li>
+<li>RS05: I am generally conservative on the political spectrum with regard to economic issues.</li>
+<li>RS06: I consider myself knowledgeable about how much energy utilities use</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>head(rs,n=10) # A tibble: 10 × 7 id RS01 RS02 RS03 RS04 RS05 RS06<br><int> &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+lbl&gt; &lt;dbl+l&gt; 1 1 2 [Somewhat Agree] 2 [Somewhat Agree] 5 [Disagree] 4 [Somewhat Disagree] 4 [Somewhat Disagree] 4 [Som… 2 2 5 [Disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 5 [Disagree] 5 [Disagree] 3 [Nei… 3 3 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor disagree] 3 [Neither agree nor di… 3 [Nei…</int></p>
+<div class="cell">
+<details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">analyze_recycling_survey</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">rs_data</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  </span>
+<span>  <span class="co"># 1) Coerce columns to numeric</span></span>
+<span>  <span class="va">rs_numeric</span> <span class="op">&lt;-</span> <span class="va">rs_data</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      RS01_num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">RS01</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      RS02_num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">RS02</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      RS03_num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">RS03</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      RS04_num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">RS04</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      RS05_num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">RS05</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      RS06_num <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">RS06</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># 2) Recode items so that higher numbers consistently reflect</span></span>
+<span>  <span class="co">#    "more" of the targeted construct:</span></span>
+<span>  <span class="co">#</span></span>
+<span>  <span class="co"># Environmental Attitude (RS01 &amp; RS03 are negative, RS02 &amp; RS06 are positive).</span></span>
+<span>  <span class="co"># Original scale is 1=Agree ... 5=Disagree</span></span>
+<span>  <span class="co"># For a 'positive' pro-environment item, do 6 - x =&gt; so 1 =&gt; 5 (strong agreement =&gt; higher = pro-env).</span></span>
+<span>  <span class="co"># For a 'negative' pro-environment item, keep x =&gt; so 1 =&gt; 1 (strong agreement =&gt; lower pro-env).</span></span>
+<span>  </span>
+<span>  <span class="va">rs_recode</span> <span class="op">&lt;-</span> <span class="va">rs_numeric</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      <span class="co"># Positive items</span></span>
+<span>      RS02_env <span class="op">=</span> <span class="fl">6</span> <span class="op">-</span> <span class="va">RS02_num</span>,  <span class="co"># now 5 = strongly pro-env</span></span>
+<span>      RS06_env <span class="op">=</span> <span class="fl">6</span> <span class="op">-</span> <span class="va">RS06_num</span>,  <span class="co"># now 5 = strongly pro-env</span></span>
+<span>      </span>
+<span>      <span class="co"># Negative items (keep the original so that 1 =&gt; 1 = strongly anti-env, 5 =&gt; 5 = strongly pro-env)</span></span>
+<span>      RS01_env <span class="op">=</span> <span class="va">RS01_num</span>,</span>
+<span>      RS03_env <span class="op">=</span> <span class="va">RS03_num</span>,</span>
+<span>      </span>
+<span>      <span class="co"># Political items: If we want higher = more conservative,</span></span>
+<span>      <span class="co"># we can do 6 - x so that 1 =&gt; 5 (strongly conservative).</span></span>
+<span>      <span class="co"># If you'd prefer the raw code to remain 1=Agree =&gt; "lowest" numeric,</span></span>
+<span>      <span class="co"># skip the transformation. Below we invert it:</span></span>
+<span>      RS04_cons <span class="op">=</span> <span class="fl">6</span> <span class="op">-</span> <span class="va">RS04_num</span>, </span>
+<span>      RS05_cons <span class="op">=</span> <span class="fl">6</span> <span class="op">-</span> <span class="va">RS05_num</span></span>
+<span>    <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># 3) Compute subscales</span></span>
+<span>  <span class="co">#    - "env_attitude": average of RS01_env, RS02_env, RS03_env, RS06_env</span></span>
+<span>  <span class="co">#      such that 5 = most pro-environment, 1 = least pro-environment</span></span>
+<span>  <span class="co">#    - "pol_conservatism": average of RS04_cons, RS05_cons</span></span>
+<span>  <span class="co">#      such that 5 = strongly conservative, 1 = strongly liberal</span></span>
+<span>  </span>
+<span>  <span class="va">rs_subscales</span> <span class="op">&lt;-</span> <span class="va">rs_recode</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">rowwise</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      env_attitude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">RS01_env</span>, <span class="va">RS02_env</span>, <span class="va">RS03_env</span>, <span class="va">RS06_env</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>      pol_conservatism <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">RS04_cons</span>, <span class="va">RS05_cons</span><span class="op">)</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">ungroup</span><span class="op">(</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># 4) Standardize subscales if desired</span></span>
+<span>  <span class="va">rs_final</span> <span class="op">&lt;-</span> <span class="va">rs_subscales</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="fu">mutate</span><span class="op">(</span></span>
+<span>      env_attitude_z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">env_attitude</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      pol_conservatism_z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/scale.html">scale</a></span><span class="op">(</span><span class="va">pol_conservatism</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>    <span class="co"># 5) Return the columns of interest</span></span>
+<span>    <span class="fu">select</span><span class="op">(</span><span class="va">id</span>, </span>
+<span>           <span class="va">env_attitude</span>, <span class="va">env_attitude_z</span>,</span>
+<span>           <span class="va">pol_conservatism</span>, <span class="va">pol_conservatism_z</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">rs_final</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">rs_scores</span> <span class="op">&lt;-</span> <span class="fu">analyze_recycling_survey</span><span class="op">(</span><span class="va">rs</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">rs_scores</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">pander</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pander/man/pandoc.table.return.html">pandoc.table</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Recycling Study Scores"</span>,split.table<span class="op">=</span><span class="cn">Inf</span>,style<span class="op">=</span><span class="st">'rmarkdown'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>
+
+| id | env_attitude | env_attitude_z | pol_conservatism | pol_conservatism_z |
+|:--:|:------------:|:--------------:|:----------------:|:------------------:|
+| 1  |     3.25     |    -0.4323     |        2         |       -0.449       |
+| 2  |     3.5      |    -0.1079     |        1         |       -1.154       |
+| 3  |      3       |    -0.7567     |        3         |       0.2555       |
+| 4  |     3.75     |     0.2164     |        1         |       -1.154       |
+| 5  |     3.75     |     0.2164     |       3.5        |       0.6077       |
+| 6  |     4.75     |     1.514      |        1         |       -1.154       |
+
+Table: Recycling Study Scores</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/tegorman13\.github\.io\/Survey_Study\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script><nav class="page-navigation column-body"><div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link" aria-label="Home">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Home</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./org.html" class="pagination-link" aria-label="Organization">
+        <span class="nav-page-text">Organization</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb15" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Instrument Analyses"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">    grid:</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="co">      sidebar-width: 220px</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co">      body-width: 1200px</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co">      margin-width: 170px</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="co">      gutter-width: 1.0rem</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">  hugo-md:</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">    include: true</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">    html-math-method: mathjax</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: inst_hugo.md</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">  gfm:</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">    echo: true</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: inst_gfm.md</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Survey Instrument Categorizations</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Survey                                      <span class="pp">|</span> Scale/Description                           <span class="pp">|</span> Categorization                                          <span class="pp">|</span> Starting Item <span class="pp">|</span> Ending Item <span class="pp">|</span> # of Items <span class="pp">|</span> Operationalization       <span class="pp">|</span></span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a><span class="pp">| :------------------------------------------</span> <span class="pp">| :------------------------------------------</span> <span class="pp">| :------------------------------------------------------</span> <span class="pp">| :------------</span> <span class="pp">| :----------</span> <span class="pp">| :---------</span> <span class="pp">| :-----------------------</span> <span class="pp">|</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Energy Literacy Survey                      <span class="pp">|</span> Energy Literacy Survey                       <span class="pp">|</span> Knowledge                                               <span class="pp">|</span> ELS01         <span class="pp">|</span> ELS08       <span class="pp">|</span> 8          <span class="pp">|</span> Multiple choice          <span class="pp">|</span></span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Attari Energy Survey - Part 1               <span class="pp">|</span> Numeracy Questions                           <span class="pp">|</span> Knowledge                                               <span class="pp">|</span> ATT16         <span class="pp">|</span> ATT18       <span class="pp">|</span> 3          <span class="pp">|</span> Specific numeric answers <span class="pp">|</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Attari Energy Survey - Part 2               <span class="pp">|</span> Relative Energy Usage                        <span class="pp">|</span> Knowledge                                               <span class="pp">|</span> ATT19         <span class="pp">|</span> ATT33       <span class="pp">|</span> 15         <span class="pp">|</span> Specific numeric answers <span class="pp">|</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Attari Energy Survey - Part 1               <span class="pp">|</span> Perceived Difficulty items                   <span class="pp">|</span> Motivation                                              <span class="pp">|</span> ATT01         <span class="pp">|</span> ATT15       <span class="pp">|</span> 15         <span class="pp">|</span> "Do it already"          <span class="pp">|</span></span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Recycling Study                             <span class="pp">|</span> NA                                           <span class="pp">|</span> Motivation - Attitudes on environment,Politics          <span class="pp">|</span> RS01          <span class="pp">|</span> RS06        <span class="pp">|</span> 6          <span class="pp">|</span> "Agree"                  <span class="pp">|</span></span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot)</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits=</span><span class="dv">2</span>, <span class="at">scipen=</span><span class="dv">999</span>, <span class="at">dplyr.summarise.inform=</span><span class="cn">FALSE</span>)</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>draw <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"draw.rds"</span>))</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>dinst <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"dinst.rds"</span>))</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Attari Energy Survey (Part 1)</span></span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true" tabindex="-1"></a>aes1 <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT01<span class="sc">:</span>ATT18)</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true" tabindex="-1"></a>aes2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT01<span class="sc">:</span>ATT18)</span>
+<span id="cb15-52"><a href="#cb15-52" aria-hidden="true" tabindex="-1"></a>aes_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(aes1, aes2)</span>
+<span id="cb15-53"><a href="#cb15-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-54"><a href="#cb15-54" aria-hidden="true" tabindex="-1"></a>att_useSave <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT19<span class="sc">:</span>ATT33)</span>
+<span id="cb15-55"><a href="#cb15-55" aria-hidden="true" tabindex="-1"></a>att_useSave2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT19<span class="sc">:</span>ATT33)</span>
+<span id="cb15-56"><a href="#cb15-56" aria-hidden="true" tabindex="-1"></a>att2_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(att_useSave, att_useSave2)</span>
+<span id="cb15-57"><a href="#cb15-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-58"><a href="#cb15-58" aria-hidden="true" tabindex="-1"></a>els1 <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ELS01<span class="sc">:</span>ELS08)</span>
+<span id="cb15-59"><a href="#cb15-59" aria-hidden="true" tabindex="-1"></a>els2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ELS01<span class="sc">:</span>ELS08)</span>
+<span id="cb15-60"><a href="#cb15-60" aria-hidden="true" tabindex="-1"></a>els <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(els1,els2)</span>
+<span id="cb15-61"><a href="#cb15-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-62"><a href="#cb15-62" aria-hidden="true" tabindex="-1"></a>rs1 <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,RS01<span class="sc">:</span>RS06)</span>
+<span id="cb15-63"><a href="#cb15-63" aria-hidden="true" tabindex="-1"></a>rs2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,RS01<span class="sc">:</span>RS06)</span>
+<span id="cb15-64"><a href="#cb15-64" aria-hidden="true" tabindex="-1"></a>rs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(rs1,rs2)</span>
+<span id="cb15-65"><a href="#cb15-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-66"><a href="#cb15-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-67"><a href="#cb15-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-68"><a href="#cb15-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-69"><a href="#cb15-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-70"><a href="#cb15-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-71"><a href="#cb15-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-72"><a href="#cb15-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-73"><a href="#cb15-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-74"><a href="#cb15-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-75"><a href="#cb15-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-76"><a href="#cb15-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-77"><a href="#cb15-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-78"><a href="#cb15-78" aria-hidden="true" tabindex="-1"></a><span class="fu"># Attari Energy Survey (Part 1)</span></span>
+<span id="cb15-79"><a href="#cb15-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-80"><a href="#cb15-80" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**A. Perceived Difficulty Items (ATT01-ATT15):**</span>
+<span id="cb15-81"><a href="#cb15-81" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Description:** Measures how easy or hard it would be for participants to make various changes related to energy usage. Items are phrased as actions such as buying a fuel-efficient car, or changing light bulbs.</span>
+<span id="cb15-82"><a href="#cb15-82" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Coding Scheme:**</span>
+<span id="cb15-83"><a href="#cb15-83" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>1 = "Do it already"</span>
+<span id="cb15-84"><a href="#cb15-84" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>2 = "Extremely easy"</span>
+<span id="cb15-85"><a href="#cb15-85" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>3 = "Very easy"</span>
+<span id="cb15-86"><a href="#cb15-86" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>4 = "Somewhat easy"</span>
+<span id="cb15-87"><a href="#cb15-87" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>5 = "Neither easy nor hard"</span>
+<span id="cb15-88"><a href="#cb15-88" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>6 = "Somewhat hard"</span>
+<span id="cb15-89"><a href="#cb15-89" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>7 = "Very hard"</span>
+<span id="cb15-90"><a href="#cb15-90" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>8 = "Extremely hard"</span>
+<span id="cb15-91"><a href="#cb15-91" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>9 = "Not applicable"</span>
+<span id="cb15-92"><a href="#cb15-92" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Specific Items:**</span>
+<span id="cb15-93"><a href="#cb15-93" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT01: Buying a more fuel-efficient automobile</span>
+<span id="cb15-94"><a href="#cb15-94" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT02: Carpooling with one other person to work</span>
+<span id="cb15-95"><a href="#cb15-95" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT03: Replacing poorly insulated windows</span>
+<span id="cb15-96"><a href="#cb15-96" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT04: Cutting highway speed</span>
+<span id="cb15-97"><a href="#cb15-97" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT05: More efficient heating unit</span>
+<span id="cb15-98"><a href="#cb15-98" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT06: Turning down the thermostat in the day and night</span>
+<span id="cb15-99"><a href="#cb15-99" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT07: Turning up the thermostat on air conditioner in the summer</span>
+<span id="cb15-100"><a href="#cb15-100" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT08: Tuning up the car twice a year</span>
+<span id="cb15-101"><a href="#cb15-101" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT09: Replacing incandescent bulbs with CFLs</span>
+<span id="cb15-102"><a href="#cb15-102" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT10: Turning up the refrigerator thermostat</span>
+<span id="cb15-103"><a href="#cb15-103" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT11: Turning down the freezer thermostat</span>
+<span id="cb15-104"><a href="#cb15-104" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT12: Drying clothes on a clothes line</span>
+<span id="cb15-105"><a href="#cb15-105" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT13: Watching less TV</span>
+<span id="cb15-106"><a href="#cb15-106" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT14: Installing a more efficient washer</span>
+<span id="cb15-107"><a href="#cb15-107" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT15: Changing washer temperature settings</span>
+<span id="cb15-108"><a href="#cb15-108" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**B. Numeracy Questions (ATT16-ATT18):**</span>
+<span id="cb15-109"><a href="#cb15-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-110"><a href="#cb15-110" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Description:** Measures numerical literacy through probability questions.</span>
+<span id="cb15-111"><a href="#cb15-111" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Coding Scheme:** Text box entry where participants are asked to enter numeric answers with no other text. Correct answers are below.</span>
+<span id="cb15-112"><a href="#cb15-112" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Specific Items:**</span>
+<span id="cb15-113"><a href="#cb15-113" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT16: Probability of coin flips (correct answer: 500)</span>
+<span id="cb15-114"><a href="#cb15-114" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT17: Probability of winning lottery (correct answer: 10)</span>
+<span id="cb15-115"><a href="#cb15-115" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT18: Percentage of winning car sweepstakes (correct answer: 0.1%)</span>
+<span id="cb15-116"><a href="#cb15-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-119"><a href="#cb15-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-120"><a href="#cb15-120" aria-hidden="true" tabindex="-1"></a>analyze_attari_survey_part1 <span class="ot">&lt;-</span> <span class="cf">function</span>(aes_combined) {</span>
+<span id="cb15-121"><a href="#cb15-121" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Correct answers for Numeracy Questions (ATT16-ATT18)</span></span>
+<span id="cb15-122"><a href="#cb15-122" aria-hidden="true" tabindex="-1"></a>  correct_numeracy <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb15-123"><a href="#cb15-123" aria-hidden="true" tabindex="-1"></a>    <span class="at">ATT16 =</span> <span class="dv">500</span>, <span class="at">ATT17 =</span> <span class="dv">10</span>, <span class="at">ATT18 =</span> <span class="fl">0.1</span></span>
+<span id="cb15-124"><a href="#cb15-124" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-125"><a href="#cb15-125" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-126"><a href="#cb15-126" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to calculate the relative score for numeracy items</span></span>
+<span id="cb15-127"><a href="#cb15-127" aria-hidden="true" tabindex="-1"></a>  calculate_relative_score_numeracy <span class="ot">&lt;-</span> <span class="cf">function</span>(response, correct) {</span>
+<span id="cb15-128"><a href="#cb15-128" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.na</span>(response)) {</span>
+<span id="cb15-129"><a href="#cb15-129" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(<span class="cn">NA</span>)</span>
+<span id="cb15-130"><a href="#cb15-130" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (response <span class="sc">&gt;</span> correct) {</span>
+<span id="cb15-131"><a href="#cb15-131" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span> <span class="sc">-</span> (response <span class="sc">-</span> correct) <span class="sc">/</span> response</span>
+<span id="cb15-132"><a href="#cb15-132" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb15-133"><a href="#cb15-133" aria-hidden="true" tabindex="-1"></a>      response <span class="sc">/</span> correct</span>
+<span id="cb15-134"><a href="#cb15-134" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-135"><a href="#cb15-135" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-136"><a href="#cb15-136" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-137"><a href="#cb15-137" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate perceived difficulty scores (average of ATT01-ATT15, excluding 9)</span></span>
+<span id="cb15-138"><a href="#cb15-138" aria-hidden="true" tabindex="-1"></a>  difficulty_scores <span class="ot">&lt;-</span> aes_combined <span class="sc">%&gt;%</span></span>
+<span id="cb15-139"><a href="#cb15-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, ATT01<span class="sc">:</span>ATT15) <span class="sc">%&gt;%</span></span>
+<span id="cb15-140"><a href="#cb15-140" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-141"><a href="#cb15-141" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> ATT01<span class="sc">:</span>ATT15,</span>
+<span id="cb15-142"><a href="#cb15-142" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb15-143"><a href="#cb15-143" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb15-144"><a href="#cb15-144" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-145"><a href="#cb15-145" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(response <span class="sc">!=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> <span class="co"># Exclude "Not applicable" responses</span></span>
+<span id="cb15-146"><a href="#cb15-146" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb15-147"><a href="#cb15-147" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">perceived_difficulty_score =</span> <span class="fu">mean</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-148"><a href="#cb15-148" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-149"><a href="#cb15-149" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate numeracy scores</span></span>
+<span id="cb15-150"><a href="#cb15-150" aria-hidden="true" tabindex="-1"></a>  numeracy_scores <span class="ot">&lt;-</span> aes_combined <span class="sc">%&gt;%</span></span>
+<span id="cb15-151"><a href="#cb15-151" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, ATT16<span class="sc">:</span>ATT18) <span class="sc">%&gt;%</span></span>
+<span id="cb15-152"><a href="#cb15-152" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-153"><a href="#cb15-153" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> ATT16<span class="sc">:</span>ATT18,</span>
+<span id="cb15-154"><a href="#cb15-154" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb15-155"><a href="#cb15-155" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb15-156"><a href="#cb15-156" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-157"><a href="#cb15-157" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">correct =</span> correct_numeracy[item]) <span class="sc">%&gt;%</span></span>
+<span id="cb15-158"><a href="#cb15-158" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">relative_score =</span> <span class="fu">map2_dbl</span>(response, correct, calculate_relative_score_numeracy)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-159"><a href="#cb15-159" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb15-160"><a href="#cb15-160" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">numeracy_score =</span> <span class="fu">mean</span>(relative_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-161"><a href="#cb15-161" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-162"><a href="#cb15-162" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the scores into a single data frame</span></span>
+<span id="cb15-163"><a href="#cb15-163" aria-hidden="true" tabindex="-1"></a>  final_scores <span class="ot">&lt;-</span> <span class="fu">full_join</span>(difficulty_scores, numeracy_scores, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="cb15-164"><a href="#cb15-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-165"><a href="#cb15-165" aria-hidden="true" tabindex="-1"></a>    final_scores <span class="ot">&lt;-</span> final_scores <span class="sc">%&gt;%</span></span>
+<span id="cb15-166"><a href="#cb15-166" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-167"><a href="#cb15-167" aria-hidden="true" tabindex="-1"></a>      <span class="at">perceived_difficulty_score =</span> <span class="fu">scale</span>(perceived_difficulty_score),</span>
+<span id="cb15-168"><a href="#cb15-168" aria-hidden="true" tabindex="-1"></a>      <span class="at">numeracy_score =</span> <span class="fu">scale</span>(numeracy_score)</span>
+<span id="cb15-169"><a href="#cb15-169" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-170"><a href="#cb15-170" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-171"><a href="#cb15-171" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(final_scores)</span>
+<span id="cb15-172"><a href="#cb15-172" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-173"><a href="#cb15-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-174"><a href="#cb15-174" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="cb15-175"><a href="#cb15-175" aria-hidden="true" tabindex="-1"></a>attari1 <span class="ot">&lt;-</span> <span class="fu">analyze_attari_survey_part1</span>(aes_combined)</span>
+<span id="cb15-176"><a href="#cb15-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-177"><a href="#cb15-177" aria-hidden="true" tabindex="-1"></a><span class="co"># histogram of attari_pd_n (1 liner plot)</span></span>
+<span id="cb15-178"><a href="#cb15-178" aria-hidden="true" tabindex="-1"></a><span class="co">#ggplot(attari1, aes(attari_pd_n)) + geom_histogram(binwidth = 1) </span></span>
+<span id="cb15-179"><a href="#cb15-179" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(attari1<span class="sc">$</span>perceived_difficulty_score, attari1<span class="sc">$</span>numeracy_score, <span class="at">use=</span><span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb15-180"><a href="#cb15-180" aria-hidden="true" tabindex="-1"></a>attari1<span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> pander<span class="sc">::</span><span class="fu">pandoc.table</span>(<span class="at">caption=</span><span class="st">"Attari Part 1"</span>)</span>
+<span id="cb15-181"><a href="#cb15-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-182"><a href="#cb15-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-183"><a href="#cb15-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-184"><a href="#cb15-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-185"><a href="#cb15-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-186"><a href="#cb15-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-187"><a href="#cb15-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-188"><a href="#cb15-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-189"><a href="#cb15-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-190"><a href="#cb15-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-191"><a href="#cb15-191" aria-hidden="true" tabindex="-1"></a><span class="fu"># Attari Energy Survey (Part 2)</span></span>
+<span id="cb15-192"><a href="#cb15-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-193"><a href="#cb15-193" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**A. Relative Energy Usage (ATT19-ATT27):**</span>
+<span id="cb15-194"><a href="#cb15-194" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Description:** Asks participants to estimate the relative energy usage of various devices compared to a 100-Watt bulb.</span>
+<span id="cb15-195"><a href="#cb15-195" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Coding Scheme:** Numeric entry. Correct answers are indicated in codebook but these can be any response between 0-200.</span>
+<span id="cb15-196"><a href="#cb15-196" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Specific Items:**</span>
+<span id="cb15-197"><a href="#cb15-197" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT19: Compact fluorescent light bulb (correct answer: 27)</span>
+<span id="cb15-198"><a href="#cb15-198" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT20: Desktop computer (correct answer: 140)</span>
+<span id="cb15-199"><a href="#cb15-199" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT21: Laptop computer (correct answer: 48)</span>
+<span id="cb15-200"><a href="#cb15-200" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT22: Stereo (correct answer: 128)</span>
+<span id="cb15-201"><a href="#cb15-201" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT23: Electric clothing dryer (correct answer: 3400)</span>
+<span id="cb15-202"><a href="#cb15-202" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT24: Portable heater (correct answer: 925)</span>
+<span id="cb15-203"><a href="#cb15-203" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT25: Air conditioning unit for a room (correct answer: 1000)</span>
+<span id="cb15-204"><a href="#cb15-204" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT26: Central air conditioning unit (correct answer: 3500)</span>
+<span id="cb15-205"><a href="#cb15-205" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT27: Dishwasher (correct answer: 3400)</span>
+<span id="cb15-206"><a href="#cb15-206" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**B. Relative Energy Savings (ATT28-ATT33):**</span>
+<span id="cb15-207"><a href="#cb15-207" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Description:** Asks participants to estimate the relative energy savings of various actions compared to turning off a 100-Watt bulb.</span>
+<span id="cb15-208"><a href="#cb15-208" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Coding Scheme:** Numeric entry. Correct answers are indicated in codebook but these can be any response between 0-200.</span>
+<span id="cb15-209"><a href="#cb15-209" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>**Specific Items:**</span>
+<span id="cb15-210"><a href="#cb15-210" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT28: Replacing 100-Watt bulb with CFL (correct answer: 1800)</span>
+<span id="cb15-211"><a href="#cb15-211" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT29: Replacing 100-watt kitchen bulb with 75-watt bulb (correct answer: 25)</span>
+<span id="cb15-212"><a href="#cb15-212" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT30: Drying clothes on a clothesline (correct answer: 3400)</span>
+<span id="cb15-213"><a href="#cb15-213" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT31: Raising summer air conditioner by 5 F (correct answer: 115)</span>
+<span id="cb15-214"><a href="#cb15-214" aria-hidden="true" tabindex="-1"></a><span class="ss">        *   </span>ATT32: Lowering winter heater by 5 F (correct answer: 546)</span>
+<span id="cb15-215"><a href="#cb15-215" aria-hidden="true" tabindex="-1"></a><span class="ss">        *    </span>ATT33: Changing washer temp settings (correct answer: 4000)</span>
+<span id="cb15-216"><a href="#cb15-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-219"><a href="#cb15-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-220"><a href="#cb15-220" aria-hidden="true" tabindex="-1"></a>analyze_attari_survey <span class="ot">&lt;-</span> <span class="cf">function</span>(att2_combined) {</span>
+<span id="cb15-221"><a href="#cb15-221" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Correct answers for Relative Energy Usage (ATT19-ATT27)</span></span>
+<span id="cb15-222"><a href="#cb15-222" aria-hidden="true" tabindex="-1"></a>  correct_usage <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb15-223"><a href="#cb15-223" aria-hidden="true" tabindex="-1"></a>    <span class="at">ATT19 =</span> <span class="dv">27</span>, <span class="at">ATT20 =</span> <span class="dv">140</span>, <span class="at">ATT21 =</span> <span class="dv">48</span>, <span class="at">ATT22 =</span> <span class="dv">128</span>, <span class="at">ATT23 =</span> <span class="dv">3400</span>,</span>
+<span id="cb15-224"><a href="#cb15-224" aria-hidden="true" tabindex="-1"></a>    <span class="at">ATT24 =</span> <span class="dv">925</span>, <span class="at">ATT25 =</span> <span class="dv">1000</span>, <span class="at">ATT26 =</span> <span class="dv">3500</span>, <span class="at">ATT27 =</span> <span class="dv">3400</span></span>
+<span id="cb15-225"><a href="#cb15-225" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-226"><a href="#cb15-226" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-227"><a href="#cb15-227" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Correct answers for Relative Energy Savings (ATT28-ATT33)</span></span>
+<span id="cb15-228"><a href="#cb15-228" aria-hidden="true" tabindex="-1"></a>  correct_savings <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb15-229"><a href="#cb15-229" aria-hidden="true" tabindex="-1"></a>    <span class="at">ATT28 =</span> <span class="dv">1800</span>, <span class="at">ATT29 =</span> <span class="dv">25</span>, <span class="at">ATT30 =</span> <span class="dv">3400</span>, <span class="at">ATT31 =</span> <span class="dv">115</span>, <span class="at">ATT32 =</span> <span class="dv">546</span>, <span class="at">ATT33 =</span> <span class="dv">4000</span></span>
+<span id="cb15-230"><a href="#cb15-230" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-231"><a href="#cb15-231" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-232"><a href="#cb15-232" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Function to calculate the relative score for each item</span></span>
+<span id="cb15-233"><a href="#cb15-233" aria-hidden="true" tabindex="-1"></a>  calculate_relative_score <span class="ot">&lt;-</span> <span class="cf">function</span>(response, correct) {</span>
+<span id="cb15-234"><a href="#cb15-234" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (response <span class="sc">&gt;</span> correct) {</span>
+<span id="cb15-235"><a href="#cb15-235" aria-hidden="true" tabindex="-1"></a>      <span class="dv">1</span> <span class="sc">-</span> (response <span class="sc">-</span> correct) <span class="sc">/</span> response</span>
+<span id="cb15-236"><a href="#cb15-236" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb15-237"><a href="#cb15-237" aria-hidden="true" tabindex="-1"></a>      response <span class="sc">/</span> correct</span>
+<span id="cb15-238"><a href="#cb15-238" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb15-239"><a href="#cb15-239" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-240"><a href="#cb15-240" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-241"><a href="#cb15-241" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate relative energy usage scores</span></span>
+<span id="cb15-242"><a href="#cb15-242" aria-hidden="true" tabindex="-1"></a>  usage_scores <span class="ot">&lt;-</span> att2_combined <span class="sc">%&gt;%</span></span>
+<span id="cb15-243"><a href="#cb15-243" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, ATT19<span class="sc">:</span>ATT27) <span class="sc">%&gt;%</span></span>
+<span id="cb15-244"><a href="#cb15-244" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-245"><a href="#cb15-245" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> ATT19<span class="sc">:</span>ATT27,</span>
+<span id="cb15-246"><a href="#cb15-246" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb15-247"><a href="#cb15-247" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb15-248"><a href="#cb15-248" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-249"><a href="#cb15-249" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">correct =</span> correct_usage[item]) <span class="sc">%&gt;%</span></span>
+<span id="cb15-250"><a href="#cb15-250" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">relative_score =</span> <span class="fu">map2_dbl</span>(response, correct, calculate_relative_score)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-251"><a href="#cb15-251" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb15-252"><a href="#cb15-252" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">relative_energy_use_score =</span> <span class="fu">mean</span>(relative_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-253"><a href="#cb15-253" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-254"><a href="#cb15-254" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate relative energy savings scores</span></span>
+<span id="cb15-255"><a href="#cb15-255" aria-hidden="true" tabindex="-1"></a>  savings_scores <span class="ot">&lt;-</span> att2_combined <span class="sc">%&gt;%</span></span>
+<span id="cb15-256"><a href="#cb15-256" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, ATT28<span class="sc">:</span>ATT33) <span class="sc">%&gt;%</span></span>
+<span id="cb15-257"><a href="#cb15-257" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb15-258"><a href="#cb15-258" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> ATT28<span class="sc">:</span>ATT33,</span>
+<span id="cb15-259"><a href="#cb15-259" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb15-260"><a href="#cb15-260" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb15-261"><a href="#cb15-261" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-262"><a href="#cb15-262" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">correct =</span> correct_savings[item]) <span class="sc">%&gt;%</span></span>
+<span id="cb15-263"><a href="#cb15-263" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">relative_score =</span> <span class="fu">map2_dbl</span>(response, correct, calculate_relative_score)) <span class="sc">%&gt;%</span></span>
+<span id="cb15-264"><a href="#cb15-264" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(id) <span class="sc">%&gt;%</span></span>
+<span id="cb15-265"><a href="#cb15-265" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">relative_energy_save_score =</span> <span class="fu">mean</span>(relative_score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb15-266"><a href="#cb15-266" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-267"><a href="#cb15-267" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Combine the scores into a single data frame</span></span>
+<span id="cb15-268"><a href="#cb15-268" aria-hidden="true" tabindex="-1"></a>  final_scores <span class="ot">&lt;-</span> <span class="fu">full_join</span>(usage_scores, savings_scores, <span class="at">by =</span> <span class="st">"id"</span>)</span>
+<span id="cb15-269"><a href="#cb15-269" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Standardize the scores</span></span>
+<span id="cb15-270"><a href="#cb15-270" aria-hidden="true" tabindex="-1"></a>  final_scores <span class="ot">&lt;-</span> final_scores <span class="sc">%&gt;%</span></span>
+<span id="cb15-271"><a href="#cb15-271" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-272"><a href="#cb15-272" aria-hidden="true" tabindex="-1"></a>      <span class="at">relative_energy_use_score =</span> <span class="fu">scale</span>(relative_energy_use_score),</span>
+<span id="cb15-273"><a href="#cb15-273" aria-hidden="true" tabindex="-1"></a>      <span class="at">relative_energy_save_score =</span> <span class="fu">scale</span>(relative_energy_save_score)</span>
+<span id="cb15-274"><a href="#cb15-274" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-275"><a href="#cb15-275" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-276"><a href="#cb15-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(final_scores)</span>
+<span id="cb15-277"><a href="#cb15-277" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-278"><a href="#cb15-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-279"><a href="#cb15-279" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage with the provided data:</span></span>
+<span id="cb15-280"><a href="#cb15-280" aria-hidden="true" tabindex="-1"></a>attari2_scores <span class="ot">&lt;-</span> <span class="fu">analyze_attari_survey</span>(att2_combined)</span>
+<span id="cb15-281"><a href="#cb15-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-282"><a href="#cb15-282" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(attari2_scores<span class="sc">$</span>relative_energy_use_score, attari2_scores<span class="sc">$</span>relative_energy_save_score, <span class="at">use=</span><span class="st">"pairwise.complete.obs"</span>)</span>
+<span id="cb15-283"><a href="#cb15-283" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(attari2_scores, <span class="fu">aes</span>(<span class="at">x =</span> relative_energy_use_score, <span class="at">y =</span> relative_energy_save_score)) <span class="sc">+</span></span>
+<span id="cb15-284"><a href="#cb15-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-285"><a href="#cb15-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb15-286"><a href="#cb15-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Relative Energy Usage Score"</span>, <span class="at">y =</span> <span class="st">"Relative Energy Savings Score"</span>) <span class="sc">+</span></span>
+<span id="cb15-287"><a href="#cb15-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb15-288"><a href="#cb15-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-289"><a href="#cb15-289" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(attari2_scores) <span class="sc">|&gt;</span> pander<span class="sc">::</span><span class="fu">pandoc.table</span>(<span class="at">caption=</span><span class="st">"Attari Part 2"</span>,<span class="at">split.table=</span><span class="cn">Inf</span>,<span class="at">style=</span><span class="st">'rmarkdown'</span>)</span>
+<span id="cb15-290"><a href="#cb15-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-291"><a href="#cb15-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-292"><a href="#cb15-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-293"><a href="#cb15-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-294"><a href="#cb15-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-295"><a href="#cb15-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-296"><a href="#cb15-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-297"><a href="#cb15-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-298"><a href="#cb15-298" aria-hidden="true" tabindex="-1"></a><span class="fu"># Energy Literacy Survey (ELS01-ELS08)</span></span>
+<span id="cb15-299"><a href="#cb15-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-300"><a href="#cb15-300" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Description:**  Assesses participants' knowledge of energy concepts.</span>
+<span id="cb15-301"><a href="#cb15-301" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Coding Scheme:** Multiple-choice questions.</span>
+<span id="cb15-302"><a href="#cb15-302" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Specific Items:**</span>
+<span id="cb15-303"><a href="#cb15-303" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS01:  Units of electrical energy (correct answer: 2 = "Kilowatt-hours (kWh)")</span>
+<span id="cb15-304"><a href="#cb15-304" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS02:  Energy consumption of appliance (correct answer: 3 = "Multiplied by the time it's used")</span>
+<span id="cb15-305"><a href="#cb15-305" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS03:  Energy conversion in incandescent bulb (correct answer: 3 = "Electrical energy to radiant energy (light) and thermal energy (heat)")</span>
+<span id="cb15-306"><a href="#cb15-306" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS04:  Best reason to buy an Energy Star appliance (correct answer: 3 = "ENERGY STAR appliances use less energy")</span>
+<span id="cb15-307"><a href="#cb15-307" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS05: Most energy used in average American home (correct answer: 3 = "Heating and cooling rooms")</span>
+<span id="cb15-308"><a href="#cb15-308" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS06: Most electricity used in average home (correct answer: 2 = "Refrigerator")</span>
+<span id="cb15-309"><a href="#cb15-309" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS07: Source of most electricity in the US (correct answer: 3 = "Burning coal")</span>
+<span id="cb15-310"><a href="#cb15-310" aria-hidden="true" tabindex="-1"></a><span class="ss">    *   </span>ELS08: Problem with switching to electric cars (correct answer: 1 = "Most electricity is currently produced from fossil fuels (coal, oil, natural gas)")</span>
+<span id="cb15-311"><a href="#cb15-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-314"><a href="#cb15-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-315"><a href="#cb15-315" aria-hidden="true" tabindex="-1"></a>analyze_els_survey <span class="ot">&lt;-</span> <span class="cf">function</span>(els) {</span>
+<span id="cb15-316"><a href="#cb15-316" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Correct answers for ELS items (ELS01-ELS08)</span></span>
+<span id="cb15-317"><a href="#cb15-317" aria-hidden="true" tabindex="-1"></a>  correct_answers <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb15-318"><a href="#cb15-318" aria-hidden="true" tabindex="-1"></a>    <span class="at">ELS01 =</span> <span class="dv">2</span>, <span class="at">ELS02 =</span> <span class="dv">3</span>, <span class="at">ELS03 =</span> <span class="dv">3</span>, <span class="at">ELS04 =</span> <span class="dv">3</span>,</span>
+<span id="cb15-319"><a href="#cb15-319" aria-hidden="true" tabindex="-1"></a>    <span class="at">ELS05 =</span> <span class="dv">3</span>, <span class="at">ELS06 =</span> <span class="dv">2</span>, <span class="at">ELS07 =</span> <span class="dv">3</span>, <span class="at">ELS08 =</span> <span class="dv">1</span></span>
+<span id="cb15-320"><a href="#cb15-320" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-321"><a href="#cb15-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-322"><a href="#cb15-322" aria-hidden="true" tabindex="-1"></a>  els <span class="sc">%&gt;%</span></span>
+<span id="cb15-323"><a href="#cb15-323" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-324"><a href="#cb15-324" aria-hidden="true" tabindex="-1"></a>      <span class="at">accuracy =</span> <span class="fu">rowSums</span>(<span class="fu">across</span>(ELS01<span class="sc">:</span>ELS08, <span class="sc">~</span> .x <span class="sc">==</span> correct_answers[<span class="fu">cur_column</span>()])),</span>
+<span id="cb15-325"><a href="#cb15-325" aria-hidden="true" tabindex="-1"></a>      <span class="at">els =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(accuracy))</span>
+<span id="cb15-326"><a href="#cb15-326" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-327"><a href="#cb15-327" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, accuracy, els)</span>
+<span id="cb15-328"><a href="#cb15-328" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-329"><a href="#cb15-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-330"><a href="#cb15-330" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage:</span></span>
+<span id="cb15-331"><a href="#cb15-331" aria-hidden="true" tabindex="-1"></a>els_scores <span class="ot">&lt;-</span> <span class="fu">analyze_els_survey</span>(els)</span>
+<span id="cb15-332"><a href="#cb15-332" aria-hidden="true" tabindex="-1"></a>els_scores <span class="sc">|&gt;</span> <span class="fu">head</span>() <span class="sc">|&gt;</span> pander<span class="sc">::</span><span class="fu">pandoc.table</span>(<span class="at">caption=</span><span class="st">"Energy Literacy Scores"</span>,<span class="at">split.table=</span><span class="cn">Inf</span>,<span class="at">style=</span><span class="st">'rmarkdown'</span>)</span>
+<span id="cb15-333"><a href="#cb15-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-334"><a href="#cb15-334" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-335"><a href="#cb15-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-336"><a href="#cb15-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-337"><a href="#cb15-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-338"><a href="#cb15-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-339"><a href="#cb15-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-340"><a href="#cb15-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-341"><a href="#cb15-341" aria-hidden="true" tabindex="-1"></a><span class="fu"># Recycling Study Questions RS01-RS06</span></span>
+<span id="cb15-342"><a href="#cb15-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-343"><a href="#cb15-343" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Description:** These are questions included from a different study</span>
+<span id="cb15-344"><a href="#cb15-344" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>**Coding Scheme:** 5-point agreement scale</span>
+<span id="cb15-345"><a href="#cb15-345" aria-hidden="true" tabindex="-1"></a><span class="ss">   *  </span>**Specific Items:**</span>
+<span id="cb15-346"><a href="#cb15-346" aria-hidden="true" tabindex="-1"></a><span class="ss">       *  </span>RS01: I generally don’t pay attention to how much energy I use.</span>
+<span id="cb15-347"><a href="#cb15-347" aria-hidden="true" tabindex="-1"></a><span class="ss">       *  </span>RS02: I would say I am very pro-environmental.</span>
+<span id="cb15-348"><a href="#cb15-348" aria-hidden="true" tabindex="-1"></a><span class="ss">       *  </span>RS03: I think saving energy is largely a waste of time.</span>
+<span id="cb15-349"><a href="#cb15-349" aria-hidden="true" tabindex="-1"></a><span class="ss">        *  </span>RS04: I am generally conservative on the political spectrum with regard to social issues.</span>
+<span id="cb15-350"><a href="#cb15-350" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span>RS05: I am generally conservative on the political spectrum with regard to economic issues.</span>
+<span id="cb15-351"><a href="#cb15-351" aria-hidden="true" tabindex="-1"></a><span class="ss">        *  </span>RS06: I consider myself knowledgeable about how much energy utilities use</span>
+<span id="cb15-352"><a href="#cb15-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-353"><a href="#cb15-353" aria-hidden="true" tabindex="-1"></a>head(rs,n=10)</span>
+<span id="cb15-354"><a href="#cb15-354" aria-hidden="true" tabindex="-1"></a><span class="fu"># A tibble: 10 × 7</span></span>
+<span id="cb15-355"><a href="#cb15-355" aria-hidden="true" tabindex="-1"></a>      id RS01                           RS02                           RS03                           RS04                           RS05                     RS06   </span>
+<span id="cb15-356"><a href="#cb15-356" aria-hidden="true" tabindex="-1"></a>   <span class="dt">&lt;</span><span class="kw">int</span><span class="dt">&gt;</span> &lt;dbl+lbl&gt;                      &lt;dbl+lbl&gt;                      &lt;dbl+lbl&gt;                      &lt;dbl+lbl&gt;                      &lt;dbl+lbl&gt;                &lt;dbl+l&gt;</span>
+<span id="cb15-357"><a href="#cb15-357" aria-hidden="true" tabindex="-1"></a> 1     1 2 <span class="co">[</span><span class="ot">Somewhat Agree</span><span class="co">]</span>             2 <span class="co">[</span><span class="ot">Somewhat Agree</span><span class="co">]</span>             5 <span class="co">[</span><span class="ot">Disagree</span><span class="co">]</span>                   4 <span class="co">[</span><span class="ot">Somewhat Disagree</span><span class="co">]</span>          4 <span class="co">[</span><span class="ot">Somewhat Disagree</span><span class="co">]</span>    4 [Som…</span>
+<span id="cb15-358"><a href="#cb15-358" aria-hidden="true" tabindex="-1"></a> 2     2 5 <span class="co">[</span><span class="ot">Disagree</span><span class="co">]</span>                   3 <span class="co">[</span><span class="ot">Neither agree nor disagree</span><span class="co">]</span> 3 <span class="co">[</span><span class="ot">Neither agree nor disagree</span><span class="co">]</span> 5 <span class="co">[</span><span class="ot">Disagree</span><span class="co">]</span>                   5 <span class="co">[</span><span class="ot">Disagree</span><span class="co">]</span>             3 [Nei…</span>
+<span id="cb15-359"><a href="#cb15-359" aria-hidden="true" tabindex="-1"></a> 3     3 3 <span class="co">[</span><span class="ot">Neither agree nor disagree</span><span class="co">]</span> 3 <span class="co">[</span><span class="ot">Neither agree nor disagree</span><span class="co">]</span> 3 <span class="co">[</span><span class="ot">Neither agree nor disagree</span><span class="co">]</span> 3 <span class="co">[</span><span class="ot">Neither agree nor disagree</span><span class="co">]</span> 3 [Neither agree nor di… 3 [Nei…</span>
+<span id="cb15-360"><a href="#cb15-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-363"><a href="#cb15-363" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-364"><a href="#cb15-364" aria-hidden="true" tabindex="-1"></a>analyze_recycling_survey <span class="ot">&lt;-</span> <span class="cf">function</span>(rs_data) {</span>
+<span id="cb15-365"><a href="#cb15-365" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-366"><a href="#cb15-366" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 1) Coerce columns to numeric</span></span>
+<span id="cb15-367"><a href="#cb15-367" aria-hidden="true" tabindex="-1"></a>  rs_numeric <span class="ot">&lt;-</span> rs_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-368"><a href="#cb15-368" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-369"><a href="#cb15-369" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS01_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(RS01)),</span>
+<span id="cb15-370"><a href="#cb15-370" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS02_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(RS02)),</span>
+<span id="cb15-371"><a href="#cb15-371" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS03_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(RS03)),</span>
+<span id="cb15-372"><a href="#cb15-372" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS04_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(RS04)),</span>
+<span id="cb15-373"><a href="#cb15-373" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS05_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(RS05)),</span>
+<span id="cb15-374"><a href="#cb15-374" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS06_num =</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(RS06))</span>
+<span id="cb15-375"><a href="#cb15-375" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-376"><a href="#cb15-376" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-377"><a href="#cb15-377" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 2) Recode items so that higher numbers consistently reflect</span></span>
+<span id="cb15-378"><a href="#cb15-378" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    "more" of the targeted construct:</span></span>
+<span id="cb15-379"><a href="#cb15-379" aria-hidden="true" tabindex="-1"></a>  <span class="co">#</span></span>
+<span id="cb15-380"><a href="#cb15-380" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Environmental Attitude (RS01 &amp; RS03 are negative, RS02 &amp; RS06 are positive).</span></span>
+<span id="cb15-381"><a href="#cb15-381" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Original scale is 1=Agree ... 5=Disagree</span></span>
+<span id="cb15-382"><a href="#cb15-382" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For a 'positive' pro-environment item, do 6 - x =&gt; so 1 =&gt; 5 (strong agreement =&gt; higher = pro-env).</span></span>
+<span id="cb15-383"><a href="#cb15-383" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For a 'negative' pro-environment item, keep x =&gt; so 1 =&gt; 1 (strong agreement =&gt; lower pro-env).</span></span>
+<span id="cb15-384"><a href="#cb15-384" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-385"><a href="#cb15-385" aria-hidden="true" tabindex="-1"></a>  rs_recode <span class="ot">&lt;-</span> rs_numeric <span class="sc">%&gt;%</span></span>
+<span id="cb15-386"><a href="#cb15-386" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-387"><a href="#cb15-387" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Positive items</span></span>
+<span id="cb15-388"><a href="#cb15-388" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS02_env =</span> <span class="dv">6</span> <span class="sc">-</span> RS02_num,  <span class="co"># now 5 = strongly pro-env</span></span>
+<span id="cb15-389"><a href="#cb15-389" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS06_env =</span> <span class="dv">6</span> <span class="sc">-</span> RS06_num,  <span class="co"># now 5 = strongly pro-env</span></span>
+<span id="cb15-390"><a href="#cb15-390" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-391"><a href="#cb15-391" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Negative items (keep the original so that 1 =&gt; 1 = strongly anti-env, 5 =&gt; 5 = strongly pro-env)</span></span>
+<span id="cb15-392"><a href="#cb15-392" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS01_env =</span> RS01_num,</span>
+<span id="cb15-393"><a href="#cb15-393" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS03_env =</span> RS03_num,</span>
+<span id="cb15-394"><a href="#cb15-394" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb15-395"><a href="#cb15-395" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Political items: If we want higher = more conservative,</span></span>
+<span id="cb15-396"><a href="#cb15-396" aria-hidden="true" tabindex="-1"></a>      <span class="co"># we can do 6 - x so that 1 =&gt; 5 (strongly conservative).</span></span>
+<span id="cb15-397"><a href="#cb15-397" aria-hidden="true" tabindex="-1"></a>      <span class="co"># If you'd prefer the raw code to remain 1=Agree =&gt; "lowest" numeric,</span></span>
+<span id="cb15-398"><a href="#cb15-398" aria-hidden="true" tabindex="-1"></a>      <span class="co"># skip the transformation. Below we invert it:</span></span>
+<span id="cb15-399"><a href="#cb15-399" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS04_cons =</span> <span class="dv">6</span> <span class="sc">-</span> RS04_num, </span>
+<span id="cb15-400"><a href="#cb15-400" aria-hidden="true" tabindex="-1"></a>      <span class="at">RS05_cons =</span> <span class="dv">6</span> <span class="sc">-</span> RS05_num</span>
+<span id="cb15-401"><a href="#cb15-401" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-402"><a href="#cb15-402" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-403"><a href="#cb15-403" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 3) Compute subscales</span></span>
+<span id="cb15-404"><a href="#cb15-404" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    - "env_attitude": average of RS01_env, RS02_env, RS03_env, RS06_env</span></span>
+<span id="cb15-405"><a href="#cb15-405" aria-hidden="true" tabindex="-1"></a>  <span class="co">#      such that 5 = most pro-environment, 1 = least pro-environment</span></span>
+<span id="cb15-406"><a href="#cb15-406" aria-hidden="true" tabindex="-1"></a>  <span class="co">#    - "pol_conservatism": average of RS04_cons, RS05_cons</span></span>
+<span id="cb15-407"><a href="#cb15-407" aria-hidden="true" tabindex="-1"></a>  <span class="co">#      such that 5 = strongly conservative, 1 = strongly liberal</span></span>
+<span id="cb15-408"><a href="#cb15-408" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-409"><a href="#cb15-409" aria-hidden="true" tabindex="-1"></a>  rs_subscales <span class="ot">&lt;-</span> rs_recode <span class="sc">%&gt;%</span></span>
+<span id="cb15-410"><a href="#cb15-410" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-411"><a href="#cb15-411" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-412"><a href="#cb15-412" aria-hidden="true" tabindex="-1"></a>      <span class="at">env_attitude =</span> <span class="fu">mean</span>(<span class="fu">c</span>(RS01_env, RS02_env, RS03_env, RS06_env), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb15-413"><a href="#cb15-413" aria-hidden="true" tabindex="-1"></a>      <span class="at">pol_conservatism =</span> <span class="fu">mean</span>(<span class="fu">c</span>(RS04_cons, RS05_cons), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-414"><a href="#cb15-414" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-415"><a href="#cb15-415" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb15-416"><a href="#cb15-416" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-417"><a href="#cb15-417" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 4) Standardize subscales if desired</span></span>
+<span id="cb15-418"><a href="#cb15-418" aria-hidden="true" tabindex="-1"></a>  rs_final <span class="ot">&lt;-</span> rs_subscales <span class="sc">%&gt;%</span></span>
+<span id="cb15-419"><a href="#cb15-419" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb15-420"><a href="#cb15-420" aria-hidden="true" tabindex="-1"></a>      <span class="at">env_attitude_z =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(env_attitude)),</span>
+<span id="cb15-421"><a href="#cb15-421" aria-hidden="true" tabindex="-1"></a>      <span class="at">pol_conservatism_z =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(pol_conservatism))</span>
+<span id="cb15-422"><a href="#cb15-422" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-423"><a href="#cb15-423" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5) Return the columns of interest</span></span>
+<span id="cb15-424"><a href="#cb15-424" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(id, </span>
+<span id="cb15-425"><a href="#cb15-425" aria-hidden="true" tabindex="-1"></a>           env_attitude, env_attitude_z,</span>
+<span id="cb15-426"><a href="#cb15-426" aria-hidden="true" tabindex="-1"></a>           pol_conservatism, pol_conservatism_z)</span>
+<span id="cb15-427"><a href="#cb15-427" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-428"><a href="#cb15-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(rs_final)</span>
+<span id="cb15-429"><a href="#cb15-429" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-430"><a href="#cb15-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-431"><a href="#cb15-431" aria-hidden="true" tabindex="-1"></a>rs_scores <span class="ot">&lt;-</span> <span class="fu">analyze_recycling_survey</span>(rs)</span>
+<span id="cb15-432"><a href="#cb15-432" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rs_scores) <span class="sc">|&gt;</span> pander<span class="sc">::</span><span class="fu">pandoc.table</span>(<span class="at">caption =</span> <span class="st">"Recycling Study Scores"</span>,<span class="at">split.table=</span><span class="cn">Inf</span>,<span class="at">style=</span><span class="st">'rmarkdown'</span>)</span>
+<span id="cb15-433"><a href="#cb15-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-434"><a href="#cb15-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb15-435"><a href="#cb15-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-438"><a href="#cb15-438" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-439"><a href="#cb15-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2025 <a href="https://tegorman13.github.io">Thomas Gorman</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p>site made with <a href="https://cran.r-project.org/"><i class="fa-brands fa-r-project" aria-label="r-project"></i></a> and <a href="https://quarto.org/">Quarto</a></p>
+<div class="toc-actions"><ul><li><a href="https://github.com/tegorman13/Survey_Study/blob/main/inst.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+<li class="nav-item">
+    <a class="nav-link" href="https://github.com/tegorman13/Survey_Study" target="_blank">
+<p><i class="fa-brands fa-github fa-2.0x" aria-label="github"></i></p>
+</a>
+  </li>  
+</ul>
+</div>
+  </div>
+</footer>
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

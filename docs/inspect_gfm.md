@@ -1,6 +1,23 @@
 # Initial Data Inspect
 
-2025-01-19
+2025-01-21
+
+This study set out to assess how prior survey instruments on sustainable
+behaviors, knowledge, and attitudes correlate.
+
+## Survey Instrument Categorizations
+
+| Survey | Scale/Description | Categorization | Starting Item | Ending Item | \# of Items | Operationalization |
+|:---|:---|:---|:---|:---|:---|:---|
+| Energy Literacy Survey | Energy Literacy Survey | Knowledge | ELS01 | ELS08 | 8 | Multiple choice |
+| Attari Energy Survey - Part 1 | Numeracy Questions | Knowledge | ATT16 | ATT18 | 3 | Specific numeric answers |
+| Attari Energy Survey - Part 2 | Relative Energy Usage | Knowledge | ATT19 | ATT33 | 15 | Specific numeric answers |
+| Attari Energy Survey - Part 1 | Perceived Difficulty items | Motivation | ATT01 | ATT15 | 15 | “Do it already” |
+| Langevin Semi-structured Interview - Part 2 | NA | Motivation - Demographics - Practices and habits | LAND | LAN87 | 78 | Varied |
+| Recycling Study | NA | Motivation - Attitudes on environment,Politics | RS01 | RS06 | 6 | “Agree” |
+| Residential Energy Consumption Survey-RECS | Survey of residential energy usage | Demographics - Practices and habits | RECSOI | RECS16 | 16 | Varied |
+| Langevin Semi-structured Interview - Part 1 | Sustainability Measures | Other - Attitudes towards norms, environment | LAN01 | LAN09 | 9 | Varied |
+| New Environmental Paradigm - NEP | NA | Attitudes towards norms, environment | ΝΕΡΟΙ | NEP15 | 15 | “Strongly Agree” |
 
 ``` r
 pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,gt,flextable,ggh4x,psych,corrplot)
@@ -13,33 +30,45 @@ dinst <- readRDS(here("data","dinst.rds"))
 # Attari Energy Survey (Part 1)
 aes1 <- draw |> select(id,ATT01:ATT18)
 aes2 <- dinst |> select(id,ATT01:ATT18)
+aes_combined <- bind_rows(aes1, aes2)
+
 
 att_useSave <- draw |> select(id,ATT19:ATT33)
 att_useSave2 <- dinst |> select(id,ATT19:ATT33)
+att2_combined <- bind_rows(att_useSave, att_useSave2)
 
 
 els1 <- draw |> select(id,ELS01:ELS08)
 els2 <- dinst |> select(id,ELS01:ELS08)
+els <- bind_rows(els1,els2)
+
 
 recs1 <- draw |> select(id,RECS01:RECS16)
 recs2 <- dinst |> select(id,RECS01:RECS16)
+recs <- bind_rows(recs1,recs2)
+
 
 lss1_1 <- draw |> select(id,LAN01:LAN09)
 lss1_2 <- dinst |> select(id,LAN01:LAN09)
+lss1 <- bind_rows(lss1_1,lss1_2)
 
 lss2_1 <- draw |> select(id,LAN10:LAN87)
 lss2_2 <- dinst |> select(id,LAN10:LAN87)
+lss2 <- bind_rows(lss2_1,lss2_2)
 
 
 nep1 <- draw |> select(id,NEP01:NEP15)
 nep2 <- dinst |> select(id,NEP01:NEP15)
+nep <- bind_rows(nep1,nep2)
 
 demo1 <- draw |> select(id,DEM01:DEM30)
 demo2 <- dinst |> select(id,DEM01:DEM30)
+demo <- bind_rows(demo1,demo2)
 
 
 rs1 <- draw |> select(id,RS01:RS06)
 rs2 <- dinst |> select(id,RS01:RS06)
+rs <- bind_rows(rs1,rs2)
 ```
 
 # Attari Energy Survey (Part 1)
@@ -95,16 +124,28 @@ ATT15\| ATT16\| ATT17\| ATT18\|
 \|–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—–:\|
 \| 1\| 6\| 3\| 5\| 6\| 6\| 5\| 5\| 5\| 4\| 2\| 5\| 3\| 5\| 5\| 4\| 500\|
 10\| 0.1\| \| 2\| 7\| 2\| 5\| 1\| 7\| 1\| 1\| 4\| 4\| 4\| 5\| 1\| 7\|
-1\| 1\| 500\| 10\| 0.1\| \| 3\| 7\| 6\| 8\| 6\| 8\| 6\| 8\| 6\| 5\| 7\|
-5\| 7\| 5\| 4\| 6\| 900\| 250\| 350.0\| \| 4\| 6\| 5\| 7\| 3\| 6\| 1\|
-1\| 5\| 1\| 2\| 6\| 1\| 1\| 1\| 1\| 500\| 100\| 10.0\| \| 5\| 5\| 6\|
-4\| 5\| 4\| 5\| 6\| 6\| 5\| 4\| 5\| 6\| 4\| 5\| 4\| 500\| 10\| 0.1\| \|
-6\| 6\| 4\| 6\| 2\| 8\| 1\| 1\| 3\| 1\| 5\| 3\| 3\| 6\| 1\| 5\| 500\|
-10\| 0.1\|
+1\| 1\| 500\| 10\| 0.1\|
+
+head(aes_combined) \# A tibble: 6 × 19 id ATT01 ATT02 ATT03 ATT04 ATT05
+ATT06 ATT07 ATT08 ATT09 ATT10 ATT11 ATT12 ATT13 ATT14 ATT15 ATT16 ATT17
+ATT18 <int> \<dbl+lbl\> \<dbl+lbl\> \<dbl+l\> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> \<dbl+l\> <dbl> <dbl> <dbl> 1 1 6 \[Somewhat hard\]
+3 \[Very easy\] 5 \[Nei… 6 \[Som… 6 \[Som… 5 \[Nei… 5 \[Nei… 5 \[Nei… 4
+\[Som… 2 \[Ext… 5 \[Nei… 3 \[Ver… 5 \[Nei… 5 \[Nei… 4 \[Som… 500 10 0.1
+2 2 7 \[Very hard\] 2 \[Extremely easy\] 5 \[Nei… 1 \[Do … 7 \[Ver… 1
+\[Do … 1 \[Do … 4 \[Som… 4 \[Som… 4 \[Som… 5 \[Nei… 1 \[Do … 7 \[Ver… 1
+\[Do … 1 \[Do … 500 10 0.1 3 3 7 \[Very hard\] 6 \[Somewhat hard\] 8
+\[Ext… 6 \[Som… 8 \[Ext… 6 \[Som… 8 \[Ext… 6 \[Som… 5 \[Nei… 7 \[Ver… 5
+\[Nei… 7 \[Ver… 5 \[Nei… 4 \[Som… 6 \[Som… 900 250 350  
+4 4 6 \[Somewhat hard\] 5 \[Neither easy nor … 7 \[Ver… 3 \[Ver… 6
+\[Som… 1 \[Do … 1 \[Do … 5 \[Nei… 1 \[Do … 2 \[Ext… 6 \[Som… 1 \[Do … 1
+\[Do … 1 \[Do … 1 \[Do … 500 100 10  
+5 5 5 \[Neither easy nor hard\] 6 \[Somewhat hard\] 4 \[Som… 5 \[Nei… 4
+\[Som… 5 \[Nei… 6 \[Som… 6 \[Som… 5 \[Nei… 4 \[Som… 5 \[Nei… 6 \[Som… 4
+\[Som… 5 \[Nei… 4 \[Som… 500 10 0.1
 
 ``` r
-aes_combined <- bind_rows(aes1, aes2)
-
 diff_items <- aes_combined %>% 
   select(id, ATT01:ATT15)
 
@@ -274,8 +315,9 @@ diff_items_clean %>%
 
 <div id="fig-Attrati_1-1">
 
-<img src="inspect_files/figure-commonmark/fig-Attrati_1-1.png"
-id="fig-Attrati_1-1" />
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/fig-Attrati_1-1.png"
+id="fig-Attrati_1-1" width="1056" />
 
 Figure 1
 
@@ -283,8 +325,9 @@ Figure 1
 
 <div id="fig-Attrati_1-2">
 
-<img src="inspect_files/figure-commonmark/fig-Attrati_1-2.png"
-id="fig-Attrati_1-2" />
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/fig-Attrati_1-2.png"
+id="fig-Attrati_1-2" width="1056" />
 
 Figure 2
 
@@ -321,7 +364,7 @@ Figure 2
     - ATT32: Lowering winter heater by 5 F (correct answer: 546)
     - ATT33: Changing washer temp settings (correct answer: 4000)
 
-head(att_useSave) \# A tibble: 6 × 16 id ATT19 ATT20 ATT21 ATT22 ATT23
+head(att2_combined) \# A tibble: 6 × 16 id ATT19 ATT20 ATT21 ATT22 ATT23
 ATT24 ATT25 ATT26 ATT27 ATT28 ATT29 ATT30 ATT31 ATT32 ATT33 <int> <dbl>
 <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
 <dbl> <dbl> 1 1 50 200 150 80 130 400 800 1200 150 50 25 150 200 250 80
@@ -332,8 +375,6 @@ ATT24 ATT25 ATT26 ATT27 ATT28 ATT29 ATT30 ATT31 ATT32 ATT33 <int> <dbl>
 2000 750 90 25 100 200 300 400
 
 ``` r
-att2_combined <- bind_rows(att_useSave, att_useSave2)
-
 # Inspect structure
 # head(att2_combined)
 
@@ -432,7 +473,9 @@ ggplot(att2_long, aes(x = Response)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-3-1.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-1.png"
+width="768" />
 
 ``` r
 # -------------------------------------------------------
@@ -573,7 +616,9 @@ corrplot::corrplot(usage_cor, method = "number", type = "upper", tl.col = "black
 title("Correlation Matrix: Raw Usage Estimates (ATT19–ATT27)")
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-3-2.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-2.png"
+width="768" />
 
 ``` r
 # If you prefer correlation among absolute error scores:
@@ -584,7 +629,9 @@ usage_abs_err_cor <- att2_scored %>%
 corrplot::corrplot(usage_abs_err_cor, method = "number", type = "upper", tl.col = "black", tl.srt = 45)
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-3-3.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-3.png"
+width="768" />
 
 ``` r
 #title("Correlation Matrix: Usage Absolute Error Scores")
@@ -673,8 +720,6 @@ psych::alpha(att2_combined %>% select(all_of(savings_items)), check.keys = TRUE)
     ATT33 586  0.90  0.83  0.83   0.87  146  258
 
 ``` r
-att2_combined <- bind_rows(att_useSave, att_useSave2)
-
 # -------------------------------------------------------
 # 1. Overview of Items in Part 2
 # -------------------------------------------------------
@@ -773,7 +818,9 @@ ggplot(att2_long, aes(x = Response)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-1.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-1.png"
+width="768" />
 
 ``` r
 # -------------------------------------------------------
@@ -922,7 +969,9 @@ ggplot(att2_est_vs_true, aes(x = Correct, y = Estimated,color=Item_Facet)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-2.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-2.png"
+width="768" />
 
 ``` r
 ggplot(att2_est_vs_true, aes(x = Correct, y = Estimated, color = Item_Facet)) +
@@ -938,7 +987,9 @@ ggplot(att2_est_vs_true, aes(x = Correct, y = Estimated, color = Item_Facet)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-3.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-3.png"
+width="768" />
 
 ``` r
 att2_est_vs_true <- att2_est_vs_true %>%
@@ -956,7 +1007,9 @@ ggplot(att2_est_vs_true, aes(x = Correct, y = Ratio, color = Item_Facet)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-4.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-4.png"
+width="768" />
 
 ``` r
 att2_split <- att2_est_vs_true %>%
@@ -975,7 +1028,9 @@ ggplot(att2_split, aes(x = Correct, y = Estimated, color = Item_Facet)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-5.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-5.png"
+width="768" />
 
 ``` r
 # -------------------------------------------------------
@@ -1006,7 +1061,9 @@ ggplot(abs_err_long, aes(x = AbsError)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-6.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-6.png"
+width="768" />
 
 ``` r
 # -------------------------------------------------------
@@ -1028,7 +1085,9 @@ ggplot(abs_err_long_log, aes(x = LogAbsError)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-7.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-7.png"
+width="768" />
 
 ``` r
 # -------------------------------------------------------
@@ -1043,7 +1102,9 @@ corrplot::corrplot(usage_cor, method = "number", type = "upper", tl.col = "black
 title("Correlation Matrix: Raw Usage Estimates (ATT19–ATT27)")
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-8.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-8.png"
+width="768" />
 
 ``` r
 # Example: correlation among absolute error scores
@@ -1055,7 +1116,9 @@ corrplot::corrplot(usage_abs_err_cor, method = "number", type = "upper", tl.col 
 title("Correlation Matrix: Usage Absolute Error Scores")
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-4-9.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-9.png"
+width="768" />
 
 ``` r
 # -------------------------------------------------------
@@ -1169,8 +1232,6 @@ ELS06\| ELS07\| ELS08\| \|–:\|—–:\|—–:\|—–:\|—–:\|—–:\|—
 3\| 3\| 3\| 2\| 3\| 5\|
 
 ``` r
-els <- bind_rows(els1,els2)
-
 els <- els |> 
   pivot_longer(cols = ELS01:ELS08, names_to = "question", values_to = "response") |> 
   # Convert response to numeric to avoid label issues
@@ -1224,7 +1285,9 @@ ggplot(els, aes(x = as.factor(response), fill = correct)) +
   )
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-5-1.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-1.png"
+width="768" />
 
 ``` r
 els_summary <- els %>%
@@ -1263,7 +1326,9 @@ ggplot(els_summary, aes(x = reorder(question, pct_correct), y = pct_correct)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-5-2.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-2.png"
+width="768" />
 
 ``` r
 # Convert "Correct"/"Incorrect" to numeric 1/0
@@ -1306,7 +1371,9 @@ ggplot(els_score_df, aes(x = ELS_Total_Score)) +
   theme_minimal()
 ```
 
-![](inspect_files/figure-commonmark/unnamed-chunk-5-3.png)
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-3.png"
+width="768" />
 
 ``` r
 # Using wide format: each row is a participant, each col is an item coded 1=correct, 0=incorrect
@@ -1397,6 +1464,8 @@ psych::alpha(els_matrix, check.keys = TRUE)
 
 # Residential Energy Consumption Survey (RECS01-RECS16)
 
+https://www.eia.gov/consumption/residential/reports/2015/overview/
+
 - **Description:** Gathers information about the household’s energy use
   and equipment.
 - **Coding Scheme:** Mixed, with multiple-choice and open-ended
@@ -1431,18 +1500,534 @@ psych::alpha(els_matrix, check.keys = TRUE)
     ordinal)
   - RECS17: Second heating source (coding: 6 point ordinal)
 
+head(recs,n=10) \# A tibble: 10 × 17 id RECS01 RECS02 RECS03 RECS04
+RECS05 RECS06 RECS07 RECS08 RECS09 RECS10 RECS11 RECS12 RECS13 RECS14
+RECS15 RECS16 <int> \<dbl+lbl\> \<dbl+lbl\> <chr> \<dbl+l\> <chr>
+\<dbl+l\> <chr> \<dbl+l\> \<dbl+l\> <chr> <chr> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> \<dbl+l\> 1 1 1 \[Fewer than 20 light bulbs\] 1
+\[Set one temperature a… “” 4 \[Tur… “” 1 \[Yes\] 2 3 \[5 t… 4 \[Tur… “”
+6 4 \[Som… 4 \[Som… 3 \[Abo… 2 \[No\] 2 \[Por… 2 2 3 \[40 to 59 light
+bulbs\] 3 \[Program the thermosta… “” 2 \[Man… “” 2 \[No\] 0 7 \[Don… 6
+\[Oth… “n/a” 6 5 \[Don… 5 \[Don… 5 \[Don… 2 \[No\] 1 \[No … 3 3 3 \[40
+to 59 light bulbs\] 4 \[Turn equipment on or … “” 3 \[Pro… “” 2 \[No\]
+10 4 \[10 … 5 \[Our… “” 100 3 \[Abo… 4 \[Som… 4 \[Som… 1 \[Yes\] 4
+\[Nat… 4 4 1 \[Fewer than 20 light bulbs\] 4 \[Turn equipment on or … “”
+4 \[Tur… “” 2 \[No\] 0 7 \[Don… 6 \[Oth… “N/A” 2 6 \[Non… 6 \[Non… 1
+\[All\] 2 \[No\] 1 \[No … 5 5 2 \[20 to 39 light bulbs\] 3 \[Program the
+thermosta… “” 3 \[Pro… “” 3 \[Don… 5 2 \[2 t… 3 \[Pro… “” 15 3 \[Abo… 4
+\[Som… 4 \[Som… 3 \[Don… 2 \[Por… 6 6 1 \[Fewer than 20 light bulbs\] 2
+\[Manually adjust the t… “” 2 \[Man… “” 1 \[Yes\] 1 4 \[10 … 2 \[Man… “”
+2 6 \[Non… 6 \[Non… 1 \[All\] 2 \[No\] 1 \[No … 7 7 1 \[Fewer than 20
+light bulbs\] 2 \[Manually adjust the t… “” 2 \[Man… “” 2 \[No\] 0 7
+\[Don… 6 \[Oth… “We h… 5 6 \[Non… 6 \[Non… 1 \[All\] 1 \[Yes\] 2 \[Por…
+8 8 3 \[40 to 59 light bulbs\] 2 \[Manually adjust the t…”” 3 \[Pro… “”
+1 \[Yes\] 450 5 \[15 … 3 \[Pro… “” 5 3 \[Abo… 3 \[Abo… 4 \[Som… 1
+\[Yes\] 3 \[Woo… 9 9 2 \[20 to 39 light bulbs\] 3 \[Program the
+thermosta… “” 4 \[Tur… “” 1 \[Yes\] 3 1 \[Les… 1 \[Set… “” 12 3 \[Abo… 4
+\[Som… 6 \[Non… 2 \[No\] 2 \[Por… 10 10 3 \[40 to 59 light bulbs\] 4
+\[Turn equipment on or … “” 3 \[Pro… “” 1 \[Yes\] 1 4 \[10 … 4 \[Tur… “”
+3 4 \[Som… 2 \[Mos… 2 \[Mos… 1 \[Yes\] 1 \[No …
+
 ``` r
-head(recs1)
+recs <- bind_rows(recs1,recs2)
+
+
+recs %>%
+  select(RECS01:RECS16) %>%
+  # This approach loops through columns, making small frequency tables
+  summarise(across(everything(),
+    ~ list(table(.x, useNA = "ifany"))
+  )) -> freq_tables
+
+# freq_tables is a data frame with one row; each column holds a frequency table
+# for convenience, you can inspect one of them:
+freq_tables$RECS01[[1]]
 ```
 
-    # A tibble: 6 × 17
-         id RECS01      RECS02  RECS03 RECS04  RECS05 RECS06  RECS07 RECS08  RECS09 
-      <int> <dbl+lbl>   <dbl+l> <chr>  <dbl+l> <chr>  <dbl+l> <chr>  <dbl+l> <dbl+l>
-    1     1 1 [Fewer t… 1 [Set… ""     4 [Tur… ""     1 [Yes] 2      3 [5 t… 4 [Tur…
-    2     2 3 [40 to 5… 3 [Pro… ""     2 [Man… ""     2 [No]  0      7 [Don… 6 [Oth…
-    3     3 3 [40 to 5… 4 [Tur… ""     3 [Pro… ""     2 [No]  10     4 [10 … 5 [Our…
-    4     4 1 [Fewer t… 4 [Tur… ""     4 [Tur… ""     2 [No]  0      7 [Don… 6 [Oth…
-    5     5 2 [20 to 3… 3 [Pro… ""     3 [Pro… ""     3 [Don… 5      2 [2 t… 3 [Pro…
-    6     6 1 [Fewer t… 2 [Man… ""     2 [Man… ""     1 [Yes] 1      4 [10 … 2 [Man…
-    # ℹ 7 more variables: RECS10 <chr>, RECS11 <chr>, RECS12 <dbl+lbl>,
-    #   RECS13 <dbl+lbl>, RECS14 <dbl+lbl>, RECS15 <dbl+lbl>, RECS16 <dbl+lbl>
+    RECS01
+      1   2   3   4   5   6 
+    239 216  91  24  10   6 
+
+``` r
+# Quick approach: loop through columns
+for (v in paste0("RECS", 1:16)) {
+  cat("Variable:", v, "\n")
+  print(table(recs[[v]], useNA = "ifany"))
+  cat("\n")
+}
+```
+
+    Variable: RECS1 
+    < table of extent 0 >
+
+    Variable: RECS2 
+    < table of extent 0 >
+
+    Variable: RECS3 
+    < table of extent 0 >
+
+    Variable: RECS4 
+    < table of extent 0 >
+
+    Variable: RECS5 
+    < table of extent 0 >
+
+    Variable: RECS6 
+    < table of extent 0 >
+
+    Variable: RECS7 
+    < table of extent 0 >
+
+    Variable: RECS8 
+    < table of extent 0 >
+
+    Variable: RECS9 
+    < table of extent 0 >
+
+    Variable: RECS10 
+
+                                                                         
+                                                                     497 
+                         Do not have an individual air conditioning unit 
+                                                                       1 
+                                        Do not have any air conditioning 
+                                                                       1 
+                                         do not have individual AC units 
+                                                                       1 
+                                              do not own air conditioner 
+                                                                       1 
+                                                              do not use 
+                                                                       1 
+                                                          do not use one 
+                                                                       1 
+                           Don not have individual air conditioning unit 
+                                                                       1 
+                                                              don't have 
+                                                                       1 
+                                                              Don't have 
+                                                                       1 
+                                                           don't have ac 
+                                                                       1 
+                                        don't have any, just central air 
+                                                                       1 
+                                  don't have individual air conditioning 
+                                                                       1 
+                                                          don't have one 
+                                                                       2 
+                                                          Don't have one 
+                                                                       3 
+                                                don't have portable unit 
+                                                                       1 
+                                                               don't own 
+                                                                       1 
+                                          don't own individual a/c units 
+                                                                       1 
+                                           Don't use individual AC units 
+                                                                       1 
+                                  Don't use individual units/central air 
+                                                                       1 
+                                                           don't use one 
+                                                                       1 
+                                                           dont have one 
+                                                                       1 
+                                                             dont use it 
+                                                                       1 
+                                                            dont use one 
+                                                                       1 
+                                                            Dont use one 
+                                                                       1 
+                                                        have central air 
+                                                                       1 
+                                                        Have central air 
+                                                                       1 
+                                                        I don't have a/c 
+                                                                       1 
+                                                 I don't have an AC unit 
+                                                                       1 
+             I don't have any window, wall, or portable air conditioning 
+                                                                       1 
+            I don't have individual units, just central air conditioning 
+                                                                       1 
+                                        I dont have a individual AC unit 
+                                                                       1 
+                                                      I have central A/C 
+                                                                       1 
+                                                       I have central AC 
+                                                                       1 
+                                                             I have none 
+                                                                       1 
+                                                 I only have central air 
+                                                                       1 
+    It is set at 78, except for when I leave the house and I turn it off 
+                                                                       1 
+                                                                     n/a 
+                                                                      15 
+                                                                     N/a 
+                                                                       2 
+                                                                     N/A 
+                                                                       9 
+                                                                      na 
+                                                                       2 
+                                                                      NA 
+                                                                       2 
+                                                                  No A/C 
+                                                                       1 
+                                                     No air conditioning 
+                                                                       1 
+                                                     No Air conditioning 
+                                                                       1 
+                                                                    none 
+                                                                       1 
+                                            not applicable - central air 
+                                                                       1 
+                                        Only have central ac no partable 
+                                                                       1 
+                                                open or close the window 
+                                                                       1 
+                                      Use Central Air that is programmed 
+                                                                       1 
+                     We do not have an individual air conditioning unit. 
+                                                                       1 
+      We do not have individual air conditioning units in our apartment. 
+                                                                       1 
+                                                     We do not have this 
+                                                                       1 
+                         We don't have individual air conditioning units 
+                                                                       1 
+                                                       We don't have one 
+                                                                       1 
+                                                       we don't use this 
+                                                                       1 
+                   We have central air conditioning, no individual units 
+                                                                       1 
+                                      We have central air not individual 
+                                                                       1 
+                                                    We have central air. 
+                                                                       2 
+                                                            We have none 
+                                                                       1 
+                                                      We use central air 
+                                                                       1 
+
+    Variable: RECS11 
+
+          0   1  10 100  12  13  14  15  16  17  18   2  20  25  29   3  30 300   4 
+      2  15  44  60   3  23   3   2  21   1   2   1  78  14   5   1  75   3   3  63 
+     40  42   5  50  54  56   6   7   8   9 
+      2   1  69   3   1   1  47   9  28   6 
+
+    Variable: RECS12 
+
+      1   2   3   4   5   6 
+     27  89  80 186  47 157 
+
+    Variable: RECS13 
+
+      1   2   3   4   5   6 
+     39 106  79 191  54 117 
+
+    Variable: RECS14 
+
+      1   2   3   4   5   6 
+     54  92  68 177  46 149 
+
+    Variable: RECS15 
+
+      1   2   3 
+    178 394  14 
+
+    Variable: RECS16 
+
+      1   2   3   4   5   6   7 
+    311 143  37  46  32   6  11 
+
+``` r
+ggplot(recs, aes(x = RECS07)) +
+  geom_histogram(binwidth = 1,stat="count", fill = "steelblue", color = "black") +
+  labs(
+    title = "Number of Window/Wall/Portable AC Units (RECS07)",
+    x = "Count of AC Units",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-1.png"
+width="768" />
+
+``` r
+recs %>%
+  summarise(
+    Mean_AC_Units   = mean(RECS07, na.rm = TRUE),
+    SD_AC_Units     = sd(RECS07, na.rm = TRUE),
+    Median_AC_Units = median(RECS07, na.rm = TRUE),
+    Max_AC_Units    = max(RECS07, na.rm = TRUE)
+  )
+```
+
+    # A tibble: 1 × 4
+      Mean_AC_Units SD_AC_Units Median_AC_Units Max_AC_Units
+              <dbl>       <dbl>           <dbl> <chr>       
+    1            NA        500.              NA na          
+
+``` r
+recs_metrics <- recs %>%
+  mutate(
+    # Suppose RECS15 = portion LED: 1="None", 2="Less than half", 3="About half", 4="Some", 5="Most", 6="All"
+    # We'll do a rough recoding to numeric for portion:
+    portion_LED = case_when(
+      RECS15 == 1 ~ 0,
+      RECS15 == 2 ~ 0.25,
+      RECS15 == 3 ~ 0.50,
+      RECS15 == 4 ~ 0.50,
+      RECS15 == 5 ~ 0.75,
+      RECS15 == 6 ~ 1.00,
+      TRUE ~ NA_real_
+    ),
+    portion_CFL = case_when(
+      RECS14 == 1 ~ 0,
+      RECS14 == 2 ~ 0.25,
+      RECS14 == 3 ~ 0.50,
+      RECS14 == 4 ~ 0.50,
+      RECS14 == 5 ~ 0.75,
+      RECS14 == 6 ~ 1.00,
+      TRUE ~ NA_real_
+    ),
+    portion_INC = case_when(
+      RECS13 == 1 ~ 1.00,
+      RECS13 == 2 ~ 0.75,
+      RECS13 == 3 ~ 0.50,
+      RECS13 == 4 ~ 0.50,
+      RECS13 == 5 ~ 0.25,
+      RECS13 == 6 ~ 0.0,
+      TRUE ~ NA_real_
+    ),
+    # A single "lighting_efficiency_score"
+    # e.g., weigh LED more strongly, subtract incandescent portion, etc.
+    lighting_efficiency_score = (portion_LED + 0.5*portion_CFL) - portion_INC
+  )
+
+# Now we can inspect the distribution of "lighting_efficiency_score"
+summary(recs_metrics$lighting_efficiency_score)
+```
+
+       Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+      -1.00   -0.25    0.00    0.01    0.25    0.75 
+
+``` r
+recs_metrics <- recs_metrics %>%
+  mutate(
+    # main heating control: 3 if "program the thermostat," 2 if "manually adjust," 1 if "set one temp," 
+    # 0 if "turn on/off," "other," or "don’t use." (Arbitrary example.)
+    heat_control_score = case_when(
+      RECS02 %in% c(3) ~ 3,  
+      RECS02 %in% c(2) ~ 2, 
+      RECS02 %in% c(1) ~ 1,
+      RECS02 %in% c(4, 5, 6) ~ 0,
+      TRUE ~ NA_real_
+    ),
+    # central AC control (RECS04)
+    # same logic
+    ac_control_score = case_when(
+      RECS04 %in% c(3) ~ 3,
+      RECS04 %in% c(2) ~ 2,
+      RECS04 %in% c(1) ~ 1,
+      RECS04 %in% c(4, 5, 6) ~ 0,
+      TRUE ~ NA_real_
+    ),
+    # If they use individual AC (RECS06=1 => yes), then RECS09 also matters
+    # We'll combine them for an 'individual AC' subscore
+    ind_ac_control_score = case_when(
+      RECS06 == 1 & RECS09 == 3 ~ 3,  # program it
+      RECS06 == 1 & RECS09 == 2 ~ 2,  # manually adjust
+      RECS06 == 1 & RECS09 == 1 ~ 1,  # set one temp
+      RECS06 == 1 & RECS09 %in% c(4,5,6,7) ~ 0, # turn on/off, other, etc.
+      TRUE ~ 0  # if no individual AC or missing
+    ),
+    # total HVAC control sophistication
+    hvac_control_score = heat_control_score + ac_control_score + ind_ac_control_score
+  )
+
+# Distribution of hvac_control_score
+summary(recs_metrics$hvac_control_score)
+```
+
+       Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+        0.0     2.0     4.0     3.5     6.0     9.0      13 
+
+``` r
+table(recs_metrics$hvac_control_score, useNA = "ifany")
+```
+
+
+       0    1    2    3    4    5    6    7    8    9 <NA> 
+     100   19   97   62  112   32  104   16   12   19   13 
+
+``` r
+ggplot(recs_metrics, aes(x = lighting_efficiency_score)) +
+  geom_histogram(binwidth = 0.25, fill = "darkgreen", color = "white") +
+  labs(
+    title = "Distribution of Lighting Efficiency Scores",
+    x = "Lighting Efficiency Score",
+    y = "Frequency"
+  ) +
+  theme_minimal()
+```
+
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-2.png"
+width="768" />
+
+``` r
+ggplot(recs_metrics, aes(x = "", y = hvac_control_score)) +
+  geom_boxplot(fill = "orange", alpha = 0.5) +
+  labs(
+    title = "HVAC Control Sophistication (Boxplot)",
+    x = "",
+    y = "HVAC Control Score"
+  ) +
+  theme_minimal()
+```
+
+<img
+src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-3.png"
+width="768" />
+
+**V. Langevin Semi-Structured Interview (Part 1) (LAN01-LAN09)**
+
+- **Description:** Measures participants’ perceptions and actions
+  towards energy conservation and sustainability.
+- **Coding Scheme:** Mixed, with text boxes, and some ordinal response
+  scales with descriptions.
+- **Specific Items:**
+  - LAN01: Textbox entry: Best energy saving opportunities
+  - LAN02: Textbox entry: Particular areas where energy is wasted
+  - LAN03: Textbox entry: Energy conservation measures in other places
+  - LAN04: Residence audit? (coding: 4 point ordinal)
+  - LAN05: Is residence audit effective? (coding: 6 point ordinal)
+  - LAN06: Has had HVAC improvements (coding: 4 point ordinal)
+- LAN07: Are HVAC improvements effective? (coding: 6 point ordinal) \*
+  LAN08: Has had lighting improvements? (coding: 4 point ordinal) \*
+  LAN09: Are lighting improvements effective? (coding: 6 point ordinal)
+
+head(lss1) \# A tibble: 6 × 10 id LAN01 LAN02 LAN03 LAN04 LAN05 LAN06
+LAN07 LAN08 LAN09  
+<int> <chr> <chr> <chr> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> 1 1 changing to power saving bulbs and turning off
+heater at night bulb… nope 4 \[Not… 3 \[Mig… 4 \[Not… 2 \[Pro… 3 \[It …
+3 \[Mig… 2 2 turning heat down, turning air conditioning up, use the
+dryer less ligh… unpl… 2 \[It … 2 \[Pro… 2 \[It … 2 \[Pro… 2 \[It … 2
+\[Pro… 3 3 Use solar energy that is only the saving of energy Heat…
+Unit… 2 \[It … 3 \[Mig… 3 \[It … 3 \[Mig… 2 \[It … 3 \[Mig… 4 4 Probably
+be reducing how much electronics are used and making sure to t… Try …
+Whil… 2 \[It … 3 \[Mig… 3 \[It … 6 \[Not… 1 \[Thi… 1 \[Def… 5 5 To be
+Turn Off unwanted usage machines. In m… Noth… 4 \[Not… 3 \[Mig… 2 \[It …
+2 \[Pro… 1 \[Thi… 2 \[Pro… 6 6 Upgrading windows and doors, and using
+weather kits every winter. Using… The … We’r… 3 \[It … 3 \[Mig… 3 \[It …
+3 \[Mig… 1 \[Thi… 1 \[Def…
+
+``` r
+lss1 <- bind_rows(lss1_1,lss1_2)
+```
+
+**VI. New Ecological Paradigm (NEP) (NEP01-NEP15)**
+
+- **Description:** Assesses participants’ views on the relationship
+  between humans and the environment.
+- **Coding Scheme:** 5-point Likert scale (agreement/disagreement).
+- **Specific Items:**
+  - NEP01-NEP15: Various statements about environmental issues. (All are
+    5-point scales where 1= Strongly Agree, 2 = Somewhat Agree, 3 =
+    Neutral/Don’t know, 4 = Somewhat Disagree, 5 = Strongly Disagree)
+
+head(nep) \# A tibble: 6 × 16 id NEP01 NEP02 NEP03 NEP04 NEP05 NEP06
+NEP07 NEP08 NEP09 NEP10 NEP11 NEP12 NEP13 NEP14 NEP15  
+<int> \<dbl+lbl\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> 1 1 3 \[Neutral / Don’t … 3 \[Neu… 3 \[Neu… 4 \[Som…
+4 \[Som… 2 \[Som… 4 \[Som… 3 \[Neu… 3 \[Neu… 2 \[Som… 4 \[Som… 2 \[Som…
+2 \[Som… 3 \[Neu… 4 \[Som… 2 2 4 \[Somewhat Disagre… 2 \[Som… 3 \[Neu… 2
+\[Som… 4 \[Som… 2 \[Som… 2 \[Som… 3 \[Neu… 1 \[Str… 3 \[Neu… 3 \[Neu… 1
+\[Str… 3 \[Neu… 5 \[Str… 4 \[Som… 3 3 4 \[Somewhat Disagre… 3 \[Neu… 5
+\[Str… 4 \[Som… 4 \[Som… 5 \[Str… 4 \[Som… 5 \[Str… 4 \[Som… 5 \[Str… 2
+\[Som… 3 \[Neu… 2 \[Som… 4 \[Som… 3 \[Neu… 4 4 2 \[Somewhat Agree\] 4
+\[Som… 2 \[Som… 3 \[Neu… 2 \[Som… 3 \[Neu… 2 \[Som… 5 \[Str… 2 \[Som… 5
+\[Str… 1 \[Str… 5 \[Str… 1 \[Str… 3 \[Neu… 1 \[Str… 5 5 3 \[Neutral /
+Don’t … 4 \[Som… 3 \[Neu… 2 \[Som… 3 \[Neu… 4 \[Som… 3 \[Neu… 4 \[Som… 2
+\[Som… 3 \[Neu… 4 \[Som… 3 \[Neu… 3 \[Neu… 4 \[Som… 2 \[Som… 6 6 1
+\[Strongly Agree\] 5 \[Str… 1 \[Str… 5 \[Str… 1 \[Str… 3 \[Neu… 1 \[Str…
+5 \[Str… 1 \[Str… 5 \[Str… 1 \[Str… 5 \[Str… 1 \[Str… 5 \[Str… 1 \[Str…
+
+**X. Langevin Semi-Structured Interview (Part 2) (LAN10-LAN87)**
+
+- **Description:** Measures participants’ temperature preferences and
+  actions.
+- **Coding Scheme:** Mixed, with some numeric and some
+  ordinal/categorical.
+- **Specific Items:**
+  - LAN10: Winter temp (F) when someone is home (coding: numeric)
+  - LAN11: Winter temp (F) when no one is home (coding: numeric)
+  - LAN12: Summer temp (F) when someone is home (coding: numeric)
+  - LAN13: Summer temp (F) when no one is home (coding: numeric)
+  - LAN14: Interior comfort level (coding: 5 point ordinal)
+  - LAN15: Temperature stability across day/season (coding: 5 point
+    ordinal)
+  - LAN16: Most comfortable temperature in summer (F) (coding: numeric)
+  - LAN17: Preferred temperature sensation in summer (coding: numeric)
+  - LAN18: Most comfortable temp in winter (F) (coding: numeric)
+  - LAN19: Preferred temperature sensation in winter (coding: numeric)
+  - LAN20: How often is house too hot? (coding: 5 point ordinal)
+  - LAN21-LAN31: Feasibility of 11 different actions to reduce heat
+    discomfort (coding: 3 point ordinal)
+  - LAN32-LAN42: Frequency of using 11 different actions to reduce heat
+    discomfort (coding: 6 point ordinal)
+  - LAN43-LAN53: Usefulness of 11 different actions to reduce heat
+    discomfort (coding: 6 point ordinal)
+- LAN54: How often is house too cold? (coding: 5 point ordinal) \*
+  LAN55-LAN65: Feasibility of 11 different actions to reduce cold
+  discomfort (coding: 3 point ordinal) \* LAN66-LAN76: Frequency of
+  using 11 different actions to reduce cold discomfort (coding: 6 point
+  ordinal) \* LAN77-LAN87: Usefulness of 11 different actions to reduce
+  cold discomfort (coding: 6 point ordinal)
+
+head(lss2) \# A tibble: 6 × 79 id LAN10 LAN11 LAN12 LAN13 LAN14 LAN15
+LAN16 LAN17 LAN18 LAN19 LAN20 LAN21 LAN22 LAN23 LAN24 LAN25 LAN26
+LAN27  
+<int> <dbl> <dbl> <dbl> <dbl> \<dbl+lbl\> \<dbl+l\> <dbl> <dbl> <dbl>
+<dbl> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\> \<dbl+l\>
+\<dbl+l\> \<dbl+l\> 1 1 68 72 65 70 1 \[Very com… 2 \[Som… 66 5 70 6 2
+\[oft… 2 \[Som… 2 \[Som… 3 \[No\] 2 \[Som… 3 \[No\] 2 \[Som… 1 \[Yes\] 2
+2 70 70 73 73 3 \[Neither … 3 \[Nei… 70 5 70 5 5 \[rar… 1 \[Yes\] 1
+\[Yes\] 1 \[Yes\] 1 \[Yes\] 1 \[Yes\] 1 \[Yes\] 1 \[Yes\] 3 3 15 20 25
+35 3 \[Neither … 3 \[Nei… 25 4 20 4 3 \[som… 2 \[Som… 1 \[Yes\] 2 \[Som…
+1 \[Yes\] 2 \[Som… 1 \[Yes\] 2 \[Som… 4 4 70 55 80 80 2 \[Somewhat… 3
+\[Nei… 75 3 75 5 3 \[som… 1 \[Yes\] 2 \[Som… 2 \[Som… 2 \[Som… 3 \[No\]
+1 \[Yes\] 1 \[Yes\] 5 5 30 10 10 30 2 \[Somewhat… 3 \[Nei… 20 7 30 6 3
+\[som… 2 \[Som… 3 \[No\] 1 \[Yes\] 2 \[Som… 1 \[Yes\] 2 \[Som… 2 \[Som…
+6 6 65 65 80 80 1 \[Very com… 1 \[Ver… 80 6 70 8 5 \[rar… 1 \[Yes\] 1
+\[Yes\] 2 \[Som… 1 \[Yes\] 2 \[Som… 1 \[Yes\] 1 \[Yes\] \# ℹ 60 more
+variables: LAN28 \<dbl+lbl\>, LAN29 \<dbl+lbl\>, LAN30 \<dbl+lbl\>,
+LAN31 \<dbl+lbl\>, LAN32 \<dbl+lbl\>, LAN33 \<dbl+lbl\>
+
+**XI. Questions from Recycling Study (RS01-RS06)** \* **Description:**
+These are questions included from a different study \* **Coding
+Scheme:** 5-point agreement scale \* **Specific Items:** \* RS01: I
+generally don’t pay attention to how much energy I use. \* RS02: I would
+say I am very pro-environmental. \* RS03: I think saving energy is
+largely a waste of time. \* RS04: I am generally conservative on the
+political spectrum with regard to social issues. \* RS05: I am generally
+conservative on the political spectrum with regard to economic issues.
+
+head(rs) \# A tibble: 6 × 7 id RS01 RS02 RS03 RS04 RS05 RS06  
+<int> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+l\>
+\<dbl+l\> 1 1 2 \[Somewhat Agree\] 2 \[Somewhat Agree\] 5 \[Disagree\] 4
+\[Somewhat Disagree\] 4 \[Som… 4 \[Som… 2 2 5 \[Disagree\] 3 \[Neither
+agree nor disagree\] 3 \[Neither agree nor disagree\] 5 \[Disagree\] 5
+\[Dis… 3 \[Nei… 3 3 3 \[Neither agree nor disagree\] 3 \[Neither agree
+nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor d…
+3 \[Nei… 3 \[Nei… 4 4 4 \[Somewhat Disagree\] 3 \[Neither agree nor
+disagree\] 5 \[Disagree\] 5 \[Disagree\] 5 \[Dis… 3 \[Nei… 5 5 3
+\[Neither agree nor disagree\] 2 \[Somewhat Agree\] 4 \[Somewhat
+Disagree\] 2 \[Somewhat Agree\] 3 \[Nei… 2 \[Som… 6 6 5 \[Disagree\] 1
+\[Agree\] 5 \[Disagree\] 5 \[Disagree\] 5 \[Dis… 2 \[Som…
