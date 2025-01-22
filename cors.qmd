@@ -1,5 +1,6 @@
 ---
 title: "Knowledge & Motivation Instrument Correlations"
+toc: true
 execute:
   echo: true
   warning: false
@@ -61,7 +62,8 @@ This code block loads the required R libraries for data analysis and visualizati
 
 
 ```{r}
-pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot,factoextra)
+pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x, patchwork,
+    lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot,factoextra)
 options(digits=2, scipen=999, dplyr.summarise.inform=FALSE)
 
 library(gridExtra)
@@ -74,6 +76,7 @@ library(rpart)
 library(rpart.plot)
 library(mclust)
 library(tidyLPA)
+
 
 select = dplyr::select
 
@@ -181,6 +184,123 @@ ggplot(melted_vars, aes(x = value)) +
   theme_minimal() +
   labs(title = "Distribution of Key Variables", x = "Value", y = "Frequency")
 ```
+
+
+
+
+
+```{r}
+
+
+# Scatter plot of perceived difficulty vs. ELS score
+plot_pd_els <- ggplot(combined_scores, aes(x = perceived_difficulty, y = els_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Perceived Difficulty vs. Energy Literacy Score",
+       x = "Perceived Difficulty (Attari Part 1)",
+       y = "Energy Literacy Score (ELS)") +
+  theme_minimal()
+
+# Scatter plot of environmental attitude vs. ELS score
+plot_ea_els <- ggplot(combined_scores, aes(x = env_attitude, y = els_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Environmental Attitude vs. Energy Literacy Score",
+       x = "Environmental Attitude (Recycling Survey)",
+       y = "Energy Literacy Score (ELS)") +
+  theme_minimal()
+
+# Scatter plot of perceived difficulty vs. Numeracy
+plot_pd_num <- ggplot(combined_scores, aes(x = perceived_difficulty, y = numeracy)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Perceived Difficulty vs. Numeracy",
+       x = "Perceived Difficulty (Attari Part 1)",
+       y = "Numeracy (Attari Part 1)") +
+  theme_minimal()
+
+# Scatter plot of environmental attitude vs. Numeracy
+plot_ea_num <- ggplot(combined_scores, aes(x = env_attitude, y = numeracy)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Environmental Attitude vs. Numeracy",
+       x = "Environmental Attitude (Recycling Survey)",
+       y = "Numeracy (Attari Part 1)") +
+  theme_minimal()
+
+# Scatter plot of perceived difficulty vs. Energy Use Knowledge
+plot_pd_eu <- ggplot(combined_scores, aes(x = perceived_difficulty, y = energy_use)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Perceived Difficulty vs. Energy Use Knowledge",
+       x = "Perceived Difficulty (Attari Part 1)",
+       y = "Energy Use Knowledge (Attari Part 2)") +
+  theme_minimal()
+
+# Scatter plot of environmental attitude vs. Energy Use Knowledge
+plot_ea_eu <- ggplot(combined_scores, aes(x = env_attitude, y = energy_use)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Environmental Attitude vs. Energy Use Knowledge",
+       x = "Environmental Attitude (Recycling Survey)",
+       y = "Energy Use Knowledge (Attari Part 2)") +
+  theme_minimal()
+
+
+# Arrange and display the plots (you might need to install gridExtra if you haven't)
+gridExtra::grid.arrange(plot_pd_els, plot_ea_els, plot_pd_num, plot_ea_num, plot_pd_eu, plot_ea_eu, ncol = 2)
+
+
+
+
+```
+
+
+
+
+```{r}
+# 3. Simple Linear Regression Models
+
+# Model: ELS score predicted by perceived difficulty
+model_els_pd <- lm(els_score ~ perceived_difficulty, data = combined_scores)
+summary(model_els_pd)
+
+# Model: ELS score predicted by environmental attitude
+model_els_ea <- lm(els_score ~ env_attitude, data = combined_scores)
+summary(model_els_ea)
+
+# Model: Numeracy predicted by perceived difficulty
+model_num_pd <- lm(numeracy ~ perceived_difficulty, data = combined_scores)
+summary(model_num_pd)
+
+# Model: Numeracy predicted by environmental attitude
+model_num_ea <- lm(numeracy ~ env_attitude, data = combined_scores)
+summary(model_num_ea)
+
+# Model: Energy use knowledge predicted by perceived difficulty
+model_eu_pd <- lm(energy_use ~ perceived_difficulty, data = combined_scores)
+summary(model_eu_pd)
+
+# Model: Energy use knowledge predicted by environmental attitude
+model_eu_ea <- lm(energy_use ~ env_attitude, data = combined_scores)
+summary(model_eu_ea)
+
+
+# 4. Multiple Linear Regression Models
+
+# Model: ELS score predicted by both perceived difficulty and environmental attitude
+model_els_pd_ea <- lm(els_score ~ perceived_difficulty + env_attitude, data = combined_scores)
+summary(model_els_pd_ea)
+
+# Model: Numeracy predicted by both perceived difficulty and environmental attitude
+model_num_pd_ea <- lm(numeracy ~ perceived_difficulty + env_attitude, data = combined_scores)
+summary(model_num_pd_ea)
+
+# Model: Energy use knowledge predicted by both perceived difficulty and environmental attitude
+model_eu_pd_ea <- lm(energy_use ~ perceived_difficulty + env_attitude, data = combined_scores)
+summary(model_eu_pd_ea)
+```
+
 
 
 
@@ -501,56 +621,7 @@ fviz_cluster(km_result,
 
 This code performs the k-means clustering with 3 clusters and visualizes the results using a scatter plot.
 
-### Clustering Results
 
-The elbow method suggests that 3 clusters might be appropriate. The scatter plot shows the three clusters based on the combined knowledge and motivation variables.
-
-## Mediation Analysis
-
-```{r}
-# Example mediation: knowledge -> perceived_difficulty -> env_attitude
-model_mediation <- '
-  # direct effect
-  env_attitude ~ c*els
-  # mediator
-  perceived_difficulty_score ~ a*els
-  env_attitude ~ b*perceived_difficulty_score
-  # indirect effect
-  ab := a*b
-  # total effect
-  total := c + (a*b)
-'
-fit_mediation <- sem(model_mediation, data = combined_df, missing = "fiml")
-summary(fit_mediation, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
-tidySEM::graph_sem(fit_mediation)
-semPlot::semPaths(fit_mediation,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
-```
-
-This code performs a mediation analysis to test whether perceived difficulty mediates the relationship between knowledge (ELS) and environmental attitude.
-
-# Modeling the Relationship between Knowledge and Motivation using Structural Equation Modeling
-
-```{r}
-# Hypothetical model:
-#   - latent Knowledge from numeracy, energy_use, energy_save, els_score
-#   - latent Motivation from env_attitude, perceived_difficulty
-#   - regression: Knowledge ~ Motivation
-
-sem_model <- '
-  Knowledge =~ numeracy + energy_use + energy_save + els_score
-  Motivation =~ env_attitude + perceived_difficulty
-  Knowledge ~ Motivation
-'
-fit_sem <- sem(sem_model, data = combined_scores, missing = "fiml")  # handle missing if needed
-summary(fit_sem, fit.measures = TRUE, standardized = TRUE)
-tidySEM::graph_sem(fit_sem)
-semPlot::semPaths(fit_sem,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
-
-```
-
-### Mediation Analysis Results
-
-The mediation analysis results suggest that perceived difficulty partially mediates the relationship between ELS and environmental attitude. The indirect effect is significant, indicating that higher ELS is associated with lower perceived difficulty, which in turn is associated with a more positive environmental attitude.
 
 ## Knowledge-Motivation Profiles by Cluster
 
@@ -593,6 +664,7 @@ The profile plot shows distinct patterns for each cluster:
 
 ```{r}
 
+
 # Combine key measures into correlation matrix
 key_measures <- combined_scores %>%
   select(
@@ -623,13 +695,77 @@ print (fa_results, cut = 0.3, sort = TRUE)
 
 
 
+
+{{< pagebreak >}}
+
+
+## Mediation Analysis
+
+```{r}
+#| fig-width: 10
+#| fig-height: 8
+
+# Example mediation: knowledge -> perceived_difficulty -> env_attitude
+model_mediation <- '
+  # direct effect
+  env_attitude ~ c*els
+  # mediator
+  perceived_difficulty_score ~ a*els
+  env_attitude ~ b*perceived_difficulty_score
+  # indirect effect
+  ab := a*b
+  # total effect
+  total := c + (a*b)
+'
+fit_mediation <- sem(model_mediation, data = combined_df, missing = "fiml")
+summary(fit_mediation, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
+
+tidySEM::graph_sem(fit_mediation)
+semPlot::semPaths(fit_mediation,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
+
+```
+
+
+{{< pagebreak >}}
+
+# Modeling the Relationship between Knowledge and Motivation using Structural Equation Modeling
+
+```{r}
+#| fig-width: 10
+#| fig-height: 8
+
+# Hypothetical model:
+#   - latent Knowledge from numeracy, energy_use, energy_save, els_score
+#   - latent Motivation from env_attitude, perceived_difficulty
+#   - regression: Knowledge ~ Motivation
+
+sem_model <- '
+  Knowledge =~ numeracy + energy_use + energy_save + els_score
+  Motivation =~ env_attitude + perceived_difficulty
+  Knowledge ~ Motivation
+'
+fit_sem <- sem(sem_model, data = combined_scores, missing = "fiml")  # handle missing if needed
+summary(fit_sem, fit.measures = TRUE, standardized = TRUE)
+tidySEM::graph_sem(fit_sem)
+semPlot::semPaths(fit_sem,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
+
+```
+
+
+The mediation analysis results suggest that perceived difficulty partially mediates the relationship between ELS and environmental attitude. The indirect effect is significant, indicating that higher ELS is associated with lower perceived difficulty, which in turn is associated with a more positive environmental attitude.
+
+
+
+
 ## Canonical Correlation Analysis (CCA)
 
 ```{r}
 # 2. Canonical Correlation Analysis between Knowledge and Motivation Sets
 # Prepare matrices
+
 knowledge_vars <- combined_scores %>% select(numeracy, energy_use, energy_save, els_score) %>%
   as.matrix()
+
 motivation_vars <- combined_scores %>%
   select(env_attitude, perceived_difficulty, pol_conservatism) %>%
   as.matrix()
@@ -644,11 +780,32 @@ cor_matrix <- cor(combined_scores %>%
                            env_attitude, perceived_difficulty, pol_conservatism),
                   use = "pairwise.complete.obs")
 
-# Create network plot
+
+
 qgraph(cor_matrix,
-       layout = "spring",
-       groups = list(Knowledge = 1:4, Motivation = 5:7),
-       color = c(rep("lightblue", 4), rep("lightgreen", 3)))
+       graph = "cor", # Correlation graph
+       layout = "spring", # Layout algorithm
+       vsize = 8, # Vertex size
+       esize = 3, # Edge size
+       title = "Network of Correlations between Motivation and Knowledge Measures")
+       
+
+
+
+
+motivation_vars <- combined_scores %>% select(perceived_difficulty, env_attitude)
+
+knowledge_vars <- combined_scores %>% select(els_score, numeracy, energy_use)
+
+# Perform CCA
+cca_result <- cancor(motivation_vars, knowledge_vars)
+
+# Display CCA results
+print(cca_result$cor) # Canonical correlations
+print(cca_result$xcoef) # Coefficients for motivation variables (canonical variates for motivation)
+print(cca_result$ycoef) # Coefficients for knowledge variables (canonical variates for knowledge)
+
+
 ```
 
 This performs a CCA to explore the relationships between the set of knowledge variables and the set of motivation variables and a network analysis to visualize variable relationships.
@@ -752,7 +909,12 @@ item_data <- all_items[, item_columns]
 
 # Perform factor analysis
 fa_items <- fa(item_data, nfactors = 5, rotate = "varimax") # Adjust nfactors as needed
-print(fa_items, cut = 0.3, sort = TRUE)
+
+print(fa_items, cut = 0.3, sort = TRUE) |> kable()
+
+
+
+
 ```
 
 This performs a factor analysis on all individual survey items to explore the underlying structure of the data.
@@ -775,7 +937,7 @@ combined_scores <- combined_scores %>%
   )
 
 # 3a. Bivariate Correlation
-with(combined_scores, cor.test(knowledge, motivation))
+with(combined_scores, cor.test(knowledge, motivation)) 
 ```
 
 This code calculates the bivariate correlation between the composite knowledge and motivation scores.
@@ -791,7 +953,8 @@ The correlation between knowledge and motivation is -0.018, which is not statist
 model <- lm(knowledge ~ motivation + pol_conservatism_z + cluster,
   data = combined_scores
 )
-summary(model)
+summary(model) |> print()
+
 ```
 
 This code performs a hierarchical regression analysis to examine the relationship between knowledge and motivation, controlling for political conservatism and cluster membership.
@@ -808,14 +971,18 @@ The regression results show that:
 
 ```{r}
 # 3c. Path Analysis
+
 path_model <- "
   motivation ~ a * knowledge
   els_score ~ b * motivation + c * knowledge
   indirect := a * b
   total := c + indirect
 "
+
 fit <- sem(path_model, data = combined_scores)
-summary(fit, standardized = TRUE)
+
+summary(fit, standardized = TRUE) 
+
 tidySEM::graph_sem(fit)
 semPlot::semPaths(fit)
 
@@ -891,21 +1058,27 @@ The correlation plot shows the relationships between the key measures, with posi
 ```{r}
 # 2. Factor Analysis to examine underlying structure
 fa_results <- fa(key_measures, nfactors = 2, rotate = "varimax")
-print(fa_results, cut = 0.3, sort = TRUE)
+print(fa_results, cut = 0.3, sort = TRUE) |> kable()
 ```
 
 This code performs a factor analysis on the key measures to examine the underlying structure.
 
-### Factor Analysis Results
 
-The factor analysis suggests a two-factor solution, with the knowledge measures loading on one factor and the motivation/attitude measures loading on the other factor. The perceived difficulty item loads negatively on the knowledge factor.
+
+
 
 
 {{< pagebreak >}}
 
-## Composite Scores and Relationships
+
+
+
+## Clustering with Composite Scores 
+
+
 
 ```{r}
+
 # Create composite scores for knowledge and motivation
 combined_scores <- combined_scores %>%
   mutate(
@@ -930,29 +1103,170 @@ fviz_nbclust(cluster_data, kmeans, method = "wss") +
   theme_minimal() +
   labs(title = "Elbow Method for Determining Optimal Number of Clusters")
 
+```
+
+
+### 3 clusters  - Composite scores
+
+```{r}
+#| fig-width: 10
+#| fig-height: 9
 
 # Decide the number of clusters (k). Let's try k = 3 for illustration:
 set.seed(123)
 km_fit <- kmeans(cluster_data, centers = 3, nstart = 25)
 # Visualize clusters
-fviz_cluster(km_fit, data = cluster_data) +
+p1 <- fviz_cluster(km_fit, data = cluster_data) +
   labs(title = "K-means Clustering on Knowledge vs. Motivation - 3 clusters") +
   theme_minimal()
+
+# Create standardized scores for profile analysis
+ profile_data <- combined_scores %>%
+    mutate(cluster = factor(km_fit$cluster)) %>%
+  select(id, knowledge_composite, motivation_composite, cluster) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+# Create profile plot
+p2 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - aggregate level",
+    x = "Measure",
+    y = "Standardized Score"
+  )
+
+# Create standardized scores for profile analysis - using original item_columns "numeracy", "energy_use", "energy_save", "els_score", perceived_difficulty
+ profile_data <- combined_scores %>%
+    mutate(cluster = factor(km_fit$cluster)) %>%
+  select(id, cluster, numeracy, energy_use, energy_save,
+         els_score, perceived_difficulty) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+# Create profile plot
+p3 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - item level",
+    x = "Measure",
+    y = "Standardized Score"
+  )
+
+p1 / (p2 + p3) + plot_layout(guides = 'collect')
+
+```
+
+```{r}
+#| fig-width: 10
+#| fig-height: 9.5
+
+# Add cluster membership back to your main dataframe
+combined_scores$km_cluster <- factor(km_fit$cluster)
+
+# Compare mean knowledge & motivation by cluster
+combined_scores %>%
+  group_by(km_cluster) %>%
+  summarise(
+    mean_knowledge = mean(knowledge_composite, na.rm = TRUE),
+    mean_motivation = mean(motivation_composite, na.rm = TRUE),
+    n = n()
+  ) |> kable()
+
+
+# Summarize cluster profiles
+cluster_profiles <- combined_scores %>%
+  group_by(cluster) %>%
+  summarise(
+    n = n(),
+    mean_knowledge = mean(knowledge_composite, na.rm=TRUE),
+    sd_knowledge = sd(knowledge_composite, na.rm=TRUE),
+    mean_motivation = mean(motivation_composite, na.rm=TRUE),
+    sd_motivation = sd(motivation_composite, na.rm=TRUE)
+  )
+cluster_profiles |> kable()
+
+```
+
+
+
+
+### 4 clusters - Composite scores
+
+```{r}
+#| fig-width: 10
+#| fig-height: 9.5
 
 # Decide the number of clusters (k). Let's try k =4 for illustration:
 set.seed(123)
 km_fit <- kmeans(cluster_data, centers = 4, nstart = 25)
 # Visualize clusters
-fviz_cluster(km_fit, data = cluster_data) +
+p1 <- fviz_cluster(km_fit, data = cluster_data) +
   labs(title = "K-means Clustering on Knowledge vs. Motivation -4 clusters") +
-  theme_minimal()
+  theme_minimal() 
 
+# Create composite knowledge score
+combined_scores$composite_knowledge <- rowMeans(combined_scores[, c("numeracy", "energy_use", "energy_save", "els_score")])
+combined_scores$cluster <- as.factor(km_fit$cluster)
+
+# Create standardized scores for profile analysis
+profile_data <- combined_scores %>%
+    mutate(cluster = factor(km_fit$cluster)) %>%
+  select(id, knowledge_composite, motivation_composite, cluster) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+p2 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - aggregate level",
+    x = "Measure",
+    y = "Standardized Score"
+  )
+
+# Create standardized scores for profile analysis
+profile_data <- combined_scores %>%
+  select(id, cluster, numeracy, energy_use, energy_save,
+         els_score, env_attitude, perceived_difficulty) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+p3 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - item level",
+    x = "Measure", y = "Standardized Score"
+  )
+
+p1 / (p2 + p3) + plot_layout(guides = 'collect')
 
 ```
 
 This code creates composite scores for knowledge and motivation and then uses cluster analysis to identify distinct profiles based on these composite scores.
-
-### Cluster Analysis Results
 
 ```{r}
 
@@ -966,16 +1280,8 @@ combined_scores %>%
     mean_knowledge = mean(knowledge_composite, na.rm = TRUE),
     mean_motivation = mean(motivation_composite, na.rm = TRUE),
     n = n()
-  )
-```
+  ) |> kable()
 
-
-# Cluster Profiles
-
-```{r}
-
-# Add cluster membership to dataframe
-combined_scores$cluster <- factor(km_fit$cluster)
 
 # Summarize cluster profiles
 cluster_profiles <- combined_scores %>%
@@ -987,9 +1293,118 @@ cluster_profiles <- combined_scores %>%
     mean_motivation = mean(motivation_composite, na.rm=TRUE),
     sd_motivation = sd(motivation_composite, na.rm=TRUE)
   )
+cluster_profiles |> kable()
 
-print(cluster_profiles)
+
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+# Select all motivation and knowledge scores for clustering
+cluster_data <- combined_scores %>%
+    select(perceived_difficulty, env_attitude, els_score, numeracy, energy_use)
+
+# Perform model-based clustering using Mclust
+# We'll let Mclust determine the optimal number of clusters (G = 1:4 as an example range, you can adjust)
+mclust_result <- Mclust(cluster_data, G = 1:4, modelNames = "VVV") # VVV for variable variance, variable covariance
+
+# Summary of clustering
+summary(mclust_result)
+plot(mclust_result, what = "BIC") # BIC plot to help choose number of clusters
+plot(mclust_result, what = "classification") # Classification plot
+
+# Get cluster assignments
+cluster_assignments <- mclust_result$classification
+combined_scores$cluster <- factor(cluster_assignments) # Add cluster assignments to your combined_scores data
+
+# Analyze clusters - e.g., mean scores per cluster
+cluster_means <- combined_scores %>%
+    group_by(cluster) %>%
+    summarise(
+        mean_pd = mean(perceived_difficulty, na.rm = TRUE),
+        mean_ea = mean(env_attitude, na.rm = TRUE),
+        mean_els = mean(els_score, na.rm = TRUE),
+        mean_num = mean(numeracy, na.rm = TRUE),
+        mean_eu = mean(energy_use, na.rm = TRUE),
+        n = n()
+    )
+print(cluster_means) |> kable()
+
+# Visualize clusters (e.g., using boxplots or profiles)
+# Example boxplots for ELS score across clusters
+ggplot(combined_scores, aes(x = cluster, y = els_score, fill = cluster)) +
+    geom_boxplot() +
+    labs(title = "ELS Score by Cluster") +
+    theme_minimal()
+
+
+# pivot long with perceived_difficulty, env_attitude, els_score, numeracy, energy_use - and create a faceted plot
+
+combined_scores_long <- combined_scores %>%
+  pivot_longer(cols = c(perceived_difficulty, env_attitude, els_score, numeracy, energy_use),
+               names_to = "variable", values_to = "value") |> 
+    mutate(cluster = factor(cluster)) |> 
+    mutate(variable = factor(variable, levels = c("perceived_difficulty", "env_attitude", "els_score", "numeracy", "energy_use"))) |> 
+    mutate(cluster = factor(cluster, levels = c("1", "2", "3")))  
+
+ggplot(combined_scores_long, aes(x = variable, y = value, fill = cluster)) +
+    geom_boxplot() +
+   # facet_wrap(~variable, scales = "free_y") +
+    labs(title = "Cluster Profiles by Variable") +
+    theme_minimal()
+
+
+
+
+
+
+# ANOVA to test for significant differences in means across clusters for each variable
+variables_to_test <- c("perceived_difficulty", "env_attitude", "els_score", "numeracy", "energy_use")
+
+anova_results <- list()
+for (var in variables_to_test) {
+  formula <- formula(paste(var, "~ cluster"))
+  anova_model <- aov(formula, data = combined_scores)
+  anova_results[[var]] <- summary(anova_model)
+  cat("ANOVA for", var, ":\n")
+  print(summary(anova_model))
+  cat("\n")
+}
+
+
+
+
+    # Use the correlation matrix calculated earlier (cor_matrix)
+if(!exists("cor_matrix")){ #recalculate if cor_matrix doesn't exist from previous code
+    cor_matrix <- cor(combined_scores %>%
+                        select(numeracy, energy_use, energy_save, els_score,
+                                env_attitude, perceived_difficulty, pol_conservatism),
+                        use = "pairwise.complete.obs")
+}
+
+qgraph(cor_matrix,
+        graph = "cor", # Correlation graph
+        layout = "spring", # Layout algorithm
+        vsize = 8, # Vertex size
+        esize = 3, # Edge size
+        title = "Network of Correlations between Motivation and Knowledge Measures")
+
+```
+
+
+
+
 
 
 
@@ -1013,23 +1428,23 @@ dq <- aes_combined |> left_join(att2_combined, by = "id") |> left_join(els, by =
 # Custom function for correlation matrix plots of question-level data
 plot_cor_matrix_items <- function(data, title = NULL) {
     
-  cor_matrix <- cor(data, use = "pairwise.complete.obs")
-  
-  # Identify item types based on column names
-  item_names <- colnames(cor_matrix)
-  is_attari_diff <- grepl("^ATT0[1-9]$|^ATT1[0-5]$", item_names) # ATT01-ATT15
-  is_attari_num <- grepl("^ATT1[6-8]$", item_names)  # ATT16-ATT18
-  is_attari_energy_use <- grepl("^ATT(19|2[0-7])$", item_names) # ATT19-ATT27
-  is_attari_energy_save <- grepl("^ATT(2[8-9]|3[0-3])$", item_names)  # ATT28-ATT33
-  is_els <- grepl("^ELS0[1-8]$", item_names) # ELS01-ELS08
-  is_rs <- grepl("^RS0[1-6]$", item_names) # RS01-RS06
-  
-  item_groups <- ifelse(is_attari_diff, "Attari Difficulty",
-                       ifelse(is_attari_num, "Attari Numeracy",
-                              ifelse(is_attari_energy_use, "Attari Usage",
-                                     ifelse(is_attari_energy_save, "Attari Savings",
-                                            ifelse(is_els, "Energy Literacy",
-                                                   ifelse(is_rs, "Recycling Study", NA))))))
+cor_matrix <- cor(data, use = "pairwise.complete.obs")
+
+# Identify item types based on column names
+item_names <- colnames(cor_matrix)
+is_attari_diff <- grepl("^ATT0[1-9]$|^ATT1[0-5]$", item_names) # ATT01-ATT15
+is_attari_num <- grepl("^ATT1[6-8]$", item_names)  # ATT16-ATT18
+is_attari_energy_use <- grepl("^ATT(19|2[0-7])$", item_names) # ATT19-ATT27
+is_attari_energy_save <- grepl("^ATT(2[8-9]|3[0-3])$", item_names)  # ATT28-ATT33
+is_els <- grepl("^ELS0[1-8]$", item_names) # ELS01-ELS08
+is_rs <- grepl("^RS0[1-6]$", item_names) # RS01-RS06
+
+item_groups <- ifelse(is_attari_diff, "Attari Difficulty",
+                    ifelse(is_attari_num, "Attari Numeracy",
+                            ifelse(is_attari_energy_use, "Attari Usage",
+                                    ifelse(is_attari_energy_save, "Attari Savings",
+                                        ifelse(is_els, "Energy Literacy",
+                                                ifelse(is_rs, "Recycling Study", NA))))))
   
   qgraph(cor_matrix,
          layout = "spring",
@@ -1057,6 +1472,17 @@ plot_cor_matrix_items(dq |> select(-id))
 ```{r}
 #| eval: false
 #| include: false
+
+
+
+# Select individual items for correlation (example)
+    item_cor_data <- combined_scores %>%
+      select(ATT09 = perceived_difficulty, ELS01 = els_score, RS02 = env_attitude) #rename for clarity
+ 
+    # Calculate correlation matrix for individual items
+    item_correlation_matrix <- cor(item_cor_data, use = "pairwise.complete.obs")
+    print("Item-Level Correlation Matrix:")
+    print(item_correlation_matrix)
 
 
 

@@ -1,5 +1,6 @@
 ---
 title: Knowledge & Motivation Instrument Correlations
+toc: true
 execute:
   echo: true
   warning: false
@@ -33,6 +34,58 @@ format:
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
+-   [Knowledge & Motivation Instrument Correlations](#knowledge-motivation-instrument-correlations)
+    -   [Data and Survey Instruments](#data-and-survey-instruments)
+-   [Exploratory Analysis of Multi-Survey Study on Sustainable Behaviors](#exploratory-analysis-of-multi-survey-study-on-sustainable-behaviors)
+    -   [Data Loading and Preparation](#data-loading-and-preparation)
+    -   [Data Summarization and Scoring](#data-summarization-and-scoring)
+    -   [Preliminary Data Exploration](#preliminary-data-exploration)
+    -   [Descriptive Statistics](#descriptive-statistics)
+    -   [Correlation Analysis](#correlation-analysis)
+    -   [Cluster Analysis](#cluster-analysis)
+        -   [Elbow Method for Optimal k](#elbow-method-for-optimal-k)
+        -   [K-means Clustering of Subjects](#k-means-clustering-of-subjects)
+    -   [Factor Analysis](#factor-analysis)
+        -   [Scree Plot](#scree-plot)
+        -   [Factor Analysis Results](#factor-analysis-results)
+    -   [Regression Analysis](#regression-analysis)
+        -   [Regression Results](#regression-results)
+    -   [Interaction Effects in Regression](#interaction-effects-in-regression)
+        -   [Interaction Results](#interaction-results)
+    -   [Enhanced Correlation Plot](#enhanced-correlation-plot)
+        -   [Correlation Plot Interpretation](#correlation-plot-interpretation)
+    -   [Knowledge Profile Clustering](#knowledge-profile-clustering)
+    -   [Knowledge-Motivation Interaction Analysis](#knowledge-motivation-interaction-analysis)
+        -   [Interaction Analysis Results](#interaction-analysis-results)
+    -   [Cluster Profile Analysis](#cluster-profile-analysis)
+        -   [Cluster Profile Analysis Results](#cluster-profile-analysis-results)
+    -   [K-means Clustering on Knowledge and Motivation Variables](#k-means-clustering-on-knowledge-and-motivation-variables)
+    -   [Knowledge-Motivation Profiles by Cluster](#knowledge-motivation-profiles-by-cluster)
+    -   [Mediation Analysis](#mediation-analysis)
+-   [Modeling the Relationship between Knowledge and Motivation using Structural Equation Modeling](#modeling-the-relationship-between-knowledge-and-motivation-using-structural-equation-modeling)
+    -   [Canonical Correlation Analysis (CCA)](#canonical-correlation-analysis-cca)
+        -   [CCA Results](#cca-results)
+        -   [Network Analysis Results](#network-analysis-results)
+    -   [Structural Equation Modeling (SEM)](#structural-equation-modeling-sem)
+        -   [SEM Results](#sem-results)
+    -   [Classification Tree](#classification-tree)
+        -   [Classification Tree Results](#classification-tree-results)
+    -   [Latent Profile Analysis (LPA)](#latent-profile-analysis-lpa)
+        -   [LPA Results](#lpa-results)
+    -   [Factor Analysis with Combined Variables](#factor-analysis-with-combined-variables)
+        -   [Factor Analysis Results](#factor-analysis-results-1)
+    -   [Knowledge-Motivation Relationship Analyses](#knowledge-motivation-relationship-analyses)
+        -   [Bivariate Correlation](#bivariate-correlation)
+        -   [Hierarchical Regression](#hierarchical-regression)
+        -   [Path Analysis](#path-analysis)
+        -   [Cluster Validation by Motivation-Knowledge Profiles](#cluster-validation-by-motivation-knowledge-profiles)
+    -   [Correlation and Factor Analysis of Key Measures](#correlation-and-factor-analysis-of-key-measures)
+        -   [Correlation Matrix Visualization](#correlation-matrix-visualization)
+    -   [Clustering with Composite Scores](#clustering-with-composite-scores)
+        -   [3 clusters - Composite scores](#clusters---composite-scores)
+        -   [4 clusters - Composite scores](#clusters---composite-scores-1)
+-   [Clustering on question-level data](#clustering-on-question-level-data)
+
 # Knowledge & Motivation Instrument Correlations
 
 This notebook explores data from a multi-survey study investigating the relationships between sustainable behaviors, knowledge, and attitudes. The study involved participants completing five different surveys, each designed to measure different aspects of these constructs. This analysis focuses on understanding these relationships, with a particular emphasis on the connection between knowledge and motivation.
@@ -59,7 +112,8 @@ This notebook presents an exploratory analysis of response data from a multi-sur
 This code block loads the required R libraries for data analysis and visualization. It then reads the survey response data from two RDS files, `draw.rds` and `dinst.rds`, which presumably contain responses from different groups or conditions. Finally, it combines subsets of the data corresponding to different surveys (Attari Energy Survey Part 1 and Part 2, Energy Literacy Survey, and Recycling Study) into separate data frames.
 
 ``` r
-pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot,factoextra)
+pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x, patchwork,
+    lme4,knitr,kableExtra,gt,pander,flextable,ggh4x,psych,corrplot,factoextra)
 options(digits=2, scipen=999, dplyr.summarise.inform=FALSE)
 
 library(gridExtra)
@@ -72,6 +126,7 @@ library(rpart)
 library(rpart.plot)
 library(mclust)
 library(tidyLPA)
+
 
 select = dplyr::select
 
@@ -174,6 +229,312 @@ ggplot(melted_vars, aes(x = value)) +
 
 <img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-1.png" width="960" />
 
+``` r
+# Scatter plot of perceived difficulty vs. ELS score
+plot_pd_els <- ggplot(combined_scores, aes(x = perceived_difficulty, y = els_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Perceived Difficulty vs. Energy Literacy Score",
+       x = "Perceived Difficulty (Attari Part 1)",
+       y = "Energy Literacy Score (ELS)") +
+  theme_minimal()
+
+# Scatter plot of environmental attitude vs. ELS score
+plot_ea_els <- ggplot(combined_scores, aes(x = env_attitude, y = els_score)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Environmental Attitude vs. Energy Literacy Score",
+       x = "Environmental Attitude (Recycling Survey)",
+       y = "Energy Literacy Score (ELS)") +
+  theme_minimal()
+
+# Scatter plot of perceived difficulty vs. Numeracy
+plot_pd_num <- ggplot(combined_scores, aes(x = perceived_difficulty, y = numeracy)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Perceived Difficulty vs. Numeracy",
+       x = "Perceived Difficulty (Attari Part 1)",
+       y = "Numeracy (Attari Part 1)") +
+  theme_minimal()
+
+# Scatter plot of environmental attitude vs. Numeracy
+plot_ea_num <- ggplot(combined_scores, aes(x = env_attitude, y = numeracy)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Environmental Attitude vs. Numeracy",
+       x = "Environmental Attitude (Recycling Survey)",
+       y = "Numeracy (Attari Part 1)") +
+  theme_minimal()
+
+# Scatter plot of perceived difficulty vs. Energy Use Knowledge
+plot_pd_eu <- ggplot(combined_scores, aes(x = perceived_difficulty, y = energy_use)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Perceived Difficulty vs. Energy Use Knowledge",
+       x = "Perceived Difficulty (Attari Part 1)",
+       y = "Energy Use Knowledge (Attari Part 2)") +
+  theme_minimal()
+
+# Scatter plot of environmental attitude vs. Energy Use Knowledge
+plot_ea_eu <- ggplot(combined_scores, aes(x = env_attitude, y = energy_use)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE, color = "red") + # Add linear regression line
+  labs(title = "Environmental Attitude vs. Energy Use Knowledge",
+       x = "Environmental Attitude (Recycling Survey)",
+       y = "Energy Use Knowledge (Attari Part 2)") +
+  theme_minimal()
+
+
+# Arrange and display the plots (you might need to install gridExtra if you haven't)
+gridExtra::grid.arrange(plot_pd_els, plot_ea_els, plot_pd_num, plot_ea_num, plot_pd_eu, plot_ea_eu, ncol = 2)
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-1.png" width="768" />
+
+``` r
+# 3. Simple Linear Regression Models
+
+# Model: ELS score predicted by perceived difficulty
+model_els_pd <- lm(els_score ~ perceived_difficulty, data = combined_scores)
+summary(model_els_pd)
+```
+
+
+    Call:
+    lm(formula = els_score ~ perceived_difficulty, data = combined_scores)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -3.0309 -0.6958  0.0236  0.7160  2.1925 
+
+    Coefficients:
+                                      Estimate            Std. Error t value
+    (Intercept)           0.000000000000000197  0.040315286752716215     0.0
+    perceived_difficulty -0.221786397116370632  0.040349729549902055    -5.5
+                            Pr(>|t|)    
+    (Intercept)                    1    
+    perceived_difficulty 0.000000058 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.98 on 584 degrees of freedom
+    Multiple R-squared:  0.0492,    Adjusted R-squared:  0.0476 
+    F-statistic: 30.2 on 1 and 584 DF,  p-value: 0.0000000579
+
+``` r
+# Model: ELS score predicted by environmental attitude
+model_els_ea <- lm(els_score ~ env_attitude, data = combined_scores)
+summary(model_els_ea)
+```
+
+
+    Call:
+    lm(formula = els_score ~ env_attitude, data = combined_scores)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -2.7955 -0.6605 -0.0334  0.7667  2.1901 
+
+    Coefficients:
+                 Estimate Std. Error t value       Pr(>|t|)    
+    (Intercept)   -1.2680     0.1893   -6.70 0.000000000050 ***
+    env_attitude   0.3539     0.0517    6.85 0.000000000019 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.96 on 584 degrees of freedom
+    Multiple R-squared:  0.0744,    Adjusted R-squared:  0.0728 
+    F-statistic: 46.9 on 1 and 584 DF,  p-value: 0.0000000000187
+
+``` r
+# Model: Numeracy predicted by perceived difficulty
+model_num_pd <- lm(numeracy ~ perceived_difficulty, data = combined_scores)
+summary(model_num_pd)
+```
+
+
+    Call:
+    lm(formula = numeracy ~ perceived_difficulty, data = combined_scores)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -2.5380 -0.5194  0.0836  0.3006  1.8322 
+
+    Coefficients:
+                                    Estimate          Std. Error t value Pr(>|t|)
+    (Intercept)           0.0000000000000144  0.0409782243863863    0.00   1.0000
+    perceived_difficulty -0.1328990942184530  0.0410132335549985   -3.24   0.0013
+                           
+    (Intercept)            
+    perceived_difficulty **
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.99 on 584 degrees of freedom
+    Multiple R-squared:  0.0177,    Adjusted R-squared:  0.016 
+    F-statistic: 10.5 on 1 and 584 DF,  p-value: 0.00126
+
+``` r
+# Model: Numeracy predicted by environmental attitude
+model_num_ea <- lm(numeracy ~ env_attitude, data = combined_scores)
+summary(model_num_ea)
+```
+
+
+    Call:
+    lm(formula = numeracy ~ env_attitude, data = combined_scores)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -2.6088 -0.5284  0.0517  0.4390  1.9894 
+
+    Coefficients:
+                 Estimate Std. Error t value  Pr(>|t|)    
+    (Intercept)   -0.9253     0.1928   -4.80 0.0000020 ***
+    env_attitude   0.2582     0.0526    4.91 0.0000012 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.98 on 584 degrees of freedom
+    Multiple R-squared:  0.0396,    Adjusted R-squared:  0.038 
+    F-statistic: 24.1 on 1 and 584 DF,  p-value: 0.0000012
+
+``` r
+# Model: Energy use knowledge predicted by perceived difficulty
+model_eu_pd <- lm(energy_use ~ perceived_difficulty, data = combined_scores)
+summary(model_eu_pd)
+```
+
+
+    Call:
+    lm(formula = energy_use ~ perceived_difficulty, data = combined_scores)
+
+    Residuals:
+       Min     1Q Median     3Q    Max 
+    -2.882 -0.536 -0.029  0.497  3.620 
+
+    Coefficients:
+                                     Estimate           Std. Error t value
+    (Intercept)          -0.00000000000000219  0.04014204909460345    0.00
+    perceived_difficulty -0.23946409496480769  0.04017634388863704   -5.96
+                             Pr(>|t|)    
+    (Intercept)                     1    
+    perceived_difficulty 0.0000000044 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.97 on 584 degrees of freedom
+    Multiple R-squared:  0.0573,    Adjusted R-squared:  0.0557 
+    F-statistic: 35.5 on 1 and 584 DF,  p-value: 0.00000000436
+
+``` r
+# Model: Energy use knowledge predicted by environmental attitude
+model_eu_ea <- lm(energy_use ~ env_attitude, data = combined_scores)
+summary(model_eu_ea)
+```
+
+
+    Call:
+    lm(formula = energy_use ~ env_attitude, data = combined_scores)
+
+    Residuals:
+       Min     1Q Median     3Q    Max 
+    -3.301 -0.515 -0.027  0.499  4.054 
+
+    Coefficients:
+                 Estimate Std. Error t value   Pr(>|t|)    
+    (Intercept)   -0.9851     0.1923   -5.12 0.00000041 ***
+    env_attitude   0.2749     0.0525    5.24 0.00000023 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.98 on 584 degrees of freedom
+    Multiple R-squared:  0.0449,    Adjusted R-squared:  0.0433 
+    F-statistic: 27.5 on 1 and 584 DF,  p-value: 0.000000225
+
+``` r
+# 4. Multiple Linear Regression Models
+
+# Model: ELS score predicted by both perceived difficulty and environmental attitude
+model_els_pd_ea <- lm(els_score ~ perceived_difficulty + env_attitude, data = combined_scores)
+summary(model_els_pd_ea)
+```
+
+
+    Call:
+    lm(formula = els_score ~ perceived_difficulty + env_attitude, 
+        data = combined_scores)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -3.0786 -0.6787  0.0272  0.7021  2.3542 
+
+    Coefficients:
+                         Estimate Std. Error t value   Pr(>|t|)    
+    (Intercept)           -1.0225     0.2029   -5.04 0.00000062 ***
+    perceived_difficulty  -0.1370     0.0428   -3.20     0.0014 ** 
+    env_attitude           0.2854     0.0555    5.14 0.00000038 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.95 on 583 degrees of freedom
+    Multiple R-squared:  0.0904,    Adjusted R-squared:  0.0873 
+    F-statistic:   29 on 2 and 583 DF,  p-value: 0.00000000000102
+
+``` r
+# Model: Numeracy predicted by both perceived difficulty and environmental attitude
+model_num_pd_ea <- lm(numeracy ~ perceived_difficulty + env_attitude, data = combined_scores)
+summary(model_num_pd_ea)
+```
+
+
+    Call:
+    lm(formula = numeracy ~ perceived_difficulty + env_attitude, 
+        data = combined_scores)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -2.5895 -0.4958  0.0285  0.4315  2.0590 
+
+    Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)           -0.8070     0.2081   -3.88  0.00012 ***
+    perceived_difficulty  -0.0660     0.0439   -1.50  0.13319    
+    env_attitude           0.2252     0.0570    3.95 0.000086 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.98 on 583 degrees of freedom
+    Multiple R-squared:  0.0433,    Adjusted R-squared:  0.04 
+    F-statistic: 13.2 on 2 and 583 DF,  p-value: 0.00000247
+
+``` r
+# Model: Energy use knowledge predicted by both perceived difficulty and environmental attitude
+model_eu_pd_ea <- lm(energy_use ~ perceived_difficulty + env_attitude, data = combined_scores)
+summary(model_eu_pd_ea)
+```
+
+
+    Call:
+    lm(formula = energy_use ~ perceived_difficulty + env_attitude, 
+        data = combined_scores)
+
+    Residuals:
+       Min     1Q Median     3Q    Max 
+    -2.958 -0.519 -0.032  0.526  3.848 
+
+    Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)           -0.6531     0.2047   -3.19   0.0015 ** 
+    perceived_difficulty  -0.1853     0.0432   -4.29 0.000021 ***
+    env_attitude           0.1823     0.0560    3.25   0.0012 ** 
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 0.96 on 583 degrees of freedom
+    Multiple R-squared:  0.0741,    Adjusted R-squared:  0.071 
+    F-statistic: 23.3 on 2 and 583 DF,  p-value: 0.000000000177
+
 ## Correlation Analysis
 
 ``` r
@@ -195,7 +556,7 @@ corrplot::corrplot(cor_matrix,
                    diag    = FALSE)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-7-1.png" width="768" />
 
 ## Cluster Analysis
 
@@ -211,7 +572,7 @@ fviz_nbclust(cluster_data, kmeans, method = "wss") +
   labs(title = "Elbow Method for Optimal k", x = "Number of Clusters k")
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-8-1.png" width="768" />
 
 This code performs a cluster analysis to identify groups of participants with similar profiles across the measured variables. It first prepares the data by selecting the relevant variables, removing rows with missing values, and scaling the data. Then, it uses the elbow method to determine the optimal number of clusters.
 
@@ -230,7 +591,7 @@ fviz_cluster(km_result,
   labs(title = "K-means Clustering of Subjects")
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-7-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-9-1.png" width="768" />
 
 This code performs k-means clustering with 3 clusters (as suggested by the elbow method) and visualizes the clusters using a scatter plot.
 
@@ -252,7 +613,7 @@ fa_data <- combined_scores %>%
 scree(fa_data)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-8-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-10-1.png" width="768" />
 
 This code performs a factor analysis to explore the underlying structure of the measured variables. It first prepares the data by selecting the relevant variables and removing rows with missing values. Then, it generates a scree plot to help determine the number of factors to extract.
 
@@ -417,7 +778,7 @@ ggplot(combined_scores, aes(x = perceived_difficulty, y = els_score, color = env
   theme_minimal()
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-12-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-14-1.png" width="768" />
 
 This code explores the potential interaction effect between environmental attitude and perceived difficulty on ELS using a linear regression model. It also visualizes the interaction using a scatter plot with a regression line for each level of environmental attitude.
 
@@ -443,7 +804,7 @@ cor_matrix <- combined_df %>%
 corrplot(cor_matrix, method = "color", type = "upper", addCoef.col = "black", tl.col = "black", tl.srt = 45, diag = FALSE, col = colorRampPalette(c("#6D9EC1", "white", "#E46726"))(200))
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-13-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-15-1.png" width="768" />
 
 This generates a visually informative correlation plot.
 
@@ -500,7 +861,7 @@ p_clusters <- ggplot(cluster_df, aes(x = PC1, y = PC2, color = Cluster)) +
 p_clusters
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-14-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-16-1.png" width="768" />
 
 The regression results do not show a significant interaction effect between perceived difficulty and environmental attitude on ELS. The visualization also suggests that the relationship between perceived difficulty and ELS does not vary substantially across different levels of environmental attitude.
 
@@ -597,7 +958,7 @@ cluster_data_scaled <- scale(cluster_data)
 fviz_nbclust(cluster_data_scaled, kmeans, method = "wss")
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-17-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-19-1.png" width="768" />
 
 The elbow method plot suggests 3 clusters is a reasonable choice.
 
@@ -617,13 +978,123 @@ fviz_cluster(km_result,
   labs(title = "K-means Clusters of Knowledge & Motivation Variables")
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-18-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-20-1.png" width="768" />
 
 This code performs the k-means clustering with 3 clusters and visualizes the results using a scatter plot.
 
-### Clustering Results
+## Knowledge-Motivation Profiles by Cluster
 
-The elbow method suggests that 3 clusters might be appropriate. The scatter plot shows the three clusters based on the combined knowledge and motivation variables.
+``` r
+# Create composite knowledge score
+combined_scores$composite_knowledge <- rowMeans(combined_scores[, c("numeracy", "energy_use", "energy_save", "els_score")])
+
+# Ensure cluster column exists
+combined_scores$cluster <- as.factor(cluster_data$cluster)
+
+# Create standardized scores for profile analysis
+profile_data <- combined_scores %>%
+  select(id, cluster, numeracy, energy_use, energy_save,
+         els_score, env_attitude, perceived_difficulty) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+# Create profile plot
+ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Profiles by Cluster",
+    x = "Measure", y = "Standardized Score"
+  )
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-21-1.png" width="768" />
+
+The profile plot shows distinct patterns for each cluster:
+
+-   **Cluster 1:** Below average on all knowledge measures, above average on perceived difficulty, and average on environmental attitude.
+-   **Cluster 2:** Above average on knowledge measures, below average on perceived difficulty, and average on environmental attitude.
+-   **Cluster 3:** Average on knowledge measures, below average on perceived difficulty, and above average on environmental attitude.
+
+``` r
+# Combine key measures into correlation matrix
+key_measures <- combined_scores %>%
+  select(
+    # Knowledge measures
+    numeracy, energy_use, energy_save, els_score,
+    # Motivation/attitude measures
+    env_attitude, perceived_difficulty, pol_conservatism
+  ) %>%
+  na.omit()
+
+# Compute and visualize correlation matrix
+cor_matrix <- cor(key_measures, use = "pairwise.complete.obs")
+corrplot(cor_matrix,
+         method = "color",
+         type = "upper",
+         addCoef.col = "black",
+         tl.col = "black",
+         tl.srt = 45,
+         diag = FALSE,
+         col = colorRampPalette(c("#6D9EC1", "white", "#E46726"))(200)
+)
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-22-1.png" width="768" />
+
+``` r
+# 2. Factor Analysis to examine underlying structure
+fa_results <- fa(key_measures, nfactors = 2, rotate = "varimax")
+print (fa_results, cut = 0.3, sort = TRUE)
+```
+
+    Factor Analysis using method =  minres
+    Call: fa(r = key_measures, nfactors = 2, rotate = "varimax")
+    Standardized loadings (pattern matrix) based upon correlation matrix
+                         item   MR1   MR2   h2     u2 com
+    energy_use              2  0.77       0.61 0.3856 1.1
+    energy_save             3  0.68       0.49 0.5146 1.1
+    numeracy                1  0.52       0.29 0.7067 1.2
+    els_score               4  0.50       0.30 0.6954 1.4
+    pol_conservatism        7             0.14 0.8570 2.0
+    env_attitude            5        0.99 1.00 0.0035 1.0
+    perceived_difficulty    6       -0.36 0.19 0.8120 1.7
+
+                           MR1  MR2
+    SS loadings           1.72 1.31
+    Proportion Var        0.25 0.19
+    Cumulative Var        0.25 0.43
+    Proportion Explained  0.57 0.43
+    Cumulative Proportion 0.57 1.00
+
+    Mean item complexity =  1.4
+    Test of the hypothesis that 2 factors are sufficient.
+
+    df null model =  21  with the objective function =  1.3 with Chi Square =  760
+    df of  the model are 8  and the objective function was  0.03 
+
+    The root mean square of the residuals (RMSR) is  0.03 
+    The df corrected root mean square of the residuals is  0.04 
+
+    The harmonic n.obs is  586 with the empirical chi square  17  with prob <  0.035 
+    The total n.obs was  586  with Likelihood Chi Square =  17  with prob <  0.029 
+
+    Tucker Lewis Index of factoring reliability =  0.97
+    RMSEA index =  0.044  and the 90 % confidence intervals are  0.014 0.073
+    BIC =  -34
+    Fit based upon off diagonal values = 0.99
+    Measures of factor score adequacy             
+                                                       MR1  MR2
+    Correlation of (regression) scores with factors   0.87 1.00
+    Multiple R square of scores with factors          0.76 0.99
+    Minimum correlation of possible factor scores     0.52 0.99
+
+
 
 ## Mediation Analysis
 
@@ -745,15 +1216,15 @@ summary(fit_mediation, fit.measures = TRUE, standardized = TRUE, rsquare = TRUE)
 tidySEM::graph_sem(fit_mediation)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-19-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-23-1.png" width="960" />
 
 ``` r
 semPlot::semPaths(fit_mediation,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-19-2.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-23-2.png" width="960" />
 
-This code performs a mediation analysis to test whether perceived difficulty mediates the relationship between knowledge (ELS) and environmental attitude.
+
 
 # Modeling the Relationship between Knowledge and Motivation using Structural Equation Modeling
 
@@ -874,137 +1345,25 @@ summary(fit_sem, fit.measures = TRUE, standardized = TRUE)
 tidySEM::graph_sem(fit_sem)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-20-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-24-1.png" width="960" />
 
 ``` r
 semPlot::semPaths(fit_sem,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-20-2.png" width="768" />
-
-### Mediation Analysis Results
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-24-2.png" width="960" />
 
 The mediation analysis results suggest that perceived difficulty partially mediates the relationship between ELS and environmental attitude. The indirect effect is significant, indicating that higher ELS is associated with lower perceived difficulty, which in turn is associated with a more positive environmental attitude.
-
-## Knowledge-Motivation Profiles by Cluster
-
-``` r
-# Create composite knowledge score
-combined_scores$composite_knowledge <- rowMeans(combined_scores[, c("numeracy", "energy_use", "energy_save", "els_score")])
-
-# Ensure cluster column exists
-combined_scores$cluster <- as.factor(cluster_data$cluster)
-
-# Create standardized scores for profile analysis
-profile_data <- combined_scores %>%
-  select(id, cluster, numeracy, energy_use, energy_save,
-         els_score, env_attitude, perceived_difficulty) %>%
-  gather(measure, value, -id, -cluster) %>%
-  group_by(measure) %>%
-  mutate(z_score = scale(value)[, 1]) %>%
-  ungroup()
-
-# Create profile plot
-ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
-  stat_summary(fun = mean, geom = "line", size = 1) +
-  stat_summary(fun = mean, geom = "point", size = 3) +
-  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  labs(
-    title = "Knowledge-Motivation Profiles by Cluster",
-    x = "Measure", y = "Standardized Score"
-  )
-```
-
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-21-1.png" width="768" />
-
-The profile plot shows distinct patterns for each cluster:
-
--   **Cluster 1:** Below average on all knowledge measures, above average on perceived difficulty, and average on environmental attitude.
--   **Cluster 2:** Above average on knowledge measures, below average on perceived difficulty, and average on environmental attitude.
--   **Cluster 3:** Average on knowledge measures, below average on perceived difficulty, and above average on environmental attitude.
-
-``` r
-# Combine key measures into correlation matrix
-key_measures <- combined_scores %>%
-  select(
-    # Knowledge measures
-    numeracy, energy_use, energy_save, els_score,
-    # Motivation/attitude measures
-    env_attitude, perceived_difficulty, pol_conservatism
-  ) %>%
-  na.omit()
-
-# Compute and visualize correlation matrix
-cor_matrix <- cor(key_measures, use = "pairwise.complete.obs")
-corrplot(cor_matrix,
-         method = "color",
-         type = "upper",
-         addCoef.col = "black",
-         tl.col = "black",
-         tl.srt = 45,
-         diag = FALSE,
-         col = colorRampPalette(c("#6D9EC1", "white", "#E46726"))(200)
-)
-```
-
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-22-1.png" width="768" />
-
-``` r
-# 2. Factor Analysis to examine underlying structure
-fa_results <- fa(key_measures, nfactors = 2, rotate = "varimax")
-print (fa_results, cut = 0.3, sort = TRUE)
-```
-
-    Factor Analysis using method =  minres
-    Call: fa(r = key_measures, nfactors = 2, rotate = "varimax")
-    Standardized loadings (pattern matrix) based upon correlation matrix
-                         item   MR1   MR2   h2     u2 com
-    energy_use              2  0.77       0.61 0.3856 1.1
-    energy_save             3  0.68       0.49 0.5146 1.1
-    numeracy                1  0.52       0.29 0.7067 1.2
-    els_score               4  0.50       0.30 0.6954 1.4
-    pol_conservatism        7             0.14 0.8570 2.0
-    env_attitude            5        0.99 1.00 0.0035 1.0
-    perceived_difficulty    6       -0.36 0.19 0.8120 1.7
-
-                           MR1  MR2
-    SS loadings           1.72 1.31
-    Proportion Var        0.25 0.19
-    Cumulative Var        0.25 0.43
-    Proportion Explained  0.57 0.43
-    Cumulative Proportion 0.57 1.00
-
-    Mean item complexity =  1.4
-    Test of the hypothesis that 2 factors are sufficient.
-
-    df null model =  21  with the objective function =  1.3 with Chi Square =  760
-    df of  the model are 8  and the objective function was  0.03 
-
-    The root mean square of the residuals (RMSR) is  0.03 
-    The df corrected root mean square of the residuals is  0.04 
-
-    The harmonic n.obs is  586 with the empirical chi square  17  with prob <  0.035 
-    The total n.obs was  586  with Likelihood Chi Square =  17  with prob <  0.029 
-
-    Tucker Lewis Index of factoring reliability =  0.97
-    RMSEA index =  0.044  and the 90 % confidence intervals are  0.014 0.073
-    BIC =  -34
-    Fit based upon off diagonal values = 0.99
-    Measures of factor score adequacy             
-                                                       MR1  MR2
-    Correlation of (regression) scores with factors   0.87 1.00
-    Multiple R square of scores with factors          0.76 0.99
-    Minimum correlation of possible factor scores     0.52 0.99
 
 ## Canonical Correlation Analysis (CCA)
 
 ``` r
 # 2. Canonical Correlation Analysis between Knowledge and Motivation Sets
 # Prepare matrices
+
 knowledge_vars <- combined_scores %>% select(numeracy, energy_use, energy_save, els_score) %>%
   as.matrix()
+
 motivation_vars <- combined_scores %>%
   select(env_attitude, perceived_difficulty, pol_conservatism) %>%
   as.matrix()
@@ -1019,14 +1378,48 @@ cor_matrix <- cor(combined_scores %>%
                            env_attitude, perceived_difficulty, pol_conservatism),
                   use = "pairwise.complete.obs")
 
-# Create network plot
+
+
 qgraph(cor_matrix,
-       layout = "spring",
-       groups = list(Knowledge = 1:4, Motivation = 5:7),
-       color = c(rep("lightblue", 4), rep("lightgreen", 3)))
+       graph = "cor", # Correlation graph
+       layout = "spring", # Layout algorithm
+       vsize = 8, # Vertex size
+       esize = 3, # Edge size
+       title = "Network of Correlations between Motivation and Knowledge Measures")
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-23-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-25-1.png" width="768" />
+
+``` r
+motivation_vars <- combined_scores %>% select(perceived_difficulty, env_attitude)
+
+knowledge_vars <- combined_scores %>% select(els_score, numeracy, energy_use)
+
+# Perform CCA
+cca_result <- cancor(motivation_vars, knowledge_vars)
+
+# Display CCA results
+print(cca_result$cor) # Canonical correlations
+```
+
+    [1] 0.346 0.088
+
+``` r
+print(cca_result$xcoef) # Coefficients for motivation variables (canonical variates for motivation)
+```
+
+                           [,1]  [,2]
+    perceived_difficulty  0.022 0.039
+    env_attitude         -0.036 0.046
+
+``` r
+print(cca_result$ycoef) # Coefficients for knowledge variables (canonical variates for knowledge)
+```
+
+                  [,1]   [,2]   [,3]
+    els_score  -0.0258  0.015 -0.035
+    numeracy   -0.0079  0.032  0.033
+    energy_use -0.0185 -0.041  0.014
 
 This performs a CCA to explore the relationships between the set of knowledge variables and the set of motivation variables and a network analysis to visualize variable relationships.
 
@@ -1145,13 +1538,13 @@ summary(fit, standardized = TRUE, fit.measures = TRUE)
 tidySEM::graph_sem(fit)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-24-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-26-1.png" width="768" />
 
 ``` r
 semPlot::semPaths(fit,layout="tree2",residual=TRUE,whatLabels="est", nCharNodes = 9)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-24-2.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-26-2.png" width="768" />
 
 This code fits a structural equation model to test a path model where motivation predicts knowledge.
 
@@ -1177,7 +1570,7 @@ tree_model <- rpart(knowledge_level ~ env_attitude + perceived_difficulty +
 rpart.plot(tree_model, extra = 1)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-25-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-27-1.png" width="768" />
 
 This code creates a classification tree to predict whether a participant has high or low knowledge based on their environmental attitude, perceived difficulty, and political conservatism.
 
@@ -1202,7 +1595,7 @@ lpa_results <- lpa_data %>%
 plot(lpa_results)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-26-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-28-1.png" width="768" />
 
 This code performs a latent profile analysis (LPA) to identify distinct subgroups of participants based on their patterns of responses across the knowledge and motivation variables.
 
@@ -1224,7 +1617,8 @@ item_data <- all_items[, item_columns]
 
 # Perform factor analysis
 fa_items <- fa(item_data, nfactors = 5, rotate = "varimax") # Adjust nfactors as needed
-print(fa_items, cut = 0.3, sort = TRUE)
+
+print(fa_items, cut = 0.3, sort = TRUE) |> kable()
 ```
 
     Factor Analysis using method =  minres
@@ -1308,6 +1702,24 @@ print(fa_items, cut = 0.3, sort = TRUE)
     Multiple R square of scores with factors          0.97 0.87 0.94 0.76 0.93
     Minimum correlation of possible factor scores     0.94 0.75 0.88 0.52 0.87
 
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+
+|                       |  MR1 |  MR2 |  MR5 |  MR3 |  MR4 |
+|:----------------------|-----:|-----:|-----:|-----:|-----:|
+| SS loadings           | 5.69 | 4.67 | 2.52 | 2.38 | 1.98 |
+| Proportion Var        | 0.12 | 0.10 | 0.05 | 0.05 | 0.04 |
+| Cumulative Var        | 0.12 | 0.22 | 0.27 | 0.32 | 0.37 |
+| Proportion Explained  | 0.33 | 0.27 | 0.15 | 0.14 | 0.11 |
+| Cumulative Proportion | 0.33 | 0.60 | 0.75 | 0.89 | 1.00 |
+
+</td>
+</tr>
+</tbody>
+</table>
+
 This performs a factor analysis on all individual survey items to explore the underlying structure of the data.
 
 ### Factor Analysis Results
@@ -1327,7 +1739,7 @@ combined_scores <- combined_scores %>%
   )
 
 # 3a. Bivariate Correlation
-with(combined_scores, cor.test(knowledge, motivation))
+with(combined_scores, cor.test(knowledge, motivation)) 
 ```
 
 
@@ -1355,7 +1767,7 @@ The correlation between knowledge and motivation is -0.018, which is not statist
 model <- lm(knowledge ~ motivation + pol_conservatism_z + cluster,
   data = combined_scores
 )
-summary(model)
+summary(model) |> print()
 ```
 
 
@@ -1395,14 +1807,17 @@ The regression results show that:
 
 ``` r
 # 3c. Path Analysis
+
 path_model <- "
   motivation ~ a * knowledge
   els_score ~ b * motivation + c * knowledge
   indirect := a * b
   total := c + indirect
 "
+
 fit <- sem(path_model, data = combined_scores)
-summary(fit, standardized = TRUE)
+
+summary(fit, standardized = TRUE) 
 ```
 
     lavaan 0.6-19 ended normally after 1 iteration
@@ -1446,13 +1861,13 @@ summary(fit, standardized = TRUE)
 tidySEM::graph_sem(fit)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-30-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-32-1.png" width="768" />
 
 ``` r
 semPlot::semPaths(fit)
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-30-2.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-32-2.png" width="768" />
 
 This code fits a path model to test the indirect effect of knowledge on ELS through motivation.
 
@@ -1479,7 +1894,7 @@ ggplot(combined_scores, aes(x = knowledge, y = motivation, color = cluster)) +
   theme_minimal()
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-31-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-33-1.png" width="768" />
 
 This code visualizes the knowledge-motivation profiles for each cluster using a scatter plot with ellipses representing the 95% confidence regions for each cluster.
 
@@ -1517,7 +1932,7 @@ corrplot(cor_matrix,
 )
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-32-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-34-1.png" width="768" />
 
 This code computes and visualizes the correlation matrix for the key knowledge and motivation measures.
 
@@ -1528,7 +1943,7 @@ The correlation plot shows the relationships between the key measures, with posi
 ``` r
 # 2. Factor Analysis to examine underlying structure
 fa_results <- fa(key_measures, nfactors = 2, rotate = "varimax")
-print(fa_results, cut = 0.3, sort = TRUE)
+print(fa_results, cut = 0.3, sort = TRUE) |> kable()
 ```
 
     Factor Analysis using method =  minres
@@ -1572,15 +1987,29 @@ print(fa_results, cut = 0.3, sort = TRUE)
     Multiple R square of scores with factors          0.76 0.99
     Minimum correlation of possible factor scores     0.52 0.99
 
+<table class="kable_wrapper">
+<tbody>
+<tr>
+<td>
+
+|                       |  MR1 |  MR2 |
+|:----------------------|-----:|-----:|
+| SS loadings           | 1.72 | 1.31 |
+| Proportion Var        | 0.25 | 0.19 |
+| Cumulative Var        | 0.25 | 0.43 |
+| Proportion Explained  | 0.57 | 0.43 |
+| Cumulative Proportion | 0.57 | 1.00 |
+
+</td>
+</tr>
+</tbody>
+</table>
+
 This code performs a factor analysis on the key measures to examine the underlying structure.
-
-### Factor Analysis Results
-
-The factor analysis suggests a two-factor solution, with the knowledge measures loading on one factor and the motivation/attitude measures loading on the other factor. The perceived difficulty item loads negatively on the knowledge factor.
 
 
 
-## Composite Scores and Relationships
+## Clustering with Composite Scores
 
 ``` r
 # Create composite scores for knowledge and motivation
@@ -1608,35 +2037,68 @@ fviz_nbclust(cluster_data, kmeans, method = "wss") +
   labs(title = "Elbow Method for Determining Optimal Number of Clusters")
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-34-1.png" width="768" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-36-1.png" width="768" />
+
+### 3 clusters - Composite scores
 
 ``` r
 # Decide the number of clusters (k). Let's try k = 3 for illustration:
 set.seed(123)
 km_fit <- kmeans(cluster_data, centers = 3, nstart = 25)
 # Visualize clusters
-fviz_cluster(km_fit, data = cluster_data) +
+p1 <- fviz_cluster(km_fit, data = cluster_data) +
   labs(title = "K-means Clustering on Knowledge vs. Motivation - 3 clusters") +
   theme_minimal()
+
+# Create standardized scores for profile analysis
+ profile_data <- combined_scores %>%
+    mutate(cluster = factor(km_fit$cluster)) %>%
+  select(id, knowledge_composite, motivation_composite, cluster) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+# Create profile plot
+p2 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - aggregate level",
+    x = "Measure",
+    y = "Standardized Score"
+  )
+
+# Create standardized scores for profile analysis - using original item_columns "numeracy", "energy_use", "energy_save", "els_score", perceived_difficulty
+ profile_data <- combined_scores %>%
+    mutate(cluster = factor(km_fit$cluster)) %>%
+  select(id, cluster, numeracy, energy_use, energy_save,
+         els_score, perceived_difficulty) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+# Create profile plot
+p3 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - item level",
+    x = "Measure",
+    y = "Standardized Score"
+  )
+
+p1 / (p2 + p3) + plot_layout(guides = 'collect')
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-34-2.png" width="768" />
-
-``` r
-# Decide the number of clusters (k). Let's try k =4 for illustration:
-set.seed(123)
-km_fit <- kmeans(cluster_data, centers = 4, nstart = 25)
-# Visualize clusters
-fviz_cluster(km_fit, data = cluster_data) +
-  labs(title = "K-means Clustering on Knowledge vs. Motivation -4 clusters") +
-  theme_minimal()
-```
-
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-34-3.png" width="768" />
-
-This code creates composite scores for knowledge and motivation and then uses cluster analysis to identify distinct profiles based on these composite scores.
-
-### Cluster Analysis Results
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-37-1.png" width="960" />
 
 ``` r
 # Add cluster membership back to your main dataframe
@@ -1649,23 +2111,16 @@ combined_scores %>%
     mean_knowledge = mean(knowledge_composite, na.rm = TRUE),
     mean_motivation = mean(motivation_composite, na.rm = TRUE),
     n = n()
-  )
+  ) |> kable()
 ```
 
-    # A tibble: 4 × 4
-      km_cluster mean_knowledge mean_motivation     n
-      <fct>               <dbl>           <dbl> <int>
-    1 1                  -0.978           0.925   109
-    2 2                   0.463           1.24    125
-    3 3                  -0.265           2.05    203
-    4 4                   0.688           2.54    149
-
-# Cluster Profiles
+| km_cluster | mean_knowledge | mean_motivation |   n |
+|:-----------|---------------:|----------------:|----:|
+| 1          |          -0.79 |             1.2 | 184 |
+| 2          |           0.47 |             1.4 | 167 |
+| 3          |           0.29 |             2.5 | 235 |
 
 ``` r
-# Add cluster membership to dataframe
-combined_scores$cluster <- factor(km_fit$cluster)
-
 # Summarize cluster profiles
 cluster_profiles <- combined_scores %>%
   group_by(cluster) %>%
@@ -1676,17 +2131,287 @@ cluster_profiles <- combined_scores %>%
     mean_motivation = mean(motivation_composite, na.rm=TRUE),
     sd_motivation = sd(motivation_composite, na.rm=TRUE)
   )
-
-print(cluster_profiles)
+cluster_profiles |> kable()
 ```
 
-    # A tibble: 4 × 6
-      cluster     n mean_knowledge sd_knowledge mean_motivation sd_motivation
-      <fct>   <int>          <dbl>        <dbl>           <dbl>         <dbl>
-    1 1         109         -0.978        0.501           0.925         0.486
-    2 2         125          0.463        0.449           1.24          0.400
-    3 3         203         -0.265        0.340           2.05          0.384
-    4 4         149          0.688        0.471           2.54          0.429
+| cluster |   n | mean_knowledge | sd_knowledge | mean_motivation | sd_motivation |
+|:--------|----:|---------------:|-------------:|----------------:|--------------:|
+| 1       | 179 |          -0.80 |         0.50 |             1.2 |          0.57 |
+| 2       | 176 |           0.19 |         0.45 |             2.0 |          0.65 |
+| 3       | 231 |           0.47 |         0.56 |             2.1 |          0.64 |
+
+### 4 clusters - Composite scores
+
+``` r
+# Decide the number of clusters (k). Let's try k =4 for illustration:
+set.seed(123)
+km_fit <- kmeans(cluster_data, centers = 4, nstart = 25)
+# Visualize clusters
+p1 <- fviz_cluster(km_fit, data = cluster_data) +
+  labs(title = "K-means Clustering on Knowledge vs. Motivation -4 clusters") +
+  theme_minimal() 
+
+# Create composite knowledge score
+combined_scores$composite_knowledge <- rowMeans(combined_scores[, c("numeracy", "energy_use", "energy_save", "els_score")])
+combined_scores$cluster <- as.factor(km_fit$cluster)
+
+# Create standardized scores for profile analysis
+profile_data <- combined_scores %>%
+    mutate(cluster = factor(km_fit$cluster)) %>%
+  select(id, knowledge_composite, motivation_composite, cluster) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+p2 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - aggregate level",
+    x = "Measure",
+    y = "Standardized Score"
+  )
+
+# Create standardized scores for profile analysis
+profile_data <- combined_scores %>%
+  select(id, cluster, numeracy, energy_use, energy_save,
+         els_score, env_attitude, perceived_difficulty) %>%
+  gather(measure, value, -id, -cluster) %>%
+  group_by(measure) %>%
+  mutate(z_score = scale(value)[, 1]) %>%
+  ungroup()
+
+p3 <- ggplot(profile_data, aes(x = measure, y = z_score, color = cluster, group = cluster)) +
+  stat_summary(fun = mean, geom = "line", size = 1) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(
+    title = "Knowledge-Motivation Clusters - item level",
+    x = "Measure", y = "Standardized Score"
+  )
+
+p1 / (p2 + p3) + plot_layout(guides = 'collect')
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-39-1.png" width="960" />
+
+This code creates composite scores for knowledge and motivation and then uses cluster analysis to identify distinct profiles based on these composite scores.
+
+``` r
+# Add cluster membership back to your main dataframe
+combined_scores$km_cluster <- factor(km_fit$cluster)
+
+# Compare mean knowledge & motivation by cluster
+combined_scores %>%
+  group_by(km_cluster) %>%
+  summarise(
+    mean_knowledge = mean(knowledge_composite, na.rm = TRUE),
+    mean_motivation = mean(motivation_composite, na.rm = TRUE),
+    n = n()
+  ) |> kable()
+```
+
+| km_cluster | mean_knowledge | mean_motivation |   n |
+|:-----------|---------------:|----------------:|----:|
+| 1          |          -0.98 |            0.93 | 109 |
+| 2          |           0.46 |            1.24 | 125 |
+| 3          |          -0.27 |            2.05 | 203 |
+| 4          |           0.69 |            2.54 | 149 |
+
+``` r
+# Summarize cluster profiles
+cluster_profiles <- combined_scores %>%
+  group_by(cluster) %>%
+  summarise(
+    n = n(),
+    mean_knowledge = mean(knowledge_composite, na.rm=TRUE),
+    sd_knowledge = sd(knowledge_composite, na.rm=TRUE),
+    mean_motivation = mean(motivation_composite, na.rm=TRUE),
+    sd_motivation = sd(motivation_composite, na.rm=TRUE)
+  )
+cluster_profiles |> kable()
+```
+
+| cluster |   n | mean_knowledge | sd_knowledge | mean_motivation | sd_motivation |
+|:--------|----:|---------------:|-------------:|----------------:|--------------:|
+| 1       | 109 |          -0.98 |         0.50 |            0.93 |          0.49 |
+| 2       | 125 |           0.46 |         0.45 |            1.24 |          0.40 |
+| 3       | 203 |          -0.27 |         0.34 |            2.05 |          0.38 |
+| 4       | 149 |           0.69 |         0.47 |            2.54 |          0.43 |
+
+``` r
+# Select all motivation and knowledge scores for clustering
+cluster_data <- combined_scores %>%
+    select(perceived_difficulty, env_attitude, els_score, numeracy, energy_use)
+
+# Perform model-based clustering using Mclust
+# We'll let Mclust determine the optimal number of clusters (G = 1:4 as an example range, you can adjust)
+mclust_result <- Mclust(cluster_data, G = 1:4, modelNames = "VVV") # VVV for variable variance, variable covariance
+
+# Summary of clustering
+summary(mclust_result)
+```
+
+    ---------------------------------------------------- 
+    Gaussian finite mixture model fitted by EM algorithm 
+    ---------------------------------------------------- 
+
+    Mclust VVV (ellipsoidal, varying volume, shape, and orientation) model with 2
+    components: 
+
+     log-likelihood   n df   BIC   ICL
+              -3729 586 41 -7719 -7828
+
+    Clustering table:
+      1   2 
+    405 181 
+
+``` r
+plot(mclust_result, what = "BIC") # BIC plot to help choose number of clusters
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-41-1.png" width="768" />
+
+``` r
+plot(mclust_result, what = "classification") # Classification plot
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-41-2.png" width="768" />
+
+``` r
+# Get cluster assignments
+cluster_assignments <- mclust_result$classification
+combined_scores$cluster <- factor(cluster_assignments) # Add cluster assignments to your combined_scores data
+
+# Analyze clusters - e.g., mean scores per cluster
+cluster_means <- combined_scores %>%
+    group_by(cluster) %>%
+    summarise(
+        mean_pd = mean(perceived_difficulty, na.rm = TRUE),
+        mean_ea = mean(env_attitude, na.rm = TRUE),
+        mean_els = mean(els_score, na.rm = TRUE),
+        mean_num = mean(numeracy, na.rm = TRUE),
+        mean_eu = mean(energy_use, na.rm = TRUE),
+        n = n()
+    )
+print(cluster_means) |> kable()
+```
+
+    # A tibble: 2 × 7
+      cluster mean_pd mean_ea mean_els mean_num mean_eu     n
+      <fct>     <dbl>   <dbl>    <dbl>    <dbl>   <dbl> <int>
+    1 1        -0.228    3.69    0.366    0.484   0.182   405
+    2 2         0.511    3.33   -0.820   -1.08   -0.408   181
+
+| cluster | mean_pd | mean_ea | mean_els | mean_num | mean_eu |   n |
+|:--------|--------:|--------:|---------:|---------:|--------:|----:|
+| 1       |   -0.23 |     3.7 |     0.37 |     0.48 |    0.18 | 405 |
+| 2       |    0.51 |     3.3 |    -0.82 |    -1.08 |   -0.41 | 181 |
+
+``` r
+# Visualize clusters (e.g., using boxplots or profiles)
+# Example boxplots for ELS score across clusters
+ggplot(combined_scores, aes(x = cluster, y = els_score, fill = cluster)) +
+    geom_boxplot() +
+    labs(title = "ELS Score by Cluster") +
+    theme_minimal()
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-41-3.png" width="768" />
+
+``` r
+# pivot long with perceived_difficulty, env_attitude, els_score, numeracy, energy_use - and create a faceted plot
+
+combined_scores_long <- combined_scores %>%
+  pivot_longer(cols = c(perceived_difficulty, env_attitude, els_score, numeracy, energy_use),
+               names_to = "variable", values_to = "value") |> 
+    mutate(cluster = factor(cluster)) |> 
+    mutate(variable = factor(variable, levels = c("perceived_difficulty", "env_attitude", "els_score", "numeracy", "energy_use"))) |> 
+    mutate(cluster = factor(cluster, levels = c("1", "2", "3")))  
+
+ggplot(combined_scores_long, aes(x = variable, y = value, fill = cluster)) +
+    geom_boxplot() +
+   # facet_wrap(~variable, scales = "free_y") +
+    labs(title = "Cluster Profiles by Variable") +
+    theme_minimal()
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-41-4.png" width="768" />
+
+``` r
+# ANOVA to test for significant differences in means across clusters for each variable
+variables_to_test <- c("perceived_difficulty", "env_attitude", "els_score", "numeracy", "energy_use")
+
+anova_results <- list()
+for (var in variables_to_test) {
+  formula <- formula(paste(var, "~ cluster"))
+  anova_model <- aov(formula, data = combined_scores)
+  anova_results[[var]] <- summary(anova_model)
+  cat("ANOVA for", var, ":\n")
+  print(summary(anova_model))
+  cat("\n")
+}
+```
+
+    ANOVA for perceived_difficulty :
+                 Df Sum Sq Mean Sq F value              Pr(>F)    
+    cluster       1     68    68.5    77.4 <0.0000000000000002 ***
+    Residuals   584    517     0.9                                
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    ANOVA for env_attitude :
+                 Df Sum Sq Mean Sq F value     Pr(>F)    
+    cluster       1     16   16.23    28.6 0.00000013 ***
+    Residuals   584    331    0.57                       
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    ANOVA for els_score :
+                 Df Sum Sq Mean Sq F value              Pr(>F)    
+    cluster       1    176   175.9     251 <0.0000000000000002 ***
+    Residuals   584    409     0.7                                
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    ANOVA for numeracy :
+                 Df Sum Sq Mean Sq F value              Pr(>F)    
+    cluster       1    307   306.7     644 <0.0000000000000002 ***
+    Residuals   584    278     0.5                                
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    ANOVA for energy_use :
+                 Df Sum Sq Mean Sq F value         Pr(>F)    
+    cluster       1     44    43.7    47.1 0.000000000017 ***
+    Residuals   584    541     0.9                           
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+``` r
+    # Use the correlation matrix calculated earlier (cor_matrix)
+if(!exists("cor_matrix")){ #recalculate if cor_matrix doesn't exist from previous code
+    cor_matrix <- cor(combined_scores %>%
+                        select(numeracy, energy_use, energy_save, els_score,
+                                env_attitude, perceived_difficulty, pol_conservatism),
+                        use = "pairwise.complete.obs")
+}
+
+qgraph(cor_matrix,
+        graph = "cor", # Correlation graph
+        layout = "spring", # Layout algorithm
+        vsize = 8, # Vertex size
+        esize = 3, # Edge size
+        title = "Network of Correlations between Motivation and Knowledge Measures")
+```
+
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-41-5.png" width="768" />
 
 
 
@@ -1702,23 +2427,23 @@ dq <- aes_combined |> left_join(att2_combined, by = "id") |> left_join(els, by =
 # Custom function for correlation matrix plots of question-level data
 plot_cor_matrix_items <- function(data, title = NULL) {
     
-  cor_matrix <- cor(data, use = "pairwise.complete.obs")
-  
-  # Identify item types based on column names
-  item_names <- colnames(cor_matrix)
-  is_attari_diff <- grepl("^ATT0[1-9]$|^ATT1[0-5]$", item_names) # ATT01-ATT15
-  is_attari_num <- grepl("^ATT1[6-8]$", item_names)  # ATT16-ATT18
-  is_attari_energy_use <- grepl("^ATT(19|2[0-7])$", item_names) # ATT19-ATT27
-  is_attari_energy_save <- grepl("^ATT(2[8-9]|3[0-3])$", item_names)  # ATT28-ATT33
-  is_els <- grepl("^ELS0[1-8]$", item_names) # ELS01-ELS08
-  is_rs <- grepl("^RS0[1-6]$", item_names) # RS01-RS06
-  
-  item_groups <- ifelse(is_attari_diff, "Attari Difficulty",
-                       ifelse(is_attari_num, "Attari Numeracy",
-                              ifelse(is_attari_energy_use, "Attari Usage",
-                                     ifelse(is_attari_energy_save, "Attari Savings",
-                                            ifelse(is_els, "Energy Literacy",
-                                                   ifelse(is_rs, "Recycling Study", NA))))))
+cor_matrix <- cor(data, use = "pairwise.complete.obs")
+
+# Identify item types based on column names
+item_names <- colnames(cor_matrix)
+is_attari_diff <- grepl("^ATT0[1-9]$|^ATT1[0-5]$", item_names) # ATT01-ATT15
+is_attari_num <- grepl("^ATT1[6-8]$", item_names)  # ATT16-ATT18
+is_attari_energy_use <- grepl("^ATT(19|2[0-7])$", item_names) # ATT19-ATT27
+is_attari_energy_save <- grepl("^ATT(2[8-9]|3[0-3])$", item_names)  # ATT28-ATT33
+is_els <- grepl("^ELS0[1-8]$", item_names) # ELS01-ELS08
+is_rs <- grepl("^RS0[1-6]$", item_names) # RS01-RS06
+
+item_groups <- ifelse(is_attari_diff, "Attari Difficulty",
+                    ifelse(is_attari_num, "Attari Numeracy",
+                            ifelse(is_attari_energy_use, "Attari Usage",
+                                    ifelse(is_attari_energy_save, "Attari Savings",
+                                        ifelse(is_els, "Energy Literacy",
+                                                ifelse(is_rs, "Recycling Study", NA))))))
   
   qgraph(cor_matrix,
          layout = "spring",
@@ -1741,4 +2466,4 @@ plot_cor_matrix_items <- function(data, title = NULL) {
 plot_cor_matrix_items(dq |> select(-id))
 ```
 
-<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-37-1.png" width="960" />
+<img src="cors.markdown_strict_files/figure-markdown_strict/unnamed-chunk-42-1.png" width="960" />
