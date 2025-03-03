@@ -236,6 +236,59 @@ window.Quarto = {
 </li>
       </ul>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text"><strong>Background</strong></span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/1_JP_summaries_know_mot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Knowledge and motivation - searched by JP</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/barber_annotated_bib.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Energy Conservation Behavior</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/EnergySurveyInstruments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">EnergySurveyInstruments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/nca_draft.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Method</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/nsf_instrument_codebook.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nsf Instrument Codebook</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/overview_files_instruments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Instrument study</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./bg/survey_codebook_outline.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Survey Codebook Outline</span></a>
+  </div>
+</li>
+      </ul>
+</li>
     </ul>
 </div>
 </nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
@@ -279,24 +332,24 @@ window.Quarto = {
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"scripts"</span>,<span class="st">"survey_functions.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">draw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"draw.rds"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">dinst</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>,<span class="st">"dinst.rds"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#dinst &lt;- readRDS(here("data","dinst.rds"))</span></span>
 <span></span>
 <span><span class="co"># Attari Energy Survey (Part 1)</span></span>
 <span><span class="va">aes1</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT01</span><span class="op">:</span><span class="va">ATT18</span><span class="op">)</span></span>
-<span><span class="va">aes2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT01</span><span class="op">:</span><span class="va">ATT18</span><span class="op">)</span></span>
-<span><span class="va">aes_combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">aes1</span>, <span class="va">aes2</span><span class="op">)</span></span>
+<span><span class="co">#aes2 &lt;- dinst |&gt; select(id,ATT01:ATT18)</span></span>
+<span><span class="va">aes_combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">aes1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">att_useSave</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT19</span><span class="op">:</span><span class="va">ATT33</span><span class="op">)</span></span>
-<span><span class="va">att_useSave2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ATT19</span><span class="op">:</span><span class="va">ATT33</span><span class="op">)</span></span>
-<span><span class="va">att2_combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">att_useSave</span>, <span class="va">att_useSave2</span><span class="op">)</span></span>
+<span><span class="co">#att_useSave2 &lt;- dinst |&gt; select(id,ATT19:ATT33)</span></span>
+<span><span class="va">att2_combined</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">att_useSave</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">els1</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ELS01</span><span class="op">:</span><span class="va">ELS08</span><span class="op">)</span></span>
-<span><span class="va">els2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">ELS01</span><span class="op">:</span><span class="va">ELS08</span><span class="op">)</span></span>
-<span><span class="va">els</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">els1</span>,<span class="va">els2</span><span class="op">)</span></span>
+<span><span class="co">#els2 &lt;- dinst |&gt; select(id,ELS01:ELS08)</span></span>
+<span><span class="va">els</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">els1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">rs1</span> <span class="op">&lt;-</span> <span class="va">draw</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">RS01</span><span class="op">:</span><span class="va">RS06</span><span class="op">)</span></span>
-<span><span class="va">rs2</span> <span class="op">&lt;-</span> <span class="va">dinst</span> <span class="op">|&gt;</span> <span class="fu">select</span><span class="op">(</span><span class="va">id</span>,<span class="va">RS01</span><span class="op">:</span><span class="va">RS06</span><span class="op">)</span></span>
-<span><span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">rs1</span>,<span class="va">rs2</span><span class="op">)</span></span>
+<span><span class="co">#rs2 &lt;- dinst |&gt; select(id,RS01:RS06)</span></span>
+<span><span class="va">rs</span> <span class="op">&lt;-</span> <span class="fu">bind_rows</span><span class="op">(</span><span class="va">rs1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">attari1</span> <span class="op">&lt;-</span> <span class="fu">analyze_attari_survey_part1</span><span class="op">(</span><span class="va">aes_combined</span><span class="op">)</span></span>
 <span><span class="va">attari2_scores</span> <span class="op">&lt;-</span> <span class="fu">analyze_attari_survey</span><span class="op">(</span><span class="va">att2_combined</span><span class="op">)</span></span>
@@ -384,10 +437,10 @@ window.Quarto = {
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">knowledge_cors</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>            numeracy energy_use energy_save els_score
-numeracy        1.00       0.41        0.34      0.34
-energy_use      0.41       1.00        0.57      0.40
-energy_save     0.34       0.57        1.00      0.36
-els_score       0.34       0.40        0.36      1.00</code></pre>
+numeracy        1.00       0.47        0.41      0.42
+energy_use      0.47       1.00        0.70      0.51
+energy_save     0.41       0.70        1.00      0.42
+els_score       0.42       0.51        0.42      1.00</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"\nMotivation measure correlations:"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
@@ -396,9 +449,9 @@ els_score       0.34       0.40        0.36      1.00</code></pre>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">motivation_cors</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>                     perceived_difficulty env_attitude_z pol_conservatism_z
-perceived_difficulty                 1.00          -0.39               0.13
-env_attitude_z                      -0.39           1.00              -0.29
-pol_conservatism_z                   0.13          -0.29               1.00</code></pre>
+perceived_difficulty                 1.00          -0.45               0.26
+env_attitude_z                      -0.45           1.00              -0.42
+pol_conservatism_z                   0.26          -0.42               1.00</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"\nKnowledge-Motivation correlations:"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
@@ -407,10 +460,10 @@ pol_conservatism_z                   0.13          -0.29               1.00</cod
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">knowledge_motivation_cors</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>            perceived_difficulty env_attitude_z pol_conservatism_z
-numeracy                   -0.13           0.20              -0.25
-energy_use                 -0.24           0.21              -0.23
-energy_save                -0.25           0.22              -0.22
-els_score                  -0.22           0.27              -0.19</code></pre>
+numeracy                   -0.19           0.23              -0.31
+energy_use                 -0.37           0.33              -0.33
+energy_save                -0.34           0.31              -0.33
+els_score                  -0.27           0.31              -0.25</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Print PCA summary</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"\nPCA Summary for knowledge measures:"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -420,10 +473,10 @@ els_score                  -0.22           0.27              -0.19</code></pre>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">knowledge_pca</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
-                         PC1   PC2   PC3   PC4
-Standard deviation     1.492 0.834 0.812 0.648
-Proportion of Variance 0.556 0.174 0.165 0.105
-Cumulative Proportion  0.556 0.730 0.895 1.000</code></pre>
+                        PC1   PC2   PC3    PC4
+Standard deviation     1.57 0.811 0.759 0.5353
+Proportion of Variance 0.62 0.164 0.144 0.0716
+Cumulative Proportion  0.62 0.784 0.928 1.0000</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create scatterplot of first two knowledge components</span></span>
 <span><span class="va">pca_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">knowledge_pca</span><span class="op">$</span><span class="va">x</span><span class="op">)</span></span>
@@ -458,7 +511,7 @@ Cumulative Proportion  0.556 0.730 0.895 1.000</code></pre>
 <span><span class="co"># Check the dimensions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">combined_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 586  11</code></pre>
+<pre><code>[1] 287  11</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Inspect a few rows</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">combined_df</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -466,12 +519,12 @@ Cumulative Proportion  0.556 0.730 0.895 1.000</code></pre>
 <pre><code># A tibble: 6 × 11
      id perceived_difficulty_score[,1] numeracy_score[,1] relative_energy_use_…¹
   &lt;int&gt;                          &lt;dbl&gt;              &lt;dbl&gt;                  &lt;dbl&gt;
-1     1                          0.614               1.45                 1.10  
-2     2                         -0.452               1.45                 0.137 
-3     3                          2.09               -2.00                -1.44  
-4     4                         -0.688              -1.26                 1.35  
-5     5                          0.910               1.45                 0.0754
-6     6                         -0.215               1.45                 1.28  
+1     1                          0.515              0.982                0.760  
+2     2                         -0.481              0.982                0.00153
+3     3                          1.90              -1.87                -1.24   
+4     4                         -0.703             -1.26                 0.953  
+5     5                          0.791              0.982               -0.0468 
+6     6                         -0.260              0.982                0.899  
 # ℹ abbreviated name: ¹​relative_energy_use_score[,1]
 # ℹ 7 more variables: relative_energy_save_score &lt;dbl[,1]&gt;, accuracy &lt;dbl&gt;,
 #   els &lt;dbl&gt;, env_attitude &lt;dbl&gt;, env_attitude_z &lt;dbl&gt;,
@@ -508,29 +561,29 @@ Cumulative Proportion  0.556 0.730 0.895 1.000</code></pre>
 <span><span class="va">subscale_cor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>                           perceived_difficulty_score numeracy_score
-perceived_difficulty_score                       1.00          -0.13
-numeracy_score                                  -0.13           1.00
-relative_energy_use_score                       -0.24           0.41
-relative_energy_save_score                      -0.25           0.34
-els                                             -0.22           0.34
-env_attitude                                    -0.39           0.20
-pol_conservatism                                 0.13          -0.25
+perceived_difficulty_score                       1.00          -0.19
+numeracy_score                                  -0.19           1.00
+relative_energy_use_score                       -0.37           0.47
+relative_energy_save_score                      -0.34           0.41
+els                                             -0.27           0.42
+env_attitude                                    -0.45           0.23
+pol_conservatism                                 0.26          -0.31
                            relative_energy_use_score relative_energy_save_score
-perceived_difficulty_score                     -0.24                      -0.25
-numeracy_score                                  0.41                       0.34
-relative_energy_use_score                       1.00                       0.57
-relative_energy_save_score                      0.57                       1.00
-els                                             0.40                       0.36
-env_attitude                                    0.21                       0.22
-pol_conservatism                               -0.23                      -0.22
+perceived_difficulty_score                     -0.37                      -0.34
+numeracy_score                                  0.47                       0.41
+relative_energy_use_score                       1.00                       0.70
+relative_energy_save_score                      0.70                       1.00
+els                                             0.51                       0.42
+env_attitude                                    0.33                       0.31
+pol_conservatism                               -0.33                      -0.33
                              els env_attitude pol_conservatism
-perceived_difficulty_score -0.22        -0.39             0.13
-numeracy_score              0.34         0.20            -0.25
-relative_energy_use_score   0.40         0.21            -0.23
-relative_energy_save_score  0.36         0.22            -0.22
-els                         1.00         0.27            -0.19
-env_attitude                0.27         1.00            -0.29
-pol_conservatism           -0.19        -0.29             1.00</code></pre>
+perceived_difficulty_score -0.27        -0.45             0.26
+numeracy_score              0.42         0.23            -0.31
+relative_energy_use_score   0.51         0.33            -0.33
+relative_energy_save_score  0.42         0.31            -0.33
+els                         1.00         0.31            -0.25
+env_attitude                0.31         1.00            -0.42
+pol_conservatism           -0.25        -0.42             1.00</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># You can also visualize it with corrplot, e.g.:</span></span>
 <span><span class="fu">corrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">subscale_cor</span>, method <span class="op">=</span> <span class="st">"ellipse"</span>, type <span class="op">=</span> <span class="st">"upper"</span>,</span>
@@ -557,47 +610,47 @@ Call: principal(r = subscales_df, nfactors = 2, rotate = "varimax",
     scores = TRUE)
 Standardized loadings (pattern matrix) based upon correlation matrix
                              RC1   RC2   h2   u2 com
-perceived_difficulty_score -0.10 -0.77 0.60 0.40 1.0
-numeracy_score              0.71  0.07 0.51 0.49 1.0
-relative_energy_use_score   0.81  0.13 0.67 0.33 1.1
-relative_energy_save_score  0.75  0.17 0.60 0.40 1.1
-els                         0.62  0.26 0.45 0.55 1.3
-env_attitude                0.12  0.83 0.70 0.30 1.0
-pol_conservatism           -0.31 -0.42 0.27 0.73 1.8
+perceived_difficulty_score -0.17 -0.74 0.58 0.42 1.1
+numeracy_score              0.74  0.08 0.56 0.44 1.0
+relative_energy_use_score   0.81  0.28 0.74 0.26 1.2
+relative_energy_save_score  0.76  0.27 0.66 0.34 1.2
+els                         0.71  0.19 0.54 0.46 1.1
+env_attitude                0.15  0.84 0.72 0.28 1.1
+pol_conservatism           -0.27 -0.62 0.45 0.55 1.4
 
                        RC1  RC2
-SS loadings           2.22 1.57
-Proportion Var        0.32 0.22
-Cumulative Var        0.32 0.54
-Proportion Explained  0.59 0.41
-Cumulative Proportion 0.59 1.00
+SS loadings           2.42 1.83
+Proportion Var        0.35 0.26
+Cumulative Var        0.35 0.61
+Proportion Explained  0.57 0.43
+Cumulative Proportion 0.57 1.00
 
 Mean item complexity =  1.2
 Test of the hypothesis that 2 components are sufficient.
 
-The root mean square of the residuals (RMSR) is  0.12 
- with the empirical chi square  339  with prob &lt;  0.00000000000000000000000000000000000000000000000000000000000000000002 
+The root mean square of the residuals (RMSR) is  0.11 
+ with the empirical chi square  146  with prob &lt;  0.0000000000000000000000000015 
 
-Fit based upon off diagonal values = 0.85</code></pre>
+Fit based upon off diagonal values = 0.92</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Examine loadings</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">pca_subscales</span><span class="op">$</span><span class="va">loadings</span>, cutoff <span class="op">=</span> <span class="fl">0.30</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>
 Loadings:
-                           RC1    RC2   
-numeracy_score              0.707       
-relative_energy_use_score   0.809       
-relative_energy_save_score  0.753       
-els                         0.617       
-perceived_difficulty_score        -0.769
-env_attitude                       0.828
-pol_conservatism           -0.308 -0.420
+                           RC1   RC2  
+numeracy_score              0.74      
+relative_energy_use_score   0.81      
+relative_energy_save_score  0.76      
+els                         0.71      
+perceived_difficulty_score       -0.74
+env_attitude                      0.84
+pol_conservatism                 -0.62
 
                 RC1  RC2
-SS loadings    2.22 1.57
-Proportion Var 0.32 0.23
-Cumulative Var 0.32 0.54</code></pre>
+SS loadings    2.42 1.82
+Proportion Var 0.35 0.26
+Cumulative Var 0.35 0.61</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># The two-factor solution might (for example) split into a </span></span>
 <span><span class="co"># “Knowledge / Numeracy” factor and a “Motivation / Attitude” factor, </span></span>
@@ -611,7 +664,7 @@ Cumulative Var 0.32 0.54</code></pre>
 <span><span class="co"># (A) Simple correlation between ELS (knowledge) and env_attitude (motivation)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">combined_df</span>, <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">els</span>, <span class="va">env_attitude</span>, use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.27</code></pre>
+<pre><code>[1] 0.31</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># (B) Regression predicting motivation from knowledge:</span></span>
 <span><span class="co">#     e.g., env_attitude ~ ELS + numeracy_score + relative_energy_use_score</span></span>
@@ -626,20 +679,20 @@ lm(formula = env_attitude ~ els + numeracy_score + relative_energy_use_score,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.2182 -0.4612  0.0582  0.5595  1.7604 
+-2.1873 -0.4388  0.0569  0.5001  1.8183 
 
 Coefficients:
-                          Estimate Std. Error t value             Pr(&gt;|t|)    
-(Intercept)                 3.5832     0.0304  117.91 &lt; 0.0000000000000002 ***
-els                         0.1578     0.0339    4.65            0.0000041 ***
-numeracy_score              0.0700     0.0342    2.05                0.041 *  
-relative_energy_use_score   0.0716     0.0350    2.05                0.041 *  
+                          Estimate Std. Error t value            Pr(&gt;|t|)    
+(Intercept)                 3.5906     0.0419   85.60 &lt;0.0000000000000002 ***
+els                         0.1371     0.0505    2.72              0.0070 ** 
+numeracy_score              0.0367     0.0489    0.75              0.4533    
+relative_energy_use_score   0.1674     0.0517    3.24              0.0013 ** 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.74 on 582 degrees of freedom
-Multiple R-squared:  0.0936,    Adjusted R-squared:  0.0889 
-F-statistic:   20 on 3 and 582 DF,  p-value: 0.00000000000227</code></pre>
+Residual standard error: 0.71 on 283 degrees of freedom
+Multiple R-squared:  0.141, Adjusted R-squared:  0.131 
+F-statistic: 15.4 on 3 and 283 DF,  p-value: 0.00000000253</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># (C) Scatterplot of perceived difficulty (motivation) vs. ELS (knowledge)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">combined_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">els</span>, y <span class="op">=</span> <span class="va">perceived_difficulty_score</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -735,56 +788,56 @@ relative_energy_use_score 0.0716 0.0350 2.05 0.041 *<br>
 Call: fa(r = combined_data[, -1], nfactors = 3, rotate = "varimax")
 Standardized loadings (pattern matrix) based upon correlation matrix
                              MR1   MR3   MR2   h2     u2 com
-perceived_difficulty_score -0.23 -0.36  0.06 0.18 0.8181 1.8
-numeracy_score              0.42  0.12 -0.19 0.23 0.7746 1.6
-relative_energy_use_score   0.52  0.14 -0.16 0.32 0.6809 1.3
-relative_energy_save_score  0.48  0.16 -0.15 0.28 0.7219 1.4
-accuracy                    0.92  0.12  0.00 0.87 0.1320 1.0
-els                         0.92  0.12  0.00 0.87 0.1320 1.0
-env_attitude                0.15  0.98 -0.13 0.99 0.0051 1.1
-env_attitude_z              0.15  0.98 -0.13 0.99 0.0051 1.1
-pol_conservatism           -0.17 -0.14  0.97 0.99 0.0138 1.1
-pol_conservatism_z         -0.17 -0.14  0.97 0.99 0.0138 1.1
+perceived_difficulty_score -0.28 -0.40  0.14 0.25 0.7459 2.1
+numeracy_score              0.49  0.11 -0.22 0.30 0.6996 1.5
+relative_energy_use_score   0.64  0.22 -0.21 0.50 0.5017 1.5
+relative_energy_save_score  0.55  0.20 -0.23 0.39 0.6072 1.6
+accuracy                    0.91  0.14 -0.02 0.85 0.1533 1.0
+els                         0.91  0.14 -0.02 0.85 0.1533 1.0
+env_attitude                0.17  0.96 -0.18 0.99 0.0067 1.1
+env_attitude_z              0.17  0.96 -0.18 0.99 0.0067 1.1
+pol_conservatism           -0.19 -0.21  0.95 0.98 0.0199 1.2
+pol_conservatism_z         -0.19 -0.21  0.95 0.98 0.0199 1.2
 
                        MR1  MR3  MR2
-SS loadings           2.53 2.17 2.00
-Proportion Var        0.25 0.22 0.20
-Cumulative Var        0.25 0.47 0.67
-Proportion Explained  0.38 0.32 0.30
-Cumulative Proportion 0.38 0.70 1.00
+SS loadings           2.81 2.25 2.03
+Proportion Var        0.28 0.22 0.20
+Cumulative Var        0.28 0.51 0.71
+Proportion Explained  0.40 0.32 0.29
+Cumulative Proportion 0.40 0.71 1.00
 
 Mean item complexity =  1.3
 Test of the hypothesis that 3 factors are sufficient.
 
-df null model =  45  with the objective function =  NaN with Chi Square =  NaN
+df null model =  45  with the objective function =  107 with Chi Square =  30024
 df of  the model are 18  and the objective function was  NaN 
 
-The root mean square of the residuals (RMSR) is  0.07 
+The root mean square of the residuals (RMSR) is  0.06 
 The df corrected root mean square of the residuals is  0.1 
 
-The harmonic n.obs is  586 with the empirical chi square  228  with prob &lt;  0.000000000000000000000000000000000000029 
-The total n.obs was  586  with Likelihood Chi Square =  NaN  with prob &lt;  NaN 
+The harmonic n.obs is  287 with the empirical chi square  103  with prob &lt;  0.00000000000007 
+The total n.obs was  287  with Likelihood Chi Square =  NaN  with prob &lt;  NaN 
 
 Tucker Lewis Index of factoring reliability =  NaN
-Fit based upon off diagonal values = 0.97
+Fit based upon off diagonal values = 0.98
 Measures of factor score adequacy             
                                                    MR1  MR3  MR2
 Correlation of (regression) scores with factors   0.95 1.00 0.99
-Multiple R square of scores with factors          0.91 1.00 0.99
-Minimum correlation of possible factor scores     0.82 0.99 0.98</code></pre>
+Multiple R square of scores with factors          0.91 0.99 0.98
+Minimum correlation of possible factor scores     0.81 0.99 0.97</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 3. Analyze the relation between motivation and knowledge items</span></span>
 <span><span class="co">#    a. Correlation between perceived_difficulty_score and els</span></span>
 <span><span class="va">cor_motivation_knowledge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">combined_data</span><span class="op">$</span><span class="va">perceived_difficulty_score</span>, <span class="va">combined_data</span><span class="op">$</span><span class="va">els</span>, use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Correlation between perceived difficulty and energy literacy:"</span>, <span class="va">cor_motivation_knowledge</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] "Correlation between perceived difficulty and energy literacy: -0.221786397116371"</code></pre>
+<pre><code>[1] "Correlation between perceived difficulty and energy literacy: -0.268417318288949"</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#    b. Correlation between env_attitude and els</span></span>
 <span><span class="va">cor_env_knowledge</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">combined_data</span><span class="op">$</span><span class="va">env_attitude</span>, <span class="va">combined_data</span><span class="op">$</span><span class="va">els</span>, use <span class="op">=</span> <span class="st">"pairwise.complete.obs"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Correlation between environmental attitude and energy literacy:"</span>, <span class="va">cor_env_knowledge</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
-<pre><code>[1] "Correlation between environmental attitude and energy literacy: 0.272737299645857"</code></pre>
+<pre><code>[1] "Correlation between environmental attitude and energy literacy: 0.312991297054729"</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#    c. Regression analysis with els as the dependent variable and motivation variables as predictors</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">els</span> <span class="op">~</span> <span class="va">perceived_difficulty_score</span> <span class="op">+</span> <span class="va">env_attitude</span> <span class="op">+</span> <span class="va">pol_conservatism</span>, data <span class="op">=</span> <span class="va">combined_data</span><span class="op">)</span></span>
@@ -796,21 +849,21 @@ lm(formula = els ~ perceived_difficulty_score + env_attitude +
     pol_conservatism, data = combined_data)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--3.171 -0.646 -0.004  0.716  2.333 
+    Min      1Q  Median      3Q     Max 
+-2.3489 -0.7106  0.0245  0.7152  2.2516 
 
 Coefficients:
-                           Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)                 -0.6422     0.2390   -2.69   0.0074 ** 
-perceived_difficulty_score  -0.1338     0.0425   -3.15   0.0017 ** 
-env_attitude                 0.2421     0.0571    4.24 0.000026 ***
-pol_conservatism            -0.0854     0.0289   -2.96   0.0032 ** 
+                           Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)                 -0.6746     0.3692   -1.83   0.0688 . 
+perceived_difficulty_score  -0.1487     0.0623   -2.39   0.0176 * 
+env_attitude                 0.2526     0.0868    2.91   0.0039 **
+pol_conservatism            -0.0891     0.0424   -2.10   0.0364 * 
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.95 on 582 degrees of freedom
-Multiple R-squared:  0.104, Adjusted R-squared:  0.0992 
-F-statistic: 22.5 on 3 and 582 DF,  p-value: 0.0000000000000872</code></pre>
+Residual standard error: 0.94 on 283 degrees of freedom
+Multiple R-squared:  0.132, Adjusted R-squared:  0.123 
+F-statistic: 14.3 on 3 and 283 DF,  p-value: 0.0000000102</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 4. Visualize the relationship between perceived_difficulty_score, env_attitude_z, and els</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">combined_data</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">perceived_difficulty_score</span>, y <span class="op">=</span> <span class="va">els</span>, color <span class="op">=</span> <span class="va">env_attitude_z</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -904,42 +957,42 @@ Call: psych::fa(r = cor_vars[complete.cases(cor_vars), ], nfactors = 2,
     rotate = "varimax", fm = "ml")
 Standardized loadings (pattern matrix) based upon correlation matrix
                              ML2   ML1   h2    u2 com
-perceived_difficulty_score       -0.37 0.19 0.807 1.7
-numeracy_score              0.51       0.28 0.720 1.2
-relative_energy_use_score   0.78       0.63 0.374 1.1
-relative_energy_save_score  0.69       0.50 0.497 1.1
-els                         0.49       0.29 0.709 1.4
-env_attitude_z                    0.99 1.00 0.005 1.0
-pol_conservatism_z                     0.14 0.860 2.0
+perceived_difficulty_score -0.31 -0.42 0.27 0.727 1.9
+numeracy_score              0.52       0.30 0.702 1.2
+relative_energy_use_score   0.85       0.78 0.220 1.1
+relative_energy_save_score  0.75       0.62 0.384 1.2
+els                         0.53       0.35 0.652 1.4
+env_attitude_z                    0.98 0.98 0.018 1.0
+pol_conservatism_z         -0.31 -0.38 0.24 0.759 1.9
 
                        ML2  ML1
-SS loadings           1.71 1.31
-Proportion Var        0.24 0.19
-Cumulative Var        0.24 0.43
-Proportion Explained  0.57 0.43
-Cumulative Proportion 0.57 1.00
+SS loadings           2.06 1.48
+Proportion Var        0.29 0.21
+Cumulative Var        0.29 0.51
+Proportion Explained  0.58 0.42
+Cumulative Proportion 0.58 1.00
 
 Mean item complexity =  1.4
 Test of the hypothesis that 2 factors are sufficient.
 
-df null model =  21  with the objective function =  1.3 with Chi Square =  760
-df of  the model are 8  and the objective function was  0.03 
+df null model =  21  with the objective function =  2 with Chi Square =  581
+df of  the model are 8  and the objective function was  0.05 
 
 The root mean square of the residuals (RMSR) is  0.03 
-The df corrected root mean square of the residuals is  0.04 
+The df corrected root mean square of the residuals is  0.05 
 
-The harmonic n.obs is  586 with the empirical chi square  18  with prob &lt;  0.025 
-The total n.obs was  586  with Likelihood Chi Square =  16  with prob &lt;  0.036 
+The harmonic n.obs is  287 with the empirical chi square  12  with prob &lt;  0.13 
+The total n.obs was  287  with Likelihood Chi Square =  15  with prob &lt;  0.066 
 
 Tucker Lewis Index of factoring reliability =  0.97
-RMSEA index =  0.042  and the 90 % confidence intervals are  0.01 0.072
-BIC =  -35
+RMSEA index =  0.054  and the 90 % confidence intervals are  0 0.097
+BIC =  -31
 Fit based upon off diagonal values = 0.99
 Measures of factor score adequacy             
                                                    ML2  ML1
-Correlation of (regression) scores with factors   0.87 1.00
-Multiple R square of scores with factors          0.77 0.99
-Minimum correlation of possible factor scores     0.53 0.99</code></pre>
+Correlation of (regression) scores with factors   0.92 0.99
+Multiple R square of scores with factors          0.84 0.98
+Minimum correlation of possible factor scores     0.68 0.96</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Perceived Difficulty vs Knowledge</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">combined</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">perceived_difficulty_score</span>, <span class="va">els</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -973,23 +1026,23 @@ lm(formula = els ~ perceived_difficulty_score + env_attitude_z,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.0786 -0.6787  0.0272  0.7021  2.3542 
+-2.1928 -0.6999 -0.0498  0.7130  2.2329 
 
 Coefficients:
                                         Estimate            Std. Error t value
-(Intercept)                 0.000000000000000221  0.039466198562163532    0.00
-perceived_difficulty_score -0.137043156114381365  0.042805101308446926   -3.20
-env_attitude_z              0.219932562179007085  0.042805101308446947    5.14
-                             Pr(&gt;|t|)    
-(Intercept)                    1.0000    
-perceived_difficulty_score     0.0014 ** 
-env_attitude_z             0.00000038 ***
+(Intercept)                -0.000000000000000151  0.055621684128591892    0.00
+perceived_difficulty_score -0.159761266067761393  0.062426844659397948   -2.56
+env_attitude_z              0.240945986236688586  0.062426844659397997    3.86
+                           Pr(&gt;|t|)    
+(Intercept)                 1.00000    
+perceived_difficulty_score  0.01101 *  
+env_attitude_z              0.00014 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.95 on 583 degrees of freedom
-Multiple R-squared:  0.0904,    Adjusted R-squared:  0.0873 
-F-statistic:   29 on 2 and 583 DF,  p-value: 0.00000000000102</code></pre>
+Residual standard error: 0.94 on 284 degrees of freedom
+Multiple R-squared:  0.118, Adjusted R-squared:  0.112 
+F-statistic: 19.1 on 2 and 284 DF,  p-value: 0.0000000172</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Predict Numeracy from Motivation</span></span>
 <span><span class="va">model_numeracy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">numeracy_score</span> <span class="op">~</span> <span class="va">perceived_difficulty_score</span> <span class="op">+</span> </span>
@@ -1003,23 +1056,23 @@ lm(formula = numeracy_score ~ perceived_difficulty_score + env_attitude_z,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.5895 -0.4958  0.0285  0.4315  2.0590 
+-2.1369 -0.6210  0.0337  0.8865  1.6788 
 
 Coefficients:
-                                      Estimate          Std. Error t value
-(Intercept)                 0.0000000000000144  0.0404741361250743    0.00
-perceived_difficulty_score -0.0660112042229361  0.0438983119814999   -1.50
-env_attitude_z              0.1735929007614459  0.0438983119815000    3.95
-                           Pr(&gt;|t|)    
-(Intercept)                    1.00    
-perceived_difficulty_score     0.13    
-env_attitude_z             0.000086 ***
+                                       Estimate           Std. Error t value
+(Intercept)                 0.00000000000000176  0.05737104617084357    0.00
+perceived_difficulty_score -0.11638282529783350  0.06439023635052721   -1.81
+env_attitude_z              0.17373106915498060  0.06439023635052725    2.70
+                           Pr(&gt;|t|)   
+(Intercept)                  1.0000   
+perceived_difficulty_score   0.0717 . 
+env_attitude_z               0.0074 **
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.98 on 583 degrees of freedom
-Multiple R-squared:  0.0433,    Adjusted R-squared:  0.04 
-F-statistic: 13.2 on 2 and 583 DF,  p-value: 0.00000247</code></pre>
+Residual standard error: 0.97 on 284 degrees of freedom
+Multiple R-squared:  0.062, Adjusted R-squared:  0.0554 
+F-statistic: 9.38 on 2 and 284 DF,  p-value: 0.000114</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Create composite scores</span></span>
 <span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">combined</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">mutate</span><span class="op">(</span></span>
@@ -1040,13 +1093,13 @@ F-statistic: 13.2 on 2 and 583 DF,  p-value: 0.00000247</code></pre>
     Pearson's product-moment correlation
 
 data:  combined$composite_knowledge and combined$composite_motivation
-t = 9, df = 584, p-value &lt;0.0000000000000002
+t = 8, df = 285, p-value = 0.000000000000006
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- 0.28 0.42
+ 0.34 0.53
 sample estimates:
  cor 
-0.35 </code></pre>
+0.44 </code></pre>
 </div>
 </div>
 <p>cor_matrix perceived_difficulty_score numeracy_score relative_energy_use_score relative_energy_save_score els env_attitude_z pol_conservatism_z perceived_difficulty_score 1.00 -0.13 -0.24 -0.25 -0.22 -0.39 0.13 numeracy_score -0.13 1.00 0.41 0.34 0.34 0.20 -0.25 relative_energy_use_score -0.24 0.41 1.00 0.57 0.40 0.21 -0.23 relative_energy_save_score -0.25 0.34 0.57 1.00 0.36 0.22 -0.22 els -0.22 0.34 0.40 0.36 1.00 0.27 -0.19 env_attitude_z -0.39 0.20 0.21 0.22 0.27 1.00 -0.29 pol_conservatism_z 0.13 -0.25 -0.23 -0.22 -0.19 -0.29 1.00</p>
@@ -1089,12 +1142,12 @@ env_attitude_z 0.1735929007614459 0.0438983119815000 3.95 0.000086 *** – Signi
 <pre><code># A tibble: 6 × 11
      id perceived_difficulty_score[,1] numeracy_score[,1] relative_energy_use_…¹
   &lt;int&gt;                          &lt;dbl&gt;              &lt;dbl&gt;                  &lt;dbl&gt;
-1     1                          0.614               1.45                 1.10  
-2     2                         -0.452               1.45                 0.137 
-3     3                          2.09               -2.00                -1.44  
-4     4                         -0.688              -1.26                 1.35  
-5     5                          0.910               1.45                 0.0754
-6     6                         -0.215               1.45                 1.28  
+1     1                          0.515              0.982                0.760  
+2     2                         -0.481              0.982                0.00153
+3     3                          1.90              -1.87                -1.24   
+4     4                         -0.703             -1.26                 0.953  
+5     5                          0.791              0.982               -0.0468 
+6     6                         -0.260              0.982                0.899  
 # ℹ abbreviated name: ¹​relative_energy_use_score[,1]
 # ℹ 7 more variables: relative_energy_save_score &lt;dbl[,1]&gt;, accuracy &lt;dbl&gt;,
 #   els &lt;dbl&gt;, env_attitude &lt;dbl&gt;, env_attitude_z &lt;dbl&gt;,
@@ -1128,29 +1181,29 @@ env_attitude_z 0.1735929007614459 0.0438983119815000 3.95 0.000086 *** – Signi
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cor_matrix</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output cell-output-stdout">
 <pre><code>                           perceived_difficulty_score numeracy_score
-perceived_difficulty_score                       1.00          -0.13
-numeracy_score                                  -0.13           1.00
-relative_energy_use_score                       -0.24           0.41
-relative_energy_save_score                      -0.25           0.34
-els                                             -0.22           0.34
-env_attitude                                    -0.39           0.20
-pol_conservatism                                 0.13          -0.25
+perceived_difficulty_score                       1.00          -0.19
+numeracy_score                                  -0.19           1.00
+relative_energy_use_score                       -0.37           0.47
+relative_energy_save_score                      -0.34           0.41
+els                                             -0.27           0.42
+env_attitude                                    -0.45           0.23
+pol_conservatism                                 0.26          -0.31
                            relative_energy_use_score relative_energy_save_score
-perceived_difficulty_score                     -0.24                      -0.25
-numeracy_score                                  0.41                       0.34
-relative_energy_use_score                       1.00                       0.57
-relative_energy_save_score                      0.57                       1.00
-els                                             0.40                       0.36
-env_attitude                                    0.21                       0.22
-pol_conservatism                               -0.23                      -0.22
+perceived_difficulty_score                     -0.37                      -0.34
+numeracy_score                                  0.47                       0.41
+relative_energy_use_score                       1.00                       0.70
+relative_energy_save_score                      0.70                       1.00
+els                                             0.51                       0.42
+env_attitude                                    0.33                       0.31
+pol_conservatism                               -0.33                      -0.33
                              els env_attitude pol_conservatism
-perceived_difficulty_score -0.22        -0.39             0.13
-numeracy_score              0.34         0.20            -0.25
-relative_energy_use_score   0.40         0.21            -0.23
-relative_energy_save_score  0.36         0.22            -0.22
-els                         1.00         0.27            -0.19
-env_attitude                0.27         1.00            -0.29
-pol_conservatism           -0.19        -0.29             1.00</code></pre>
+perceived_difficulty_score -0.27        -0.45             0.26
+numeracy_score              0.42         0.23            -0.31
+relative_energy_use_score   0.51         0.33            -0.33
+relative_energy_save_score  0.42         0.31            -0.33
+els                         1.00         0.31            -0.25
+env_attitude                0.31         1.00            -0.42
+pol_conservatism           -0.25        -0.42             1.00</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">corrplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/corrplot/man/corrplot.html">corrplot</a></span><span class="op">(</span><span class="va">cor_matrix</span>, method <span class="op">=</span> <span class="st">"ellipse"</span>, type <span class="op">=</span> <span class="st">"upper"</span>, tl.srt <span class="op">=</span> <span class="fl">45</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details><div class="cell-output-display">
@@ -1177,42 +1230,42 @@ pol_conservatism           -0.19        -0.29             1.00</code></pre>
 Call: psych::fa(r = fa_data, nfactors = 2, rotate = "varimax", fm = "ml")
 Standardized loadings (pattern matrix) based upon correlation matrix
                            item   ML2   ML1   h2    u2 com
-relative_energy_use_score     3  0.78  0.14 0.63 0.374 1.1
-relative_energy_save_score    4  0.69  0.16 0.50 0.497 1.1
-numeracy_score                2  0.51  0.15 0.28 0.720 1.2
-els                           5  0.49  0.23 0.29 0.709 1.4
-pol_conservatism              7 -0.27 -0.26 0.14 0.860 2.0
-env_attitude                  6  0.09  0.99 1.00 0.005 1.0
-perceived_difficulty_score    1 -0.24 -0.37 0.19 0.807 1.7
+relative_energy_use_score     3  0.85  0.23 0.78 0.220 1.1
+relative_energy_save_score    4  0.75  0.22 0.62 0.384 1.2
+els                           5  0.53  0.25 0.35 0.652 1.4
+numeracy_score                2  0.52  0.16 0.30 0.702 1.2
+env_attitude                  6  0.13  0.98 0.98 0.018 1.0
+perceived_difficulty_score    1 -0.31 -0.42 0.27 0.727 1.9
+pol_conservatism              7 -0.31 -0.38 0.24 0.759 1.9
 
                        ML2  ML1
-SS loadings           1.71 1.31
-Proportion Var        0.24 0.19
-Cumulative Var        0.24 0.43
-Proportion Explained  0.57 0.43
-Cumulative Proportion 0.57 1.00
+SS loadings           2.06 1.48
+Proportion Var        0.29 0.21
+Cumulative Var        0.29 0.51
+Proportion Explained  0.58 0.42
+Cumulative Proportion 0.58 1.00
 
 Mean item complexity =  1.4
 Test of the hypothesis that 2 factors are sufficient.
 
-df null model =  21  with the objective function =  1.3 with Chi Square =  760
-df of  the model are 8  and the objective function was  0.03 
+df null model =  21  with the objective function =  2 with Chi Square =  581
+df of  the model are 8  and the objective function was  0.05 
 
 The root mean square of the residuals (RMSR) is  0.03 
-The df corrected root mean square of the residuals is  0.04 
+The df corrected root mean square of the residuals is  0.05 
 
-The harmonic n.obs is  586 with the empirical chi square  18  with prob &lt;  0.025 
-The total n.obs was  586  with Likelihood Chi Square =  16  with prob &lt;  0.036 
+The harmonic n.obs is  287 with the empirical chi square  12  with prob &lt;  0.13 
+The total n.obs was  287  with Likelihood Chi Square =  15  with prob &lt;  0.066 
 
 Tucker Lewis Index of factoring reliability =  0.97
-RMSEA index =  0.042  and the 90 % confidence intervals are  0.01 0.072
-BIC =  -35
+RMSEA index =  0.054  and the 90 % confidence intervals are  0 0.097
+BIC =  -31
 Fit based upon off diagonal values = 0.99
 Measures of factor score adequacy             
                                                    ML2  ML1
-Correlation of (regression) scores with factors   0.87 1.00
-Multiple R square of scores with factors          0.77 0.99
-Minimum correlation of possible factor scores     0.53 0.99</code></pre>
+Correlation of (regression) scores with factors   0.92 0.99
+Multiple R square of scores with factors          0.84 0.98
+Minimum correlation of possible factor scores     0.68 0.96</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 4) Inspect the specific relationship between motivation and knowledge items.</span></span>
 <span><span class="co">#    For instance, do an OLS regression testing if environmental attitude (motivation)</span></span>
@@ -1227,18 +1280,18 @@ lm(formula = els ~ env_attitude, data = combined_df)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.7955 -0.6605 -0.0334  0.7667  2.1901 
+-2.2841 -0.7300 -0.0017  0.7265  2.1682 
 
 Coefficients:
-             Estimate Std. Error t value       Pr(&gt;|t|)    
-(Intercept)   -1.2680     0.1893   -6.70 0.000000000050 ***
-env_attitude   0.3539     0.0517    6.85 0.000000000019 ***
+             Estimate Std. Error t value    Pr(&gt;|t|)    
+(Intercept)   -1.4739     0.2708   -5.44 0.000000113 ***
+env_attitude   0.4105     0.0738    5.56 0.000000061 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.96 on 584 degrees of freedom
-Multiple R-squared:  0.0744,    Adjusted R-squared:  0.0728 
-F-statistic: 46.9 on 1 and 584 DF,  p-value: 0.0000000000187</code></pre>
+Residual standard error: 0.95 on 285 degrees of freedom
+Multiple R-squared:  0.098, Adjusted R-squared:  0.0948 
+F-statistic:   31 on 1 and 285 DF,  p-value: 0.000000061</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># Another regression: see if perceived difficulty (motivation) predicts numeracy (knowledge)</span></span>
 <span><span class="va">model_diff_num</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">numeracy_score</span> <span class="op">~</span> <span class="va">perceived_difficulty_score</span>, data <span class="op">=</span> <span class="va">combined_df</span><span class="op">)</span></span>
@@ -1250,21 +1303,21 @@ lm(formula = numeracy_score ~ perceived_difficulty_score, data = combined_df)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.5380 -0.5194  0.0836  0.3006  1.8322 
+-2.3475 -0.6219 -0.0402  0.9201  1.4913 
 
 Coefficients:
-                                      Estimate          Std. Error t value
-(Intercept)                 0.0000000000000144  0.0409782243863863    0.00
-perceived_difficulty_score -0.1328990942184530  0.0410132335549985   -3.24
-                           Pr(&gt;|t|)   
-(Intercept)                  1.0000   
-perceived_difficulty_score   0.0013 **
+                                       Estimate           Std. Error t value
+(Intercept)                 0.00000000000000174  0.05799966257793866    0.00
+perceived_difficulty_score -0.19472790345158641  0.05810097210943094   -3.35
+                           Pr(&gt;|t|)    
+(Intercept)                 1.00000    
+perceived_difficulty_score  0.00091 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.99 on 584 degrees of freedom
-Multiple R-squared:  0.0177,    Adjusted R-squared:  0.016 
-F-statistic: 10.5 on 1 and 584 DF,  p-value: 0.00126</code></pre>
+Residual standard error: 0.98 on 285 degrees of freedom
+Multiple R-squared:  0.0379,    Adjusted R-squared:  0.0345 
+F-statistic: 11.2 on 1 and 285 DF,  p-value: 0.000912</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 5) Example of a more complex model: </span></span>
 <span><span class="co">#    Predict knowledge (ELS) from both environment attitude and numeracy, controlling for political conservatism</span></span>
@@ -1279,20 +1332,20 @@ lm(formula = els ~ env_attitude + pol_conservatism + numeracy_score,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--2.9385 -0.6354  0.0088  0.6822  2.1663 
+-2.7036 -0.6392  0.0051  0.6859  2.2377 
 
 Coefficients:
-                 Estimate Std. Error t value        Pr(&gt;|t|)    
-(Intercept)       -0.7996     0.2201   -3.63         0.00031 ***
-env_attitude       0.2563     0.0518    4.95 0.0000009827500 ***
-pol_conservatism  -0.0451     0.0285   -1.58         0.11393    
-numeracy_score     0.2859     0.0395    7.23 0.0000000000015 ***
+                 Estimate Std. Error t value      Pr(&gt;|t|)    
+(Intercept)       -0.9072     0.3312   -2.74        0.0065 ** 
+env_attitude       0.2773     0.0757    3.66        0.0003 ***
+pol_conservatism  -0.0338     0.0410   -0.83        0.4094    
+numeracy_score     0.3596     0.0551    6.52 0.00000000032 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.92 on 582 degrees of freedom
-Multiple R-squared:  0.164, Adjusted R-squared:  0.159 
-F-statistic:   38 on 3 and 582 DF,  p-value: &lt;0.0000000000000002</code></pre>
+Residual standard error: 0.88 on 283 degrees of freedom
+Multiple R-squared:  0.23,  Adjusted R-squared:  0.222 
+F-statistic: 28.2 on 3 and 283 DF,  p-value: 0.000000000000000563</code></pre>
 </div>
 <details class="code-fold"><summary>Display code</summary><div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 6) Quick plots to visualize the relationship between motivation and knowledge</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">combined_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">env_attitude</span>, y <span class="op">=</span> <span class="va">els</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -1885,24 +1938,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb85-42"><a href="#cb85-42" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">here</span>(<span class="st">"scripts"</span>,<span class="st">"survey_functions.R"</span>))</span>
 <span id="cb85-43"><a href="#cb85-43" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-44"><a href="#cb85-44" aria-hidden="true" tabindex="-1"></a>draw <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"draw.rds"</span>))</span>
-<span id="cb85-45"><a href="#cb85-45" aria-hidden="true" tabindex="-1"></a>dinst <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"dinst.rds"</span>))</span>
+<span id="cb85-45"><a href="#cb85-45" aria-hidden="true" tabindex="-1"></a><span class="co">#dinst &lt;- readRDS(here("data","dinst.rds"))</span></span>
 <span id="cb85-46"><a href="#cb85-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-47"><a href="#cb85-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Attari Energy Survey (Part 1)</span></span>
 <span id="cb85-48"><a href="#cb85-48" aria-hidden="true" tabindex="-1"></a>aes1 <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT01<span class="sc">:</span>ATT18)</span>
-<span id="cb85-49"><a href="#cb85-49" aria-hidden="true" tabindex="-1"></a>aes2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT01<span class="sc">:</span>ATT18)</span>
-<span id="cb85-50"><a href="#cb85-50" aria-hidden="true" tabindex="-1"></a>aes_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(aes1, aes2)</span>
+<span id="cb85-49"><a href="#cb85-49" aria-hidden="true" tabindex="-1"></a><span class="co">#aes2 &lt;- dinst |&gt; select(id,ATT01:ATT18)</span></span>
+<span id="cb85-50"><a href="#cb85-50" aria-hidden="true" tabindex="-1"></a>aes_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(aes1)</span>
 <span id="cb85-51"><a href="#cb85-51" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-52"><a href="#cb85-52" aria-hidden="true" tabindex="-1"></a>att_useSave <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT19<span class="sc">:</span>ATT33)</span>
-<span id="cb85-53"><a href="#cb85-53" aria-hidden="true" tabindex="-1"></a>att_useSave2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ATT19<span class="sc">:</span>ATT33)</span>
-<span id="cb85-54"><a href="#cb85-54" aria-hidden="true" tabindex="-1"></a>att2_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(att_useSave, att_useSave2)</span>
+<span id="cb85-53"><a href="#cb85-53" aria-hidden="true" tabindex="-1"></a><span class="co">#att_useSave2 &lt;- dinst |&gt; select(id,ATT19:ATT33)</span></span>
+<span id="cb85-54"><a href="#cb85-54" aria-hidden="true" tabindex="-1"></a>att2_combined <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(att_useSave)</span>
 <span id="cb85-55"><a href="#cb85-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-56"><a href="#cb85-56" aria-hidden="true" tabindex="-1"></a>els1 <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ELS01<span class="sc">:</span>ELS08)</span>
-<span id="cb85-57"><a href="#cb85-57" aria-hidden="true" tabindex="-1"></a>els2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,ELS01<span class="sc">:</span>ELS08)</span>
-<span id="cb85-58"><a href="#cb85-58" aria-hidden="true" tabindex="-1"></a>els <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(els1,els2)</span>
+<span id="cb85-57"><a href="#cb85-57" aria-hidden="true" tabindex="-1"></a><span class="co">#els2 &lt;- dinst |&gt; select(id,ELS01:ELS08)</span></span>
+<span id="cb85-58"><a href="#cb85-58" aria-hidden="true" tabindex="-1"></a>els <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(els1)</span>
 <span id="cb85-59"><a href="#cb85-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-60"><a href="#cb85-60" aria-hidden="true" tabindex="-1"></a>rs1 <span class="ot">&lt;-</span> draw <span class="sc">|&gt;</span> <span class="fu">select</span>(id,RS01<span class="sc">:</span>RS06)</span>
-<span id="cb85-61"><a href="#cb85-61" aria-hidden="true" tabindex="-1"></a>rs2 <span class="ot">&lt;-</span> dinst <span class="sc">|&gt;</span> <span class="fu">select</span>(id,RS01<span class="sc">:</span>RS06)</span>
-<span id="cb85-62"><a href="#cb85-62" aria-hidden="true" tabindex="-1"></a>rs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(rs1,rs2)</span>
+<span id="cb85-61"><a href="#cb85-61" aria-hidden="true" tabindex="-1"></a><span class="co">#rs2 &lt;- dinst |&gt; select(id,RS01:RS06)</span></span>
+<span id="cb85-62"><a href="#cb85-62" aria-hidden="true" tabindex="-1"></a>rs <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(rs1)</span>
 <span id="cb85-63"><a href="#cb85-63" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-64"><a href="#cb85-64" aria-hidden="true" tabindex="-1"></a>attari1 <span class="ot">&lt;-</span> <span class="fu">analyze_attari_survey_part1</span>(aes_combined)</span>
 <span id="cb85-65"><a href="#cb85-65" aria-hidden="true" tabindex="-1"></a>attari2_scores <span class="ot">&lt;-</span> <span class="fu">analyze_attari_survey</span>(att2_combined)</span>

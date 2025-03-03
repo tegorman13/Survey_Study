@@ -50,24 +50,24 @@ The following code block loads the data from RDS files and combines data from di
 ```{r load-data}
 # Load data from RDS files
 draw <- readRDS(here("data", "draw.rds"))
-dinst <- readRDS(here("data", "dinst.rds"))
+#dinst <- readRDS(here("data", "dinst.rds"))
 
 # Combine data from different sources for each survey part
 aes1 <- draw %>% select(id, ATT01:ATT18)
-aes2 <- dinst %>% select(id, ATT01:ATT18)
-aes_combined <- bind_rows(aes1, aes2)
+#aes2 <- dinst %>% select(id, ATT01:ATT18)
+aes_combined <- bind_rows(aes1)
 
 att_useSave <- draw %>% select(id, ATT19:ATT33)
-att_useSave2 <- dinst %>% select(id, ATT19:ATT33)
-att2_combined <- bind_rows(att_useSave, att_useSave2)
+#att_useSave2 <- dinst %>% select(id, ATT19:ATT33)
+att2_combined <- bind_rows(att_useSave)
 
 els1 <- draw %>% select(id, ELS01:ELS08)
-els2 <- dinst %>% select(id, ELS01:ELS08)
-els <- bind_rows(els1, els2)
+#els2 <- dinst %>% select(id, ELS01:ELS08)
+els <- bind_rows(els1)
 
 rs1 <- draw %>% select(id, RS01:RS06)
-rs2 <- dinst %>% select(id, RS01:RS06)
-rs <- bind_rows(rs1, rs2)
+#rs2 <- dinst %>% select(id, RS01:RS06)
+rs <- bind_rows(rs1)
 ```
 
 This code block processes the raw survey responses using custom scoring functions to generate meaningful scores for each participant in each survey.  These scores are then merged into a single data frame (`combined_scores`). Finally, columns are renamed for clarity.

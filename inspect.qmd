@@ -48,51 +48,51 @@ pacman::p_load(dplyr,purrr,tidyr,here, haven,tibble,ggplot2,ggh4x,lme4,knitr,gt,
 options(digits=2, scipen=999, dplyr.summarise.inform=FALSE)
 
 draw <- readRDS(here("data","draw.rds"))
-dinst <- readRDS(here("data","dinst.rds"))
+#dinst <- readRDS(here("data","dinst.rds"))
 
 
 # Attari Energy Survey (Part 1)
 aes1 <- draw |> select(id,ATT01:ATT18)
-aes2 <- dinst |> select(id,ATT01:ATT18)
-aes_combined <- bind_rows(aes1, aes2)
+#aes2 <- dinst |> select(id,ATT01:ATT18)
+aes_combined <- bind_rows(aes1)
 
 
 att_useSave <- draw |> select(id,ATT19:ATT33)
-att_useSave2 <- dinst |> select(id,ATT19:ATT33)
-att2_combined <- bind_rows(att_useSave, att_useSave2)
+#att_useSave2 <- dinst |> select(id,ATT19:ATT33)
+att2_combined <- bind_rows(att_useSave)
 
 
 els1 <- draw |> select(id,ELS01:ELS08)
-els2 <- dinst |> select(id,ELS01:ELS08)
-els <- bind_rows(els1,els2)
+#els2 <- dinst |> select(id,ELS01:ELS08)
+els <- bind_rows(els1)
 
 
 recs1 <- draw |> select(id,RECS01:RECS16)
-recs2 <- dinst |> select(id,RECS01:RECS16)
-recs <- bind_rows(recs1,recs2)
+#recs2 <- dinst |> select(id,RECS01:RECS16)
+recs <- bind_rows(recs1)
 
 
 lss1_1 <- draw |> select(id,LAN01:LAN09)
-lss1_2 <- dinst |> select(id,LAN01:LAN09)
-lss1 <- bind_rows(lss1_1,lss1_2)
+#lss1_2 <- dinst |> select(id,LAN01:LAN09)
+lss1 <- bind_rows(lss1_1)
 
 lss2_1 <- draw |> select(id,LAN10:LAN87)
-lss2_2 <- dinst |> select(id,LAN10:LAN87)
-lss2 <- bind_rows(lss2_1,lss2_2)
+#lss2_2 <- dinst |> select(id,LAN10:LAN87)
+lss2 <- bind_rows(lss2_1)
 
 
 nep1 <- draw |> select(id,NEP01:NEP15)
-nep2 <- dinst |> select(id,NEP01:NEP15)
-nep <- bind_rows(nep1,nep2)
+#nep2 <- dinst |> select(id,NEP01:NEP15)
+nep <- bind_rows(nep1)
 
 demo1 <- draw |> select(id,DEM01:DEM30)
-demo2 <- dinst |> select(id,DEM01:DEM30)
-demo <- bind_rows(demo1,demo2)
+#demo2 <- dinst |> select(id,DEM01:DEM30)
+demo <- bind_rows(demo1)
 
 
 rs1 <- draw |> select(id,RS01:RS06)
-rs2 <- dinst |> select(id,RS01:RS06)
-rs <- bind_rows(rs1,rs2)
+#rs2 <- dinst |> select(id,RS01:RS06)
+rs <- bind_rows(rs1)
 
 ```
 
@@ -994,7 +994,7 @@ head(recs,n=10)
 
 
 ```{r}
-recs <- bind_rows(recs1,recs2)
+recs <- bind_rows(recs1)
 
 
 recs %>%
@@ -1163,7 +1163,7 @@ head(lss1)
 
 ```{r}
 
-lss1 <- bind_rows(lss1_1,lss1_2)
+#lss1 <- bind_rows(lss1_1,lss1_2)
 
 
 ```

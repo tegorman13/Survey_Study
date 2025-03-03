@@ -1,34 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tegorman13.github.io/Survey_Study/org.html</loc>
-    <lastmod>2025-01-21T07:33:06.063Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/Survey_Study/index.html</loc>
-    <lastmod>2025-01-19T22:15:01.342Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/Survey_Study/inspect.html</loc>
-    <lastmod>2025-01-21T09:57:05.959Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/Survey_Study/inst.html</loc>
-    <lastmod>2025-01-21T10:05:02.318Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/Survey_Study/cors.html</loc>
-    <lastmod>2025-01-22T04:19:41.311Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/Survey_Study/cors1.html</loc>
-    <lastmod>2025-01-21T19:09:41.041Z</lastmod>
-  </url>
-  <url>
-    <loc>https://tegorman13.github.io/Survey_Study/cors2.html</loc>
-    <lastmod>2025-01-21T19:24:32.293Z</lastmod>
-  </url>
-  <url>
     <loc>https://tegorman13.github.io/Survey_Study/bg/survey_codebook_outline.html</loc>
     <lastmod>2025-01-21T13:19:28.591Z</lastmod>
   </url>
@@ -43,6 +15,34 @@
   <url>
     <loc>https://tegorman13.github.io/Survey_Study/bg/1_JP_summaries_know_mot.html</loc>
     <lastmod>2025-01-20T00:37:41.250Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/cors1.html</loc>
+    <lastmod>2025-03-03T21:30:36.013Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/inst.html</loc>
+    <lastmod>2025-01-21T10:05:02.318Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/inspect.html</loc>
+    <lastmod>2025-03-03T21:36:45.832Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/index.html</loc>
+    <lastmod>2025-01-19T22:15:01.342Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/org.html</loc>
+    <lastmod>2025-01-21T07:33:06.063Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/cors.html</loc>
+    <lastmod>2025-03-03T21:21:27.114Z</lastmod>
+  </url>
+  <url>
+    <loc>https://tegorman13.github.io/Survey_Study/cors2.html</loc>
+    <lastmod>2025-03-03T21:30:02.422Z</lastmod>
   </url>
   <url>
     <loc>https://tegorman13.github.io/Survey_Study/bg/EnergySurveyInstruments.html</loc>

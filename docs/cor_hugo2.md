@@ -45,24 +45,24 @@ select = dplyr::select
 source(here("scripts","survey_functions.R"))
 
 draw <- readRDS(here("data","draw.rds"))
-dinst <- readRDS(here("data","dinst.rds"))
+#dinst <- readRDS(here("data","dinst.rds"))
 
 # Attari Energy Survey (Part 1)
 aes1 <- draw |> select(id,ATT01:ATT18)
-aes2 <- dinst |> select(id,ATT01:ATT18)
-aes_combined <- bind_rows(aes1, aes2)
+#aes2 <- dinst |> select(id,ATT01:ATT18)
+aes_combined <- bind_rows(aes1)
 
 att_useSave <- draw |> select(id,ATT19:ATT33)
-att_useSave2 <- dinst |> select(id,ATT19:ATT33)
-att2_combined <- bind_rows(att_useSave, att_useSave2)
+#att_useSave2 <- dinst |> select(id,ATT19:ATT33)
+att2_combined <- bind_rows(att_useSave)
 
 els1 <- draw |> select(id,ELS01:ELS08)
-els2 <- dinst |> select(id,ELS01:ELS08)
-els <- bind_rows(els1,els2)
+#els2 <- dinst |> select(id,ELS01:ELS08)
+els <- bind_rows(els1)
 
 rs1 <- draw |> select(id,RS01:RS06)
-rs2 <- dinst |> select(id,RS01:RS06)
-rs <- bind_rows(rs1,rs2)
+#rs2 <- dinst |> select(id,RS01:RS06)
+rs <- bind_rows(rs1)
 
 attari1 <- analyze_attari_survey_part1(aes_combined)
 attari2_scores <- analyze_attari_survey(att2_combined)
@@ -91,11 +91,11 @@ combined_scores |> head(5) |> kable() |> kable_styling("striped", full_width = F
 
 | id | perceived_difficulty | numeracy | energy_use | energy_save | els_accuracy | els_score | env_attitude | env_attitude_z | pol_conservatism | pol_conservatism_z |
 |---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| 1 | 0.61 | 1.5 | 1.101 | 1.01 | 6 | 0.74 | 3.2 | -0.43 | 2.0 | -0.45 |
-| 2 | -0.45 | 1.5 | 0.137 | -0.46 | 5 | 0.20 | 3.5 | -0.11 | 1.0 | -1.15 |
-| 3 | 2.09 | -2.0 | -1.440 | 0.70 | 4 | -0.33 | 3.0 | -0.76 | 3.0 | 0.26 |
-| 4 | -0.69 | -1.3 | 1.346 | 2.16 | 2 | -1.40 | 3.8 | 0.22 | 1.0 | -1.15 |
-| 5 | 0.91 | 1.5 | 0.075 | -0.52 | 3 | -0.87 | 3.8 | 0.22 | 3.5 | 0.61 |
+| 1 | 0.51 | 0.98 | 0.7601 | 0.78 | 6 | 0.79 | 3.2 | -0.45 | 2.0 | -0.42 |
+| 2 | -0.48 | 0.98 | 0.0015 | -0.43 | 5 | 0.27 | 3.5 | -0.12 | 1.0 | -1.12 |
+| 3 | 1.90 | -1.87 | -1.2393 | 0.53 | 4 | -0.25 | 3.0 | -0.77 | 3.0 | 0.27 |
+| 4 | -0.70 | -1.26 | 0.9531 | 1.73 | 2 | -1.29 | 3.8 | 0.21 | 1.0 | -1.12 |
+| 5 | 0.79 | 0.98 | -0.0468 | -0.48 | 3 | -0.77 | 3.8 | 0.21 | 3.5 | 0.62 |
 
 # 1a
 
@@ -159,43 +159,43 @@ print(fa_result, cut = 0.3, sort = TRUE)
     Factor Analysis using method =  minres
     Call: fa(r = fa_data, nfactors = 2, rotate = "varimax")
     Standardized loadings (pattern matrix) based upon correlation matrix
-                         item   MR1   MR2   h2     u2 com
-    energy_use              3  0.77       0.61 0.3856 1.1
-    energy_save             4  0.68       0.49 0.5146 1.1
-    numeracy                2  0.52       0.29 0.7067 1.2
-    els_score               5  0.50       0.30 0.6954 1.4
-    pol_conservatism_z      7             0.14 0.8570 2.0
-    env_attitude_z          6        0.99 1.00 0.0035 1.0
-    perceived_difficulty    1       -0.36 0.19 0.8120 1.7
+                         item   MR1   MR2   h2    u2 com
+    energy_use              3  0.84       0.76 0.244 1.1
+    energy_save             4  0.73       0.59 0.414 1.2
+    els_score               5  0.56       0.37 0.634 1.3
+    numeracy                2  0.55       0.33 0.671 1.2
+    env_attitude_z          6        0.99 1.00 0.004 1.0
+    perceived_difficulty    1 -0.31 -0.41 0.27 0.733 1.9
+    pol_conservatism_z      7 -0.33 -0.37 0.25 0.752 2.0
 
                            MR1  MR2
-    SS loadings           1.72 1.31
-    Proportion Var        0.25 0.19
-    Cumulative Var        0.25 0.43
-    Proportion Explained  0.57 0.43
-    Cumulative Proportion 0.57 1.00
+    SS loadings           2.08 1.47
+    Proportion Var        0.30 0.21
+    Cumulative Var        0.30 0.51
+    Proportion Explained  0.59 0.41
+    Cumulative Proportion 0.59 1.00
 
     Mean item complexity =  1.4
     Test of the hypothesis that 2 factors are sufficient.
 
-    df null model =  21  with the objective function =  1.3 with Chi Square =  760
-    df of  the model are 8  and the objective function was  0.03 
+    df null model =  21  with the objective function =  2 with Chi Square =  581
+    df of  the model are 8  and the objective function was  0.06 
 
     The root mean square of the residuals (RMSR) is  0.03 
-    The df corrected root mean square of the residuals is  0.04 
+    The df corrected root mean square of the residuals is  0.05 
 
-    The harmonic n.obs is  586 with the empirical chi square  17  with prob <  0.035 
-    The total n.obs was  586  with Likelihood Chi Square =  17  with prob <  0.029 
+    The harmonic n.obs is  287 with the empirical chi square  11  with prob <  0.21 
+    The total n.obs was  287  with Likelihood Chi Square =  16  with prob <  0.039 
 
-    Tucker Lewis Index of factoring reliability =  0.97
-    RMSEA index =  0.044  and the 90 % confidence intervals are  0.014 0.073
-    BIC =  -34
+    Tucker Lewis Index of factoring reliability =  0.96
+    RMSEA index =  0.06  and the 90 % confidence intervals are  0.013 0.1
+    BIC =  -29
     Fit based upon off diagonal values = 0.99
     Measures of factor score adequacy             
                                                        MR1  MR2
-    Correlation of (regression) scores with factors   0.87 1.00
-    Multiple R square of scores with factors          0.76 0.99
-    Minimum correlation of possible factor scores     0.52 0.99
+    Correlation of (regression) scores with factors   0.91 1.00
+    Multiple R square of scores with factors          0.83 0.99
+    Minimum correlation of possible factor scores     0.66 0.99
 
 ``` r
 # 3. Enhanced Regression Models
@@ -213,31 +213,31 @@ summary(model_els_enhanced)
 
     Residuals:
         Min      1Q  Median      3Q     Max 
-    -2.8527 -0.5932 -0.0299  0.6199  1.8308 
+    -2.6980 -0.5503  0.0032  0.5721  1.8213 
 
     Coefficients:
-                                     Estimate           Std. Error t value Pr(>|t|)
-    (Intercept)          -0.00000000000000163  0.03613218269822796    0.00   1.0000
-    perceived_difficulty -0.06114449214752567  0.04004735896976241   -1.53   0.1274
-    env_attitude_z        0.13430310791561964  0.04088654156087833    3.28   0.0011
-    pol_conservatism_z   -0.02729118081676693  0.03888339472559318   -0.70   0.4830
-    numeracy              0.16978503215872956  0.04078151886943691    4.16 0.000036
-    energy_use            0.19904507771344263  0.04637687030463776    4.29 0.000021
-    energy_save           0.13859460176947813  0.04521755406911262    3.07   0.0023
-                            
-    (Intercept)             
-    perceived_difficulty    
-    env_attitude_z       ** 
-    pol_conservatism_z      
-    numeracy             ***
-    energy_use           ***
-    energy_save          ** 
+                                       Estimate             Std. Error t value
+    (Intercept)          -0.0000000000000000688  0.0489269055507626435    0.00
+    perceived_difficulty -0.0337244503822692054  0.0570460415578972341   -0.59
+    env_attitude_z        0.1261028743723029699  0.0590615887219709187    2.14
+    pol_conservatism_z    0.0051715350800468698  0.0562734579223263670    0.09
+    numeracy              0.2159823248735648904  0.0566852070307704362    3.81
+    energy_use            0.3194051454769996634  0.0731342822426433031    4.37
+    energy_save           0.0588285984463395514  0.0703556985523190459    0.84
+                         Pr(>|t|)    
+    (Intercept)           1.00000    
+    perceived_difficulty  0.55488    
+    env_attitude_z        0.03362 *  
+    pol_conservatism_z    0.92684    
+    numeracy              0.00017 ***
+    energy_use           0.000018 ***
+    energy_save           0.40378    
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.88 on 579 degrees of freedom
-    Multiple R-squared:  0.243, Adjusted R-squared:  0.235 
-    F-statistic: 30.9 on 6 and 579 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.83 on 280 degrees of freedom
+    Multiple R-squared:  0.327, Adjusted R-squared:  0.313 
+    F-statistic: 22.7 on 6 and 280 DF,  p-value: <0.0000000000000002
 
 ``` r
 # 4. Interaction Effects in Regression
@@ -252,21 +252,21 @@ summary(model_interaction)
         data = combined_scores)
 
     Residuals:
-       Min     1Q Median     3Q    Max 
-    -3.169 -0.678  0.026  0.689  2.285 
+        Min      1Q  Median      3Q     Max 
+    -2.4443 -0.6460  0.0125  0.6944  2.1713 
 
     Coefficients:
-                                        Estimate Std. Error t value   Pr(>|t|)    
-    (Intercept)                          -0.0130     0.0423   -0.31     0.7592    
-    perceived_difficulty                 -0.1383     0.0428   -3.23     0.0013 ** 
-    env_attitude_z                        0.2187     0.0428    5.11 0.00000045 ***
-    perceived_difficulty:env_attitude_z  -0.0337     0.0393   -0.86     0.3915    
+                                        Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)                          -0.0457     0.0613   -0.75  0.45624    
+    perceived_difficulty                 -0.1680     0.0624   -2.69  0.00749 ** 
+    env_attitude_z                        0.2286     0.0626    3.65  0.00031 ***
+    perceived_difficulty:env_attitude_z  -0.1017     0.0581   -1.75  0.08091 .  
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.96 on 582 degrees of freedom
-    Multiple R-squared:  0.0915,    Adjusted R-squared:  0.0868 
-    F-statistic: 19.5 on 3 and 582 DF,  p-value: 0.00000000000438
+    Residual standard error: 0.94 on 283 degrees of freedom
+    Multiple R-squared:  0.128, Adjusted R-squared:  0.119 
+    F-statistic: 13.8 on 3 and 283 DF,  p-value: 0.0000000196
 
 ``` r
 # Visualize the interaction (example)
@@ -439,27 +439,27 @@ summary(interaction_model)
 
     Residuals:
         Min      1Q  Median      3Q     Max 
-    -3.0152 -0.6285  0.0088  0.6599  2.2174 
+    -2.5406 -0.5246  0.0126  0.6594  2.0447 
 
     Coefficients:
                                             Estimate Std. Error t value
-    (Intercept)                              -0.7906     0.1966   -4.02
-    env_attitude                              0.2192     0.0538    4.07
-    perceived_difficulty_score               -0.0550     0.1782   -0.31
-    numeracy_score                            0.2909     0.0387    7.52
-    env_attitude:perceived_difficulty_score  -0.0177     0.0488   -0.36
-                                                    Pr(>|t|)    
-    (Intercept)                             0.00006570557947 ***
-    env_attitude                            0.00005257587373 ***
-    perceived_difficulty_score                          0.76    
-    numeracy_score                          0.00000000000021 ***
-    env_attitude:perceived_difficulty_score             0.72    
+    (Intercept)                              -0.8353     0.2813   -2.97
+    env_attitude                              0.2227     0.0774    2.88
+    perceived_difficulty_score                0.2508     0.2572    0.98
+    numeracy_score                            0.3541     0.0535    6.62
+    env_attitude:perceived_difficulty_score  -0.1047     0.0711   -1.47
+                                                 Pr(>|t|)    
+    (Intercept)                                    0.0032 ** 
+    env_attitude                                   0.0043 ** 
+    perceived_difficulty_score                     0.3303    
+    numeracy_score                          0.00000000019 ***
+    env_attitude:perceived_difficulty_score        0.1421    
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.91 on 581 degrees of freedom
-    Multiple R-squared:  0.172, Adjusted R-squared:  0.166 
-    F-statistic: 30.2 on 4 and 581 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.88 on 282 degrees of freedom
+    Multiple R-squared:  0.245, Adjusted R-squared:  0.234 
+    F-statistic: 22.9 on 4 and 282 DF,  p-value: <0.0000000000000002
 
 ``` r
 # Create interaction plot data
@@ -487,18 +487,18 @@ summary(gam_model)
     els ~ s(env_attitude) + s(perceived_difficulty_score)
 
     Parametric coefficients:
-                           Estimate          Std. Error t value Pr(>|t|)
-    (Intercept) 0.00000000000000488 0.03867979305614088       0        1
+                             Estimate            Std. Error t value Pr(>|t|)
+    (Intercept) -0.000000000000000183  0.054877905715381682       0        1
 
     Approximate significance of smooth terms:
-                                   edf Ref.df    F   p-value    
-    s(env_attitude)               5.44   6.52 6.19 0.0000016 ***
-    s(perceived_difficulty_score) 6.28   7.42 3.76   0.00043 ***
+                                   edf Ref.df    F p-value    
+    s(env_attitude)               2.87   3.61 5.74 0.00034 ***
+    s(perceived_difficulty_score) 1.92   2.43 3.62 0.02485 *  
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    R-sq.(adj) =  0.123   Deviance explained = 14.1%
-    GCV = 0.89618  Scale est. = 0.87673   n = 586
+    R-sq.(adj) =  0.136   Deviance explained =   15%
+    GCV = 0.8821  Scale est. = 0.86432   n = 287
 
 ``` r
 summary(interaction_model)
@@ -511,27 +511,27 @@ summary(interaction_model)
 
     Residuals:
         Min      1Q  Median      3Q     Max 
-    -3.0152 -0.6285  0.0088  0.6599  2.2174 
+    -2.5406 -0.5246  0.0126  0.6594  2.0447 
 
     Coefficients:
                                             Estimate Std. Error t value
-    (Intercept)                              -0.7906     0.1966   -4.02
-    env_attitude                              0.2192     0.0538    4.07
-    perceived_difficulty_score               -0.0550     0.1782   -0.31
-    numeracy_score                            0.2909     0.0387    7.52
-    env_attitude:perceived_difficulty_score  -0.0177     0.0488   -0.36
-                                                    Pr(>|t|)    
-    (Intercept)                             0.00006570557947 ***
-    env_attitude                            0.00005257587373 ***
-    perceived_difficulty_score                          0.76    
-    numeracy_score                          0.00000000000021 ***
-    env_attitude:perceived_difficulty_score             0.72    
+    (Intercept)                              -0.8353     0.2813   -2.97
+    env_attitude                              0.2227     0.0774    2.88
+    perceived_difficulty_score                0.2508     0.2572    0.98
+    numeracy_score                            0.3541     0.0535    6.62
+    env_attitude:perceived_difficulty_score  -0.1047     0.0711   -1.47
+                                                 Pr(>|t|)    
+    (Intercept)                                    0.0032 ** 
+    env_attitude                                   0.0043 ** 
+    perceived_difficulty_score                     0.3303    
+    numeracy_score                          0.00000000019 ***
+    env_attitude:perceived_difficulty_score        0.1421    
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.91 on 581 degrees of freedom
-    Multiple R-squared:  0.172, Adjusted R-squared:  0.166 
-    F-statistic: 30.2 on 4 and 581 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.88 on 282 degrees of freedom
+    Multiple R-squared:  0.245, Adjusted R-squared:  0.234 
+    F-statistic: 22.9 on 4 and 282 DF,  p-value: <0.0000000000000002
 
 ``` r
 # Cluster profile analysis
@@ -553,9 +553,9 @@ print(cluster_profiles)
     # A tibble: 3 × 8
       knowledge_cluster mean_numeracy mean_energy_use mean_energy_save mean_els
       <fct>                     <dbl>           <dbl>            <dbl>    <dbl>
-    1 1                        -1.43           -0.670           -0.679   -0.790
-    2 2                         0.361          -0.386           -0.470   -0.463
-    3 3                         0.459           0.635            0.705    0.756
+    1 1                        -1.41           -1.18            -1.14    -1.03 
+    2 2                         0.609           0.840            0.782    0.801
+    3 3                         0.106          -0.240           -0.199   -0.276
     # ℹ 3 more variables: mean_env_attitude <dbl>, mean_difficulty <dbl>, n <int>
 
 
@@ -635,13 +635,13 @@ cluster_centers
 ```
 
       numeracy_score relative_energy_use_score relative_energy_save_score   els
-    1          -0.80                     -0.74                      -0.76 -0.89
-    2           0.19                      0.12                       0.13  0.33
-    3           0.48                      0.48                       0.49  0.44
+    1           0.28                     0.056                      0.074  0.19
+    2          -1.14                    -1.026                     -1.085 -0.98
+    3           0.46                     0.559                      0.581  0.44
       perceived_difficulty_score env_attitude pol_conservatism
-    1                       0.69      -0.6788             0.41
-    2                      -0.35       0.0008             0.84
-    3                      -0.27       0.5253            -0.96
+    1                     -0.074        -0.39             0.74
+    2                      0.825        -0.68             0.60
+    3                     -0.430         0.68            -0.88
 
 
 
@@ -662,7 +662,7 @@ table(clusters)
 
     clusters
       1   2   3 
-    211  65 310 
+    109 120  58 
 
 ``` r
 # Example mediation: knowledge -> perceived_difficulty -> env_attitude
@@ -688,7 +688,7 @@ summary(fit_mediation, fit.measures=TRUE, standardized=TRUE, rsquare=TRUE)
       Optimization method                           NLMINB
       Number of model parameters                         7
 
-      Number of observations                           586
+      Number of observations                           287
       Number of missing patterns                         1
 
     Model Test User Model:
@@ -698,7 +698,7 @@ summary(fit_mediation, fit.measures=TRUE, standardized=TRUE, rsquare=TRUE)
 
     Model Test Baseline Model:
 
-      Test statistic                               149.690
+      Test statistic                               101.384
       Degrees of freedom                                 3
       P-value                                        0.000
 
@@ -712,12 +712,12 @@ summary(fit_mediation, fit.measures=TRUE, standardized=TRUE, rsquare=TRUE)
 
     Loglikelihood and Information Criteria:
 
-      Loglikelihood user model (H0)              -1434.548
-      Loglikelihood unrestricted model (H1)      -1434.548
+      Loglikelihood user model (H0)               -684.945
+      Loglikelihood unrestricted model (H1)       -684.945
                                                           
-      Akaike (AIC)                                2883.095
-      Bayesian (BIC)                              2913.709
-      Sample-size adjusted Bayesian (SABIC)       2891.486
+      Akaike (AIC)                                1383.891
+      Bayesian (BIC)                              1409.507
+      Sample-size adjusted Bayesian (SABIC)       1387.309
 
     Root Mean Square Error of Approximation:
 
@@ -746,38 +746,38 @@ summary(fit_mediation, fit.measures=TRUE, standardized=TRUE, rsquare=TRUE)
     Regressions:
                                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv
       env_attitude ~                                                           
-        els        (c)                0.152    0.029    5.151    0.000    0.152
+        els        (c)                0.158    0.041    3.880    0.000    0.158
       perceived_difficulty_score ~                                             
-        els        (a)               -0.222    0.040   -5.506    0.000   -0.222
+        els        (a)               -0.268    0.057   -4.721    0.000   -0.268
       env_attitude ~                                                           
-        prcvd_dff_ (b)               -0.263    0.029   -8.934    0.000   -0.263
+        prcvd_dff_ (b)               -0.302    0.041   -7.417    0.000   -0.302
       Std.all
              
-        0.197
+        0.207
              
-       -0.222
+       -0.268
              
-       -0.342
+       -0.395
 
     Intercepts:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .env_attitude      3.583    0.029  124.796    0.000    3.583    4.653
-       .prcvd_dffclty_    0.000    0.040    0.000    1.000    0.000    0.000
+       .env_attitude      3.591    0.039   91.857    0.000    3.591    4.717
+       .prcvd_dffclty_    0.000    0.057    0.000    1.000    0.000    0.000
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .env_attitude      0.483    0.028   17.117    0.000    0.483    0.815
-       .prcvd_dffclty_    0.949    0.055   17.117    0.000    0.949    0.951
+       .env_attitude      0.439    0.037   11.979    0.000    0.439    0.757
+       .prcvd_dffclty_    0.925    0.077   11.979    0.000    0.925    0.928
 
     R-Square:
                        Estimate
-        env_attitude      0.185
-        prcvd_dffclty_    0.049
+        env_attitude      0.243
+        prcvd_dffclty_    0.072
 
     Defined Parameters:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-        ab                0.058    0.012    4.687    0.000    0.058    0.076
-        total             0.210    0.031    6.862    0.000    0.210    0.273
+        ab                0.081    0.020    3.982    0.000    0.081    0.106
+        total             0.239    0.043    5.583    0.000    0.239    0.313
 
 ------------------------------------------------------------------------
 
@@ -832,35 +832,27 @@ km3 <- kmeans(cluster_data, centers = 3, nstart = 25)
 km3
 ```
 
-    K-means clustering with 3 clusters of sizes 184, 167, 235
+    K-means clustering with 3 clusters of sizes 87, 124, 76
 
     Cluster means:
       composite_knowledge composite_motivation
-    1               -0.79                  1.2
-    2                0.47                  1.4
-    3                0.29                  2.5
+    1                0.35                  1.4
+    2                0.39                  2.5
+    3               -1.03                  1.1
 
     Clustering vector:
-      [1] 2 3 1 3 2 3 3 1 2 3 3 3 1 3 1 1 1 1 1 3 3 2 1 3 3 3 2 3 1 1 2 2 2 3 2 2 2
-     [38] 1 3 2 1 3 2 1 2 3 3 1 1 1 2 2 3 1 3 2 3 3 1 3 2 3 1 2 3 2 1 3 1 3 3 1 3 2
-     [75] 2 3 1 3 1 3 3 3 3 2 2 2 1 2 3 1 2 3 3 3 2 3 1 3 2 3 3 3 3 2 2 2 3 3 3 3 2
-    [112] 3 2 3 3 1 3 3 2 2 2 1 3 3 2 2 3 3 2 2 3 3 3 3 1 1 3 3 3 1 3 1 3 2 3 3 2 2
-    [149] 2 3 3 2 2 1 3 3 1 2 2 1 2 3 3 2 3 1 3 3 2 2 3 2 2 1 2 3 1 3 2 2 2 3 3 1 2
-    [186] 1 2 2 3 3 3 2 1 2 2 2 3 2 3 2 3 2 3 1 1 1 3 3 3 2 1 2 3 1 2 1 3 2 2 3 2 2
-    [223] 3 1 3 1 2 2 3 2 1 1 2 2 3 2 1 3 1 1 1 2 2 1 1 1 3 1 3 1 3 1 1 2 1 2 1 1 1
-    [260] 3 1 3 1 3 3 1 1 1 3 1 1 1 1 1 3 3 1 2 1 1 1 1 1 1 1 3 1 3 2 1 1 3 1 2 2 2
-    [297] 2 3 2 2 3 2 1 3 3 1 2 1 1 1 1 2 2 3 2 1 3 1 1 2 3 3 2 2 3 3 1 1 1 2 2 1 3
-    [334] 1 3 3 3 1 1 1 2 2 2 1 3 3 3 1 1 3 1 2 2 3 2 2 1 1 1 1 1 3 3 1 2 3 3 2 1 3
-    [371] 1 2 3 3 3 2 1 3 2 3 3 3 3 2 1 3 2 3 3 3 1 1 1 1 2 2 1 3 3 3 3 2 3 1 1 3 1
-    [408] 3 2 2 2 1 2 2 3 1 2 3 3 2 3 1 2 3 1 1 3 3 1 1 3 2 2 1 3 1 3 2 2 3 2 3 1 1
-    [445] 2 1 1 2 3 3 2 1 3 1 2 2 2 2 3 1 1 2 2 3 3 2 3 3 1 3 2 3 1 3 3 1 2 3 3 1 3
-    [482] 3 3 2 3 3 2 2 3 1 1 1 2 1 3 1 1 3 1 1 3 1 3 3 3 1 3 3 3 3 3 3 1 2 2 3 3 1
-    [519] 3 1 2 3 2 1 2 2 1 2 3 3 3 3 3 3 1 3 3 3 3 1 3 1 3 2 1 1 2 3 3 1 2 1 3 1 1
-    [556] 2 1 1 1 1 3 1 3 2 1 3 3 2 2 3 3 3 2 1 3 3 1 1 1 3 3 2 3 3 3 2
+      [1] 1 2 3 2 1 2 2 3 2 2 2 2 3 2 3 1 3 3 3 2 2 1 3 2 2 2 1 2 3 3 2 1 1 2 1 1 1
+     [38] 3 2 1 3 2 1 3 1 2 2 3 3 1 1 1 2 1 2 1 2 2 3 2 1 2 3 1 2 1 3 2 3 2 2 3 2 1
+     [75] 1 2 3 2 3 2 2 2 2 1 1 2 3 1 2 3 1 2 2 2 1 2 3 2 2 2 2 2 2 1 1 1 2 2 2 2 1
+    [112] 2 1 2 2 3 2 1 1 2 1 3 2 2 1 1 2 2 2 1 2 2 2 2 3 3 2 2 2 1 2 3 2 1 2 2 1 1
+    [149] 1 2 2 1 1 3 2 2 3 1 1 1 1 2 2 1 2 3 2 2 1 1 2 1 1 3 1 2 3 2 1 1 2 2 2 1 1
+    [186] 3 1 2 2 2 2 1 3 1 1 1 2 1 2 2 2 1 2 3 3 3 2 2 2 1 1 1 2 3 2 3 2 1 2 2 1 1
+    [223] 2 3 2 3 1 1 2 2 3 3 1 1 2 1 3 2 3 3 3 1 1 3 1 3 2 3 2 3 2 3 3 1 1 1 3 3 3
+    [260] 2 3 2 3 2 2 3 3 3 2 3 1 1 3 3 2 2 3 1 3 3 3 3 3 3 3 2 3
 
     Within cluster sum of squares by cluster:
-    [1] 103  67 108
-     (between_SS / total_SS =  57.0 %)
+    [1] 32 55 36
+     (between_SS / total_SS =  63.7 %)
 
     Available components:
 
@@ -893,9 +885,9 @@ combined_scores %>%
     # A tibble: 3 × 4
       cluster     n mean_knowledge mean_motivation
       <fct>   <int>          <dbl>           <dbl>
-    1 1         184         -0.794            1.22
-    2 2         167          0.469            1.44
-    3 3         235          0.288            2.49
+    1 1          87          0.348            1.40
+    2 2         124          0.389            2.48
+    3 3          76         -1.03             1.13
 
 ------------------------------------------------------------------------
 
@@ -984,28 +976,28 @@ summary(mixed_model)
     Formula: els_score ~ env_attitude + perceived_difficulty + (1 | cluster)
        Data: combined_scores
 
-    REML criterion at convergence: 1432
+    REML criterion at convergence: 715
 
     Scaled residuals: 
-       Min     1Q Median     3Q    Max 
-    -3.446 -0.743  0.019  0.716  2.054 
+        Min      1Q  Median      3Q     Max 
+    -3.1569 -0.6181  0.0618  0.7882  1.9642 
 
     Random effects:
      Groups   Name        Variance Std.Dev.
-     cluster  (Intercept) 0.583    0.763   
-     Residual             0.650    0.806   
-    Number of obs: 586, groups:  cluster, 3
+     cluster  (Intercept) 0.551    0.742   
+     Residual             0.665    0.816   
+    Number of obs: 287, groups:  cluster, 3
 
     Fixed effects:
                          Estimate Std. Error t value
-    (Intercept)           -0.1027     0.4782   -0.21
-    env_attitude           0.0172     0.0515    0.33
-    perceived_difficulty   0.0600     0.0386    1.55
+    (Intercept)           -0.4586     0.5199   -0.88
+    env_attitude           0.0966     0.0826    1.17
+    perceived_difficulty   0.0466     0.0581    0.80
 
     Correlation of Fixed Effects:
                 (Intr) env_tt
-    env_attitud -0.382       
-    prcvd_dffcl -0.095  0.244
+    env_attitud -0.558       
+    prcvd_dffcl -0.166  0.278
 
 ``` r
 # 5. Structural Equation Model for Path Analysis
@@ -1025,51 +1017,51 @@ fit <- sem(model, data = combined_scores)
 summary(fit, standardized = TRUE, fit.measures = TRUE)
 ```
 
-    lavaan 0.6-19 ended normally after 36 iterations
+    lavaan 0.6-19 ended normally after 34 iterations
 
       Estimator                                         ML
       Optimization method                           NLMINB
       Number of model parameters                        15
 
-      Number of observations                           586
+      Number of observations                           287
 
     Model Test User Model:
                                                           
-      Test statistic                                48.061
+      Test statistic                                28.421
       Degrees of freedom                                13
-      P-value (Chi-square)                           0.000
+      P-value (Chi-square)                           0.008
 
     Model Test Baseline Model:
 
-      Test statistic                               765.733
+      Test statistic                               589.268
       Degrees of freedom                                21
       P-value                                        0.000
 
     User Model versus Baseline Model:
 
-      Comparative Fit Index (CFI)                    0.953
-      Tucker-Lewis Index (TLI)                       0.924
+      Comparative Fit Index (CFI)                    0.973
+      Tucker-Lewis Index (TLI)                       0.956
 
     Loglikelihood and Information Criteria:
 
-      Loglikelihood user model (H0)              -5510.805
-      Loglikelihood unrestricted model (H1)      -5486.775
+      Loglikelihood user model (H0)              -2593.839
+      Loglikelihood unrestricted model (H1)      -2579.629
                                                           
-      Akaike (AIC)                               11051.610
-      Bayesian (BIC)                             11117.210
-      Sample-size adjusted Bayesian (SABIC)      11069.590
+      Akaike (AIC)                                5217.679
+      Bayesian (BIC)                              5272.571
+      Sample-size adjusted Bayesian (SABIC)       5225.004
 
     Root Mean Square Error of Approximation:
 
-      RMSEA                                          0.068
-      90 Percent confidence interval - lower         0.048
-      90 Percent confidence interval - upper         0.089
-      P-value H_0: RMSEA <= 0.050                    0.068
-      P-value H_0: RMSEA >= 0.080                    0.180
+      RMSEA                                          0.064
+      90 Percent confidence interval - lower         0.032
+      90 Percent confidence interval - upper         0.097
+      P-value H_0: RMSEA <= 0.050                    0.208
+      P-value H_0: RMSEA >= 0.080                    0.231
 
     Standardized Root Mean Square Residual:
 
-      SRMR                                           0.045
+      SRMR                                           0.041
 
     Parameter Estimates:
 
@@ -1080,31 +1072,31 @@ summary(fit, standardized = TRUE, fit.measures = TRUE)
     Latent Variables:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       knowledge =~                                                          
-        numeracy          1.000                               0.534    0.534
-        energy_use        1.441    0.131   10.978    0.000    0.769    0.769
-        energy_save       1.331    0.123   10.786    0.000    0.710    0.711
-        els_score         1.024    0.109    9.393    0.000    0.546    0.547
+        numeracy          1.000                               0.549    0.550
+        energy_use        1.593    0.173    9.204    0.000    0.874    0.875
+        energy_save       1.429    0.159    8.965    0.000    0.784    0.785
+        els_score         1.080    0.142    7.624    0.000    0.592    0.593
       motivation =~                                                         
-        env_attitude      1.000                               0.506    0.657
-        percvd_dffclty   -1.068    0.142   -7.515    0.000   -0.540   -0.541
-        pol_conservtsm   -1.159    0.175   -6.635    0.000   -0.586   -0.413
+        env_attitude      1.000                               0.537    0.705
+        percvd_dffclty   -1.123    0.155   -7.233    0.000   -0.603   -0.604
+        pol_conservtsm   -1.487    0.216   -6.892    0.000   -0.798   -0.555
 
     Regressions:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       knowledge ~                                                           
-        motivation        0.609    0.094    6.497    0.000    0.577    0.577
+        motivation        0.654    0.111    5.910    0.000    0.640    0.640
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .numeracy          0.714    0.047   15.120    0.000    0.714    0.715
-       .energy_use        0.408    0.042    9.619    0.000    0.408    0.408
-       .energy_save       0.494    0.042   11.665    0.000    0.494    0.495
-       .els_score         0.700    0.047   14.976    0.000    0.700    0.701
-       .env_attitude      0.337    0.037    9.074    0.000    0.337    0.569
-       .percvd_dffclty    0.706    0.056   12.591    0.000    0.706    0.708
-       .pol_conservtsm    1.668    0.111   14.976    0.000    1.668    0.829
-       .knowledge         0.190    0.034    5.553    0.000    0.667    0.667
-        motivation        0.256    0.042    6.021    0.000    1.000    1.000
+       .numeracy          0.696    0.063   11.110    0.000    0.696    0.698
+       .energy_use        0.233    0.045    5.191    0.000    0.233    0.234
+       .energy_save       0.382    0.047    8.211    0.000    0.382    0.384
+       .els_score         0.646    0.059   10.874    0.000    0.646    0.648
+       .env_attitude      0.291    0.041    7.054    0.000    0.291    0.502
+       .percvd_dffclty    0.633    0.070    9.104    0.000    0.633    0.635
+       .pol_conservtsm    1.434    0.146    9.788    0.000    1.434    0.692
+       .knowledge         0.178    0.042    4.275    0.000    0.590    0.590
+        motivation        0.288    0.053    5.390    0.000    1.000    1.000
 
 ``` r
 # 6. Classification Tree for Predicting Knowledge Levels - rpart functions
@@ -1138,14 +1130,14 @@ summary(lpa_model)
     Gaussian finite mixture model fitted by EM algorithm 
     ---------------------------------------------------- 
 
-    Mclust VEE (ellipsoidal, equal shape and orientation) model with 8 components: 
+    Mclust VEE (ellipsoidal, equal shape and orientation) model with 3 components: 
 
-     log-likelihood   n df    BIC    ICL
-              -4869 586 98 -10362 -10419
+     log-likelihood   n df   BIC   ICL
+              -2450 287 53 -5201 -5231
 
     Clustering table:
-      1   2   3   4   5   6   7   8 
-     54 123 115  30  81  68  83  32 
+      1   2   3 
+    129  66  92 
 
 ``` r
 plot(lpa_model, "BIC")
@@ -1159,7 +1151,7 @@ can_cor <- cancor(select(combined_scores, numeracy, energy_use, energy_save),
 print(can_cor$cor)
 ```
 
-    [1] 0.324 0.084
+    [1] 0.434 0.055
 
 ``` r
 fviz_nbclust(cluster_data_scaled, cluster::pam, method = "silhouette") +
@@ -1178,19 +1170,19 @@ fit <- sem(sem_model, data = combined_scores)
 summary(fit, standardized = TRUE)
 ```
 
-    lavaan 0.6-19 ended normally after 34 iterations
+    lavaan 0.6-19 ended normally after 32 iterations
 
       Estimator                                         ML
       Optimization method                           NLMINB
       Number of model parameters                        13
 
-      Number of observations                           586
+      Number of observations                           287
 
     Model Test User Model:
                                                           
-      Test statistic                                23.012
+      Test statistic                                13.787
       Degrees of freedom                                 8
-      P-value (Chi-square)                           0.003
+      P-value (Chi-square)                           0.087
 
     Parameter Estimates:
 
@@ -1201,29 +1193,29 @@ summary(fit, standardized = TRUE)
     Latent Variables:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       knowledge =~                                                          
-        numeracy          1.000                               0.527    0.527
-        energy_use        1.469    0.136   10.825    0.000    0.774    0.774
-        energy_save       1.352    0.127   10.662    0.000    0.712    0.713
-        els_accuracy      1.925    0.208    9.263    0.000    1.014    0.543
+        numeracy          1.000                               0.542    0.543
+        energy_use        1.623    0.179    9.079    0.000    0.880    0.882
+        energy_save       1.441    0.163    8.857    0.000    0.782    0.783
+        els_accuracy      2.099    0.278    7.546    0.000    1.139    0.591
       motivation =~                                                         
-        env_attitude_z    1.000                               0.618    0.619
-        percvd_dffclty   -1.006    0.160   -6.283    0.000   -0.622   -0.623
+        env_attitude_z    1.000                               0.654    0.655
+        percvd_dffclty   -1.050    0.172   -6.120    0.000   -0.687   -0.688
 
     Regressions:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       knowledge ~                                                           
-        motivation        0.450    0.076    5.903    0.000    0.529    0.529
+        motivation        0.505    0.095    5.345    0.000    0.609    0.609
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .numeracy          0.721    0.047   15.176    0.000    0.721    0.722
-       .energy_use        0.400    0.043    9.282    0.000    0.400    0.400
-       .energy_save       0.491    0.043   11.489    0.000    0.491    0.492
-       .els_accuracy      2.463    0.164   15.004    0.000    2.463    0.705
-       .env_attitude_z    0.616    0.070    8.860    0.000    0.616    0.617
-       .percvd_dffclty    0.611    0.070    8.726    0.000    0.611    0.612
-       .knowledge         0.200    0.036    5.586    0.000    0.721    0.721
-        motivation        0.382    0.075    5.087    0.000    1.000    1.000
+       .numeracy          0.702    0.063   11.143    0.000    0.702    0.705
+       .energy_use        0.222    0.046    4.848    0.000    0.222    0.223
+       .energy_save       0.386    0.047    8.188    0.000    0.386    0.387
+       .els_accuracy      2.416    0.222   10.891    0.000    2.416    0.651
+       .env_attitude_z    0.569    0.081    7.037    0.000    0.569    0.571
+       .percvd_dffclty    0.525    0.084    6.218    0.000    0.525    0.526
+       .knowledge         0.185    0.044    4.227    0.000    0.629    0.629
+        motivation        0.428    0.095    4.525    0.000    1.000    1.000
 
 ``` r
 combined_scores %>%
@@ -1235,9 +1227,9 @@ combined_scores %>%
     # A tibble: 3 × 5
       cluster numeracy_mean numeracy_sd env_attitude_z_mean env_attitude_z_sd
       <fct>           <dbl>       <dbl>               <dbl>             <dbl>
-    1 1              -0.802       0.983           -0.679                0.890
-    2 2               0.187       0.774            0.000799             0.869
-    3 3               0.480       0.761            0.525                0.848
+    1 1               0.282       0.757              -0.391             0.842
+    2 2              -1.14        0.854              -0.685             0.796
+    3 3               0.463       0.666               0.679             0.765
 
 ``` r
 plot(lpa_model, "BIC") # Visualize model selection
@@ -1256,127 +1248,127 @@ summary(lpa_3class, parameters=TRUE)
 
     Mclust VEE (ellipsoidal, equal shape and orientation) model with 3 components: 
 
-     log-likelihood   n df    BIC    ICL
-              -5302 586 53 -10943 -11055
+     log-likelihood   n df   BIC   ICL
+              -2450 287 53 -5201 -5231
 
     Clustering table:
       1   2   3 
-    236 270  80 
+    129  66  92 
 
     Mixing probabilities:
        1    2    3 
-    0.39 0.46 0.16 
+    0.45 0.22 0.32 
 
     Means:
-                                 [,1]  [,2]  [,3]
-    numeracy_score              0.108  0.31 -1.18
-    relative_energy_use_score  -0.010  0.26 -0.74
-    relative_energy_save_score -0.021  0.32 -0.89
-    els                         0.069  0.28 -0.98
-    perceived_difficulty_score -0.163 -0.20  0.99
-    env_attitude               -0.196  0.32 -0.46
-    pol_conservatism            0.889 -0.95  0.58
+                                [,1]  [,2]   [,3]
+    numeracy_score              0.40 -1.34  0.366
+    relative_energy_use_score   0.38 -0.95  0.118
+    relative_energy_save_score  0.44 -1.00  0.072
+    els                         0.32 -0.96  0.207
+    perceived_difficulty_score -0.32  0.81 -0.109
+    env_attitude                0.52 -0.68 -0.261
+    pol_conservatism           -0.97  0.68  0.883
 
     Variances:
     [,,1]
                                numeracy_score relative_energy_use_score
-    numeracy_score                      0.800                      0.27
-    relative_energy_use_score           0.266                      0.97
-    relative_energy_save_score          0.151                      0.47
-    els                                 0.127                      0.27
-    perceived_difficulty_score          0.087                     -0.11
-    env_attitude                        0.088                      0.13
-    pol_conservatism                   -0.051                     -0.05
-                               relative_energy_save_score     els
-    numeracy_score                                 0.1511  0.1272
-    relative_energy_use_score                      0.4697  0.2750
-    relative_energy_save_score                     0.9038  0.2033
-    els                                            0.2033  0.8974
-    perceived_difficulty_score                    -0.0940 -0.0432
-    env_attitude                                   0.1237  0.1850
-    pol_conservatism                               0.0079 -0.0076
+    numeracy_score                      0.423                     0.087
+    relative_energy_use_score           0.087                     0.627
+    relative_energy_save_score          0.024                     0.349
+    els                                 0.049                     0.213
+    perceived_difficulty_score          0.100                    -0.111
+    env_attitude                       -0.031                     0.093
+    pol_conservatism                   -0.026                    -0.041
+                               relative_energy_save_score    els
+    numeracy_score                                 0.0243  0.049
+    relative_energy_use_score                      0.3495  0.213
+    relative_energy_save_score                     0.5890  0.117
+    els                                            0.1172  0.641
+    perceived_difficulty_score                    -0.0684 -0.038
+    env_attitude                                   0.0550  0.099
+    pol_conservatism                              -0.0015 -0.015
                                perceived_difficulty_score env_attitude
-    numeracy_score                                  0.087        0.088
-    relative_energy_use_score                      -0.108        0.133
-    relative_energy_save_score                     -0.094        0.124
-    els                                            -0.043        0.185
-    perceived_difficulty_score                      0.890       -0.326
-    env_attitude                                   -0.326        0.996
-    pol_conservatism                                0.014       -0.044
+    numeracy_score                                  0.100      -0.0306
+    relative_energy_use_score                      -0.111       0.0932
+    relative_energy_save_score                     -0.068       0.0550
+    els                                            -0.038       0.0990
+    perceived_difficulty_score                      0.692      -0.2266
+    env_attitude                                   -0.227       0.6598
+    pol_conservatism                                0.019      -0.0093
                                pol_conservatism
-    numeracy_score                      -0.0507
-    relative_energy_use_score           -0.0504
-    relative_energy_save_score           0.0079
-    els                                 -0.0076
-    perceived_difficulty_score           0.0139
-    env_attitude                        -0.0441
-    pol_conservatism                     0.2415
+    numeracy_score                      -0.0258
+    relative_energy_use_score           -0.0413
+    relative_energy_save_score          -0.0015
+    els                                 -0.0151
+    perceived_difficulty_score           0.0195
+    env_attitude                        -0.0093
+    pol_conservatism                     0.1793
     [,,2]
                                numeracy_score relative_energy_use_score
-    numeracy_score                      0.658                     0.219
-    relative_energy_use_score           0.219                     0.798
-    relative_energy_save_score          0.124                     0.386
-    els                                 0.105                     0.226
-    perceived_difficulty_score          0.071                    -0.089
-    env_attitude                        0.073                     0.109
-    pol_conservatism                   -0.042                    -0.041
-                               relative_energy_save_score     els
-    numeracy_score                                 0.1243  0.1046
-    relative_energy_use_score                      0.3863  0.2262
-    relative_energy_save_score                     0.7434  0.1672
-    els                                            0.1672  0.7381
-    perceived_difficulty_score                    -0.0773 -0.0355
-    env_attitude                                   0.1018  0.1522
-    pol_conservatism                               0.0065 -0.0063
+    numeracy_score                      0.509                      0.11
+    relative_energy_use_score           0.105                      0.75
+    relative_energy_save_score          0.029                      0.42
+    els                                 0.058                      0.26
+    perceived_difficulty_score          0.120                     -0.13
+    env_attitude                       -0.037                      0.11
+    pol_conservatism                   -0.031                     -0.05
+                               relative_energy_save_score    els
+    numeracy_score                                 0.0292  0.058
+    relative_energy_use_score                      0.4206  0.256
+    relative_energy_save_score                     0.7090  0.141
+    els                                            0.1410  0.771
+    perceived_difficulty_score                    -0.0823 -0.046
+    env_attitude                                   0.0663  0.119
+    pol_conservatism                              -0.0018 -0.018
                                perceived_difficulty_score env_attitude
-    numeracy_score                                  0.071        0.073
-    relative_energy_use_score                      -0.089        0.109
-    relative_energy_save_score                     -0.077        0.102
-    els                                            -0.036        0.152
-    perceived_difficulty_score                      0.732       -0.268
-    env_attitude                                   -0.268        0.819
-    pol_conservatism                                0.011       -0.036
+    numeracy_score                                  0.120       -0.037
+    relative_energy_use_score                      -0.133        0.112
+    relative_energy_save_score                     -0.082        0.066
+    els                                            -0.046        0.119
+    perceived_difficulty_score                      0.833       -0.273
+    env_attitude                                   -0.273        0.794
+    pol_conservatism                                0.023       -0.011
                                pol_conservatism
-    numeracy_score                      -0.0417
-    relative_energy_use_score           -0.0415
-    relative_energy_save_score           0.0065
-    els                                 -0.0063
-    perceived_difficulty_score           0.0114
-    env_attitude                        -0.0363
-    pol_conservatism                     0.1987
+    numeracy_score                      -0.0310
+    relative_energy_use_score           -0.0498
+    relative_energy_save_score          -0.0018
+    els                                 -0.0182
+    perceived_difficulty_score           0.0235
+    env_attitude                        -0.0112
+    pol_conservatism                     0.2159
     [,,3]
                                numeracy_score relative_energy_use_score
-    numeracy_score                      0.785                     0.261
-    relative_energy_use_score           0.261                     0.952
-    relative_energy_save_score          0.148                     0.461
-    els                                 0.125                     0.270
-    perceived_difficulty_score          0.085                    -0.106
-    env_attitude                        0.087                     0.130
-    pol_conservatism                   -0.050                    -0.049
-                               relative_energy_save_score     els
-    numeracy_score                                 0.1483  0.1248
-    relative_energy_use_score                      0.4608  0.2698
-    relative_energy_save_score                     0.8868  0.1994
-    els                                            0.1994  0.8806
-    perceived_difficulty_score                    -0.0922 -0.0424
-    env_attitude                                   0.1214  0.1816
-    pol_conservatism                               0.0078 -0.0075
+    numeracy_score                      0.566                     0.117
+    relative_energy_use_score           0.117                     0.840
+    relative_energy_save_score          0.033                     0.468
+    els                                 0.065                     0.285
+    perceived_difficulty_score          0.134                    -0.149
+    env_attitude                       -0.041                     0.125
+    pol_conservatism                   -0.035                    -0.055
+                               relative_energy_save_score    els
+    numeracy_score                                  0.033  0.065
+    relative_energy_use_score                       0.468  0.285
+    relative_energy_save_score                      0.789  0.157
+    els                                             0.157  0.859
+    perceived_difficulty_score                     -0.092 -0.051
+    env_attitude                                    0.074  0.133
+    pol_conservatism                               -0.002 -0.020
                                perceived_difficulty_score env_attitude
-    numeracy_score                                  0.085        0.087
-    relative_energy_use_score                      -0.106        0.130
-    relative_energy_save_score                     -0.092        0.121
-    els                                            -0.042        0.182
-    perceived_difficulty_score                      0.874       -0.320
-    env_attitude                                   -0.320        0.977
-    pol_conservatism                                0.014       -0.043
+    numeracy_score                                  0.134       -0.041
+    relative_energy_use_score                      -0.149        0.125
+    relative_energy_save_score                     -0.092        0.074
+    els                                            -0.051        0.133
+    perceived_difficulty_score                      0.927       -0.304
+    env_attitude                                   -0.304        0.884
+    pol_conservatism                                0.026       -0.012
                                pol_conservatism
-    numeracy_score                      -0.0498
-    relative_energy_use_score           -0.0494
-    relative_energy_save_score           0.0078
-    els                                 -0.0075
-    perceived_difficulty_score           0.0136
-    env_attitude                        -0.0432
-    pol_conservatism                     0.2370
+    numeracy_score                       -0.035
+    relative_energy_use_score            -0.055
+    relative_energy_save_score           -0.002
+    els                                  -0.020
+    perceived_difficulty_score            0.026
+    env_attitude                         -0.012
+    pol_conservatism                      0.240
 
 ``` r
 plot(lpa_3class, what="classification") # Visualize classification
@@ -1394,9 +1386,9 @@ print(cancor_loadings)
 ```
 
          variable Dimension1 Dimension2 Dimension3
-    1    numeracy      0.010      0.045    0.00041
-    2  energy_use      0.017     -0.019    0.04573
-    3 energy_save      0.023     -0.012   -0.04353
+    1    numeracy     0.0067     0.0669     0.0049
+    2  energy_use     0.0370    -0.0325     0.0708
+    3 energy_save     0.0230    -0.0078    -0.0802
 
 ``` r
 # 3. Improve SEM specification
@@ -1410,47 +1402,47 @@ fit_improved <- sem(sem_improved, data=combined_scores)
 summary(fit_improved, fit.measures=TRUE)
 ```
 
-    lavaan 0.6-19 ended normally after 37 iterations
+    lavaan 0.6-19 ended normally after 34 iterations
 
       Estimator                                         ML
       Optimization method                           NLMINB
       Number of model parameters                        14
 
-      Number of observations                           586
+      Number of observations                           287
 
     Model Test User Model:
                                                           
-      Test statistic                                19.280
+      Test statistic                                13.301
       Degrees of freedom                                 7
-      P-value (Chi-square)                           0.007
+      P-value (Chi-square)                           0.065
 
     Model Test Baseline Model:
 
-      Test statistic                               680.231
+      Test statistic                               509.961
       Degrees of freedom                                15
       P-value                                        0.000
 
     User Model versus Baseline Model:
 
-      Comparative Fit Index (CFI)                    0.982
-      Tucker-Lewis Index (TLI)                       0.960
+      Comparative Fit Index (CFI)                    0.987
+      Tucker-Lewis Index (TLI)                       0.973
 
     Loglikelihood and Information Criteria:
 
-      Loglikelihood user model (H0)              -5022.340
-      Loglikelihood unrestricted model (H1)      -5012.700
+      Loglikelihood user model (H0)              -2380.829
+      Loglikelihood unrestricted model (H1)      -2374.178
                                                           
-      Akaike (AIC)                               10072.681
-      Bayesian (BIC)                             10133.907
-      Sample-size adjusted Bayesian (SABIC)      10089.462
+      Akaike (AIC)                                4789.657
+      Bayesian (BIC)                              4840.890
+      Sample-size adjusted Bayesian (SABIC)       4796.495
 
     Root Mean Square Error of Approximation:
 
-      RMSEA                                          0.055
-      90 Percent confidence interval - lower         0.026
-      90 Percent confidence interval - upper         0.085
-      P-value H_0: RMSEA <= 0.050                    0.350
-      P-value H_0: RMSEA >= 0.080                    0.085
+      RMSEA                                          0.056
+      90 Percent confidence interval - lower         0.000
+      90 Percent confidence interval - upper         0.101
+      P-value H_0: RMSEA <= 0.050                    0.360
+      P-value H_0: RMSEA >= 0.080                    0.219
 
     Standardized Root Mean Square Residual:
 
@@ -1466,33 +1458,33 @@ summary(fit_improved, fit.measures=TRUE)
                        Estimate  Std.Err  z-value  P(>|z|)
       knowledge =~                                        
         numeracy          1.000                           
-        energy_use        1.551    0.154   10.076    0.000
-        energy_save       1.312    0.122   10.768    0.000
-        els_accuracy      2.123    0.248    8.545    0.000
+        energy_use        1.652    0.191    8.666    0.000
+        energy_save       1.420    0.160    8.863    0.000
+        els_accuracy      2.186    0.313    6.987    0.000
       motivation =~                                       
         env_attitude_z    1.000                           
-        percvd_dffclty   -0.999    0.158   -6.311    0.000
+        percvd_dffclty   -1.047    0.171   -6.134    0.000
 
     Regressions:
                        Estimate  Std.Err  z-value  P(>|z|)
       knowledge ~                                         
-        motivation        0.436    0.075    5.812    0.000
+        motivation        0.500    0.095    5.285    0.000
 
     Covariances:
                        Estimate  Std.Err  z-value  P(>|z|)
      .energy_use ~~                                       
-       .els_accuracy     -0.150    0.077   -1.946    0.052
+       .els_accuracy     -0.068    0.092   -0.738    0.460
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)
-       .numeracy          0.727    0.048   15.278    0.000
-       .energy_use        0.346    0.054    6.423    0.000
-       .energy_save       0.531    0.046   11.596    0.000
-       .els_accuracy      2.269    0.189   11.994    0.000
-       .env_attitude_z    0.613    0.070    8.811    0.000
-       .percvd_dffclty    0.614    0.069    8.836    0.000
-       .knowledge         0.198    0.035    5.650    0.000
-        motivation        0.385    0.075    5.111    0.000
+       .numeracy          0.704    0.063   11.128    0.000
+       .energy_use        0.198    0.058    3.397    0.001
+       .energy_save       0.406    0.053    7.684    0.000
+       .els_accuracy      2.315    0.254    9.107    0.000
+       .env_attitude_z    0.567    0.081    7.022    0.000
+       .percvd_dffclty    0.526    0.084    6.259    0.000
+       .knowledge         0.185    0.043    4.262    0.000
+        motivation        0.429    0.095    4.536    0.000
 
 ``` r
 # 4. Validate clusters with outcomes
@@ -1530,83 +1522,83 @@ print(fa_items, cut = 0.3, sort = TRUE)
     Factor Analysis using method =  minres
     Call: fa(r = item_data, nfactors = 5, rotate = "varimax")
     Standardized loadings (pattern matrix) based upon correlation matrix
-          item   MR1   MR2   MR5   MR3   MR4    h2    u2 com
+          item   MR1   MR2   MR3   MR5   MR4    h2    u2 com
     ATT25   25  0.94                         0.903 0.097 1.0
-    ATT23   23  0.90                         0.865 0.135 1.1
-    ATT27   27  0.89                         0.804 0.196 1.0
-    ATT26   26  0.89                         0.810 0.190 1.0
-    ATT24   24  0.82                         0.767 0.233 1.3
-    ATT33   33  0.70                         0.622 0.378 1.5
-    ATT32   32  0.61                         0.424 0.576 1.3
-    ATT30   30  0.56        0.40             0.572 0.428 2.6
-    ATT31   31  0.42                         0.258 0.742 1.9
-    ELS08   41                               0.026 0.974 3.2
-    ATT10   10        0.63                   0.455 0.545 1.3
-    ATT15   15        0.63       -0.37       0.537 0.463 1.7
-    ATT09    9        0.62                   0.456 0.544 1.3
-    ATT14   14        0.62       -0.34       0.516 0.484 1.6
-    ATT06    6        0.61                   0.401 0.599 1.2
-    ATT07    7        0.56                   0.337 0.663 1.1
-    ATT08    8        0.55                   0.313 0.687 1.0
-    ATT13   13        0.54                   0.317 0.683 1.2
-    ATT03    3        0.49        0.36       0.367 0.633 1.9
-    ATT12   12        0.48                   0.256 0.744 1.2
-    ATT05    5        0.48        0.37       0.362 0.638 1.9
-    ATT04    4        0.47                   0.235 0.765 1.1
-    ATT01    1        0.42        0.31       0.275 0.725 1.9
-    RS01    42       -0.40                   0.248 0.752 2.0
-    RS02    43                               0.083 0.917 1.2
-    ATT11   11                               0.070 0.930 1.5
-    ELS01   34                               0.037 0.963 2.8
-    ATT20   20              0.92             0.915 0.085 1.2
-    ATT21   21  0.35        0.79             0.759 0.241 1.4
-    ATT22   22              0.73             0.610 0.390 1.3
-    RS03    44       -0.37        0.59       0.503 0.497 1.8
-    RS04    45                    0.46       0.256 0.744 1.5
-    RS05    46                    0.44       0.212 0.788 1.2
-    RS06    47                    0.38       0.158 0.842 1.2
-    ATT17   17                   -0.36       0.166 0.834 1.5
-    ELS02   35                    0.34       0.132 0.868 1.2
-    ATT18   18                               0.139 0.861 2.6
-    ELS03   36                               0.073 0.927 1.4
-    ATT02    2                               0.111 0.889 2.2
-    ELS04   37                               0.038 0.962 1.3
-    ELS07   40                               0.039 0.961 1.9
-    ATT19   19                               0.028 0.972 1.1
-    ELS05   38                               0.022 0.978 1.4
-    ATT28   28                          0.94 0.888 0.112 1.0
-    ATT29   29                          0.90 0.827 0.173 1.0
-    ATT16   16                               0.024 0.976 1.1
-    ELS06   39                               0.027 0.973 4.0
+    ATT23   23  0.89                         0.854 0.146 1.1
+    ATT26   26  0.89                         0.811 0.189 1.1
+    ATT27   27  0.89                         0.802 0.198 1.0
+    ATT24   24  0.81                         0.758 0.242 1.3
+    ATT33   33  0.70                         0.624 0.376 1.6
+    ATT32   32  0.61                         0.423 0.577 1.3
+    ATT30   30  0.54              0.36       0.561 0.439 2.9
+    ATT31   31  0.40                         0.238 0.762 2.0
+    ATT10   10        0.68                   0.537 0.463 1.4
+    ATT15   15        0.66 -0.37             0.593 0.407 1.7
+    ATT14   14        0.65 -0.39             0.611 0.389 1.8
+    ATT09    9        0.64                   0.507 0.493 1.5
+    ATT06    6        0.64                   0.460 0.540 1.3
+    ATT13   13        0.60                   0.365 0.635 1.0
+    ATT07    7        0.58                   0.377 0.623 1.3
+    ATT03    3        0.57                   0.420 0.580 1.6
+    ATT04    4        0.52                   0.320 0.680 1.4
+    ATT08    8        0.52                   0.284 0.716 1.1
+    ATT12   12        0.50                   0.290 0.710 1.4
+    ATT05    5        0.49                   0.313 0.687 1.6
+    ATT01    1        0.45                   0.265 0.735 1.6
+    RS01    42       -0.42  0.32             0.321 0.679 2.4
+    ATT02    2        0.35                   0.190 0.810 2.1
+    RS02    43                               0.092 0.908 1.2
+    ATT11   11                               0.098 0.902 1.7
+    RS03    44       -0.40  0.61             0.596 0.404 2.2
+    ATT17   17             -0.47             0.290 0.710 1.6
+    RS06    47              0.45             0.229 0.771 1.3
+    RS04    45              0.43             0.309 0.691 2.3
+    RS05    46              0.41             0.249 0.751 1.9
+    ATT18   18             -0.40             0.279 0.721 2.5
+    ELS02   35              0.40             0.178 0.822 1.2
+    ELS03   36              0.39             0.176 0.824 1.3
+    ELS07   40              0.34             0.133 0.867 1.3
+    ELS04   37              0.32             0.107 0.893 1.0
+    ELS05   38                               0.084 0.916 1.3
+    ELS01   34                               0.116 0.884 2.7
+    ATT19   19                               0.040 0.960 1.2
+    ELS08   41                               0.070 0.930 3.6
+    ATT20   20                    0.93       0.917 0.083 1.1
+    ATT21   21  0.33              0.80       0.757 0.243 1.3
+    ATT22   22                    0.75       0.618 0.382 1.2
+    ATT28   28                          0.88 0.787 0.213 1.0
+    ATT29   29                          0.86 0.751 0.249 1.0
+    ATT16   16                               0.068 0.932 1.2
+    ELS06   39                               0.035 0.965 3.2
 
-                           MR1  MR2  MR5  MR3  MR4
-    SS loadings           5.69 4.67 2.52 2.38 1.98
-    Proportion Var        0.12 0.10 0.05 0.05 0.04
-    Cumulative Var        0.12 0.22 0.27 0.32 0.37
-    Proportion Explained  0.33 0.27 0.15 0.14 0.11
-    Cumulative Proportion 0.33 0.60 0.75 0.89 1.00
+                           MR1  MR2  MR3  MR5  MR4
+    SS loadings           5.73 5.41 2.97 2.71 1.99
+    Proportion Var        0.12 0.12 0.06 0.06 0.04
+    Cumulative Var        0.12 0.24 0.30 0.36 0.40
+    Proportion Explained  0.30 0.29 0.16 0.14 0.11
+    Cumulative Proportion 0.30 0.59 0.75 0.89 1.00
 
     Mean item complexity =  1.6
     Test of the hypothesis that 5 factors are sufficient.
 
-    df null model =  1081  with the objective function =  27 with Chi Square =  15130
-    df of  the model are 856  and the objective function was  8.8 
+    df null model =  1081  with the objective function =  31 with Chi Square =  8297
+    df of  the model are 856  and the objective function was  11 
 
-    The root mean square of the residuals (RMSR) is  0.05 
-    The df corrected root mean square of the residuals is  0.06 
+    The root mean square of the residuals (RMSR) is  0.06 
+    The df corrected root mean square of the residuals is  0.07 
 
-    The harmonic n.obs is  586 with the empirical chi square  3813  with prob <  0 
-    The total n.obs was  586  with Likelihood Chi Square =  4950  with prob <  0 
+    The harmonic n.obs is  287 with the empirical chi square  2111  with prob <  0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000024 
+    The total n.obs was  287  with Likelihood Chi Square =  3032  with prob <  0.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000026 
 
-    Tucker Lewis Index of factoring reliability =  0.63
-    RMSEA index =  0.09  and the 90 % confidence intervals are  0.088 0.093
-    BIC =  -506
-    Fit based upon off diagonal values = 0.91
+    Tucker Lewis Index of factoring reliability =  0.61
+    RMSEA index =  0.094  and the 90 % confidence intervals are  0.091 0.098
+    BIC =  -1812
+    Fit based upon off diagonal values = 0.92
     Measures of factor score adequacy             
-                                                       MR1  MR2  MR5  MR3  MR4
-    Correlation of (regression) scores with factors   0.98 0.93 0.97 0.87 0.97
-    Multiple R square of scores with factors          0.97 0.87 0.94 0.76 0.93
-    Minimum correlation of possible factor scores     0.94 0.75 0.88 0.52 0.87
+                                                       MR1  MR2  MR3  MR5  MR4
+    Correlation of (regression) scores with factors   0.98 0.94 0.89 0.97 0.94
+    Multiple R square of scores with factors          0.97 0.89 0.79 0.95 0.88
+    Minimum correlation of possible factor scores     0.93 0.78 0.58 0.89 0.76
 
 ``` r
 model <- '
@@ -1622,51 +1614,51 @@ fit <- sem(model, data = combined_scores)
 summary(fit, fit.measures = TRUE, standardized = TRUE)
 ```
 
-    lavaan 0.6-19 ended normally after 32 iterations
+    lavaan 0.6-19 ended normally after 31 iterations
 
       Estimator                                         ML
       Optimization method                           NLMINB
       Number of model parameters                        13
 
-      Number of observations                           586
+      Number of observations                           287
 
     Model Test User Model:
                                                           
-      Test statistic                                23.012
+      Test statistic                                13.787
       Degrees of freedom                                 8
-      P-value (Chi-square)                           0.003
+      P-value (Chi-square)                           0.087
 
     Model Test Baseline Model:
 
-      Test statistic                               680.231
+      Test statistic                               509.961
       Degrees of freedom                                15
       P-value                                        0.000
 
     User Model versus Baseline Model:
 
-      Comparative Fit Index (CFI)                    0.977
-      Tucker-Lewis Index (TLI)                       0.958
+      Comparative Fit Index (CFI)                    0.988
+      Tucker-Lewis Index (TLI)                       0.978
 
     Loglikelihood and Information Criteria:
 
-      Loglikelihood user model (H0)              -4657.376
-      Loglikelihood unrestricted model (H1)      -4645.870
+      Loglikelihood user model (H0)              -2192.320
+      Loglikelihood unrestricted model (H1)      -2185.427
                                                           
-      Akaike (AIC)                                9340.753
-      Bayesian (BIC)                              9397.606
-      Sample-size adjusted Bayesian (SABIC)       9356.335
+      Akaike (AIC)                                4410.640
+      Bayesian (BIC)                              4458.213
+      Sample-size adjusted Bayesian (SABIC)       4416.989
 
     Root Mean Square Error of Approximation:
 
-      RMSEA                                          0.057
-      90 Percent confidence interval - lower         0.030
-      90 Percent confidence interval - upper         0.084
-      P-value H_0: RMSEA <= 0.050                    0.305
-      P-value H_0: RMSEA >= 0.080                    0.086
+      RMSEA                                          0.050
+      90 Percent confidence interval - lower         0.000
+      90 Percent confidence interval - upper         0.094
+      P-value H_0: RMSEA <= 0.050                    0.441
+      P-value H_0: RMSEA >= 0.080                    0.145
 
     Standardized Root Mean Square Residual:
 
-      SRMR                                           0.032
+      SRMR                                           0.031
 
     Parameter Estimates:
 
@@ -1677,29 +1669,29 @@ summary(fit, fit.measures = TRUE, standardized = TRUE)
     Latent Variables:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       Knowledge =~                                                          
-        numeracy          1.000                               0.527    0.527
-        energy_use        1.469    0.136   10.825    0.000    0.774    0.774
-        energy_save       1.352    0.127   10.662    0.000    0.712    0.713
-        els_score         1.029    0.111    9.263    0.000    0.542    0.543
+        numeracy          1.000                               0.542    0.543
+        energy_use        1.623    0.179    9.079    0.000    0.880    0.882
+        energy_save       1.441    0.163    8.857    0.000    0.782    0.783
+        els_score         1.088    0.144    7.546    0.000    0.590    0.591
       Motivation =~                                                         
-        env_attitude_z    1.000                               0.618    0.619
-        percvd_dffclty   -1.006    0.160   -6.283    0.000   -0.622   -0.623
+        env_attitude_z    1.000                               0.654    0.655
+        percvd_dffclty   -1.050    0.172   -6.120    0.000   -0.687   -0.688
 
     Regressions:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       Knowledge ~                                                           
-        Motivation        0.450    0.076    5.903    0.000    0.529    0.529
+        Motivation        0.505    0.095    5.345    0.000    0.609    0.609
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .numeracy          0.721    0.047   15.176    0.000    0.721    0.722
-       .energy_use        0.400    0.043    9.282    0.000    0.400    0.400
-       .energy_save       0.491    0.043   11.489    0.000    0.491    0.492
-       .els_score         0.704    0.047   15.004    0.000    0.704    0.705
-       .env_attitude_z    0.616    0.070    8.860    0.000    0.616    0.617
-       .percvd_dffclty    0.611    0.070    8.726    0.000    0.611    0.612
-       .Knowledge         0.200    0.036    5.586    0.000    0.721    0.721
-        Motivation        0.382    0.075    5.087    0.000    1.000    1.000
+       .numeracy          0.702    0.063   11.143    0.000    0.702    0.705
+       .energy_use        0.222    0.046    4.848    0.000    0.222    0.223
+       .energy_save       0.386    0.047    8.188    0.000    0.386    0.387
+       .els_score         0.649    0.060   10.891    0.000    0.649    0.651
+       .env_attitude_z    0.569    0.081    7.037    0.000    0.569    0.571
+       .percvd_dffclty    0.525    0.084    6.218    0.000    0.525    0.526
+       .Knowledge         0.185    0.044    4.227    0.000    0.629    0.629
+        Motivation        0.428    0.095    4.525    0.000    1.000    1.000
 
 ``` r
 # Example LPA (using tidyLPA)
@@ -1762,42 +1754,42 @@ print(fa_result, cut=0.3, sort=TRUE)
     Call: fa(r = fa_data, nfactors = 2, rotate = "varimax", fm = "ml")
     Standardized loadings (pattern matrix) based upon correlation matrix
                          item   ML2   ML1   h2    u2 com
-    energy_use              2  0.78       0.63 0.374 1.1
-    energy_save             3  0.69       0.50 0.497 1.1
-    numeracy                1  0.51       0.28 0.720 1.2
-    els_score               4  0.49       0.29 0.709 1.4
-    pol_conservatism        7             0.14 0.860 2.0
-    env_attitude            6        0.99 1.00 0.005 1.0
-    perceived_difficulty    5       -0.37 0.19 0.807 1.7
+    energy_use              2  0.85       0.78 0.220 1.1
+    energy_save             3  0.75       0.62 0.384 1.2
+    els_score               4  0.53       0.35 0.652 1.4
+    numeracy                1  0.52       0.30 0.702 1.2
+    env_attitude            6        0.98 0.98 0.018 1.0
+    perceived_difficulty    5 -0.31 -0.42 0.27 0.727 1.9
+    pol_conservatism        7 -0.31 -0.38 0.24 0.759 1.9
 
                            ML2  ML1
-    SS loadings           1.71 1.31
-    Proportion Var        0.24 0.19
-    Cumulative Var        0.24 0.43
-    Proportion Explained  0.57 0.43
-    Cumulative Proportion 0.57 1.00
+    SS loadings           2.06 1.48
+    Proportion Var        0.29 0.21
+    Cumulative Var        0.29 0.51
+    Proportion Explained  0.58 0.42
+    Cumulative Proportion 0.58 1.00
 
     Mean item complexity =  1.4
     Test of the hypothesis that 2 factors are sufficient.
 
-    df null model =  21  with the objective function =  1.3 with Chi Square =  760
-    df of  the model are 8  and the objective function was  0.03 
+    df null model =  21  with the objective function =  2 with Chi Square =  581
+    df of  the model are 8  and the objective function was  0.05 
 
     The root mean square of the residuals (RMSR) is  0.03 
-    The df corrected root mean square of the residuals is  0.04 
+    The df corrected root mean square of the residuals is  0.05 
 
-    The harmonic n.obs is  586 with the empirical chi square  18  with prob <  0.025 
-    The total n.obs was  586  with Likelihood Chi Square =  16  with prob <  0.036 
+    The harmonic n.obs is  287 with the empirical chi square  12  with prob <  0.13 
+    The total n.obs was  287  with Likelihood Chi Square =  15  with prob <  0.066 
 
     Tucker Lewis Index of factoring reliability =  0.97
-    RMSEA index =  0.042  and the 90 % confidence intervals are  0.01 0.072
-    BIC =  -35
+    RMSEA index =  0.054  and the 90 % confidence intervals are  0 0.097
+    BIC =  -31
     Fit based upon off diagonal values = 0.99
     Measures of factor score adequacy             
                                                        ML2  ML1
-    Correlation of (regression) scores with factors   0.87 1.00
-    Multiple R square of scores with factors          0.77 0.99
-    Minimum correlation of possible factor scores     0.53 0.99
+    Correlation of (regression) scores with factors   0.92 0.99
+    Multiple R square of scores with factors          0.84 0.98
+    Minimum correlation of possible factor scores     0.68 0.96
 
 ``` r
 model_motivation <- lm(env_attitude ~ els_score + numeracy + pol_conservatism,
@@ -1811,21 +1803,21 @@ summary(model_motivation)
         data = combined_scores)
 
     Residuals:
-       Min     1Q Median     3Q    Max 
-    -2.320 -0.486  0.020  0.514  1.944 
+        Min      1Q  Median      3Q     Max 
+    -2.4317 -0.4376  0.0398  0.4590  1.9839 
 
     Coefficients:
                      Estimate Std. Error t value             Pr(>|t|)    
-    (Intercept)        3.9098     0.0646   60.48 < 0.0000000000000002 ***
-    els_score          0.1575     0.0318    4.95           0.00000098 ***
-    numeracy           0.0555     0.0323    1.72                0.086 .  
-    pol_conservatism  -0.1239     0.0218   -5.69           0.00000002 ***
+    (Intercept)        4.0791     0.0866   47.11 < 0.0000000000000002 ***
+    els_score          0.1633     0.0446    3.66               0.0003 ***
+    numeracy           0.0210     0.0454    0.46               0.6433    
+    pol_conservatism  -0.1872     0.0294   -6.36        0.00000000081 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.72 on 582 degrees of freedom
-    Multiple R-squared:  0.135, Adjusted R-squared:  0.131 
-    F-statistic: 30.3 on 3 and 582 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.68 on 283 degrees of freedom
+    Multiple R-squared:  0.22,  Adjusted R-squared:  0.212 
+    F-statistic: 26.6 on 3 and 283 DF,  p-value: 0.00000000000000336
 
 ``` r
 model_knowledge <- lm(els_score ~ perceived_difficulty + env_attitude + pol_conservatism,
@@ -1839,21 +1831,21 @@ summary(model_knowledge)
         pol_conservatism, data = combined_scores)
 
     Residuals:
-       Min     1Q Median     3Q    Max 
-    -3.171 -0.646 -0.004  0.716  2.333 
+        Min      1Q  Median      3Q     Max 
+    -2.3489 -0.7106  0.0245  0.7152  2.2516 
 
     Coefficients:
-                         Estimate Std. Error t value Pr(>|t|)    
-    (Intercept)           -0.6422     0.2390   -2.69   0.0074 ** 
-    perceived_difficulty  -0.1338     0.0425   -3.15   0.0017 ** 
-    env_attitude           0.2421     0.0571    4.24 0.000026 ***
-    pol_conservatism      -0.0854     0.0289   -2.96   0.0032 ** 
+                         Estimate Std. Error t value Pr(>|t|)   
+    (Intercept)           -0.6746     0.3692   -1.83   0.0688 . 
+    perceived_difficulty  -0.1487     0.0623   -2.39   0.0176 * 
+    env_attitude           0.2526     0.0868    2.91   0.0039 **
+    pol_conservatism      -0.0891     0.0424   -2.10   0.0364 * 
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.95 on 582 degrees of freedom
-    Multiple R-squared:  0.104, Adjusted R-squared:  0.0992 
-    F-statistic: 22.5 on 3 and 582 DF,  p-value: 0.0000000000000872
+    Residual standard error: 0.94 on 283 degrees of freedom
+    Multiple R-squared:  0.132, Adjusted R-squared:  0.123 
+    F-statistic: 14.3 on 3 and 283 DF,  p-value: 0.0000000102
 
 ``` r
 knowledge_only <- combined_scores %>%
@@ -1914,9 +1906,9 @@ combined_scores %>%
     # A tibble: 3 × 4
       cluster mean_recycling sd_recycling     n
       <fct>            <dbl>        <dbl> <int>
-    1 1            -0.679           0.890   179
-    2 2             0.000799        0.869   176
-    3 3             0.525           0.848   231
+    1 1               -0.391        0.842    89
+    2 2               -0.685        0.796    73
+    3 3                0.679        0.765   125
 
 ``` r
 # 2. ANOVA to test whether clusters differ significantly 
@@ -1925,8 +1917,8 @@ summary(anova_result)
 ```
 
                  Df Sum Sq Mean Sq F value              Pr(>F)    
-    cluster       2    146    73.1    97.1 <0.0000000000000002 ***
-    Residuals   583    439     0.8                                
+    cluster       2    105    52.7    82.9 <0.0000000000000002 ***
+    Residuals   284    181     0.6                                
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -1941,10 +1933,10 @@ TukeyHSD(anova_result)
     Fit: aov(formula = env_attitude_z ~ cluster, data = combined_scores)
 
     $cluster
-        diff  lwr  upr p adj
-    2-1 0.68 0.46 0.90     0
-    3-1 1.20 1.00 1.41     0
-    3-2 0.52 0.32 0.73     0
+         diff   lwr    upr p adj
+    2-1 -0.29 -0.59 0.0033  0.05
+    3-1  1.07  0.81 1.3306  0.00
+    3-2  1.36  1.09 1.6401  0.00
 
 ``` r
 # Subset data to knowledge & motivation variables
@@ -1963,14 +1955,14 @@ summary(lpa_model)  # Tells you how many clusters & the type of covariance struc
     Gaussian finite mixture model fitted by EM algorithm 
     ---------------------------------------------------- 
 
-    Mclust VEE (ellipsoidal, equal shape and orientation) model with 8 components: 
+    Mclust VEE (ellipsoidal, equal shape and orientation) model with 3 components: 
 
-     log-likelihood   n df    BIC    ICL
-              -4869 586 98 -10362 -10419
+     log-likelihood   n df   BIC   ICL
+              -2450 287 53 -5201 -5231
 
     Clustering table:
-      1   2   3   4   5   6   7   8 
-     54 123 115  30  81  68  83  32 
+      1   2   3 
+    129  66  92 
 
 ``` r
 # Extract membership
@@ -1979,8 +1971,8 @@ table(combined_scores$LPA_cluster)
 ```
 
 
-      1   2   3   4   5   6   7   8 
-     54 123 115  30  81  68  83  32 
+      1   2   3 
+    129  66  92 
 
 ``` r
 # Compare means across the new LPA-based clusters
@@ -1991,17 +1983,12 @@ combined_scores %>%
   )
 ```
 
-    # A tibble: 8 × 9
+    # A tibble: 3 × 9
       LPA_cluster numeracy energy_use energy_save els_accuracy els_score
       <fct>          <dbl>      <dbl>       <dbl>        <dbl>     <dbl>
-    1 1             1.45       0.453      0.258           5.04    0.222 
-    2 2             0.106      0.0661     0.146           4.84    0.116 
-    3 3            -1.50      -0.687     -0.671           3.17   -0.774 
-    4 4            -1.17       0.146      0.239           4.37   -0.136 
-    5 5             0.117     -0.130     -0.193           4.79    0.0903
-    6 6             1.43       0.785      0.659           5.18    0.297 
-    7 7             0.0666    -0.0178     0.00612         4.67    0.0286
-    8 8             0.133      0.0197     0.261           6.78    1.16  
+    1 1              0.391      0.383       0.433         5.12     0.329
+    2 2             -1.34      -0.954      -1.01          2.58    -0.987
+    3 3              0.412      0.146       0.116         4.96     0.246
     # ℹ 3 more variables: env_attitude <dbl>, env_attitude_z <dbl>,
     #   pol_conservatism <dbl>
 
@@ -2045,13 +2032,13 @@ with(combined_scores, cor.test(knowledge, motivation))
         Pearson's product-moment correlation
 
     data:  knowledge and motivation
-    t = -0.4, df = 584, p-value = 0.7
+    t = -0.5, df = 285, p-value = 0.6
     alternative hypothesis: true correlation is not equal to 0
     95 percent confidence interval:
-     -0.099  0.063
+     -0.148  0.084
     sample estimates:
        cor 
-    -0.018 
+    -0.032 
 
 ``` r
 # 3b. Hierarchical Regression
@@ -2067,21 +2054,21 @@ summary(model)
 
     Residuals:
         Min      1Q  Median      3Q     Max 
-    -2.2080 -0.4889 -0.0304  0.4339  2.2729 
+    -1.3728 -0.4668 -0.0452  0.4709  1.5670 
 
     Coefficients:
-                       Estimate Std. Error t value            Pr(>|t|)    
-    (Intercept)         -1.0897     0.0546  -19.96 <0.0000000000000002 ***
-    motivation          -0.0437     0.0284   -1.54                0.12    
-    pol_conservatism_z   0.0339     0.0464    0.73                0.46    
-    cluster2             1.3164     0.0753   17.47 <0.0000000000000002 ***
-    cluster3             1.7613     0.0933   18.88 <0.0000000000000002 ***
+                       Estimate Std. Error t value             Pr(>|t|)    
+    (Intercept)          0.1457     0.0742    1.96                0.051 .  
+    motivation          -0.0523     0.0347   -1.51                0.133    
+    pol_conservatism_z   0.0603     0.0548    1.10                0.272    
+    cluster2            -1.5294     0.0927  -16.49 < 0.0000000000000002 ***
+    cluster3             0.5587     0.1203    4.65            0.0000052 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.68 on 581 degrees of freedom
-    Multiple R-squared:  0.535, Adjusted R-squared:  0.532 
-    F-statistic:  167 on 4 and 581 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.58 on 282 degrees of freedom
+    Multiple R-squared:  0.662, Adjusted R-squared:  0.658 
+    F-statistic:  138 on 4 and 282 DF,  p-value: <0.0000000000000002
 
 ``` r
 # 3c. Path Analysis
@@ -2095,13 +2082,13 @@ fit <- sem(path_model, data = combined_scores)
 summary(fit, standardized = TRUE)
 ```
 
-    lavaan 0.6-19 ended normally after 5 iterations
+    lavaan 0.6-19 ended normally after 1 iteration
 
       Estimator                                         ML
       Optimization method                           NLMINB
       Number of model parameters                         5
 
-      Number of observations                           586
+      Number of observations                           287
 
     Model Test User Model:
                                                           
@@ -2117,20 +2104,20 @@ summary(fit, standardized = TRUE)
     Regressions:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       motivation ~                                                          
-        knowledge  (a)   -0.018    0.041   -0.439    0.660   -0.018   -0.018
+        knowledge  (a)   -0.032    0.059   -0.550    0.582   -0.032   -0.032
       els_score ~                                                           
-        motivation (b)    0.036    0.029    1.229    0.219    0.036    0.036
-        knowledge  (c)    0.707    0.029   24.181    0.000    0.707    0.707
+        motivation (b)    0.019    0.039    0.487    0.626    0.019    0.019
+        knowledge  (c)    0.751    0.039   19.232    0.000    0.751    0.751
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .motivation        0.998    0.058   17.117    0.000    0.998    1.000
-       .els_score         0.499    0.029   17.117    0.000    0.499    0.500
+       .motivation        0.995    0.083   11.979    0.000    0.995    0.999
+       .els_score         0.435    0.036   11.979    0.000    0.435    0.437
 
     Defined Parameters:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-        indirect         -0.001    0.002   -0.414    0.679   -0.001   -0.001
-        total             0.706    0.029   24.132    0.000    0.706    0.706
+        indirect         -0.001    0.002   -0.365    0.715   -0.001   -0.001
+        total             0.750    0.039   19.218    0.000    0.750    0.750
 
 ``` r
 # 4. Cluster Validation by Motivation-Knowledge Profiles
@@ -2181,43 +2168,43 @@ print(fa_results, cut=0.3, sort=TRUE)
     Factor Analysis using method =  minres
     Call: fa(r = key_measures, nfactors = 2, rotate = "varimax")
     Standardized loadings (pattern matrix) based upon correlation matrix
-                         item   MR1   MR2   h2     u2 com
-    energy_use              2  0.77       0.61 0.3856 1.1
-    energy_save             3  0.68       0.49 0.5146 1.1
-    numeracy                1  0.52       0.29 0.7067 1.2
-    els_score               4  0.50       0.30 0.6954 1.4
-    pol_conservatism        7             0.14 0.8570 2.0
-    env_attitude            5        0.99 1.00 0.0035 1.0
-    perceived_difficulty    6       -0.36 0.19 0.8120 1.7
+                         item   MR1   MR2   h2    u2 com
+    energy_use              2  0.84       0.76 0.244 1.1
+    energy_save             3  0.73       0.59 0.414 1.2
+    els_score               4  0.56       0.37 0.634 1.3
+    numeracy                1  0.55       0.33 0.671 1.2
+    env_attitude            5        0.99 1.00 0.004 1.0
+    perceived_difficulty    6 -0.31 -0.41 0.27 0.733 1.9
+    pol_conservatism        7 -0.33 -0.37 0.25 0.752 2.0
 
                            MR1  MR2
-    SS loadings           1.72 1.31
-    Proportion Var        0.25 0.19
-    Cumulative Var        0.25 0.43
-    Proportion Explained  0.57 0.43
-    Cumulative Proportion 0.57 1.00
+    SS loadings           2.08 1.47
+    Proportion Var        0.30 0.21
+    Cumulative Var        0.30 0.51
+    Proportion Explained  0.59 0.41
+    Cumulative Proportion 0.59 1.00
 
     Mean item complexity =  1.4
     Test of the hypothesis that 2 factors are sufficient.
 
-    df null model =  21  with the objective function =  1.3 with Chi Square =  760
-    df of  the model are 8  and the objective function was  0.03 
+    df null model =  21  with the objective function =  2 with Chi Square =  581
+    df of  the model are 8  and the objective function was  0.06 
 
     The root mean square of the residuals (RMSR) is  0.03 
-    The df corrected root mean square of the residuals is  0.04 
+    The df corrected root mean square of the residuals is  0.05 
 
-    The harmonic n.obs is  586 with the empirical chi square  17  with prob <  0.035 
-    The total n.obs was  586  with Likelihood Chi Square =  17  with prob <  0.029 
+    The harmonic n.obs is  287 with the empirical chi square  11  with prob <  0.21 
+    The total n.obs was  287  with Likelihood Chi Square =  16  with prob <  0.039 
 
-    Tucker Lewis Index of factoring reliability =  0.97
-    RMSEA index =  0.044  and the 90 % confidence intervals are  0.014 0.073
-    BIC =  -34
+    Tucker Lewis Index of factoring reliability =  0.96
+    RMSEA index =  0.06  and the 90 % confidence intervals are  0.013 0.1
+    BIC =  -29
     Fit based upon off diagonal values = 0.99
     Measures of factor score adequacy             
                                                        MR1  MR2
-    Correlation of (regression) scores with factors   0.87 1.00
-    Multiple R square of scores with factors          0.76 0.99
-    Minimum correlation of possible factor scores     0.52 0.99
+    Correlation of (regression) scores with factors   0.91 1.00
+    Multiple R square of scores with factors          0.83 0.99
+    Minimum correlation of possible factor scores     0.66 0.99
 
 ``` r
 # 3. Create composite scores and analyze relationships
@@ -2280,21 +2267,21 @@ summary(model_1)
 
     Residuals:
        Min     1Q Median     3Q    Max 
-    -3.506 -0.616  0.004  0.651  2.623 
+    -3.167 -0.541 -0.007  0.607  1.985 
 
     Coefficients:
-                                     Estimate            Std. Error t value
-    (Intercept)         -0.000000000000000109  0.037634207769266410       0
-    knowledge_composite  0.414061913664111936  0.037666360024399721      11
+                                       Estimate              Std. Error t value
+    (Intercept)         0.000000000000000000796 0.051394015005993207157    0.00
+    knowledge_composite 0.494554980602242011400 0.051483786279658251550    9.61
                                    Pr(>|t|)    
     (Intercept)                           1    
     knowledge_composite <0.0000000000000002 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.91 on 584 degrees of freedom
-    Multiple R-squared:  0.171, Adjusted R-squared:  0.17 
-    F-statistic:  121 on 1 and 584 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.87 on 285 degrees of freedom
+    Multiple R-squared:  0.245, Adjusted R-squared:  0.242 
+    F-statistic: 92.3 on 1 and 285 DF,  p-value: <0.0000000000000002
 
 ``` r
 summary(model_2)
@@ -2306,20 +2293,20 @@ summary(model_2)
         data = combined_scores)
 
     Residuals:
-       Min     1Q Median     3Q    Max 
-    -2.273 -0.465  0.018  0.482  2.119 
+        Min      1Q  Median      3Q     Max 
+    -1.9267 -0.4231 -0.0482  0.4611  1.7669 
 
     Coefficients:
                         Estimate Std. Error t value             Pr(>|t|)    
-    (Intercept)           1.0955     0.0649   16.89 < 0.0000000000000002 ***
-    knowledge_composite   0.2377     0.0311    7.65    0.000000000000081 ***
-    pol_conservatism     -0.4154     0.0219  -18.99 < 0.0000000000000002 ***
+    (Intercept)           1.1464     0.0840   13.64 < 0.0000000000000002 ***
+    knowledge_composite   0.2509     0.0414    6.07         0.0000000042 ***
+    pol_conservatism     -0.4393     0.0287  -15.31 < 0.0000000000000002 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.72 on 583 degrees of freedom
-    Multiple R-squared:  0.488, Adjusted R-squared:  0.486 
-    F-statistic:  278 on 2 and 583 DF,  p-value: <0.0000000000000002
+    Residual standard error: 0.65 on 284 degrees of freedom
+    Multiple R-squared:  0.586, Adjusted R-squared:  0.583 
+    F-statistic:  201 on 2 and 284 DF,  p-value: <0.0000000000000002
 
 ``` r
 # 6. Examine cluster profiles
@@ -2340,9 +2327,9 @@ print(cluster_profiles)
     # A tibble: 3 × 6
       cluster     n mean_knowledge sd_knowledge mean_motivation sd_motivation
       <fct>   <int>          <dbl>        <dbl>           <dbl>         <dbl>
-    1 1         194          0.649        0.787           1.08          0.487
-    2 2         125         -1.32         0.632          -1.07          0.676
-    3 3         267          0.145        0.649          -0.285         0.582
+    1 1          99          0.343        0.609          -0.377         0.560
+    2 2         112          0.573        0.685           1.01          0.465
+    3 3          76         -1.29         0.546          -0.999         0.599
 
 # 3c
 
@@ -2357,7 +2344,7 @@ all_items <- aes_combined %>%
 dim(all_items)
 ```
 
-    [1] 586  48
+    [1] 287  48
 
 ``` r
 head(all_items)
@@ -2443,42 +2430,42 @@ print(two_factor, cut = 0.30, sort = TRUE)
     Call: fa(r = fa_data, nfactors = 2, rotate = "varimax", fm = "ml")
     Standardized loadings (pattern matrix) based upon correlation matrix
                          item   ML2   ML1   h2    u2 com
-    energy_use              2  0.78       0.63 0.374 1.1
-    energy_save             3  0.69       0.50 0.497 1.1
-    numeracy                1  0.51       0.28 0.720 1.2
-    els_score               4  0.49       0.29 0.709 1.4
-    pol_conservatism        7             0.14 0.860 2.0
-    env_attitude            6        0.99 1.00 0.005 1.0
-    perceived_difficulty    5       -0.37 0.19 0.807 1.7
+    energy_use              2  0.85       0.78 0.220 1.1
+    energy_save             3  0.75       0.62 0.384 1.2
+    els_score               4  0.53       0.35 0.652 1.4
+    numeracy                1  0.52       0.30 0.702 1.2
+    env_attitude            6        0.98 0.98 0.018 1.0
+    perceived_difficulty    5 -0.31 -0.42 0.27 0.727 1.9
+    pol_conservatism        7 -0.31 -0.38 0.24 0.759 1.9
 
                            ML2  ML1
-    SS loadings           1.71 1.31
-    Proportion Var        0.24 0.19
-    Cumulative Var        0.24 0.43
-    Proportion Explained  0.57 0.43
-    Cumulative Proportion 0.57 1.00
+    SS loadings           2.06 1.48
+    Proportion Var        0.29 0.21
+    Cumulative Var        0.29 0.51
+    Proportion Explained  0.58 0.42
+    Cumulative Proportion 0.58 1.00
 
     Mean item complexity =  1.4
     Test of the hypothesis that 2 factors are sufficient.
 
-    df null model =  21  with the objective function =  1.3 with Chi Square =  760
-    df of  the model are 8  and the objective function was  0.03 
+    df null model =  21  with the objective function =  2 with Chi Square =  581
+    df of  the model are 8  and the objective function was  0.05 
 
     The root mean square of the residuals (RMSR) is  0.03 
-    The df corrected root mean square of the residuals is  0.04 
+    The df corrected root mean square of the residuals is  0.05 
 
-    The harmonic n.obs is  586 with the empirical chi square  18  with prob <  0.025 
-    The total n.obs was  586  with Likelihood Chi Square =  16  with prob <  0.036 
+    The harmonic n.obs is  287 with the empirical chi square  12  with prob <  0.13 
+    The total n.obs was  287  with Likelihood Chi Square =  15  with prob <  0.066 
 
     Tucker Lewis Index of factoring reliability =  0.97
-    RMSEA index =  0.042  and the 90 % confidence intervals are  0.01 0.072
-    BIC =  -35
+    RMSEA index =  0.054  and the 90 % confidence intervals are  0 0.097
+    BIC =  -31
     Fit based upon off diagonal values = 0.99
     Measures of factor score adequacy             
                                                        ML2  ML1
-    Correlation of (regression) scores with factors   0.87 1.00
-    Multiple R square of scores with factors          0.77 0.99
-    Minimum correlation of possible factor scores     0.53 0.99
+    Correlation of (regression) scores with factors   0.92 0.99
+    Multiple R square of scores with factors          0.84 0.98
+    Minimum correlation of possible factor scores     0.68 0.96
 
 ``` r
 # ============================================================
@@ -2498,21 +2485,21 @@ summary(model_els)
         pol_conservatism, data = combined_scores)
 
     Residuals:
-       Min     1Q Median     3Q    Max 
-    -3.171 -0.646 -0.004  0.716  2.333 
+        Min      1Q  Median      3Q     Max 
+    -2.3489 -0.7106  0.0245  0.7152  2.2516 
 
     Coefficients:
-                         Estimate Std. Error t value Pr(>|t|)    
-    (Intercept)           -0.6422     0.2390   -2.69   0.0074 ** 
-    env_attitude           0.2421     0.0571    4.24 0.000026 ***
-    perceived_difficulty  -0.1338     0.0425   -3.15   0.0017 ** 
-    pol_conservatism      -0.0854     0.0289   -2.96   0.0032 ** 
+                         Estimate Std. Error t value Pr(>|t|)   
+    (Intercept)           -0.6746     0.3692   -1.83   0.0688 . 
+    env_attitude           0.2526     0.0868    2.91   0.0039 **
+    perceived_difficulty  -0.1487     0.0623   -2.39   0.0176 * 
+    pol_conservatism      -0.0891     0.0424   -2.10   0.0364 * 
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    Residual standard error: 0.95 on 582 degrees of freedom
-    Multiple R-squared:  0.104, Adjusted R-squared:  0.0992 
-    F-statistic: 22.5 on 3 and 582 DF,  p-value: 0.0000000000000872
+    Residual standard error: 0.94 on 283 degrees of freedom
+    Multiple R-squared:  0.132, Adjusted R-squared:  0.123 
+    F-statistic: 14.3 on 3 and 283 DF,  p-value: 0.0000000102
 
 ``` r
 # --- (b) Create composites and correlate them
@@ -2535,7 +2522,7 @@ cor(combined_scores$knowledge_composite, combined_scores$motivation_composite,
     use = "pairwise.complete.obs")
 ```
 
-    [1] 0.35
+    [1] 0.44
 
 ``` r
 cluster_data <- combined_scores %>%
@@ -2572,9 +2559,9 @@ combined_scores %>%
     # A tibble: 3 × 4
       km_cluster mean_knowledge mean_motivation     n
       <fct>               <dbl>           <dbl> <int>
-    1 1                  -0.794            1.22   184
-    2 2                   0.469            1.44   167
-    3 3                   0.288            2.49   235
+    1 1                  -1.04             1.11    75
+    2 2                   0.362            1.39    85
+    3 3                   0.370            2.47   127
 
 ``` r
 # --- (d) Canonical Correlation Analysis (CCA)
@@ -2597,27 +2584,27 @@ cca_res <- cancor(K, M)
 cca_res$cor  # canonical correlations
 ```
 
-    [1] 0.418 0.117 0.088
+    [1] 0.502 0.136 0.084
 
 ``` r
 # Inspect canonical weights and loadings
 cca_res$xcoef
 ```
 
-                 [,1]   [,2]   [,3]    [,4]
-    numeracy    0.011  0.044  0.004 -0.0076
-    energy_use  0.011 -0.006 -0.029  0.0432
-    energy_save 0.016 -0.016 -0.013 -0.0444
-    els_score   0.017 -0.016  0.039  0.0086
+                 [,1]    [,2]   [,3]    [,4]
+    numeracy    0.011  0.0636 -0.020 -0.0152
+    energy_use  0.025 -0.0251  0.045 -0.0695
+    energy_save 0.022  0.0099  0.016  0.0788
+    els_score   0.015 -0.0372 -0.058  0.0074
 
 ``` r
 cca_res$ycoef
 ```
 
-                           [,1]    [,2]  [,3]
-    env_attitude          0.022 -0.0009 0.056
-    perceived_difficulty -0.019  0.0312 0.026
-    pol_conservatism     -0.015 -0.0222 0.014
+                           [,1]   [,2]    [,3]
+    env_attitude          0.025 -0.041 -0.0792
+    perceived_difficulty -0.029  0.027 -0.0535
+    pol_conservatism     -0.020 -0.040 -0.0041
 
 ``` r
 # Hypothetical model: 
@@ -2634,57 +2621,57 @@ fit_sem <- sem(sem_model, data = combined_scores, missing = "fiml")  # handle mi
 summary(fit_sem, fit.measures = TRUE, standardized = TRUE)
 ```
 
-    lavaan 0.6-19 ended normally after 36 iterations
+    lavaan 0.6-19 ended normally after 32 iterations
 
       Estimator                                         ML
       Optimization method                           NLMINB
       Number of model parameters                        19
 
-      Number of observations                           586
+      Number of observations                           287
       Number of missing patterns                         1
 
     Model Test User Model:
                                                           
-      Test statistic                                23.012
+      Test statistic                                13.787
       Degrees of freedom                                 8
-      P-value (Chi-square)                           0.003
+      P-value (Chi-square)                           0.087
 
     Model Test Baseline Model:
 
-      Test statistic                               680.231
+      Test statistic                               509.961
       Degrees of freedom                                15
       P-value                                        0.000
 
     User Model versus Baseline Model:
 
-      Comparative Fit Index (CFI)                    0.977
-      Tucker-Lewis Index (TLI)                       0.958
+      Comparative Fit Index (CFI)                    0.988
+      Tucker-Lewis Index (TLI)                       0.978
                                                           
-      Robust Comparative Fit Index (CFI)             0.977
-      Robust Tucker-Lewis Index (TLI)                0.958
+      Robust Comparative Fit Index (CFI)             0.988
+      Robust Tucker-Lewis Index (TLI)                0.978
 
     Loglikelihood and Information Criteria:
 
-      Loglikelihood user model (H0)              -4504.774
-      Loglikelihood unrestricted model (H1)      -4493.268
+      Loglikelihood user model (H0)              -2114.488
+      Loglikelihood unrestricted model (H1)      -2107.595
                                                           
-      Akaike (AIC)                                9047.548
-      Bayesian (BIC)                              9130.641
-      Sample-size adjusted Bayesian (SABIC)       9070.323
+      Akaike (AIC)                                4266.977
+      Bayesian (BIC)                              4336.507
+      Sample-size adjusted Bayesian (SABIC)       4276.256
 
     Root Mean Square Error of Approximation:
 
-      RMSEA                                          0.057
-      90 Percent confidence interval - lower         0.030
-      90 Percent confidence interval - upper         0.084
-      P-value H_0: RMSEA <= 0.050                    0.305
-      P-value H_0: RMSEA >= 0.080                    0.086
+      RMSEA                                          0.050
+      90 Percent confidence interval - lower         0.000
+      90 Percent confidence interval - upper         0.094
+      P-value H_0: RMSEA <= 0.050                    0.441
+      P-value H_0: RMSEA >= 0.080                    0.145
                                                           
-      Robust RMSEA                                   0.057
-      90 Percent confidence interval - lower         0.030
-      90 Percent confidence interval - upper         0.084
-      P-value H_0: Robust RMSEA <= 0.050             0.305
-      P-value H_0: Robust RMSEA >= 0.080             0.086
+      Robust RMSEA                                   0.050
+      90 Percent confidence interval - lower         0.000
+      90 Percent confidence interval - upper         0.094
+      P-value H_0: Robust RMSEA <= 0.050             0.441
+      P-value H_0: Robust RMSEA >= 0.080             0.145
 
     Standardized Root Mean Square Residual:
 
@@ -2699,35 +2686,35 @@ summary(fit_sem, fit.measures = TRUE, standardized = TRUE)
     Latent Variables:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       Knowledge =~                                                          
-        numeracy          1.000                               0.527    0.527
-        energy_use        1.469    0.135   10.849    0.000    0.774    0.774
-        energy_save       1.352    0.129   10.452    0.000    0.712    0.713
-        els_score         1.029    0.110    9.400    0.000    0.542    0.543
+        numeracy          1.000                               0.542    0.543
+        energy_use        1.623    0.181    8.970    0.000    0.880    0.882
+        energy_save       1.441    0.163    8.822    0.000    0.782    0.783
+        els_score         1.088    0.142    7.658    0.000    0.590    0.591
       Motivation =~                                                         
-        env_attitude      1.000                               0.477    0.619
-        percvd_dffclty   -1.306    0.208   -6.269    0.000   -0.622   -0.623
+        env_attitude      1.000                               0.499    0.655
+        percvd_dffclty   -1.377    0.225   -6.113    0.000   -0.687   -0.688
 
     Regressions:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
       Knowledge ~                                                           
-        Motivation        0.584    0.099    5.923    0.000    0.529    0.529
+        Motivation        0.663    0.124    5.343    0.000    0.609    0.609
 
     Intercepts:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .numeracy          0.000    0.041    0.000    1.000    0.000    0.000
-       .energy_use       -0.000    0.041   -0.000    1.000   -0.000   -0.000
-       .energy_save      -0.000    0.041   -0.000    1.000   -0.000   -0.000
-       .els_score         0.000    0.041    0.000    1.000    0.000    0.000
-       .env_attitude      3.583    0.032  112.638    0.000    3.583    4.653
-       .percvd_dffclty    0.000    0.041    0.000    1.000    0.000    0.000
+       .numeracy          0.000    0.059    0.000    1.000    0.000    0.000
+       .energy_use       -0.000    0.059   -0.000    1.000   -0.000   -0.000
+       .energy_save      -0.000    0.059   -0.000    1.000   -0.000   -0.000
+       .els_score         0.000    0.059    0.000    1.000    0.000    0.000
+       .env_attitude      3.591    0.045   79.917    0.000    3.591    4.717
+       .percvd_dffclty    0.000    0.059    0.000    1.000    0.000    0.000
 
     Variances:
                        Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-       .numeracy          0.721    0.048   15.124    0.000    0.721    0.722
-       .energy_use        0.400    0.042    9.432    0.000    0.400    0.400
-       .energy_save       0.491    0.042   11.751    0.000    0.491    0.492
-       .els_score         0.704    0.047   14.845    0.000    0.704    0.705
-       .env_attitude      0.366    0.041    8.844    0.000    0.366    0.617
-       .percvd_dffclty    0.611    0.070    8.711    0.000    0.611    0.612
-       .Knowledge         0.200    0.036    5.567    0.000    0.721    0.721
-        Motivation        0.227    0.045    5.079    0.000    1.000    1.000
+       .numeracy          0.702    0.063   11.084    0.000    0.702    0.705
+       .energy_use        0.222    0.044    5.007    0.000    0.222    0.223
+       .energy_save       0.386    0.045    8.535    0.000    0.386    0.387
+       .els_score         0.649    0.060   10.831    0.000    0.649    0.651
+       .env_attitude      0.331    0.047    7.032    0.000    0.331    0.571
+       .percvd_dffclty    0.525    0.084    6.213    0.000    0.525    0.526
+       .Knowledge         0.185    0.044    4.215    0.000    0.629    0.629
+        Motivation        0.249    0.055    4.523    0.000    1.000    1.000

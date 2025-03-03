@@ -1896,23 +1896,107 @@ id LAN10 LAN11 LAN12 LAN13 LAN14 LAN15 LAN16 LAN17 LAN18 LAN19 LAN20 LAN21 LAN22
 6 6 65 65 80 80 1 \[Very com... 1 \[Ver... 80 6 70 8 5 \[rar... 1 \[Yes\] 1 \[Yes\] 2 \[Som... 1 \[Yes\] 2 \[Som... 1 \[Yes\] 1 \[Yes\]
 \# ℹ 60 more variables: LAN28 \<dbl+lbl\>, LAN29 \<dbl+lbl\>, LAN30 \<dbl+lbl\>, LAN31 \<dbl+lbl\>, LAN32 \<dbl+lbl\>, LAN33 \<dbl+lbl\>
 
-**XI. Questions from Recycling Study (RS01-RS06)**
-\* **Description:** These are questions included from a different study
-\* **Coding Scheme:** 5-point agreement scale
-\* **Specific Items:**
-\* RS01: I generally don't pay attention to how much energy I use.
-\* RS02: I would say I am very pro-environmental.
-\* RS03: I think saving energy is largely a waste of time.
-\* RS04: I am generally conservative on the political spectrum with regard to social issues.
-\* RS05: I am generally conservative on the political spectrum with regard to economic issues.
+# Recycling Study Questions (RS01-RS06)
 
-head(rs)
-\# A tibble: 6 × 7
+-   **Description:** These are questions included from a different study
+    -   **Coding Scheme:** 5-point agreement scale
+    -   **Specific Items:**
+        -   RS01: I generally don't pay attention to how much energy I use.
+        -   RS02: I would say I am very pro-environmental.
+        -   RS03: I think saving energy is largely a waste of time.
+        -   RS04: I am generally conservative on the political spectrum with regard to social issues.
+        -   RS05: I am generally conservative on the political spectrum with regard to economic issues.
+        -   RS06: I consider myself knowledgeable about how much energy utilities use
+
+head(rs,n=10)
+\# A tibble: 10 × 7
 id RS01 RS02 RS03 RS04 RS05 RS06  
-<int> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+l\> \<dbl+l\>
-1 1 2 \[Somewhat Agree\] 2 \[Somewhat Agree\] 5 \[Disagree\] 4 \[Somewhat Disagree\] 4 \[Som... 4 \[Som...
-2 2 5 \[Disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 5 \[Disagree\] 5 \[Dis... 3 \[Nei...
-3 3 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor d... 3 \[Nei... 3 \[Nei...
-4 4 4 \[Somewhat Disagree\] 3 \[Neither agree nor disagree\] 5 \[Disagree\] 5 \[Disagree\] 5 \[Dis... 3 \[Nei...
-5 5 3 \[Neither agree nor disagree\] 2 \[Somewhat Agree\] 4 \[Somewhat Disagree\] 2 \[Somewhat Agree\] 3 \[Nei... 2 \[Som...
-6 6 5 \[Disagree\] 1 \[Agree\] 5 \[Disagree\] 5 \[Disagree\] 5 \[Dis... 2 \[Som...
+<int> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+l\>
+1 1 2 \[Somewhat Agree\] 2 \[Somewhat Agree\] 5 \[Disagree\] 4 \[Somewhat Disagree\] 4 \[Somewhat Disagree\] 4 \[Som...
+2 2 5 \[Disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 5 \[Disagree\] 5 \[Disagree\] 3 \[Nei...
+3 3 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor di... 3 \[Nei...
+
+``` r
+analyze_recycling_survey <- function(rs_data) {
+  
+  # 1) Coerce columns to numeric
+  rs_numeric <- rs_data %>%
+    mutate(
+      RS01_num = as.numeric(as.character(RS01)),
+      RS02_num = as.numeric(as.character(RS02)),
+      RS03_num = as.numeric(as.character(RS03)),
+      RS04_num = as.numeric(as.character(RS04)),
+      RS05_num = as.numeric(as.character(RS05)),
+      RS06_num = as.numeric(as.character(RS06))
+    )
+  
+  # 2) Recode items so that higher numbers consistently reflect
+  #    "more" of the targeted construct:
+  #
+  # Environmental Attitude (RS01 & RS03 are negative, RS02 & RS06 are positive).
+  # Original scale is 1=Agree ... 5=Disagree
+  # For a 'positive' pro-environment item, do 6 - x => so 1 => 5 (strong agreement => higher = pro-env).
+  # For a 'negative' pro-environment item, keep x => so 1 => 1 (strong agreement => lower pro-env).
+  
+  rs_recode <- rs_numeric %>%
+    mutate(
+      # Positive items
+      RS02_env = 6 - RS02_num,  # now 5 = strongly pro-env
+      RS06_env = 6 - RS06_num,  # now 5 = strongly pro-env
+      
+      # Negative items (keep the original so that 1 => 1 = strongly anti-env, 5 => 5 = strongly pro-env)
+      RS01_env = RS01_num,
+      RS03_env = RS03_num,
+      
+      # Political items: If we want higher = more conservative,
+      # we can do 6 - x so that 1 => 5 (strongly conservative).
+      # If you'd prefer the raw code to remain 1=Agree => "lowest" numeric,
+      # skip the transformation. Below we invert it:
+      RS04_cons = 6 - RS04_num, 
+      RS05_cons = 6 - RS05_num
+    )
+  
+  # 3) Compute subscales
+  #    - "env_attitude": average of RS01_env, RS02_env, RS03_env, RS06_env
+  #      such that 5 = most pro-environment, 1 = least pro-environment
+  #    - "pol_conservatism": average of RS04_cons, RS05_cons
+  #      such that 5 = strongly conservative, 1 = strongly liberal
+  
+  rs_subscales <- rs_recode %>%
+    rowwise() %>%
+    mutate(
+      env_attitude = mean(c(RS01_env, RS02_env, RS03_env, RS06_env), na.rm = TRUE),
+      pol_conservatism = mean(c(RS04_cons, RS05_cons), na.rm = TRUE)
+    ) %>%
+    ungroup()
+  
+  # 4) Standardize subscales if desired
+  rs_final <- rs_subscales %>%
+    mutate(
+      env_attitude_z = as.numeric(scale(env_attitude)),
+      pol_conservatism_z = as.numeric(scale(pol_conservatism))
+    ) %>%
+    # 5) Return the columns of interest
+    select(id, 
+           env_attitude, env_attitude_z,
+           pol_conservatism, pol_conservatism_z)
+  
+  return(rs_final)
+}
+
+rs_scores <- analyze_recycling_survey(rs)
+head(rs_scores) |> pander::pandoc.table(caption = "Recycling Study Scores",split.table=Inf,style='rmarkdown')
+```
+
+
+
+    | id | env_attitude | env_attitude_z | pol_conservatism | pol_conservatism_z |
+    |:--:|:------------:|:--------------:|:----------------:|:------------------:|
+    | 1  |     3.25     |    -0.4323     |        2         |       -0.449       |
+    | 2  |     3.5      |    -0.1079     |        1         |       -1.154       |
+    | 3  |      3       |    -0.7567     |        3         |       0.2555       |
+    | 4  |     3.75     |     0.2164     |        1         |       -1.154       |
+    | 5  |     3.75     |     0.2164     |       3.5        |       0.6077       |
+    | 6  |     4.75     |     1.514      |        1         |       -1.154       |
+
+    Table: Recycling Study Scores

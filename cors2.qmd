@@ -54,24 +54,24 @@ select = dplyr::select
 source(here("scripts","survey_functions.R"))
 
 draw <- readRDS(here("data","draw.rds"))
-dinst <- readRDS(here("data","dinst.rds"))
+#dinst <- readRDS(here("data","dinst.rds"))
 
 # Attari Energy Survey (Part 1)
 aes1 <- draw |> select(id,ATT01:ATT18)
-aes2 <- dinst |> select(id,ATT01:ATT18)
-aes_combined <- bind_rows(aes1, aes2)
+#aes2 <- dinst |> select(id,ATT01:ATT18)
+aes_combined <- bind_rows(aes1)
 
 att_useSave <- draw |> select(id,ATT19:ATT33)
-att_useSave2 <- dinst |> select(id,ATT19:ATT33)
-att2_combined <- bind_rows(att_useSave, att_useSave2)
+#att_useSave2 <- dinst |> select(id,ATT19:ATT33)
+att2_combined <- bind_rows(att_useSave)
 
 els1 <- draw |> select(id,ELS01:ELS08)
-els2 <- dinst |> select(id,ELS01:ELS08)
-els <- bind_rows(els1,els2)
+#els2 <- dinst |> select(id,ELS01:ELS08)
+els <- bind_rows(els1)
 
 rs1 <- draw |> select(id,RS01:RS06)
-rs2 <- dinst |> select(id,RS01:RS06)
-rs <- bind_rows(rs1,rs2)
+#rs2 <- dinst |> select(id,RS01:RS06)
+rs <- bind_rows(rs1)
 
 attari1 <- analyze_attari_survey_part1(aes_combined)
 attari2_scores <- analyze_attari_survey(att2_combined)

@@ -1,6 +1,6 @@
 # Initial Data Inspect
 
-2025-01-21
+2025-03-03
 
 This study set out to assess how prior survey instruments on sustainable
 behaviors, knowledge, and attitudes correlate.
@@ -315,9 +315,8 @@ diff_items_clean %>%
 
 <div id="fig-Attrati_1-1">
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/fig-Attrati_1-1.png"
-id="fig-Attrati_1-1" width="1056" />
+<img src="inspect_files/figure-commonmark/fig-Attrati_1-1.png"
+id="fig-Attrati_1-1" />
 
 Figure 1
 
@@ -325,9 +324,8 @@ Figure 1
 
 <div id="fig-Attrati_1-2">
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/fig-Attrati_1-2.png"
-id="fig-Attrati_1-2" width="1056" />
+<img src="inspect_files/figure-commonmark/fig-Attrati_1-2.png"
+id="fig-Attrati_1-2" />
 
 Figure 2
 
@@ -473,9 +471,7 @@ ggplot(att2_long, aes(x = Response)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-1.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-3-1.png)
 
 ``` r
 # -------------------------------------------------------
@@ -616,9 +612,7 @@ corrplot::corrplot(usage_cor, method = "number", type = "upper", tl.col = "black
 title("Correlation Matrix: Raw Usage Estimates (ATT19–ATT27)")
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-2.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-3-2.png)
 
 ``` r
 # If you prefer correlation among absolute error scores:
@@ -629,9 +623,7 @@ usage_abs_err_cor <- att2_scored %>%
 corrplot::corrplot(usage_abs_err_cor, method = "number", type = "upper", tl.col = "black", tl.srt = 45)
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-3-3.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-3-3.png)
 
 ``` r
 #title("Correlation Matrix: Usage Absolute Error Scores")
@@ -818,9 +810,7 @@ ggplot(att2_long, aes(x = Response)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-1.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-1.png)
 
 ``` r
 # -------------------------------------------------------
@@ -969,9 +959,7 @@ ggplot(att2_est_vs_true, aes(x = Correct, y = Estimated,color=Item_Facet)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-2.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-2.png)
 
 ``` r
 ggplot(att2_est_vs_true, aes(x = Correct, y = Estimated, color = Item_Facet)) +
@@ -987,9 +975,7 @@ ggplot(att2_est_vs_true, aes(x = Correct, y = Estimated, color = Item_Facet)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-3.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-3.png)
 
 ``` r
 att2_est_vs_true <- att2_est_vs_true %>%
@@ -1007,9 +993,7 @@ ggplot(att2_est_vs_true, aes(x = Correct, y = Ratio, color = Item_Facet)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-4.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-4.png)
 
 ``` r
 att2_split <- att2_est_vs_true %>%
@@ -1028,9 +1012,7 @@ ggplot(att2_split, aes(x = Correct, y = Estimated, color = Item_Facet)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-5.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-5.png)
 
 ``` r
 # -------------------------------------------------------
@@ -1061,9 +1043,7 @@ ggplot(abs_err_long, aes(x = AbsError)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-6.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-6.png)
 
 ``` r
 # -------------------------------------------------------
@@ -1085,9 +1065,7 @@ ggplot(abs_err_long_log, aes(x = LogAbsError)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-7.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-7.png)
 
 ``` r
 # -------------------------------------------------------
@@ -1102,9 +1080,7 @@ corrplot::corrplot(usage_cor, method = "number", type = "upper", tl.col = "black
 title("Correlation Matrix: Raw Usage Estimates (ATT19–ATT27)")
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-8.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-8.png)
 
 ``` r
 # Example: correlation among absolute error scores
@@ -1116,9 +1092,7 @@ corrplot::corrplot(usage_abs_err_cor, method = "number", type = "upper", tl.col 
 title("Correlation Matrix: Usage Absolute Error Scores")
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-4-9.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-4-9.png)
 
 ``` r
 # -------------------------------------------------------
@@ -1285,9 +1259,7 @@ ggplot(els, aes(x = as.factor(response), fill = correct)) +
   )
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-1.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-5-1.png)
 
 ``` r
 els_summary <- els %>%
@@ -1326,9 +1298,7 @@ ggplot(els_summary, aes(x = reorder(question, pct_correct), y = pct_correct)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-2.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-5-2.png)
 
 ``` r
 # Convert "Correct"/"Incorrect" to numeric 1/0
@@ -1371,9 +1341,7 @@ ggplot(els_score_df, aes(x = ELS_Total_Score)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-5-3.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-5-3.png)
 
 ``` r
 # Using wide format: each row is a participant, each col is an item coded 1=correct, 0=incorrect
@@ -1752,9 +1720,7 @@ ggplot(recs, aes(x = RECS07)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-1.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-6-1.png)
 
 ``` r
 recs %>%
@@ -1875,9 +1841,7 @@ ggplot(recs_metrics, aes(x = lighting_efficiency_score)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-2.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-6-2.png)
 
 ``` r
 ggplot(recs_metrics, aes(x = "", y = hvac_control_score)) +
@@ -1890,9 +1854,7 @@ ggplot(recs_metrics, aes(x = "", y = hvac_control_score)) +
   theme_minimal()
 ```
 
-<img
-src="inspect.markdown_strict_files/figure-markdown_strict/unnamed-chunk-6-3.png"
-width="768" />
+![](inspect_files/figure-commonmark/unnamed-chunk-6-3.png)
 
 **V. Langevin Semi-Structured Interview (Part 1) (LAN01-LAN09)**
 
@@ -2010,24 +1972,112 @@ LAN27
 variables: LAN28 \<dbl+lbl\>, LAN29 \<dbl+lbl\>, LAN30 \<dbl+lbl\>,
 LAN31 \<dbl+lbl\>, LAN32 \<dbl+lbl\>, LAN33 \<dbl+lbl\>
 
-**XI. Questions from Recycling Study (RS01-RS06)** \* **Description:**
-These are questions included from a different study \* **Coding
-Scheme:** 5-point agreement scale \* **Specific Items:** \* RS01: I
-generally don’t pay attention to how much energy I use. \* RS02: I would
-say I am very pro-environmental. \* RS03: I think saving energy is
-largely a waste of time. \* RS04: I am generally conservative on the
-political spectrum with regard to social issues. \* RS05: I am generally
-conservative on the political spectrum with regard to economic issues.
+# Recycling Study Questions (RS01-RS06)
 
-head(rs) \# A tibble: 6 × 7 id RS01 RS02 RS03 RS04 RS05 RS06  
-<int> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+l\>
+- **Description:** These are questions included from a different study
+  - **Coding Scheme:** 5-point agreement scale
+  - **Specific Items:**
+    - RS01: I generally don’t pay attention to how much energy I use.
+    - RS02: I would say I am very pro-environmental.
+    - RS03: I think saving energy is largely a waste of time.
+    - RS04: I am generally conservative on the political spectrum with
+      regard to social issues.
+    - RS05: I am generally conservative on the political spectrum with
+      regard to economic issues.
+    - RS06: I consider myself knowledgeable about how much energy
+      utilities use
+
+head(rs,n=10) \# A tibble: 10 × 7 id RS01 RS02 RS03 RS04 RS05 RS06  
+<int> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\> \<dbl+lbl\>
 \<dbl+l\> 1 1 2 \[Somewhat Agree\] 2 \[Somewhat Agree\] 5 \[Disagree\] 4
-\[Somewhat Disagree\] 4 \[Som… 4 \[Som… 2 2 5 \[Disagree\] 3 \[Neither
-agree nor disagree\] 3 \[Neither agree nor disagree\] 5 \[Disagree\] 5
-\[Dis… 3 \[Nei… 3 3 3 \[Neither agree nor disagree\] 3 \[Neither agree
-nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor d…
-3 \[Nei… 3 \[Nei… 4 4 4 \[Somewhat Disagree\] 3 \[Neither agree nor
-disagree\] 5 \[Disagree\] 5 \[Disagree\] 5 \[Dis… 3 \[Nei… 5 5 3
-\[Neither agree nor disagree\] 2 \[Somewhat Agree\] 4 \[Somewhat
-Disagree\] 2 \[Somewhat Agree\] 3 \[Nei… 2 \[Som… 6 6 5 \[Disagree\] 1
-\[Agree\] 5 \[Disagree\] 5 \[Disagree\] 5 \[Dis… 2 \[Som…
+\[Somewhat Disagree\] 4 \[Somewhat Disagree\] 4 \[Som… 2 2 5
+\[Disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor
+disagree\] 5 \[Disagree\] 5 \[Disagree\] 3 \[Nei… 3 3 3 \[Neither agree
+nor disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor
+disagree\] 3 \[Neither agree nor disagree\] 3 \[Neither agree nor di… 3
+\[Nei…
+
+``` r
+analyze_recycling_survey <- function(rs_data) {
+  
+  # 1) Coerce columns to numeric
+  rs_numeric <- rs_data %>%
+    mutate(
+      RS01_num = as.numeric(as.character(RS01)),
+      RS02_num = as.numeric(as.character(RS02)),
+      RS03_num = as.numeric(as.character(RS03)),
+      RS04_num = as.numeric(as.character(RS04)),
+      RS05_num = as.numeric(as.character(RS05)),
+      RS06_num = as.numeric(as.character(RS06))
+    )
+  
+  # 2) Recode items so that higher numbers consistently reflect
+  #    "more" of the targeted construct:
+  #
+  # Environmental Attitude (RS01 & RS03 are negative, RS02 & RS06 are positive).
+  # Original scale is 1=Agree ... 5=Disagree
+  # For a 'positive' pro-environment item, do 6 - x => so 1 => 5 (strong agreement => higher = pro-env).
+  # For a 'negative' pro-environment item, keep x => so 1 => 1 (strong agreement => lower pro-env).
+  
+  rs_recode <- rs_numeric %>%
+    mutate(
+      # Positive items
+      RS02_env = 6 - RS02_num,  # now 5 = strongly pro-env
+      RS06_env = 6 - RS06_num,  # now 5 = strongly pro-env
+      
+      # Negative items (keep the original so that 1 => 1 = strongly anti-env, 5 => 5 = strongly pro-env)
+      RS01_env = RS01_num,
+      RS03_env = RS03_num,
+      
+      # Political items: If we want higher = more conservative,
+      # we can do 6 - x so that 1 => 5 (strongly conservative).
+      # If you'd prefer the raw code to remain 1=Agree => "lowest" numeric,
+      # skip the transformation. Below we invert it:
+      RS04_cons = 6 - RS04_num, 
+      RS05_cons = 6 - RS05_num
+    )
+  
+  # 3) Compute subscales
+  #    - "env_attitude": average of RS01_env, RS02_env, RS03_env, RS06_env
+  #      such that 5 = most pro-environment, 1 = least pro-environment
+  #    - "pol_conservatism": average of RS04_cons, RS05_cons
+  #      such that 5 = strongly conservative, 1 = strongly liberal
+  
+  rs_subscales <- rs_recode %>%
+    rowwise() %>%
+    mutate(
+      env_attitude = mean(c(RS01_env, RS02_env, RS03_env, RS06_env), na.rm = TRUE),
+      pol_conservatism = mean(c(RS04_cons, RS05_cons), na.rm = TRUE)
+    ) %>%
+    ungroup()
+  
+  # 4) Standardize subscales if desired
+  rs_final <- rs_subscales %>%
+    mutate(
+      env_attitude_z = as.numeric(scale(env_attitude)),
+      pol_conservatism_z = as.numeric(scale(pol_conservatism))
+    ) %>%
+    # 5) Return the columns of interest
+    select(id, 
+           env_attitude, env_attitude_z,
+           pol_conservatism, pol_conservatism_z)
+  
+  return(rs_final)
+}
+
+rs_scores <- analyze_recycling_survey(rs)
+head(rs_scores) |> pander::pandoc.table(caption = "Recycling Study Scores",split.table=Inf,style='rmarkdown')
+```
+
+
+
+    | id | env_attitude | env_attitude_z | pol_conservatism | pol_conservatism_z |
+    |:--:|:------------:|:--------------:|:----------------:|:------------------:|
+    | 1  |     3.25     |    -0.4323     |        2         |       -0.449       |
+    | 2  |     3.5      |    -0.1079     |        1         |       -1.154       |
+    | 3  |      3       |    -0.7567     |        3         |       0.2555       |
+    | 4  |     3.75     |     0.2164     |        1         |       -1.154       |
+    | 5  |     3.75     |     0.2164     |       3.5        |       0.6077       |
+    | 6  |     4.75     |     1.514      |        1         |       -1.154       |
+
+    Table: Recycling Study Scores
